@@ -84,6 +84,7 @@ nav:
           - Chapter 3: eceg-6303/solutions/03-linear-estimation-prediction.md
           - Chapter 4: eceg-6303/solutions/04-adaptive-filters.md
           - Chapter 5: eceg-6303/solutions/05-multirate-dsp.md
+      - Exam Bank: eceg-6303/exam-bank.md
       - Assessment: eceg-6303/assessment.md
       - Resources: eceg-6303/resources.md
   - ECEG-6423 — Multimedia Signal Processing:
