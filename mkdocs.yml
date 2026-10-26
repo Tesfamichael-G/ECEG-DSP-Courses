@@ -1,0 +1,121 @@
+site_name: MSc DSP Courses — ECEG-6423 & ECEG-6303
+site_description: Multimedia Signal Processing & Advanced DSP
+site_author: Dr. Tesfamichael Gebregziabher
+site_url: https://tesfamichael-g.github.io/ECEG-DSP-Courses/   # ← MUST change from ECEG-6201
+#repo_name: tesfamichael-g/ECEG-DSP-Courses                     # ← MUST change from ECEG-6201
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - navigation.tracking
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    logo: material/chart-bell-curve-cumulative
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+      inline_syntax: ['dollar', 'round']    # $…$  and  \(…\)
+      block_syntax:  ['dollar', 'square']   # $$…$$ and  \[…\]
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  # … existing entries …
+  - md_in_html
+  # … your existing entries …
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
+nav:
+  - Home: index.md
+  - DSP Primer: shared/dsp-primer.md
+  - Software: shared/software.md
+  - ECEG-6303 — Advanced DSP:
+      - Overview: eceg-6303/index.md
+      - Syllabus: eceg-6303/syllabus.md
+      - Schedule: eceg-6303/schedule.md
+      - Chapters:
+          - 1. Discrete Random Signal Processing: eceg-6303/chapters/01-discrete-random-signal-processing.md
+          - 2. Spectrum Estimation: eceg-6303/chapters/02-spectrum-estimation.md
+          - 3. Linear Estimation and Prediction: eceg-6303/chapters/03-linear-estimation-prediction.md
+          - 4. Adaptive Filters: eceg-6303/chapters/04-adaptive-filters.md
+          - 5. Multirate DSP: eceg-6303/chapters/05-multirate-dsp.md
+      - Solutions:
+          - Overview: eceg-6303/solutions/index.md
+          - Chapter 1: eceg-6303/solutions/01-discrete-random-signal-processing.md
+          - Chapter 2: eceg-6303/solutions/02-spectrum-estimation.md
+          - Chapter 3: eceg-6303/solutions/03-linear-estimation-prediction.md
+          - Chapter 4: eceg-6303/solutions/04-adaptive-filters.md
+          - Chapter 5: eceg-6303/solutions/05-multirate-dsp.md
+      - Assessment: eceg-6303/assessment.md
+      - Resources: eceg-6303/resources.md
+  - ECEG-6423 — Multimedia Signal Processing:
+      - Overview: eceg-6423/index.md
+      - Syllabus: eceg-6423/syllabus.md
+      - Schedule: eceg-6423/schedule.md
+      - Chapters:
+          - 1. Continuous and Discrete Images and Systems: eceg-6423/chapters/01-continuous-discrete-images.md
+          - 2. Image Processing Techniques: eceg-6423/chapters/02-image-processing-techniques.md
+          - 3. Introduction to Digital Speech Processing: eceg-6423/chapters/03-speech-processing-intro.md
+          - 4. Time and Frequency Domain Speech Methods: eceg-6423/chapters/04-speech-processing-methods.md
+          - 5. Applications of Speech Processing: eceg-6423/chapters/05-speech-applications.md
+          - 6. Digital Video Processing: eceg-6423/chapters/06-video-processing.md
+      - Solutions:
+          - Overview: eceg-6423/solutions/index.md
+          - Chapter 1: eceg-6423/solutions/01-continuous-discrete-images.md
+          - Chapter 2: eceg-6423/solutions/02-image-processing-techniques.md
+          - Chapter 3: eceg-6423/solutions/03-speech-processing-intro.md
+          - Chapter 4: eceg-6423/solutions/04-speech-processing-methods.md
+          - Chapter 5: eceg-6423/solutions/05-speech-applications.md
+          - Chapter 6: eceg-6423/solutions/06-video-processing.md
+      - Exam Bank: eceg-6423/exam-bank.md
+      - Assessment: eceg-6423/assessment.md
+      - Resources: eceg-6423/resources.md
+  - References: shared/references.md
+  - Feedback: feedback.md
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
