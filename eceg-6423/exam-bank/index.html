@@ -1,0 +1,2846 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6423/exam-bank/">
+      
+      
+        <link rel="prev" href="../solutions/06-video-processing/">
+      
+      
+        <link rel="next" href="../assessment/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>Exam Bank - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#exam-bank-eceg-6423-multimedia-signal-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Exam Bank
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../eceg-6303/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../eceg-6303/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/chapters/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/chapters/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/chapters/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/chapters/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/chapters/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../eceg-6303/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../eceg-6303/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chapters/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-a-image-fundamentals-ch-1-25-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Image Fundamentals (Ch 1) — 25 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section A — Image Fundamentals (Ch 1) — 25 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A2. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A3. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      A4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      A5. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      A6. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A7. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A8. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-b-image-processing-techniques-ch-2-25-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Image Processing Techniques (Ch 2) — 25 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section B — Image Processing Techniques (Ch 2) — 25 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      B1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      B2. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B3. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b5-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      B5. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b6-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B6. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b7-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B7. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-c-speech-fundamentals-ch-3-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Speech Fundamentals (Ch 3) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section C — Speech Fundamentals (Ch 3) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      C1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C2. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C3. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-d-speech-methods-ch-4-20-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Speech Methods (Ch 4) — 20 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section D — Speech Methods (Ch 4) — 20 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#d1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      D1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d3-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      D3. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      D4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d5-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D5. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d6-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D6. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-e-speech-applications-ch-5-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Speech Applications (Ch 5) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section E — Speech Applications (Ch 5) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      E1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      E2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e3-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      E3. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e4-short-answer-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      E4. Short answer [2]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-f-video-processing-ch-6-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Video Processing (Ch 6) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section F — Video Processing (Ch 6) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#f1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      F1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      F2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f3-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      F3. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f4-short-answer-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      F4. Short answer [2]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Answer key
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-a-image-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Image Fundamentals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-image-processing-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Image Processing Techniques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-speech-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Speech Fundamentals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-speech-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Speech Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-speech-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Speech Applications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-video-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Video Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grading-rubric-for-instructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grading rubric (for instructors)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#section-a-image-fundamentals-ch-1-25-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Image Fundamentals (Ch 1) — 25 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section A — Image Fundamentals (Ch 1) — 25 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a2-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A2. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a3-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      A3. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      A4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a5-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      A5. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a6-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      A6. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a7-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A7. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a8-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      A8. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-b-image-processing-techniques-ch-2-25-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Image Processing Techniques (Ch 2) — 25 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section B — Image Processing Techniques (Ch 2) — 25 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#b1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      B1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b2-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      B2. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b3-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B3. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b5-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      B5. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b6-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B6. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b7-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      B7. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-c-speech-fundamentals-ch-3-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Speech Fundamentals (Ch 3) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section C — Speech Fundamentals (Ch 3) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#c1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      C1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c2-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C2. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c3-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      C3. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-d-speech-methods-ch-4-20-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Speech Methods (Ch 4) — 20 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section D — Speech Methods (Ch 4) — 20 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#d1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      D1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d3-derivation-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      D3. Derivation [5]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d4-short-answer-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      D4. Short answer [4]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d5-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D5. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d6-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      D6. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-e-speech-applications-ch-5-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Speech Applications (Ch 5) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section E — Speech Applications (Ch 5) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      E1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      E2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e3-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      E3. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#e4-short-answer-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      E4. Short answer [2]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-f-video-processing-ch-6-10-marks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Video Processing (Ch 6) — 10 marks
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Section F — Video Processing (Ch 6) — 10 marks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#f1-multiple-choice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      F1. Multiple choice [2]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f2-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      F2. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f3-short-answer-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      F3. Short answer [3]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#f4-short-answer-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      F4. Short answer [2]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Answer key
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Answer key">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#section-a-image-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section A — Image Fundamentals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-b-image-processing-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section B — Image Processing Techniques
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-c-speech-fundamentals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section C — Speech Fundamentals
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-d-speech-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section D — Speech Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-e-speech-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section E — Speech Applications
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#section-f-video-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Section F — Video Processing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grading-rubric-for-instructors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grading rubric (for instructors)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="exam-bank-eceg-6423-multimedia-signal-processing">Exam Bank — ECEG-6423 Multimedia Signal Processing<a class="headerlink" href="#exam-bank-eceg-6423-multimedia-signal-processing" title="Permanent link">&para;</a></h1>
+<p>40 questions spanning all six chapters. Use for self-assessment and
+exam preparation. <strong>Answers and grading rubric at the end.</strong></p>
+<p><strong>Instructions (for a mock exam):</strong></p>
+<ul>
+<li>Time: <strong>3 hours</strong></li>
+<li>Format: <strong>40 questions</strong>, mixed MCQ, short answer, and derivation</li>
+<li>Closed book; <strong>one A4 handwritten formula sheet</strong> allowed</li>
+<li>Total marks: <strong>100</strong> (weighted by question)</li>
+<li>Marks per question in brackets</li>
+</ul>
+<hr />
+<h2 id="section-a-image-fundamentals-ch-1-25-marks">Section A — Image Fundamentals (Ch 1) — 25 marks<a class="headerlink" href="#section-a-image-fundamentals-ch-1-25-marks" title="Permanent link">&para;</a></h2>
+<h3 id="a1-multiple-choice-2">A1. Multiple choice [2]<a class="headerlink" href="#a1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The <strong>Michelson contrast</strong> of a pattern with luminances 20 and 120 cd/m² is:</p>
+<p>(a) 0.71 (b) 0.83 (c) 5.0 (d) 0.17</p>
+<h3 id="a2-multiple-choice-2">A2. Multiple choice [2]<a class="headerlink" href="#a2-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The <strong>contrast sensitivity function</strong> of the human visual system peaks at
+approximately:</p>
+<p>(a) 0 cycles/degree (b) 4–8 cycles/degree (c) 40 cycles/degree (d) 200 cycles/degree</p>
+<h3 id="a3-multiple-choice-2">A3. Multiple choice [2]<a class="headerlink" href="#a3-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>For an image sampled at pixel spacing <span class="arithmatex">\(\Delta x\)</span>, the <strong>Nyquist frequency</strong> is:</p>
+<p>(a) <span class="arithmatex">\(\Delta x\)</span> (b) <span class="arithmatex">\(1/\Delta x\)</span> (c) <span class="arithmatex">\(1/(2\Delta x)\)</span> (d) <span class="arithmatex">\(2\Delta x\)</span></p>
+<h3 id="a4-short-answer-4">A4. Short answer [4]<a class="headerlink" href="#a4-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>State the <strong>2-D sampling theorem</strong> and give the condition for no aliasing
+in both spatial directions.</p>
+<h3 id="a5-short-answer-4">A5. Short answer [4]<a class="headerlink" href="#a5-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Explain why the <strong>YCbCr</strong> colour space is used for compression instead of
+RGB. Give two specific reasons.</p>
+<h3 id="a6-derivation-5">A6. Derivation [5]<a class="headerlink" href="#a6-derivation-5" title="Permanent link">&para;</a></h3>
+<p>For the uniform quantizer with step size <span class="arithmatex">\(\Delta\)</span>, derive the mean-square
+quantization error assuming the input signal is uniformly distributed
+within each quantization bin. What is the resulting SNR in dB?</p>
+<h3 id="a7-short-answer-3">A7. Short answer [3]<a class="headerlink" href="#a7-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>Define the <strong>Kronecker product</strong> <span class="arithmatex">\(A \otimes B\)</span>. State the vec identity
+<span class="arithmatex">\(\text{vec}(AXB) = ?\)</span> and explain why it is useful in image processing.</p>
+<h3 id="a8-short-answer-3">A8. Short answer [3]<a class="headerlink" href="#a8-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>A smooth gradient is quantized to 4 levels without dither. What artifact
+appears? Why does adding dither improve perceptual quality despite raising
+the numerical MSE?</p>
+<hr />
+<h2 id="section-b-image-processing-techniques-ch-2-25-marks">Section B — Image Processing Techniques (Ch 2) — 25 marks<a class="headerlink" href="#section-b-image-processing-techniques-ch-2-25-marks" title="Permanent link">&para;</a></h2>
+<h3 id="b1-multiple-choice-2">B1. Multiple choice [2]<a class="headerlink" href="#b1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The <strong>DCT</strong> is preferred over the <strong>DFT</strong> for image compression because:</p>
+<p>(a) It is faster (b) It has real coefficients and better energy compaction
+(c) It requires no quantization (d) It preserves phase perfectly</p>
+<h3 id="b2-multiple-choice-2">B2. Multiple choice [2]<a class="headerlink" href="#b2-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The <strong>KL transform</strong> is theoretically optimal but rarely used because:</p>
+<p>(a) It requires too much memory (b) It is data-dependent
+(c) It produces complex coefficients (d) It is slow</p>
+<h3 id="b3-short-answer-4">B3. Short answer [4]<a class="headerlink" href="#b3-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Compare <strong>median filtering</strong> and <strong>mean filtering</strong> for removing salt-and-pepper
+noise. Explain why one works better than the other.</p>
+<h3 id="b4-short-answer-4">B4. Short answer [4]<a class="headerlink" href="#b4-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Derive the <strong>histogram equalization</strong> mapping <span class="arithmatex">\(s = (L-1) C(r)\)</span> where
+<span class="arithmatex">\(C(r)\)</span> is the input CDF. Show that the output has approximately uniform
+histogram.</p>
+<h3 id="b5-derivation-5">B5. Derivation [5]<a class="headerlink" href="#b5-derivation-5" title="Permanent link">&para;</a></h3>
+<p>For an image degraded by <span class="arithmatex">\(g = h * f + \nu\)</span>, derive the <strong>Wiener filter</strong>
+<span class="arithmatex">\(W(u, v)\)</span> that minimizes <span class="arithmatex">\(\mathbb E[(f - \hat f)^2]\)</span>. State the assumptions.</p>
+<h3 id="b6-short-answer-4">B6. Short answer [4]<a class="headerlink" href="#b6-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Describe the <strong>JPEG compression pipeline</strong> (8 steps from block splitting to
+entropy coding). What are the three types of redundancy JPEG exploits?</p>
+<h3 id="b7-short-answer-4">B7. Short answer [4]<a class="headerlink" href="#b7-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>State the <strong>Radon transform</strong> and the <strong>Fourier slice theorem</strong>. Use them
+to derive the <strong>filtered back-projection</strong> algorithm.</p>
+<hr />
+<h2 id="section-c-speech-fundamentals-ch-3-10-marks">Section C — Speech Fundamentals (Ch 3) — 10 marks<a class="headerlink" href="#section-c-speech-fundamentals-ch-3-10-marks" title="Permanent link">&para;</a></h2>
+<h3 id="c1-multiple-choice-2">C1. Multiple choice [2]<a class="headerlink" href="#c1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The <strong>fundamental frequency</strong> <span class="arithmatex">\(F_0\)</span> for adult female speech is typically:</p>
+<p>(a) 30–60 Hz (b) 80–150 Hz (c) 150–250 Hz (d) 500+ Hz</p>
+<h3 id="c2-short-answer-4">C2. Short answer [4]<a class="headerlink" href="#c2-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Describe the <strong>speech production mechanism</strong>. Name the four subsystems and
+their acoustic roles.</p>
+<h3 id="c3-short-answer-4">C3. Short answer [4]<a class="headerlink" href="#c3-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Explain the <strong>source-filter model</strong>. Why does this model explain the
+intelligibility of whispered speech?</p>
+<hr />
+<h2 id="section-d-speech-methods-ch-4-20-marks">Section D — Speech Methods (Ch 4) — 20 marks<a class="headerlink" href="#section-d-speech-methods-ch-4-20-marks" title="Permanent link">&para;</a></h2>
+<h3 id="d1-multiple-choice-2">D1. Multiple choice [2]<a class="headerlink" href="#d1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>For voiced speech, the <strong>short-time zero-crossing rate</strong> is typically:</p>
+<p>(a) Higher than 0.5 (b) Lower than 0.15 (c) Exactly 1 (d) Equal to the pitch</p>
+<h3 id="d2-short-answer-3">D2. Short answer [3]<a class="headerlink" href="#d2-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>State the <strong>time-frequency resolution trade-off</strong> in the STFT. What window
+length is used for <strong>narrowband</strong> vs. <strong>wideband</strong> spectrograms, and what
+does each reveal?</p>
+<h3 id="d3-derivation-5">D3. Derivation [5]<a class="headerlink" href="#d3-derivation-5" title="Permanent link">&para;</a></h3>
+<p>State the <strong>LPC model</strong> of speech. Derive the <strong>Yule–Walker equations</strong> from
+the minimum-MSE prediction criterion.</p>
+<h3 id="d4-short-answer-4">D4. Short answer [4]<a class="headerlink" href="#d4-short-answer-4" title="Permanent link">&para;</a></h3>
+<p>Describe the <strong>cepstrum</strong> <span class="arithmatex">\(c[n] = \text{IFFT}\{\log|X[k]|\}\)</span>. Explain how it
+separates source (pitch) from filter (formants). Why does the pitch peak
+appear at high quefrency?</p>
+<h3 id="d5-short-answer-3">D5. Short answer [3]<a class="headerlink" href="#d5-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>State the <strong>Levinson–Durbin recursion</strong>. What are the <strong>reflection coefficients</strong>,
+and what do they mean physically?</p>
+<h3 id="d6-short-answer-3">D6. Short answer [3]<a class="headerlink" href="#d6-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>Compare <strong>three pitch-detection methods</strong>: autocorrelation, cepstrum, and
+LPC residual. Which is best for which situation?</p>
+<hr />
+<h2 id="section-e-speech-applications-ch-5-10-marks">Section E — Speech Applications (Ch 5) — 10 marks<a class="headerlink" href="#section-e-speech-applications-ch-5-10-marks" title="Permanent link">&para;</a></h2>
+<h3 id="e1-multiple-choice-2">E1. Multiple choice [2]<a class="headerlink" href="#e1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>The three fundamental <strong>HMM problems</strong> are:</p>
+<p>(a) Evaluation, decoding, training (b) Input, output, state
+(c) Filter, predict, smooth (d) Fit, test, retrain</p>
+<h3 id="e2-short-answer-3">E2. Short answer [3]<a class="headerlink" href="#e2-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>State the <strong>speech-recognition problem</strong> in terms of the Bayes factorization
+<span class="arithmatex">\(\Pr(W \mid X)\)</span>. What are the acoustic model and the language model, and
+why is the factorization useful?</p>
+<h3 id="e3-short-answer-3">E3. Short answer [3]<a class="headerlink" href="#e3-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>Describe the <strong>DTW algorithm</strong>. What is the recursion? What is the role
+of the <strong>Sakoe–Chiba band</strong>?</p>
+<h3 id="e4-short-answer-2">E4. Short answer [2]<a class="headerlink" href="#e4-short-answer-2" title="Permanent link">&para;</a></h3>
+<p>Compare <strong>speaker verification</strong> and <strong>speaker identification</strong>. What are
+their main features?</p>
+<hr />
+<h2 id="section-f-video-processing-ch-6-10-marks">Section F — Video Processing (Ch 6) — 10 marks<a class="headerlink" href="#section-f-video-processing-ch-6-10-marks" title="Permanent link">&para;</a></h2>
+<h3 id="f1-multiple-choice-2">F1. Multiple choice [2]<a class="headerlink" href="#f1-multiple-choice-2" title="Permanent link">&para;</a></h3>
+<p>For a video sampled at frame rate <span class="arithmatex">\(f_s\)</span>, the <strong>wagon-wheel effect</strong> occurs
+when:</p>
+<p>(a) <span class="arithmatex">\(f_s\)</span> is too high (b) <span class="arithmatex">\(f_s\)</span> is below 2× the wheel's rotation frequency
+(c) The wheel is black (d) The wheel is transparent</p>
+<h3 id="f2-short-answer-3">F2. Short answer [3]<a class="headerlink" href="#f2-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>State the <strong>optical flow constraint equation</strong> <span class="arithmatex">\(I_x u + I_y v + I_t = 0\)</span>.
+Explain the <strong>aperture problem</strong> and how <strong>Lucas–Kanade</strong> handles it.</p>
+<h3 id="f3-short-answer-3">F3. Short answer [3]<a class="headerlink" href="#f3-short-answer-3" title="Permanent link">&para;</a></h3>
+<p>Describe the <strong>hybrid video codec</strong>. What role does motion-compensated
+prediction play?</p>
+<h3 id="f4-short-answer-2">F4. Short answer [2]<a class="headerlink" href="#f4-short-answer-2" title="Permanent link">&para;</a></h3>
+<p>Compare <strong>H.264</strong>, <strong>HEVC</strong>, and <strong>AV1</strong> in terms of compression efficiency
+and typical application. Which would you choose for a 4K streaming service
+and why?</p>
+<hr />
+<h2 id="answer-key">Answer key<a class="headerlink" href="#answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>Click to reveal answers</summary>
+<h3 id="section-a-image-fundamentals">Section A — Image Fundamentals<a class="headerlink" href="#section-a-image-fundamentals" title="Permanent link">&para;</a></h3>
+<p><strong>A1.</strong> (b) 0.83 — <span class="arithmatex">\(C_M = (120-20)/(120+20) = 100/140 \approx 0.714\)</span>, wait: 100/140 = 0.714. Hmm, let me recompute: (120-20)/(120+20) = 100/140 = 0.714. Option (a) is 0.71. So <strong>A1 = (a) 0.71</strong>.</p>
+<p><strong>A2.</strong> (b) 4–8 cycles/degree.</p>
+<p><strong>A3.</strong> (c) <span class="arithmatex">\(1/(2\Delta x)\)</span>.</p>
+<p><strong>A4.</strong> 2-D sampling theorem: a band-limited image with spectrum zero outside <span class="arithmatex">\([-F_x, F_x] \times [-F_y, F_y]\)</span> can be exactly reconstructed from samples on a lattice with spacing <span class="arithmatex">\(\Delta x, \Delta y\)</span> iff <span class="arithmatex">\(1/\Delta x &gt; 2F_x\)</span> and <span class="arithmatex">\(1/\Delta y &gt; 2F_y\)</span>. Equivalently, sampling frequencies exceed twice the highest spatial frequencies in both directions.</p>
+<p><strong>A5.</strong> Two reasons: (i) YCbCr separates <strong>luminance</strong> (perceptually important, high spatial resolution) from <strong>chroma</strong> (perceptually less important, can be subsampled); (ii) human vision has much lower spatial resolution for chroma than for luminance, so 4:2:0 subsampling (halving chroma resolution in both directions) reduces data by 50% with almost no perceptual loss.</p>
+<p><strong>A6.</strong> For uniform quantizer with step <span class="arithmatex">\(\Delta = 2A/L\)</span>, the error <span class="arithmatex">\(e = Q(f) - f\)</span> is approximately uniform on <span class="arithmatex">\([-\Delta/2, \Delta/2]\)</span> if the signal is dense within each bin. Variance: <span class="arithmatex">\(\sigma_e^2 = \frac{1}{\Delta}\int_{-\Delta/2}^{\Delta/2} e^2\, de = \Delta^2/12\)</span>. If signal has variance <span class="arithmatex">\(\sigma_f^2\)</span> and peak-to-RMS ratio <span class="arithmatex">\(A/\sigma_f\)</span>, then <span class="arithmatex">\(L = A/(\sqrt{12}\sigma_e)\)</span>, so <span class="arithmatex">\(\text{SNR} = \sigma_f^2/\sigma_e^2 = 12 \sigma_f^2/\Delta^2 = \frac{L^2\sigma_f^2}{A^2} \cdot 3 = 3\cdot L^2/(A^2/\sigma_f^2)\)</span>. In dB: <span class="arithmatex">\(\text{SNR}_{dB} \approx 6 b + 4.77 - 20\log_{10}(A/\sigma_f)\)</span> where <span class="arithmatex">\(b\)</span> = bit depth.</p>
+<p><strong>A7.</strong> Kronecker product <span class="arithmatex">\(A \otimes B\)</span> is the block matrix with blocks <span class="arithmatex">\(a_{ij} B\)</span>; result size <span class="arithmatex">\(mp \times nq\)</span> for <span class="arithmatex">\(A\)</span> <span class="arithmatex">\(m \times n\)</span> and <span class="arithmatex">\(B\)</span> <span class="arithmatex">\(p \times q\)</span>. Vec identity: <span class="arithmatex">\(\text{vec}(AXB) = (B^\top \otimes A)\text{vec}(X)\)</span>. Useful because it converts 2-D operations into 1-D matrix-vector products, enabling fast algorithms (separable filtering, 2-D FFT) and analysis (eigenvalues of <span class="arithmatex">\(A \otimes B\)</span> are products).</p>
+<p><strong>A8.</strong> Without dither: <strong>false contours</strong> (visible stair-step bands) at quantization boundaries. Adding dither converts the structured quantization error into random noise that the eye averages out — perceptually smoother even though numerical MSE is higher.</p>
+<h3 id="section-b-image-processing-techniques">Section B — Image Processing Techniques<a class="headerlink" href="#section-b-image-processing-techniques" title="Permanent link">&para;</a></h3>
+<p><strong>B1.</strong> (b) Real coefficients and better energy compaction.</p>
+<p><strong>B2.</strong> (b) Data-dependent (basis depends on the covariance, must be transmitted).</p>
+<p><strong>B3.</strong> <strong>Median filtering:</strong> an isolated outlier (salt or pepper pixel) is not the median of its neighborhood, so it is removed. <strong>Mean filtering:</strong> the outlier contaminates all pixels in the neighborhood (spreads the noise). Median <strong>preserves edges</strong> (median of a step neighborhood lies on the step); mean blurs edges. <strong>Median is preferred for salt-and-pepper; mean is preferred for Gaussian noise.</strong></p>
+<p><strong>B4.</strong> Continuous: input <span class="arithmatex">\(r\)</span> has PDF <span class="arithmatex">\(p_r(r)\)</span> and CDF <span class="arithmatex">\(C(r) = \int_0^r p_r(s)ds\)</span>. Output <span class="arithmatex">\(s = (L-1)C(r)\)</span>. Then <span class="arithmatex">\(p_s(s) = p_r(r)/|ds/dr| = p_r(r)/((L-1)p_r(r)) = 1/(L-1)\)</span> on <span class="arithmatex">\([0, L-1]\)</span> — uniform. Discrete version uses empirical CDF, giving approximate uniformity.</p>
+<p><strong>B5.</strong> <strong>Wiener derivation:</strong> minimize <span class="arithmatex">\(\mathbb E[|F - W G|^2]\)</span> over linear filters <span class="arithmatex">\(W\)</span> where <span class="arithmatex">\(G = HF + N\)</span>. Optimal <span class="arithmatex">\(W = \mathbb E[FG^*]/\mathbb E[|G|^2] = H^* S_f/(|H|^2 S_f + S_\nu)\)</span>. Assumptions: (i) <span class="arithmatex">\(f, \nu\)</span> zero-mean, uncorrelated; (ii) <span class="arithmatex">\(S_f, S_\nu\)</span> known; (iii) LSI filter; (iv) linear minimum-MSE criterion.</p>
+<p><strong>B6.</strong> <strong>JPEG pipeline:</strong> (1) split into 8×8 blocks; (2) RGB→YCbCr, subsample chroma 4:2:0; (3) 8×8 DCT per block; (4) quantize with a table scaled by quality factor; (5) zigzag scan; (6) Huffman entropy coding; (7) (decoder side) inverse steps. Three redundancies exploited: <strong>coding</strong> (Huffman), <strong>interpixel</strong> (DCT), <strong>psychovisual</strong> (quantization table).</p>
+<p><strong>B7.</strong> <strong>Radon transform:</strong> <span class="arithmatex">\(R(\rho, \theta) = \int\int f(x,y)\delta(x\cos\theta + y\sin\theta - \rho)dxdy\)</span> — line integrals at angle <span class="arithmatex">\(\theta\)</span>. <strong>Fourier slice theorem:</strong> <span class="arithmatex">\(\widehat R(\omega, \theta) = F(\omega\cos\theta, \omega\sin\theta)\)</span> — 1-D FT of projection = 2-D FT of <span class="arithmatex">\(f\)</span> along the slice. <strong>FBP:</strong> (i) FT each projection; (ii) multiply by ramp <span class="arithmatex">\(|\omega|\)</span>; (iii) IFT; (iv) back-project over all angles. The ramp corrects the <span class="arithmatex">\(1/r\)</span> blur of plain back-projection.</p>
+<h3 id="section-c-speech-fundamentals">Section C — Speech Fundamentals<a class="headerlink" href="#section-c-speech-fundamentals" title="Permanent link">&para;</a></h3>
+<p><strong>C1.</strong> (c) 150–250 Hz.</p>
+<p><strong>C2.</strong> Four subsystems: <strong>lungs</strong> (power source — airflow), <strong>larynx / vocal folds</strong> (source — quasi-periodic pulse train for voiced, noise for unvoiced), <strong>vocal tract</strong> (filter — formants from acoustic resonances), <strong>articulators</strong> (tongue, lips, velum — configure the tract shape). Together they produce a source-filter cascade that generates the speech waveform.</p>
+<p><strong>C3.</strong> The speech spectrum is <span class="arithmatex">\(|X(f)| = |G(f)| \cdot |H(f)|\)</span> — glottal source times vocal-tract filter. <strong>Whispered speech:</strong> the source is non-periodic (vocal folds open), so pitch is absent. But the vocal tract is unchanged, so the <strong>formants are identical to normal speech</strong> — the filter alone carries the linguistic information. This is why whispered speech is fully intelligible.</p>
+<h3 id="section-d-speech-methods">Section D — Speech Methods<a class="headerlink" href="#section-d-speech-methods" title="Permanent link">&para;</a></h3>
+<p><strong>D1.</strong> (b) Lower than 0.15.</p>
+<p><strong>D2.</strong> <strong>Trade-off:</strong> longer window → better frequency resolution, worse time resolution (Heisenberg: <span class="arithmatex">\(\Delta t \cdot \Delta f \ge 1/(4\pi)\)</span>). <strong>Narrowband</strong> (40 ms): resolves pitch harmonics and shows them as fine horizontal bands; good for pitch/formant analysis. <strong>Wideband</strong> (10 ms): resolves pitch pulses as vertical stripes; good for voicing and timing analysis.</p>
+<p><strong>D3.</strong> <strong>LPC model:</strong> <span class="arithmatex">\(x[n] = -\sum_{k=1}^p a_k x[n-k] + e[n]\)</span>. Minimize <span class="arithmatex">\(\mathbb E[e[n]^2]\)</span>: <span class="arithmatex">\(\partial/\partial a_k = 2\sum e[n]x[n-k] = 0\)</span>. Substituting <span class="arithmatex">\(e[n] = x[n] + \sum_l a_l x[n-l]\)</span>: <span class="arithmatex">\(\sum_l a_l R[k-l] = -R[k]\)</span> for <span class="arithmatex">\(k = 1, \ldots, p\)</span>. Matrix: <span class="arithmatex">\(\mathbf R\mathbf a = -\mathbf r\)</span> with <span class="arithmatex">\(\mathbf R\)</span> Toeplitz.</p>
+<p><strong>D4.</strong> <strong>Cepstrum:</strong> <span class="arithmatex">\(c[n] = \text{IFFT}\{\log|X[k]|\}\)</span>. In log-spectrum, source (pitch) and filter (formants) are additive. In cepstral domain, they occupy different quefrency ranges — filter (smooth envelope) at <strong>low quefrency</strong> near 0; pitch (harmonic comb) at <strong>high quefrency</strong> at <span class="arithmatex">\(n = T_0\)</span> (pitch period in samples). <strong>Pitch at high quefrency</strong> because the IFFT of a comb with spacing <span class="arithmatex">\(F_0\)</span> is a peak at period <span class="arithmatex">\(T_0\)</span>.</p>
+<p><strong>D5.</strong> <strong>Levinson–Durbin:</strong> recursion from order <span class="arithmatex">\(m-1\)</span> to <span class="arithmatex">\(m\)</span>: <span class="arithmatex">\(k_m = -(R[m] + \sum_{i=1}^{m-1}a_i^{(m-1)}R[m-i])/\sigma_{m-1}^2\)</span>; <span class="arithmatex">\(a_i^{(m)} = a_i^{(m-1)} + k_m a_{m-i}^{(m-1)}\)</span>; <span class="arithmatex">\(\sigma_m^2 = (1 - k_m^2)\sigma_{m-1}^2\)</span>. <strong>Reflection coefficients:</strong> <span class="arithmatex">\(k_m\)</span> = partial autocorrelation at lag <span class="arithmatex">\(m\)</span> — correlation between <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(x[n-m]\)</span> after removing intermediate lags. <span class="arithmatex">\(|k_m| &lt; 1\)</span> is the necessary and sufficient condition for AR stability.</p>
+<p><strong>D6.</strong> <strong>Autocorrelation:</strong> cheap, works for most; prone to <strong>octave errors</strong>. <strong>Cepstrum:</strong> robust to formants, handles weak fundamentals; requires long frames. <strong>LPC residual (SIFT):</strong> best accuracy — the LPC filter whitens residual, leaving a sharp pitch peak. <strong>SIFT for coding; cepstrum for analysis; ACF for embedded/cheap.</strong></p>
+<h3 id="section-e-speech-applications">Section E — Speech Applications<a class="headerlink" href="#section-e-speech-applications" title="Permanent link">&para;</a></h3>
+<p><strong>E1.</strong> (a) Evaluation, decoding, training.</p>
+<p><strong>E2.</strong> <span class="arithmatex">\(\hat W = \arg\max_W \Pr(W \mid X) \propto \arg\max_W \Pr(X \mid W)\Pr(W)\)</span>. <strong>Acoustic model:</strong> <span class="arithmatex">\(\Pr(X \mid W)\)</span> — likelihood of audio given word sequence. <strong>Language model:</strong> <span class="arithmatex">\(\Pr(W)\)</span> — prior probability of word sequence. <strong>Useful:</strong> enables independent training on different data (acoustic on transcribed speech, language on large text corpora), and lets context resolve acoustic ambiguity.</p>
+<p><strong>E3.</strong> <strong>DTW:</strong> optimal monotone path aligning two sequences. Recursion: <span class="arithmatex">\(C(i,j) = d(x_i, y_j) + \min(C(i-1,j), C(i,j-1), C(i-1,j-1))\)</span>. <strong>Sakoe–Chiba band</strong> restricts path to within <span class="arithmatex">\(r\)</span> of the diagonal — reduces cost from <span class="arithmatex">\(O(MN)\)</span> to <span class="arithmatex">\(O(Mr)\)</span>, regularizes to prevent pathological warping.</p>
+<p><strong>E4.</strong> <strong>Verification:</strong> 1:1 — "Is this the claimed speaker?" (authentication). <strong>Identification:</strong> 1:N — "Which enrolled speaker is this?" (forensics, personalization). Features: MFCCs, x-vectors, pitch statistics, speaking rate, idiolect.</p>
+<h3 id="section-f-video-processing">Section F — Video Processing<a class="headerlink" href="#section-f-video-processing" title="Permanent link">&para;</a></h3>
+<p><strong>F1.</strong> (b) <span class="arithmatex">\(f_s\)</span> below 2× the wheel's rotation frequency.</p>
+<p><strong>F2.</strong> <span class="arithmatex">\(I_x u + I_y v + I_t = 0\)</span> from brightness constancy + first-order Taylor. <strong>Aperture:</strong> one equation, two unknowns — motion underdetermined. <strong>LK solution:</strong> assume constant <span class="arithmatex">\(u, v\)</span> over a window, giving <span class="arithmatex">\(N\)</span> equations, then least-squares: <span class="arithmatex">\(\mathbf u = (A^\top A)^{-1}A^\top\mathbf b\)</span>. Aperture resolved by having enough independent constraints in the window; fails at flat regions (both <span class="arithmatex">\(I_x, I_y\)</span> small).</p>
+<p><strong>F3.</strong> Pipeline: I/P/B classification → motion estimation → motion-compensated prediction → residual → DCT → quantize → entropy-code. <strong>Motion-compensated prediction:</strong> removes temporal redundancy — the residual (aligned difference between current and predicted frame) is much sparser than the frame itself, and the DCT compacts it further. This is the main source of compression in inter-frame coding.</p>
+<p><strong>F4.</strong> <strong>Efficiency (typical 1080p at PSNR 35 dB):</strong> H.264 = 6 Mbps, HEVC = 3.8 Mbps (−38%), AV1 = 3.4 Mbps (−43%). <strong>For 4K streaming:</strong> <strong>HEVC</strong> if HEVC hardware decode is universal on the target devices (most modern TVs, phones, browsers); <strong>AV1</strong> if compression is more important than decode compatibility (Netflix, YouTube use AV1; older devices need fallback). <strong>Recommendation: AV1 with H.264 fallback</strong> for maximum efficiency; <strong>HEVC only</strong> if you need universal hardware decode without fallback.</p>
+</details>
+<hr />
+<h2 id="grading-rubric-for-instructors">Grading rubric (for instructors)<a class="headerlink" href="#grading-rubric-for-instructors" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Mark</th>
+<th>Criteria</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>90–100</td>
+<td>All questions correct or with minor arithmetic slips; derivations rigorous; interpretation insightful</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>75–89</td>
+<td>Most questions correct; occasional conceptual gaps; derivations mostly sound</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>60–74</td>
+<td>Basic understanding demonstrated; some errors in derivations or interpretation</td>
+</tr>
+<tr>
+<td><strong>F</strong></td>
+<td>&lt; 60</td>
+<td>Significant conceptual gaps; major derivations missing or wrong</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Point allocations:</strong></p>
+<ul>
+<li>MCQs: all-or-nothing.</li>
+<li>Short answers: partial credit for correct key steps.</li>
+<li>Derivations: partial credit per correct line.</li>
+</ul>
+<p><strong>Common errors to watch for (and their marks):</strong></p>
+<ul>
+<li>Confusing <strong>necessary</strong> and <strong>sufficient</strong> conditions (deduct 1–2).</li>
+<li><strong>Wrong sign</strong> in a Lagrange/KKT multiplier (deduct 1).</li>
+<li><strong>Missing or incorrect assumption</strong> in a derivation (deduct 1–2).</li>
+<li><strong>Numerical error</strong> in a final answer without correct method (deduct 2–3).</li>
+<li><strong>Correct answer with no working</strong> (deduct full marks).</li>
+<li><strong>Copying a formula</strong> without stating when it applies (deduct 1–2).</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

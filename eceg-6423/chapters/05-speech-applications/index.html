@@ -1,0 +1,4109 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6423/chapters/05-speech-applications/">
+      
+      
+        <link rel="prev" href="../04-speech-processing-methods/">
+      
+      
+        <link rel="next" href="../06-video-processing/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>5. Applications of Speech Processing - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-5-applications-of-speech-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              5. Applications of Speech Processing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../eceg-6303/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-overview-of-the-four-application-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Overview of the four application families
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-the-speech-recognition-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 The speech-recognition problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 The speech-recognition problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522-three-levels-of-difficulty" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.2 Three levels of difficulty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523-the-standard-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.3 The standard pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#524-specification-of-a-typical-application-voice-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.4 Specification of a typical application — voice response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-dynamic-time-warping-dtw" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Dynamic Time Warping (DTW)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Dynamic Time Warping (DTW)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531-the-need-for-time-warping" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.1 The need for time warping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532-the-dtw-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.2 The DTW algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-51-dtw-on-two-simple-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.1 — DTW on two simple sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533-sakoechiba-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.3 Sakoe–Chiba band
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#534-lb_keogh-and-lower-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.4 LB_Keogh and lower bounds
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#535-dtw-in-isolated-word-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.5 DTW in isolated-word recognition
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-hidden-markov-models-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Hidden Markov Models (HMM)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 Hidden Markov Models (HMM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#541-the-hmm-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.1 The HMM framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#542-evaluation-the-forward-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.2 Evaluation — the forward algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-52-forward-algorithm-on-a-2-state-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.2 — forward algorithm on a 2-state HMM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#543-decoding-the-viterbi-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.3 Decoding — the Viterbi algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-53-viterbi-on-the-same-2-state-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.3 — Viterbi on the same 2-state HMM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#544-training-baumwelch-forward-backward" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.4 Training — Baum–Welch (forward-backward)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-54-one-baumwelch-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.4 — one Baum–Welch update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#545-hmm-for-isolated-word-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.5 HMM for isolated word recognition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#546-why-hmm-replaced-dtw" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.6 Why HMM replaced DTW
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#547-the-modern-landscape-neural-asr" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.7 The modern landscape — neural ASR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-speech-synthesis-text-to-speech" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 Speech synthesis (text-to-speech)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 Speech synthesis (text-to-speech)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#551-the-tts-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.1 The TTS pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#552-four-generations-of-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.2 Four generations of synthesis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#553-modern-neural-tts-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.3 Modern neural TTS in detail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-55-tts-pipeline-walk-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.5 — TTS pipeline walk-through
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#554-quality-evaluation-mos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.4 Quality evaluation — MOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-speaker-verification-and-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6 Speaker verification and identification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 Speaker verification and identification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#561-problem-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.1 Problem definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#562-features-and-modeling-the-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.2 Features and modeling — the evolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#563-evaluation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.3 Evaluation metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-56-eer-and-farfrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.6 — EER and FAR/FRR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#564-text-dependent-vs-text-independent" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.4 Text-dependent vs. text-independent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#565-anti-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.5 Anti-spoofing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-voice-over-ip-voip" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7 Voice over IP (VoIP)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 Voice over IP (VoIP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#571-the-voip-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.1 The VoIP stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#572-bandwidth-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.2 Bandwidth budget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#573-latency-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.3 Latency budget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#574-jitter-buffer-and-packet-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.4 Jitter buffer and packet loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-57-bandwidth-and-latency-for-a-mobile-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.7 — bandwidth and latency for a mobile call
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-aids-to-the-handicapped-applications-in-speech" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.8 Aids to the handicapped — applications in speech
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#59-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.9 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#510-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.10 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.10 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#511-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.11 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51-overview-of-the-four-application-families" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1 Overview of the four application families
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-the-speech-recognition-problem" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2 The speech-recognition problem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.2 The speech-recognition problem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#521-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#522-three-levels-of-difficulty" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.2 Three levels of difficulty
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#523-the-standard-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.3 The standard pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#524-specification-of-a-typical-application-voice-response" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2.4 Specification of a typical application — voice response
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-dynamic-time-warping-dtw" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3 Dynamic Time Warping (DTW)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 Dynamic Time Warping (DTW)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531-the-need-for-time-warping" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.1 The need for time warping
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532-the-dtw-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.2 The DTW algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-51-dtw-on-two-simple-sequences" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.1 — DTW on two simple sequences
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533-sakoechiba-band" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.3 Sakoe–Chiba band
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#534-lb_keogh-and-lower-bounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.4 LB_Keogh and lower bounds
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#535-dtw-in-isolated-word-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3.5 DTW in isolated-word recognition
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54-hidden-markov-models-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4 Hidden Markov Models (HMM)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4 Hidden Markov Models (HMM)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#541-the-hmm-framework" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.1 The HMM framework
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#542-evaluation-the-forward-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.2 Evaluation — the forward algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-52-forward-algorithm-on-a-2-state-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.2 — forward algorithm on a 2-state HMM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#543-decoding-the-viterbi-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.3 Decoding — the Viterbi algorithm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-53-viterbi-on-the-same-2-state-hmm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.3 — Viterbi on the same 2-state HMM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#544-training-baumwelch-forward-backward" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.4 Training — Baum–Welch (forward-backward)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-54-one-baumwelch-update" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.4 — one Baum–Welch update
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#545-hmm-for-isolated-word-recognition" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.5 HMM for isolated word recognition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#546-why-hmm-replaced-dtw" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.6 Why HMM replaced DTW
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#547-the-modern-landscape-neural-asr" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4.7 The modern landscape — neural ASR
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-speech-synthesis-text-to-speech" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5 Speech synthesis (text-to-speech)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.5 Speech synthesis (text-to-speech)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#551-the-tts-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.1 The TTS pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#552-four-generations-of-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.2 Four generations of synthesis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#553-modern-neural-tts-in-detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.3 Modern neural TTS in detail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-55-tts-pipeline-walk-through" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.5 — TTS pipeline walk-through
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#554-quality-evaluation-mos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5.4 Quality evaluation — MOS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#56-speaker-verification-and-identification" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6 Speaker verification and identification
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.6 Speaker verification and identification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#561-problem-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.1 Problem definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#562-features-and-modeling-the-evolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.2 Features and modeling — the evolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#563-evaluation-metrics" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.3 Evaluation metrics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-56-eer-and-farfrr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.6 — EER and FAR/FRR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#564-text-dependent-vs-text-independent" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.4 Text-dependent vs. text-independent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#565-anti-spoofing" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.6.5 Anti-spoofing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#57-voice-over-ip-voip" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7 Voice over IP (VoIP)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.7 Voice over IP (VoIP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#571-the-voip-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.1 The VoIP stack
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#572-bandwidth-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.2 Bandwidth budget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#573-latency-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.3 Latency budget
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#574-jitter-buffer-and-packet-loss" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.7.4 Jitter buffer and packet loss
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-57-bandwidth-and-latency-for-a-mobile-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 5.7 — bandwidth and latency for a mobile call
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#58-aids-to-the-handicapped-applications-in-speech" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.8 Aids to the handicapped — applications in speech
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#59-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.9 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#510-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.10 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.10 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#511-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.11 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-5-applications-of-speech-processing">Chapter 5 — Applications of Speech Processing<a class="headerlink" href="#chapter-5-applications-of-speech-processing" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Chapter at a glance</p>
+<p><strong>Contact hours:</strong> 2 lecture + 2 tutorial + 1 laboratory · <strong>Home study:</strong> 5 h</p>
+<p><strong>Coverage (syllabus):</strong> speech recognition — specification of a typical
+application, voice response system · algorithms: spectral estimation,
+<strong>dynamic time warping (DTW)</strong>, <strong>hidden Markov model (HMM)</strong> · speech
+synthesis: text-to-speech, voice over IP · speaker verification and
+identification.</p>
+</div>
+<hr />
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this chapter you should be able to:</p>
+<ol>
+<li>Describe the four major <strong>application families</strong> of speech processing, and
+   identify the technology stack each uses.</li>
+<li>State the <strong>speech-recognition problem</strong> in its three levels (isolated word,
+   connected word, continuous speech) and describe the standard pipeline:
+   feature extraction → acoustic model → language model → decoder.</li>
+<li>Derive and apply <strong>dynamic time warping (DTW)</strong> for template matching; state
+   its complexity, its constraint variants (Sakoe–Chiba band, Itakura
+   parallelogram), and the modern lower-bound acceleration.</li>
+<li>Derive and apply <strong>hidden Markov models (HMM)</strong>: forward algorithm,
+   Viterbi decoding, and Baum–Welch training. State the three fundamental HMM
+   problems and their solutions.</li>
+<li>Compare <strong>HMM-based</strong> and <strong>DTW-based</strong> recognizers. Explain why HMMs
+   replaced DTW and why neural networks have now displaced classical HMMs in
+   production.</li>
+<li>Describe the four <strong>speech-synthesis</strong> generations (concatenative, formant,
+   HMM-based, neural) and their trade-offs.</li>
+<li>State the modern <strong>speaker verification</strong> stack: feature extraction, model
+   (GMM-UBM / i-vector / x-vector / ECAPA-TDNN), and score normalization.
+   Compute EER, FAR, and FRR.</li>
+<li>Describe the <strong>Voice-over-IP</strong> stack: codec, RTP, jitter buffer, packet-loss
+   concealment, and end-to-end latency budget.</li>
+<li>Implement <strong>DTW</strong>, the <strong>forward algorithm</strong>, and <strong>Viterbi</strong> in Python, Java,
+   and C#.</li>
+</ol>
+<hr />
+<h2 id="51-overview-of-the-four-application-families">5.1 Overview of the four application families<a class="headerlink" href="#51-overview-of-the-four-application-families" title="Permanent link">&para;</a></h2>
+<p>Speech processing supports four main applications, each built on the analysis
+tools of Chapter 4:</p>
+<table>
+<thead>
+<tr>
+<th>Application</th>
+<th>Input</th>
+<th>Output</th>
+<th>Core technology</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Recognition</strong></td>
+<td>Audio</td>
+<td>Text / intent</td>
+<td>HMM, DTW, deep nets</td>
+</tr>
+<tr>
+<td><strong>Synthesis</strong></td>
+<td>Text</td>
+<td>Audio</td>
+<td>Concatenative, neural TTS</td>
+</tr>
+<tr>
+<td><strong>Speaker recognition</strong></td>
+<td>Audio</td>
+<td>Identity</td>
+<td>GMM-UBM, i-vector, x-vector</td>
+</tr>
+<tr>
+<td><strong>Coding / transmission</strong></td>
+<td>Audio</td>
+<td>Bits</td>
+<td>LPC, CELP, Opus</td>
+</tr>
+</tbody>
+</table>
+<p>This chapter covers all four, with <strong>recognition</strong> receiving the most
+attention — it is the hardest problem and introduces the two fundamental
+algorithms (DTW and HMM) that appear throughout the field.</p>
+<hr />
+<h2 id="52-the-speech-recognition-problem">5.2 The speech-recognition problem<a class="headerlink" href="#52-the-speech-recognition-problem" title="Permanent link">&para;</a></h2>
+<h3 id="521-problem-statement">5.2.1 Problem statement<a class="headerlink" href="#521-problem-statement" title="Permanent link">&para;</a></h3>
+<p>Given an acoustic signal <span class="arithmatex">\(x(t)\)</span> (typically 5–10 s of speech), find the most
+likely word sequence <span class="arithmatex">\(\hat W = (w_1, \ldots, w_M)\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat W = \arg\max_W \Pr(W \mid X)\;}
+\]</div>
+<p>By Bayes' rule:</p>
+<div class="arithmatex">\[
+\Pr(W \mid X) = \frac{\Pr(X \mid W)\Pr(W)}{\Pr(X)}.
+\]</div>
+<p>Since <span class="arithmatex">\(\Pr(X)\)</span> is independent of <span class="arithmatex">\(W\)</span>, the argmax reduces to:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat W = \arg\max_W \underbrace{\Pr(X \mid W)}_{\text{acoustic model}} \cdot \underbrace{\Pr(W)}_{\text{language model}}\;}
+\]</div>
+<p>This <strong>factorization</strong> is the foundation of every ASR system. The acoustic model
+scores how well the audio matches each word; the language model scores how
+likely each word sequence is; the <strong>decoder</strong> searches for the best combined
+score.</p>
+<h3 id="522-three-levels-of-difficulty">5.2.2 Three levels of difficulty<a class="headerlink" href="#522-three-levels-of-difficulty" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Task</th>
+<th>Vocabulary</th>
+<th>Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Isolated word</strong></td>
+<td>One word at a time, with pauses</td>
+<td>Small–medium</td>
+<td>No context</td>
+</tr>
+<tr>
+<td><strong>Connected word</strong></td>
+<td>Fluent speech, small set of words</td>
+<td>Small</td>
+<td>No language model</td>
+</tr>
+<tr>
+<td><strong>Continuous speech</strong></td>
+<td>Natural speech, large vocabulary</td>
+<td>50k–1M+ words</td>
+<td>Full language model</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Production systems</strong> today are <strong>continuous, large-vocabulary</strong> and usually
+<strong>speaker-independent</strong>, with vocabulary sizes ranging from 20k (dictation) to
+over a million (voice search), and language models trained on billions of
+sentences.</p>
+<h3 id="523-the-standard-pipeline">5.2.3 The standard pipeline<a class="headerlink" href="#523-the-standard-pipeline" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Audio  →  Pre-emphasis  →  Framing  →  Windowing  →  Feature
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                                     Extraction
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                                        ↓
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                             (MFCC / PLP / filterbank)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                                        ↓
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                        +-------------------------------------------------+
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>                        |                                                 |
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                        |  Acoustic Model (HMM/DNN): p(X | W)             |
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                        |  Language Model (n-gram / RNN): p(W)            |
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                        |  Lexicon (dictionary): pronunciation rules      |
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                        |  Decoder (Viterbi / WFST): search best W        |
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>                        |                                                 |
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>                        +-------------------------------------------------+
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>                                                        ↓
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                                                     Text
+</span></code></pre></div>
+<p><strong>Acoustic model.</strong> Scores the likelihood of the acoustic observations given a
+phoneme or word sequence. Historically HMM-GMM; now DNN/RNN/Transformer.</p>
+<p><strong>Language model.</strong> Scores the a priori likelihood of word sequences.
+Historically n-grams; now recurrent / Transformer LMs.</p>
+<p><strong>Lexicon.</strong> Maps words to phoneme sequences (pronunciation dictionary).</p>
+<p><strong>Decoder.</strong> Searches the combined model for the most likely word sequence.
+Dynamic-programming algorithm (Viterbi over the state lattice).</p>
+<h3 id="524-specification-of-a-typical-application-voice-response">5.2.4 Specification of a typical application — voice response<a class="headerlink" href="#524-specification-of-a-typical-application-voice-response" title="Permanent link">&para;</a></h3>
+<p>A <strong>voice response system</strong> (e.g., an IVR menu) has much stricter constraints
+than dictation:</p>
+<table>
+<thead>
+<tr>
+<th>Requirement</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vocabulary</td>
+<td>10–100 commands (isolated words)</td>
+</tr>
+<tr>
+<td>Speaker dependency</td>
+<td>Speaker-independent preferred</td>
+</tr>
+<tr>
+<td>Noise tolerance</td>
+<td>Must work in a noisy environment</td>
+</tr>
+<tr>
+<td>Latency</td>
+<td>&lt; 300 ms (user expects immediate response)</td>
+</tr>
+<tr>
+<td>Word accuracy</td>
+<td>&gt; 98% (errors are more costly in an IVR than in dictation)</td>
+</tr>
+<tr>
+<td>Language</td>
+<td>One language, trained on domain-specific corpus</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design choices for an IVR.</strong></p>
+<ul>
+<li><strong>Isolated word / small vocabulary</strong> — simpler acoustic model, no language model needed (or a small grammar).</li>
+<li><strong>MFCC features + HMM</strong> (or deep net) — the standard architecture.</li>
+<li><strong>Keyword spotting</strong> — listen for a small set of keywords in continuous speech, no full transcription needed. Simpler than full ASR.</li>
+<li><strong>Confirm-by-repeat</strong> — ask the user to repeat the choice for ambiguous cases (≥ 85% confidence).</li>
+</ul>
+<p>The IVR is a <strong>classic engineering application</strong> — a small, well-defined problem
+where accuracy can be pushed to 99%+ with domain-specific training.</p>
+<hr />
+<h2 id="53-dynamic-time-warping-dtw">5.3 Dynamic Time Warping (DTW)<a class="headerlink" href="#53-dynamic-time-warping-dtw" title="Permanent link">&para;</a></h2>
+<h3 id="531-the-need-for-time-warping">5.3.1 The need for time warping<a class="headerlink" href="#531-the-need-for-time-warping" title="Permanent link">&para;</a></h3>
+<p>The same word, spoken twice, has different <strong>durations</strong> — one utterance may
+take 400 ms, another 600 ms. A naive <strong>Euclidean distance</strong> between the
+feature sequences is meaningless — the sequences have different lengths and
+their features are misaligned in time.</p>
+<p><strong>DTW</strong> solves this by finding an <strong>optimal alignment</strong> — a monotone warping
+path that matches the two sequences frame-by-frame, allowing different
+speeds.</p>
+<h3 id="532-the-dtw-algorithm">5.3.2 The DTW algorithm<a class="headerlink" href="#532-the-dtw-algorithm" title="Permanent link">&para;</a></h3>
+<p><strong>Problem statement.</strong> Given two feature sequences</p>
+<div class="arithmatex">\[
+X = (x_1, \ldots, x_M),\qquad Y = (y_1, \ldots, y_N),
+\]</div>
+<p>with <span class="arithmatex">\(x_i, y_j \in \mathbb{R}^d\)</span> (e.g., MFCC vectors, <span class="arithmatex">\(d = 13\)</span>), find the
+<strong>alignment path</strong> <span class="arithmatex">\(\pi = ((\pi_1^X, \pi_1^Y), \ldots)\)</span> that minimizes the
+<strong>accumulated cost</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{DTW}(X, Y) = \min_{\pi} \sum_{(i,j) \in \pi} d(x_i, y_j)\;}
+\]</div>
+<p>subject to constraints:</p>
+<ul>
+<li><strong>Boundary:</strong> path starts at <span class="arithmatex">\((1,1)\)</span> and ends at <span class="arithmatex">\((M,N)\)</span>.</li>
+<li><strong>Monotonicity:</strong> if <span class="arithmatex">\((i,j)\)</span> follows <span class="arithmatex">\((i',j')\)</span>, then <span class="arithmatex">\(i \ge i'\)</span> and <span class="arithmatex">\(j \ge j'\)</span>.</li>
+<li><strong>Step size:</strong> <span class="arithmatex">\((i,j)\)</span> follows <span class="arithmatex">\((i',j')\)</span> with <span class="arithmatex">\((i-i', j-j') \in \{(0,1), (1,0), (1,1)\}\)</span> — path can only move right, up, or diagonally.</li>
+<li><strong>Locality:</strong> (optional) path stays within a band around the diagonal — the <strong>Sakoe–Chiba band</strong> <span class="arithmatex">\(|i/M - j/N| \le r\)</span> or the <strong>Itakura parallelogram</strong>.</li>
+</ul>
+<p><strong>The DP recursion.</strong> Compute the accumulated cost matrix:</p>
+<div class="arithmatex">\[
+\boxed{\;C(i,j) = d(x_i, y_j) + \min\begin{cases}C(i-1,j) &amp; \text{(insertion)} \\ C(i,j-1) &amp; \text{(deletion)} \\ C(i-1,j-1) &amp; \text{(match)}\end{cases}\;}
+\]</div>
+<p>Initial conditions: <span class="arithmatex">\(C(1,1) = d(x_1,y_1)\)</span>; <span class="arithmatex">\(C(i,1) = C(i-1,1) + d(x_i, y_1)\)</span>; <span class="arithmatex">\(C(1,j) = C(1,j-1) + d(x_1, y_j)\)</span>.</p>
+<p><strong>DTW distance:</strong> <span class="arithmatex">\(C(M,N)\)</span>.</p>
+<p><strong>Optimal path:</strong> trace back from <span class="arithmatex">\((M,N)\)</span> to <span class="arithmatex">\((1,1)\)</span> by following the argmin at each step.</p>
+<p><strong>Complexity.</strong> <span class="arithmatex">\(O(MN)\)</span> time and <span class="arithmatex">\(O(MN)\)</span> memory. With the Sakoe–Chiba band of width <span class="arithmatex">\(r\)</span>, it reduces to <span class="arithmatex">\(O(Mr)\)</span> — a major saving for long sequences.</p>
+<h3 id="worked-example-51-dtw-on-two-simple-sequences">Worked example 5.1 — DTW on two simple sequences<a class="headerlink" href="#worked-example-51-dtw-on-two-simple-sequences" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X = (1, 2, 3)\)</span>, <span class="arithmatex">\(Y = (1, 3)\)</span>, distance <span class="arithmatex">\(d(x_i,y_j) = |x_i - y_j|\)</span>.</p>
+<p><strong>Distance matrix <span class="arithmatex">\(D\)</span>:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: center;"><span class="arithmatex">\(y=1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(y=3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(x=1\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x=2\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x=3\)</span></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Accumulated cost matrix <span class="arithmatex">\(C\)</span>:</strong></p>
+<p><span class="arithmatex">\(C(1,1) = 0\)</span>, <span class="arithmatex">\(C(1,2) = 0+2=2\)</span>, <span class="arithmatex">\(C(2,1) = 0+1=1\)</span>, <span class="arithmatex">\(C(3,1) = 1+2=3\)</span>.</p>
+<p><span class="arithmatex">\(C(2,2) = 1 + \min(C(1,1), C(1,2), C(2,1)) = 1 + \min(0,2,1) = 1\)</span>.</p>
+<p><span class="arithmatex">\(C(3,2) = 0 + \min(C(2,1), C(2,2), C(3,1)) = 0 + \min(1,1,3) = 1\)</span>.</p>
+<p><strong>Final matrix:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: center;"><span class="arithmatex">\(y=1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(y=3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(x=1\)</span></td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x=2\)</span></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x=3\)</span></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>DTW distance:</strong> <span class="arithmatex">\(C(3,2) = 1\)</span>.</p>
+<p><strong>Backtracked path.</strong> Starting at <span class="arithmatex">\((3,2)\)</span>: predecessor is <span class="arithmatex">\(C(2,2)\)</span> (min of 1,1,3). From <span class="arithmatex">\((2,2)\)</span>: predecessor is <span class="arithmatex">\(C(1,1)\)</span> (min of 0,2,1). From <span class="arithmatex">\((1,1)\)</span>: start.</p>
+<p><strong>Path:</strong> <span class="arithmatex">\((1,1) \to (2,2) \to (3,2)\)</span>. So <span class="arithmatex">\(x_1 \leftrightarrow y_1\)</span>, <span class="arithmatex">\(x_2 \leftrightarrow y_3\)</span>, <span class="arithmatex">\(x_3 \leftrightarrow y_3\)</span>.</p>
+<p><strong>Interpretation.</strong> <span class="arithmatex">\(X\)</span> "stretches" the second sample to match both <span class="arithmatex">\(y_2\)</span> and <span class="arithmatex">\(y_3\)</span> — DTW warped the time axis optimally. Total cost 1 = <span class="arithmatex">\(|1-1| + |2-3| + |3-3|\)</span>. ✓</p>
+<h3 id="533-sakoechiba-band">5.3.3 Sakoe–Chiba band<a class="headerlink" href="#533-sakoechiba-band" title="Permanent link">&para;</a></h3>
+<p>The <strong>Sakoe–Chiba band</strong> restricts the path to within <span class="arithmatex">\(r\)</span> samples of the
+diagonal:</p>
+<div class="arithmatex">\[
+\boxed{\;|i \cdot \tfrac{N}{M} - j| \le r,\quad \text{or equivalently } \left|\frac{i}{M} - \frac{j}{N}\right| \le \frac{r}{\min(M,N)}.\;}
+\]</div>
+<p><strong>Effects.</strong></p>
+<ul>
+<li><strong>Speedup:</strong> <span class="arithmatex">\(O(MN) \to O(r \min(M,N))\)</span> — for long sequences, a huge speedup.</li>
+<li><strong>Regularization:</strong> prevents pathological warping (e.g., aligning one frame of <span class="arithmatex">\(X\)</span> with all of <span class="arithmatex">\(Y\)</span>). For similar-length sequences, this is desirable.</li>
+<li><strong>Small accuracy loss</strong> in most speech tasks — the path rarely leaves the band anyway.</li>
+</ul>
+<p>Typical choices: <span class="arithmatex">\(r = 0.05 M\)</span>–<span class="arithmatex">\(0.15 M\)</span> (5–15% of the sequence length).</p>
+<h3 id="534-lb_keogh-and-lower-bounds">5.3.4 LB_Keogh and lower bounds<a class="headerlink" href="#534-lb_keogh-and-lower-bounds" title="Permanent link">&para;</a></h3>
+<p>For template matching over a large database, computing DTW for every candidate
+is expensive. <strong>Lower-bound distances</strong> prune candidates without computing the
+full DTW:</p>
+<p><strong>LB_Keogh.</strong> Compute the upper and lower envelopes of <span class="arithmatex">\(Y\)</span> within the
+Sakoe–Chiba band:</p>
+<div class="arithmatex">\[
+U_i = \max_{j \in [i-r, i+r]} y_j,\qquad L_i = \min_{j \in [i-r, i+r]} y_j.
+\]</div>
+<p>Then:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{LB\_Keogh}(X, Y) = \sum_{i=1}^M \begin{cases}(x_i - U_i)^2, &amp; x_i &gt; U_i \\ (x_i - L_i)^2, &amp; x_i &lt; L_i \\ 0, &amp; \text{otherwise}\end{cases}\;}
+\]</div>
+<p>is a <strong>lower bound</strong> on the DTW distance: <span class="arithmatex">\(\text{LB\_Keogh}(X,Y) \le \text{DTW}(X,Y)\)</span>.</p>
+<p><strong>Use.</strong> For each candidate, compute the cheap lower bound first. If it
+exceeds the current best DTW distance, skip the full DTW. Typically prunes
+90–99% of candidates — the difference between O(N·M²) and O(N·M) in practice.</p>
+<p>The modern standard in time-series matching is the <strong>UCR Suite</strong> (Rakthanmanon
+et al., 2012), which combines LB_Keogh with early abandoning, Z-normalization,
+and reordering — enables DTW search over billions of subsequences.</p>
+<h3 id="535-dtw-in-isolated-word-recognition">5.3.5 DTW in isolated-word recognition<a class="headerlink" href="#535-dtw-in-isolated-word-recognition" title="Permanent link">&para;</a></h3>
+<p><strong>Training.</strong> Store one or more templates per word (recorded examples). Average
+across speakers and conditions if available.</p>
+<p><strong>Testing.</strong> For each candidate template <span class="arithmatex">\(W\)</span>, compute <span class="arithmatex">\(\text{DTW}(X, W)\)</span> on the
+MFCC sequence of the test utterance. The word with minimum DTW distance is the
+recognized word:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat w = \arg\min_{W \in \text{vocab}} \text{DTW}(X, W).\;}
+\]</div>
+<p><strong>Word accuracy.</strong> For a 10-word isolated-digit task with 3 templates per word,
+speaker-dependent DTW gives ~99% accuracy; speaker-independent ~95%. This was
+the state of the art in the 1970s–80s and still works well for small tasks.</p>
+<p><strong>Limitations.</strong></p>
+<ul>
+<li><strong>Template storage</strong> — memory grows with vocabulary and number of templates.</li>
+<li><strong>No statistical modelling</strong> — no way to represent within-word variability beyond the templates.</li>
+<li><strong>No language model</strong> — cannot exploit word-sequence statistics.</li>
+<li><strong>Speaker-dependence</strong> — accuracy drops sharply across speakers.</li>
+</ul>
+<p>These limitations motivated the transition to HMMs.</p>
+<hr />
+<h2 id="54-hidden-markov-models-hmm">5.4 Hidden Markov Models (HMM)<a class="headerlink" href="#54-hidden-markov-models-hmm" title="Permanent link">&para;</a></h2>
+<h3 id="541-the-hmm-framework">5.4.1 The HMM framework<a class="headerlink" href="#541-the-hmm-framework" title="Permanent link">&para;</a></h3>
+<p>An <strong>HMM</strong> models a sequence of observations as generated by an underlying
+<strong>Markov chain</strong> whose states are hidden. Formally, an HMM is characterized by:</p>
+<ul>
+<li><strong><span class="arithmatex">\(N\)</span> states</strong> <span class="arithmatex">\(S = \{1, \ldots, N\}\)</span> — for speech, each phoneme gets 3–5 states (beginning / middle / end).</li>
+<li><strong>Initial distribution</strong> <span class="arithmatex">\(\boldsymbol\pi = (\pi_1, \ldots, \pi_N)\)</span> — <span class="arithmatex">\(P(q_1 = i)\)</span>.</li>
+<li><strong>Transition matrix</strong> <span class="arithmatex">\(A = [a_{ij}]\)</span> where <span class="arithmatex">\(a_{ij} = P(q_t = j \mid q_{t-1} = i)\)</span>.</li>
+<li><strong>Emission distribution</strong> <span class="arithmatex">\(B = \{b_j(\cdot)\}\)</span> — probability of observing a feature vector given the state. For classical HMM-GMM, <span class="arithmatex">\(b_j(x) = \sum_k c_{jk}\, \mathcal N(x; \mu_{jk}, \Sigma_{jk})\)</span> (Gaussian mixture).</li>
+</ul>
+<div class="admonition abstract">
+<p class="admonition-title">Three fundamental HMM problems</p>
+<ol>
+<li><strong>Evaluation.</strong> Given observation <span class="arithmatex">\(O = (o_1, \ldots, o_T)\)</span> and model <span class="arithmatex">\(\lambda = (A, B, \boldsymbol\pi)\)</span>, compute <span class="arithmatex">\(P(O \mid \lambda)\)</span>. — <strong>Forward algorithm.</strong></li>
+<li><strong>Decoding.</strong> Given <span class="arithmatex">\(O\)</span> and <span class="arithmatex">\(\lambda\)</span>, find the most likely hidden state sequence <span class="arithmatex">\(\hat Q = (\hat q_1, \ldots, \hat q_T)\)</span>. — <strong>Viterbi algorithm.</strong></li>
+<li><strong>Training.</strong> Given one or more observation sequences and an initial model, find the parameters <span class="arithmatex">\(\lambda = (A, B, \boldsymbol\pi)\)</span> that maximize <span class="arithmatex">\(P(O \mid \lambda)\)</span>. — <strong>Baum–Welch (EM) algorithm.</strong></li>
+</ol>
+</div>
+<h3 id="542-evaluation-the-forward-algorithm">5.4.2 Evaluation — the forward algorithm<a class="headerlink" href="#542-evaluation-the-forward-algorithm" title="Permanent link">&para;</a></h3>
+<p>Define the <strong>forward variable</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\alpha_t(i) = P(o_1, o_2, \ldots, o_t, q_t = i \mid \lambda)\;}
+\]</div>
+<p>— the probability of the observation prefix and being in state <span class="arithmatex">\(i\)</span> at time <span class="arithmatex">\(t\)</span>.</p>
+<p><strong>Recursion.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\alpha_1(i) = \pi_i\, b_i(o_1)\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;\alpha_t(j) = \Bigl[\sum_{i=1}^{N} \alpha_{t-1}(i)\, a_{ij}\Bigr]\, b_j(o_t),\quad t = 2, \ldots, T;\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;P(O \mid \lambda) = \sum_{i=1}^{N} \alpha_T(i).\;}
+\]</div>
+<p><strong>Cost.</strong> <span class="arithmatex">\(O(N^2 T)\)</span> — for <span class="arithmatex">\(N = 3\)</span> states, <span class="arithmatex">\(T = 400\)</span> frames, <span class="arithmatex">\(\sim 3600\)</span> multiplications. <strong>Trivial</strong> compared to the <span class="arithmatex">\(O(N^T)\)</span> naive enumeration.</p>
+<h3 id="worked-example-52-forward-algorithm-on-a-2-state-hmm">Worked example 5.2 — forward algorithm on a 2-state HMM<a class="headerlink" href="#worked-example-52-forward-algorithm-on-a-2-state-hmm" title="Permanent link">&para;</a></h3>
+<p><strong>Model.</strong></p>
+<ul>
+<li>States <span class="arithmatex">\(S = \{1, 2\}\)</span></li>
+<li><span class="arithmatex">\(\boldsymbol\pi = (0.6, 0.4)\)</span></li>
+<li><span class="arithmatex">\(A = \begin{bmatrix} 0.7 &amp; 0.3 \\ 0.4 &amp; 0.6 \end{bmatrix}\)</span></li>
+<li>Emission:</li>
+<li>State 1: <span class="arithmatex">\(b_1(A) = 0.5\)</span>, <span class="arithmatex">\(b_1(B) = 0.5\)</span></li>
+<li>State 2: <span class="arithmatex">\(b_2(A) = 0.1\)</span>, <span class="arithmatex">\(b_2(B) = 0.9\)</span></li>
+<li>Observation: <span class="arithmatex">\(O = A, B, A\)</span></li>
+</ul>
+<p><strong><span class="arithmatex">\(\alpha_1\)</span>:</strong></p>
+<div class="arithmatex">\[
+\alpha_1(1) = 0.6 \times 0.5 = 0.30,\quad \alpha_1(2) = 0.4 \times 0.1 = 0.04.
+\]</div>
+<p><strong><span class="arithmatex">\(\alpha_2\)</span>:</strong></p>
+<div class="arithmatex">\[
+\alpha_2(1) = [0.30 \times 0.7 + 0.04 \times 0.4] \times 0.5 = [0.21 + 0.016] \times 0.5 = 0.113,
+\]</div>
+<div class="arithmatex">\[
+\alpha_2(2) = [0.30 \times 0.3 + 0.04 \times 0.6] \times 0.9 = [0.09 + 0.024] \times 0.9 = 0.1026.
+\]</div>
+<p><strong><span class="arithmatex">\(\alpha_3\)</span>:</strong></p>
+<div class="arithmatex">\[
+\alpha_3(1) = [0.113 \times 0.7 + 0.1026 \times 0.4] \times 0.5 = 0.06007,
+\]</div>
+<div class="arithmatex">\[
+\alpha_3(2) = [0.113 \times 0.3 + 0.1026 \times 0.6] \times 0.1 = 0.009546.
+\]</div>
+<p><strong>Final.</strong> <span class="arithmatex">\(P(O \mid \lambda) = 0.06007 + 0.00955 = 0.06962\)</span>.</p>
+<p>The observation sequence <span class="arithmatex">\(A, B, A\)</span> has ~7% probability under the model. <strong>The
+forward algorithm avoids the <span class="arithmatex">\(N^T = 8\)</span> full path enumerations</strong> — with <span class="arithmatex">\(N=3\)</span>,
+<span class="arithmatex">\(T=400\)</span>, it's the difference between <span class="arithmatex">\(3^{400}\)</span> (impossible) and 360,000
+(instant).</p>
+<h3 id="543-decoding-the-viterbi-algorithm">5.4.3 Decoding — the Viterbi algorithm<a class="headerlink" href="#543-decoding-the-viterbi-algorithm" title="Permanent link">&para;</a></h3>
+<p>The <strong>Viterbi algorithm</strong> finds the most likely state sequence:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat Q = \arg\max_Q P(Q, O \mid \lambda).\;}
+\]</div>
+<p><strong>Recursion.</strong> Define <span class="arithmatex">\(\delta_t(i) = \max_{q_1,\ldots,q_{t-1}} P(q_1,\ldots,q_{t-1}, q_t = i, o_1, \ldots, o_t \mid \lambda)\)</span>.</p>
+<div class="arithmatex">\[
+\boxed{\;\delta_1(i) = \pi_i\, b_i(o_1),\qquad \psi_1(i) = 0;\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;\delta_t(j) = \max_{i}\, [\delta_{t-1}(i)\, a_{ij}]\, b_j(o_t),\qquad \psi_t(j) = \arg\max_i\, \delta_{t-1}(i)\, a_{ij}.\;}
+\]</div>
+<p><strong>Backtrack.</strong></p>
+<div class="arithmatex">\[
+q_T^* = \arg\max_i \delta_T(i),\qquad q_t^* = \psi_{t+1}(q_{t+1}^*),\quad t = T-1, \ldots, 1.
+\]</div>
+<p><strong>Differences from forward.</strong></p>
+<ul>
+<li><strong>Forward</strong> uses <strong>sum</strong> over the previous states → gives <strong>total probability</strong> <span class="arithmatex">\(P(O \mid \lambda)\)</span>.</li>
+<li><strong>Viterbi</strong> uses <strong>max</strong> over the previous states → gives <strong>best single path</strong> <span class="arithmatex">\(\max_Q P(Q, O \mid \lambda)\)</span>.</li>
+</ul>
+<p>In the <strong>log domain</strong>, "sum" becomes <strong>log-sum-exp</strong> and "max" becomes plain max
+— the operations stay in the log domain for numerical stability.</p>
+<h3 id="worked-example-53-viterbi-on-the-same-2-state-hmm">Worked example 5.3 — Viterbi on the same 2-state HMM<a class="headerlink" href="#worked-example-53-viterbi-on-the-same-2-state-hmm" title="Permanent link">&para;</a></h3>
+<p>Same model and observation <span class="arithmatex">\(O = A, B, A\)</span>.</p>
+<p><strong><span class="arithmatex">\(\delta_1\)</span>:</strong> <span class="arithmatex">\(\delta_1(1) = 0.30\)</span>, <span class="arithmatex">\(\delta_1(2) = 0.04\)</span>; both <span class="arithmatex">\(\psi_1 = 0\)</span>.</p>
+<p><strong><span class="arithmatex">\(\delta_2\)</span>:</strong></p>
+<div class="arithmatex">\[
+\delta_2(1) = \max(0.30 \times 0.7, 0.04 \times 0.4) \times 0.5 = 0.21 \times 0.5 = 0.105,\quad \psi_2(1) = 1.
+\]</div>
+<div class="arithmatex">\[
+\delta_2(2) = \max(0.30 \times 0.3, 0.04 \times 0.6) \times 0.9 = 0.09 \times 0.9 = 0.081,\quad \psi_2(2) = 1.
+\]</div>
+<p><strong><span class="arithmatex">\(\delta_3\)</span>:</strong></p>
+<div class="arithmatex">\[
+\delta_3(1) = \max(0.105 \times 0.7, 0.081 \times 0.4) \times 0.5 = 0.0735 \times 0.5 = 0.03675,\quad \psi_3(1) = 1.
+\]</div>
+<div class="arithmatex">\[
+\delta_3(2) = \max(0.105 \times 0.3, 0.081 \times 0.6) \times 0.1 = 0.0486 \times 0.1 = 0.00486,\quad \psi_3(2) = 2.
+\]</div>
+<p><strong>Termination.</strong> <span class="arithmatex">\(q_3^* = \arg\max(0.03675, 0.00486) = 1\)</span>.</p>
+<p><strong>Backtrack.</strong> <span class="arithmatex">\(q_3^* = 1 \Rightarrow q_2^* = \psi_3(1) = 1 \Rightarrow q_1^* = \psi_2(1) = 1\)</span>.</p>
+<p><strong>Viterbi path:</strong> <span class="arithmatex">\((1, 1, 1)\)</span> — all three states are state 1. The observation
+<span class="arithmatex">\(A, B, A\)</span> is best explained by staying in state 1 throughout, even though
+state 2 emits <span class="arithmatex">\(B\)</span> with high probability — because state 1 started with much
+higher probability.</p>
+<p><strong>Comparison with forward.</strong> Forward sums over <strong>all paths</strong> (including
+<span class="arithmatex">\((1,1,1)\)</span>, <span class="arithmatex">\((1,1,2)\)</span>, <span class="arithmatex">\((1,2,1)\)</span>, ..., <span class="arithmatex">\((2,2,2)\)</span>), giving the total likelihood.
+Viterbi returns the <strong>single best path</strong> <span class="arithmatex">\((1,1,1)\)</span> — the most likely
+explanation, not the summed probability.</p>
+<p><strong>Use in ASR.</strong> Viterbi decodes each word's HMM, then the language model
+re-ranks the candidate sequences. The combined Viterbi + language model search
+is a <strong>single DP</strong> over the lattice of all possible word sequences.</p>
+<h3 id="544-training-baumwelch-forward-backward">5.4.4 Training — Baum–Welch (forward-backward)<a class="headerlink" href="#544-training-baumwelch-forward-backward" title="Permanent link">&para;</a></h3>
+<p>The <strong>Baum–Welch algorithm</strong> is EM for HMMs: iteratively re-estimate the
+parameters to increase <span class="arithmatex">\(P(O \mid \lambda)\)</span> until convergence.</p>
+<p><strong>Backward variable.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\beta_t(i) = P(o_{t+1}, \ldots, o_T \mid q_t = i, \lambda)\;}
+\]</div>
+<div class="arithmatex">\[
+\beta_T(i) = 1,\qquad \beta_t(i) = \sum_{j=1}^{N} a_{ij}\, b_j(o_{t+1})\, \beta_{t+1}(j).
+\]</div>
+<p><strong>State posterior.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\gamma_t(i) = \frac{\alpha_t(i)\, \beta_t(i)}{P(O \mid \lambda)} = P(q_t = i \mid O, \lambda).\;}
+\]</div>
+<p><strong>Transition posterior.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\xi_t(i, j) = \frac{\alpha_t(i)\, a_{ij}\, b_j(o_{t+1})\, \beta_{t+1}(j)}{P(O \mid \lambda)} = P(q_t = i, q_{t+1} = j \mid O, \lambda).\;}
+\]</div>
+<p><strong>M-step updates.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\hat a_{ij} = \frac{\sum_{t=1}^{T-1} \xi_t(i, j)}{\sum_{t=1}^{T-1} \gamma_t(i)},\qquad
+\hat b_j(k) = \frac{\sum_{t : o_t = k} \gamma_t(j)}{\sum_{t=1}^{T} \gamma_t(j)},\qquad
+\hat\pi_i = \gamma_1(i).\;}
+\]</div>
+<p>For continuous observations with GMM emissions, <span class="arithmatex">\(\hat\mu_{jk}\)</span> and
+<span class="arithmatex">\(\hat\Sigma_{jk}\)</span> are updated using the <strong>state- and component-level
+posteriors</strong> — an additional responsibility variable per mixture component.</p>
+<h3 id="worked-example-54-one-baumwelch-update">Worked example 5.4 — one Baum–Welch update<a class="headerlink" href="#worked-example-54-one-baumwelch-update" title="Permanent link">&para;</a></h3>
+<p>Same 2-state model, observation <span class="arithmatex">\(O = A, B, A\)</span>. We computed <span class="arithmatex">\(\alpha\)</span> in 5.2.
+Now compute <span class="arithmatex">\(\beta\)</span> (backward) with <span class="arithmatex">\(\beta_3(1) = \beta_3(2) = 1\)</span>.</p>
+<div class="arithmatex">\[
+\beta_2(1) = 0.7 \times 0.5 \times \beta_3(1) + 0.3 \times 0.1 \times \beta_3(2) = 0.35 + 0.03 = 0.38,
+\]</div>
+<div class="arithmatex">\[
+\beta_2(2) = 0.4 \times 0.5 \times 1 + 0.6 \times 0.1 \times 1 = 0.20 + 0.06 = 0.26.
+\]</div>
+<div class="arithmatex">\[
+\beta_1(1) = 0.7 \times 0.5 \times 0.38 + 0.3 \times 0.9 \times 0.26 = 0.133 + 0.0702 = 0.2032,
+\]</div>
+<div class="arithmatex">\[
+\beta_1(2) = 0.4 \times 0.5 \times 0.38 + 0.6 \times 0.9 \times 0.26 = 0.076 + 0.1404 = 0.2164.
+\]</div>
+<p><strong>Check</strong> (should equal <span class="arithmatex">\(P(O)\)</span>): <span class="arithmatex">\(\pi_1 b_1(A)\beta_1(1) + \pi_2 b_2(A)\beta_1(2) = 0.6 \times 0.5 \times 0.2032 + 0.4 \times 0.1 \times 0.2164 = 0.06096 + 0.008656 = 0.0696\)</span>. ✓</p>
+<p><strong>State posteriors <span class="arithmatex">\(\gamma\)</span>.</strong></p>
+<div class="arithmatex">\[
+\gamma_1(1) = \frac{0.30 \times 0.2032}{0.0696} = 0.876,\quad
+\gamma_1(2) = \frac{0.04 \times 0.2164}{0.0696} = 0.124.
+\]</div>
+<div class="arithmatex">\[
+\gamma_2(1) = \frac{0.113 \times 0.38}{0.0696} = 0.617,\quad
+\gamma_2(2) = \frac{0.1026 \times 0.26}{0.0696} = 0.383.
+\]</div>
+<div class="arithmatex">\[
+\gamma_3(1) = \frac{0.06007 \times 1}{0.0696} = 0.863,\quad
+\gamma_3(2) = \frac{0.009546 \times 1}{0.0696} = 0.137.
+\]</div>
+<p><strong>Transition posteriors <span class="arithmatex">\(\xi\)</span></strong> (only <span class="arithmatex">\(t=1,2\)</span>).</p>
+<div class="arithmatex">\[
+\xi_1(1,1) = \frac{0.30 \times 0.7 \times 0.5 \times 0.38}{0.0696} = \frac{0.0399}{0.0696} = 0.5733,
+\]</div>
+<div class="arithmatex">\[
+\xi_2(1,1) = \frac{0.113 \times 0.7 \times 0.5 \times 1}{0.0696} = \frac{0.03955}{0.0696} = 0.568.
+\]</div>
+<p><strong>M-step: update <span class="arithmatex">\(a_{11}\)</span>.</strong></p>
+<div class="arithmatex">\[
+\hat a_{11} = \frac{\xi_1(1,1) + \xi_2(1,1)}{\gamma_1(1) + \gamma_2(1)} = \frac{0.5733 + 0.568}{0.876 + 0.617} = \frac{1.1413}{1.493} = 0.7644.
+\]</div>
+<p><strong>Comparison.</strong> Old <span class="arithmatex">\(a_{11} = 0.70\)</span>, new <span class="arithmatex">\(a_{11} = 0.7644\)</span> — the transition
+probability into state 1 has <strong>increased</strong> after observing <span class="arithmatex">\(A,B,A\)</span>, which
+favoured staying in state 1. ✓ This is exactly the algorithm's intent: adjust
+the transition matrix to better explain the observations.</p>
+<p><strong>Numerical note.</strong> The <span class="arithmatex">\(\alpha\)</span> and <span class="arithmatex">\(\beta\)</span> values <strong>shrink exponentially</strong>
+with <span class="arithmatex">\(T\)</span>, underflowing in floating point for <span class="arithmatex">\(T &gt; 100\)</span>. <strong>Scaling</strong> is
+required (or work in the <strong>log domain</strong> with <strong>log-sum-exp</strong>). Standard
+implementations use log-domain arithmetic throughout.</p>
+<h3 id="545-hmm-for-isolated-word-recognition">5.4.5 HMM for isolated word recognition<a class="headerlink" href="#545-hmm-for-isolated-word-recognition" title="Permanent link">&para;</a></h3>
+<p><strong>Architecture.</strong> One HMM per word in the vocabulary, each with <span class="arithmatex">\(N = 3\)</span>–<span class="arithmatex">\(5\)</span>
+states (roughly one state per phoneme or per subphoneme segment).</p>
+<p><strong>Training.</strong> For each word, train its HMM on multiple examples (Baum–Welch).</p>
+<p><strong>Testing.</strong> For each candidate word's HMM <span class="arithmatex">\(\lambda_w\)</span>, compute
+<span class="arithmatex">\(P(O \mid \lambda_w)\)</span> (forward). The word with highest likelihood:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat w = \arg\max_w P(O \mid \lambda_w).\;}
+\]</div>
+<p><strong>Extension to continuous speech.</strong> Connect the word HMMs into a <strong>sentence
+HMM</strong> using the language model and a <strong>lexicon</strong> (pronunciation dictionary).
+The decoder runs Viterbi over the combined state lattice — the <strong>word
+lattice</strong> — to find the best word sequence.</p>
+<h3 id="546-why-hmm-replaced-dtw">5.4.6 Why HMM replaced DTW<a class="headerlink" href="#546-why-hmm-replaced-dtw" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>DTW</th>
+<th>HMM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modelling</td>
+<td>Template matching</td>
+<td>Probabilistic</td>
+</tr>
+<tr>
+<td>Within-class variability</td>
+<td>Only via multiple templates</td>
+<td>Via transition and emission distributions</td>
+</tr>
+<tr>
+<td>Segment duration</td>
+<td>Warping path</td>
+<td>Implicit in self-transitions</td>
+</tr>
+<tr>
+<td>Training</td>
+<td>Store templates</td>
+<td>Baum–Welch uses all data</td>
+</tr>
+<tr>
+<td>Language model</td>
+<td>Not straightforward</td>
+<td>Natural via state topology</td>
+</tr>
+<tr>
+<td>Continuous speech</td>
+<td>Hard</td>
+<td>Natural via word lattice</td>
+</tr>
+</tbody>
+</table>
+<p>HMM's <strong>probabilistic framework</strong> makes it naturally extendable to larger
+vocabularies, continuous speech, and probabilistic language models — that is
+why it dominated ASR for 30 years (1980s–2010s).</p>
+<h3 id="547-the-modern-landscape-neural-asr">5.4.7 The modern landscape — neural ASR<a class="headerlink" href="#547-the-modern-landscape-neural-asr" title="Permanent link">&para;</a></h3>
+<p>Since ~2012, deep neural networks have progressively replaced the components
+of the HMM pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Classical</th>
+<th>Neural</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acoustic model</td>
+<td>HMM-GMM</td>
+<td>DNN-HMM (2012), then end-to-end (CTC, RNN-T, Transformer)</td>
+</tr>
+<tr>
+<td>Language model</td>
+<td>n-gram</td>
+<td>RNN / Transformer LM</td>
+</tr>
+<tr>
+<td>Decoder</td>
+<td>Viterbi over WFST</td>
+<td>Beam search over neural decoder</td>
+</tr>
+<tr>
+<td>Feature extraction</td>
+<td>MFCC</td>
+<td>Learned (raw waveform or log-mel)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Modern systems</strong> (Whisper, Conformer, wav2vec 2.0) are <strong>end-to-end</strong> — a
+single neural network maps audio → text, with no explicit HMM or lexicon. Word
+error rates on standard benchmarks (LibriSpeech) have dropped from ~10%
+(classical HMM-GMM) to ~2% (best neural systems).</p>
+<p><strong>HMM still matters because:</strong></p>
+<ul>
+<li>Its <strong>mathematics</strong> (forward-backward, Viterbi) underlies the neural tools too — CTC and RNN-T use forward-backward and Viterbi variants.</li>
+<li>Its <strong>concepts</strong> — states, transitions, decoding over a lattice — are reused in neural decoders.</li>
+<li><strong>Small-vocabulary, low-resource</strong> applications still use HMM-based systems effectively.</li>
+<li><strong>Understanding HMMs</strong> gives insight into every sequence-labelling problem.</li>
+</ul>
+<hr />
+<h2 id="55-speech-synthesis-text-to-speech">5.5 Speech synthesis (text-to-speech)<a class="headerlink" href="#55-speech-synthesis-text-to-speech" title="Permanent link">&para;</a></h2>
+<h3 id="551-the-tts-pipeline">5.5.1 The TTS pipeline<a class="headerlink" href="#551-the-tts-pipeline" title="Permanent link">&para;</a></h3>
+<p><strong>Text-to-speech</strong> converts written text to spoken audio through five stages:</p>
+<ol>
+<li><strong>Text normalization</strong> — expand abbreviations, numbers, dates, currency: "Dr." → "doctor", "2024" → "twenty twenty-four" (or "two thousand and twenty-four" depending on context).</li>
+<li><strong>Text analysis</strong> — sentence segmentation, part-of-speech tagging, syntactic parsing.</li>
+<li><strong>Grapheme-to-phoneme (G2P)</strong> — convert words to phoneme sequences using rules, a dictionary, or a neural network.</li>
+<li><strong>Prosody prediction</strong> — pitch contour, duration, stress, pauses, and speaking rate from syntax and semantics.</li>
+<li><strong>Waveform generation</strong> — synthesize the acoustic signal from the phoneme + prosody sequence.</li>
+</ol>
+<p>Stages 1–4 are <strong>linguistic</strong>; stage 5 is <strong>acoustic</strong>.</p>
+<h3 id="552-four-generations-of-synthesis">5.5.2 Four generations of synthesis<a class="headerlink" href="#552-four-generations-of-synthesis" title="Permanent link">&para;</a></h3>
+<p><strong>1. Concatenative synthesis (1990s–2000s).</strong></p>
+<ul>
+<li><strong>Unit selection</strong> — record a large corpus (10–100 hours) covering many phonemes and contexts.</li>
+<li><strong>Synthesis</strong> — for each target phoneme, select the best-matching recorded unit from the corpus, minimize join cost + target cost.</li>
+<li><strong>Quality:</strong> near-human for matched conditions; degrades outside the recorded domain.</li>
+<li><strong>Storage:</strong> large corpus (hundreds of MB).</li>
+<li><strong>Example:</strong> AT&amp;T Natural Voices, IBM ViaVoice, modern "unit-selection" TTS.</li>
+</ul>
+<p><strong>2. Formant synthesis (1960s–1990s).</strong></p>
+<ul>
+<li><strong>Rule-based</strong> — model the vocal tract as a formant filter, generate glottal pulses, modulate with formant trajectories.</li>
+<li><strong>Quality:</strong> robotic, intelligible.</li>
+<li><strong>Storage:</strong> kilobytes.</li>
+<li><strong>Example:</strong> MITalk, DECtalk, Klatt synthesizer (Stephen Hawking's voice).</li>
+</ul>
+<p><strong>3. HMM-based parametric synthesis (2000s–2010s).</strong></p>
+<ul>
+<li><strong>Statistical</strong> — HMM models of the speech frames, trained on a corpus.</li>
+<li><strong>Synthesis</strong> — generate a speech parameter trajectory from the HMM, then vocode.</li>
+<li><strong>Quality:</strong> smooth but buzzy (no phase detail).</li>
+<li><strong>Storage:</strong> small model (a few MB).</li>
+<li><strong>Example:</strong> HTS (HMM-based TTS), MaryTTS.</li>
+</ul>
+<p><strong>4. Neural synthesis (2016–present).</strong></p>
+<ul>
+<li><strong>End-to-end</strong> — a neural network takes text (or phonemes) and outputs audio directly.</li>
+<li><strong>Architectures:</strong></li>
+<li><strong>WaveNet</strong> (2016) — autoregressive sample-by-sample synthesis, very high quality but slow.</li>
+<li><strong>Tacotron 1/2</strong> (2017–2018) — sequence-to-sequence, generates a mel spectrogram, then a vocoder.</li>
+<li><strong>FastSpeech 1/2</strong> (2019–2020) — non-autoregressive, much faster.</li>
+<li><strong>VITS, NaturalSpeech, Bark, VoiceBox</strong> — current state of the art.</li>
+<li><strong>Quality:</strong> nearly indistinguishable from human speech in ideal conditions.</li>
+<li><strong>Storage:</strong> 20–100 MB per voice.</li>
+<li><strong>Latency:</strong> ~50 ms with optimized inference.</li>
+<li><strong>Examples:</strong> Google WaveNet, Amazon Polly, Azure Neural TTS, OpenAI Voice Engine, ElevenLabs.</li>
+</ul>
+<h3 id="553-modern-neural-tts-in-detail">5.5.3 Modern neural TTS in detail<a class="headerlink" href="#553-modern-neural-tts-in-detail" title="Permanent link">&para;</a></h3>
+<p>The <strong>Tacotron 2 + WaveNet</strong> pipeline is representative:</p>
+<ol>
+<li><strong>Text encoder</strong> — character or phoneme sequence → hidden representation (encoder RNN/Transformer).</li>
+<li><strong>Attention decoder</strong> — generates a <strong>mel spectrogram</strong> frame by frame (80 mel bins per 12.5 ms).</li>
+<li><strong>Vocoder</strong> — mel spectrogram → waveform. <strong>WaveNet</strong> (autoregressive) or <strong>HiFi-GAN</strong> (adversarial) or <strong>WaveGlow</strong> (flow-based).</li>
+</ol>
+<p><strong>End-to-end training.</strong> The whole pipeline is trained on (text, audio) pairs
+without separate acoustic and prosodic labels. <strong>Voice cloning</strong> requires only
+a few seconds of target voice audio (few-shot learning with speaker embeddings).</p>
+<h3 id="worked-example-55-tts-pipeline-walk-through">Worked example 5.5 — TTS pipeline walk-through<a class="headerlink" href="#worked-example-55-tts-pipeline-walk-through" title="Permanent link">&para;</a></h3>
+<p><strong>Input text.</strong> "The 2024 budget is $1.2 billion."</p>
+<p><strong>Stage 1 — Text normalization.</strong></p>
+<div class="arithmatex">\[
+\text{"The two-thousand-and-twenty-four budget is one-point-two billion dollars."}
+\]</div>
+<p><strong>Stage 2 — Text analysis.</strong> Sentence: declarative. Words: "The" (det), "two-thousand-and-twenty-four" (num), "budget" (noun), "is" (verb), "one-point-two" (num), "billion" (num), "dollars" (noun).</p>
+<p><strong>Stage 3 — G2P.</strong></p>
+<ul>
+<li>"The" → <strong>DH AH</strong> (or <strong>DH IY</strong> before vowel)</li>
+<li>"two-thousand" → <strong>T UW TH AW Z AH N D</strong></li>
+<li>"budget" → <strong>B AH JH IH T</strong></li>
+<li>"is" → <strong>IH Z</strong></li>
+<li>"one" → <strong>W AH N</strong></li>
+<li>"point" → <strong>P OY N T</strong></li>
+<li>"two" → <strong>T UW</strong></li>
+<li>"billion" → <strong>B IH L Y AH N</strong></li>
+<li>"dollars" → <strong>D AA L ER Z</strong></li>
+</ul>
+<p><strong>Stage 4 — Prosody.</strong></p>
+<ul>
+<li><strong>Falling intonation</strong> at the end of a declarative sentence.</li>
+<li><strong>Stress:</strong> "BUDget" (noun stress on first syllable), "bilLION" (numeral stress on second syllable).</li>
+<li><strong>Duration:</strong> numerals speak slower (more processing time for listeners).</li>
+<li><strong>Pauses:</strong> none within the sentence; potential short pause after "is".</li>
+</ul>
+<p><strong>Stage 5 — Waveform generation.</strong></p>
+<p>Neural TTS generates a mel spectrogram from the phoneme + prosody sequence,
+then converts to a waveform with the vocoder. Total latency for an 8-word
+sentence: ~500 ms on GPU, ~2 s on CPU (with WaveNet; faster with HiFi-GAN).</p>
+<h3 id="554-quality-evaluation-mos">5.5.4 Quality evaluation — MOS<a class="headerlink" href="#554-quality-evaluation-mos" title="Permanent link">&para;</a></h3>
+<p><strong>Mean opinion score (MOS)</strong> is the standard subjective metric for TTS quality:</p>
+<ul>
+<li><strong>5 = Excellent</strong> (indistinguishable from human)</li>
+<li><strong>4 = Good</strong> (natural, minor artifacts)</li>
+<li><strong>3 = Fair</strong> (intelligible, noticeable artifacts)</li>
+<li><strong>2 = Poor</strong> (intelligible with effort)</li>
+<li><strong>1 = Bad</strong> (unintelligible)</li>
+</ul>
+<p>Ratings collected from 20+ listeners per sample, over 50+ sentences, from 3+
+different systems. Averaged.</p>
+<p><strong>Typical MOS by generation:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Generation</th>
+<th>MOS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Formant (DECtalk)</td>
+<td>2.5–3.0</td>
+</tr>
+<tr>
+<td>Concatenative</td>
+<td>4.0–4.3</td>
+</tr>
+<tr>
+<td>HTS (HMM)</td>
+<td>3.5–3.8</td>
+</tr>
+<tr>
+<td>Tacotron 2 + WaveNet</td>
+<td><strong>4.5–4.8</strong></td>
+</tr>
+<tr>
+<td>FastSpeech 2 + HiFi-GAN</td>
+<td>4.3–4.6</td>
+</tr>
+<tr>
+<td>Best neural (2023+)</td>
+<td>4.6–4.9</td>
+</tr>
+</tbody>
+</table>
+<p>The jump from ~4.0 (concatenative) to ~4.7 (neural) is what made neural TTS
+displace every other approach in production. It is now the default for
+virtual assistants, audiobook generation, and voice interfaces.</p>
+<hr />
+<h2 id="56-speaker-verification-and-identification">5.6 Speaker verification and identification<a class="headerlink" href="#56-speaker-verification-and-identification" title="Permanent link">&para;</a></h2>
+<h3 id="561-problem-definitions">5.6.1 Problem definitions<a class="headerlink" href="#561-problem-definitions" title="Permanent link">&para;</a></h3>
+<p><strong>Speaker identification.</strong> Given a test utterance, determine which of <span class="arithmatex">\(N\)</span>
+<strong>enrolled speakers</strong> produced it:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat s = \arg\max_{s \in \{1, \ldots, N\}} P(s \mid X).\;}
+\]</div>
+<ul>
+<li><strong>Closed-set</strong> — the speaker is known to be enrolled; must pick the closest.</li>
+<li><strong>Open-set</strong> — the speaker may be unknown; must first detect, then classify.</li>
+</ul>
+<p><strong>Speaker verification.</strong> Given a test utterance <span class="arithmatex">\(X\)</span> and a claimed identity <span class="arithmatex">\(s\)</span>,
+decide whether <span class="arithmatex">\(X\)</span> was spoken by <span class="arithmatex">\(s\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{score}(X, s) \gtrless \theta \;\Rightarrow\; \text{accept or reject}.\;}
+\]</div>
+<p><strong>Speaker diarization.</strong> "Who spoke when?" — segment a multi-speaker recording
+by speaker identity.</p>
+<h3 id="562-features-and-modeling-the-evolution">5.6.2 Features and modeling — the evolution<a class="headerlink" href="#562-features-and-modeling-the-evolution" title="Permanent link">&para;</a></h3>
+<p><strong>Features.</strong> MFCCs (13-dimensional, plus deltas) are the standard. Recent
+systems use <strong>larger context</strong> (stacked frames, longer analysis windows) and
+<strong>learned features</strong> from deep networks.</p>
+<p><strong>Modelling evolution.</strong></p>
+<p><strong>1. GMM-UBM (2000s).</strong></p>
+<ul>
+<li>Train a <strong>Universal Background Model (UBM)</strong> — a large GMM trained on many speakers, capturing speaker-independent distribution of speech.</li>
+<li>For each enrolled speaker, adapt the UBM using <strong>MAP adaptation</strong> on their audio.</li>
+<li>Score: <strong>log-likelihood ratio</strong> between speaker-adapted model and UBM.</li>
+</ul>
+<p><strong>2. i-vector (2011).</strong></p>
+<ul>
+<li>Represent each utterance as a fixed-length <strong>i-vector</strong> (typically 400–600 dimensions):</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{\;M = m + T\,w,\;}
+\]</div>
+<p>where <span class="arithmatex">\(M\)</span> is the supervector (concatenation of GMM means), <span class="arithmatex">\(m\)</span> is the UBM mean supervector, <span class="arithmatex">\(T\)</span> is a low-rank matrix, and <span class="arithmatex">\(w\)</span> is the i-vector.</p>
+<ul>
+<li><strong>Scoring:</strong> cosine similarity between i-vectors, with <strong>PLDA</strong> (probabilistic linear discriminant analysis) for probabilistic comparison.</li>
+</ul>
+<p><strong>3. x-vector (2017).</strong></p>
+<ul>
+<li><strong>DNN-based</strong> — a small network classifies speakers on a training set, and an internal layer (before the classifier) becomes the x-vector.</li>
+<li><strong>Extraction:</strong> run the test utterance through the network, average the activations of the target layer over frames → x-vector.</li>
+<li><strong>Scoring:</strong> cosine or PLDA on x-vectors.</li>
+</ul>
+<p><strong>4. ECAPA-TDNN (2020).</strong></p>
+<ul>
+<li><strong>State of the art</strong> — 1D-convolutional, <strong>self-attention</strong> pooling, channel-dependent squeeze-excitation.</li>
+<li>EER as low as <strong>0.5%</strong> on VoxCeleb (test set).</li>
+</ul>
+<h3 id="563-evaluation-metrics">5.6.3 Evaluation metrics<a class="headerlink" href="#563-evaluation-metrics" title="Permanent link">&para;</a></h3>
+<p><strong>False Acceptance Rate (FAR).</strong> Fraction of impostor attempts incorrectly accepted:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{FAR} = \frac{\text{false accepts}}{\text{total impostor trials}}.\;}
+\]</div>
+<p><strong>False Rejection Rate (FRR).</strong> Fraction of genuine attempts incorrectly rejected:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{FRR} = \frac{\text{false rejects}}{\text{total genuine trials}}.\;}
+\]</div>
+<p><strong>Equal Error Rate (EER).</strong> The threshold at which <span class="arithmatex">\(\text{FAR} = \text{FRR}\)</span> — a single-number summary of the system. Lower is better.</p>
+<p><strong>Detection Error Tradeoff (DET) curve.</strong> FAR vs. FRR plotted over all thresholds. The <strong>DET curve</strong> shape distinguishes good from poor systems (close to the origin is good).</p>
+<p><strong>Typical EER values:</strong></p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th>EER (on VoxCeleb1-O)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GMM-UBM</td>
+<td>~5–10%</td>
+</tr>
+<tr>
+<td>i-vector + PLDA</td>
+<td>~2–4%</td>
+</tr>
+<tr>
+<td>x-vector</td>
+<td>~1–2%</td>
+</tr>
+<tr>
+<td>ECAPA-TDNN</td>
+<td>~0.5–1%</td>
+</tr>
+</tbody>
+</table>
+<p>Modern systems are <strong>more accurate than humans</strong> at speaker verification.</p>
+<h3 id="worked-example-56-eer-and-farfrr">Worked example 5.6 — EER and FAR/FRR<a class="headerlink" href="#worked-example-56-eer-and-farfrr" title="Permanent link">&para;</a></h3>
+<p>A speaker-verification system evaluated on 1000 trials: 500 <strong>genuine</strong> (same
+speaker) and 500 <strong>impostor</strong> (different speakers). At a candidate threshold
+<span class="arithmatex">\(\theta\)</span>:</p>
+<ul>
+<li>Genuine trials: 450 accepted, 50 rejected → FRR = 50/500 = 10%.</li>
+<li>Impostor trials: 20 accepted, 480 rejected → FAR = 20/500 = 4%.</li>
+</ul>
+<p>The system is currently at <span class="arithmatex">\((\text{FAR}, \text{FRR}) = (4\%, 10\%)\)</span>. By raising
+the threshold, both FAR and FRR change: fewer false accepts but more false
+rejects. The <strong>EER</strong> is the point where they cross.</p>
+<p><strong>Iterating thresholds.</strong> At another threshold <span class="arithmatex">\(\theta'\)</span>:</p>
+<ul>
+<li>Genuine: 470 accepted, 30 rejected → FRR = 6%.</li>
+<li>Impostor: 40 accepted, 460 rejected → FAR = 8%.</li>
+</ul>
+<p>At some intermediate threshold <span class="arithmatex">\(\theta''\)</span>: FAR = FRR = 6% → <strong>EER ≈ 6%</strong>.</p>
+<p><strong>Application.</strong> For <strong>access control</strong> (banking), you might choose a threshold
+with FAR = 0.1%, FRR = 10% — security-critical. For <strong>forensic analysis</strong> (where
+the analyst verifies), FAR = 5%, FRR = 1% — high sensitivity, human confirmation.</p>
+<h3 id="564-text-dependent-vs-text-independent">5.6.4 Text-dependent vs. text-independent<a class="headerlink" href="#564-text-dependent-vs-text-independent" title="Permanent link">&para;</a></h3>
+<p><strong>Text-dependent.</strong> The user speaks a <strong>fixed passphrase</strong> ("my voice is my
+password"). Easier because the system knows the target content. Security
+benefit: an impostor who doesn't know the phrase is rejected even if their
+voice matches.</p>
+<p><strong>Text-independent.</strong> The user speaks <strong>any</strong> content. Harder because content
+varies. Better for forensic work (no constraint on suspect's speech).</p>
+<p><strong>Deep-speaker verification</strong> (e.g., for banking) often uses <strong>text-dependent</strong>
+with <strong>anti-spoofing</strong> (detecting recorded replay, synthetic speech, and
+voice conversion).</p>
+<h3 id="565-anti-spoofing">5.6.5 Anti-spoofing<a class="headerlink" href="#565-anti-spoofing" title="Permanent link">&para;</a></h3>
+<p>Modern speaker-verification systems must defend against:</p>
+<ul>
+<li><strong>Replay attacks</strong> — replay a recording of the enrolled speaker.</li>
+<li><strong>Synthetic speech</strong> — TTS-generated audio of the target.</li>
+<li><strong>Voice conversion</strong> — transcode a different speaker's voice to sound like the target.</li>
+</ul>
+<p><strong>Countermeasures:</strong></p>
+<ul>
+<li><strong>Liveness detection</strong> — challenge-response (random passphrase), lip-sync checks, pop noise / breath sounds.</li>
+<li><strong>Deepfake detectors</strong> — trained to distinguish real from synthesized speech (spectral artifacts, phase discontinuities).</li>
+<li><strong>Random prompts</strong> — the user must read a random sequence (not pre-recordable).</li>
+</ul>
+<p>This is an <strong>active research area</strong> — every advance in TTS/voice conversion
+raises a new class of attacks.</p>
+<hr />
+<h2 id="57-voice-over-ip-voip">5.7 Voice over IP (VoIP)<a class="headerlink" href="#57-voice-over-ip-voip" title="Permanent link">&para;</a></h2>
+<h3 id="571-the-voip-stack">5.7.1 The VoIP stack<a class="headerlink" href="#571-the-voip-stack" title="Permanent link">&para;</a></h3>
+<p><strong>VoIP</strong> transmits speech over IP networks (Internet, enterprise LANs, mobile
+data). The full stack has five layers:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Protocol</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Signalling</strong></td>
+<td>SIP, H.323, WebRTC</td>
+<td>Call setup, teardown</td>
+</tr>
+<tr>
+<td><strong>Media transport</strong></td>
+<td>RTP / UDP</td>
+<td>Audio packet delivery</td>
+</tr>
+<tr>
+<td><strong>Codec</strong></td>
+<td>G.711, G.729, Opus, AMR</td>
+<td>Speech compression</td>
+</tr>
+<tr>
+<td><strong>Jitter buffer</strong></td>
+<td>—</td>
+<td>Compensate network delay</td>
+</tr>
+<tr>
+<td><strong>Quality (QoS)</strong></td>
+<td>DSCP, RSVP</td>
+<td>Priority for real-time traffic</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>codec</strong> is what this course has been building toward — every algorithm
+from speech analysis (Chapter 4) is used in the codec.</p>
+<h3 id="572-bandwidth-budget">5.7.2 Bandwidth budget<a class="headerlink" href="#572-bandwidth-budget" title="Permanent link">&para;</a></h3>
+<p><strong>Narrowband VoIP (G.711):</strong></p>
+<ul>
+<li>Speech: 64 kbps.</li>
+<li>RTP/UDP/IP headers: 54 bytes/20 ms packet = 21.6 kbps.</li>
+<li><strong>Total ~85 kbps per call</strong> — 33% overhead just for headers.</li>
+</ul>
+<p><strong>Compressed VoIP (G.729):</strong></p>
+<ul>
+<li>Speech: 8 kbps.</li>
+<li>RTP/UDP/IP headers: 21.6 kbps.</li>
+<li><strong>Total ~30 kbps</strong> — headers are 2.7× the payload.</li>
+</ul>
+<p><strong>Header compression (cRTP).</strong> Compresses 54-byte headers to ~4 bytes:</p>
+<ul>
+<li>G.729 + cRTP: 8 + 2 = ~10 kbps per call.</li>
+</ul>
+<p>Modern mobile (VoLTE) uses AMR-WB or EVS with header compression — ~15 kbps
+per call is typical.</p>
+<h3 id="573-latency-budget">5.7.3 Latency budget<a class="headerlink" href="#573-latency-budget" title="Permanent link">&para;</a></h3>
+<p><strong>End-to-end latency</strong> for interactive voice:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Typical delay</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Encoder</td>
+<td>10–30 ms</td>
+</tr>
+<tr>
+<td>Packetization</td>
+<td>20 ms</td>
+</tr>
+<tr>
+<td>Network transit</td>
+<td>50–100 ms</td>
+</tr>
+<tr>
+<td>Jitter buffer</td>
+<td>20–60 ms</td>
+</tr>
+<tr>
+<td>Decoder</td>
+<td>10–30 ms</td>
+</tr>
+<tr>
+<td><strong>Total (one-way)</strong></td>
+<td><strong>~130–250 ms</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ITU-T G.114</strong> recommends <strong>&lt; 150 ms one-way</strong> for toll-quality; <strong>150–400 ms</strong>
+is acceptable; <strong>&gt; 400 ms</strong> makes conversation difficult.</p>
+<h3 id="574-jitter-buffer-and-packet-loss">5.7.4 Jitter buffer and packet loss<a class="headerlink" href="#574-jitter-buffer-and-packet-loss" title="Permanent link">&para;</a></h3>
+<p><strong>Jitter.</strong> Packets arrive with <strong>variable delay</strong> — some fast, some slow.
+The <strong>jitter buffer</strong> delays each packet by a small amount, smoothing out the
+variation.</p>
+<p><strong>Trade-off.</strong> Larger buffer absorbs more jitter but adds more latency. Typical
+choice: buffer size ≈ 2–4× the observed jitter.</p>
+<p><strong>Packet loss.</strong> Network packets can be dropped. Three defenses:</p>
+<ol>
+<li><strong>FEC (Forward Error Correction).</strong> Send redundant packets — each frame carries bits of the previous frames. Recovers isolated losses at the cost of extra bandwidth.</li>
+<li><strong>PLC (Packet Loss Concealment).</strong> Synthesize missing frames from past frames (repetition, LPC extrapolation, pitch-based). No extra bandwidth; quality drop.</li>
+<li><strong>Retransmission.</strong> Request retransmission of missing packets. Adds latency — not viable for interactive voice unless the buffer is large.</li>
+</ol>
+<p>Modern systems (Opus, EVS) include <strong>built-in PLC and FEC</strong> — they can recover
+from 5–10% packet loss with minimal perceptual impact.</p>
+<h3 id="worked-example-57-bandwidth-and-latency-for-a-mobile-call">Worked example 5.7 — bandwidth and latency for a mobile call<a class="headerlink" href="#worked-example-57-bandwidth-and-latency-for-a-mobile-call" title="Permanent link">&para;</a></h3>
+<p><strong>4G VoLTE call.</strong></p>
+<ul>
+<li>Codec: AMR-WB at 12.65 kbps.</li>
+<li>Packetization: 20 ms frames.</li>
+<li>Header compression: RoHC → 4 bytes (32 bits).</li>
+<li>Total bitrate: <span class="arithmatex">\(12.65 + 32/0.020/1000 = 12.65 + 1.6 = 14.25\)</span> kbps.</li>
+</ul>
+<p><strong>Call with 5% packet loss:</strong></p>
+<ul>
+<li><strong>Without FEC/PLC:</strong> 5% of frames are silent or artifact — very noticeable.</li>
+<li><strong>With Opus's built-in PLC:</strong> most losses are concealed by extrapolation — the listener barely notices.</li>
+</ul>
+<p><strong>Latency budget</strong> (typical VoLTE):</p>
+<ul>
+<li>Codec: 25 ms (AMR-WB frame + algorithmic delay).</li>
+<li>Network: 40 ms (4G RTT one-way).</li>
+<li>Jitter buffer: 40 ms.</li>
+<li>Decoder: 5 ms.</li>
+<li><strong>Total one-way: ~110 ms</strong> — well below 150 ms.</li>
+</ul>
+<p>This is why VoLTE calls have noticeably lower latency than 3G / GSM calls
+(~200 ms one-way).</p>
+<hr />
+<h2 id="58-aids-to-the-handicapped-applications-in-speech">5.8 Aids to the handicapped — applications in speech<a class="headerlink" href="#58-aids-to-the-handicapped-applications-in-speech" title="Permanent link">&para;</a></h2>
+<p>(This is a brief reprise of Chapter 3 §3.7.5, with concrete TTS/ASR technology.)</p>
+<table>
+<thead>
+<tr>
+<th>Technology</th>
+<th>Users</th>
+<th>Underlying tech</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Screen readers</strong> (NVDA, JAWS, VoiceOver)</td>
+<td>Blind</td>
+<td>TTS on screen content</td>
+</tr>
+<tr>
+<td><strong>Speech-to-text</strong> (YouTube, Teams, Google Meet captions)</td>
+<td>Deaf / hard-of-hearing</td>
+<td>Neural ASR</td>
+</tr>
+<tr>
+<td><strong>Hearing aids</strong></td>
+<td>Hard-of-hearing</td>
+<td>Speech enhancement, noise reduction, compression</td>
+</tr>
+<tr>
+<td><strong>Cochlear implants</strong></td>
+<td>Profoundly deaf</td>
+<td>Audio filter bank + neural stimulation</td>
+</tr>
+<tr>
+<td><strong>Voice banking</strong> (for ALS, Parkinson's)</td>
+<td>Progressive speech loss</td>
+<td>Neural TTS on recorded phrases</td>
+</tr>
+<tr>
+<td><strong>AAC (Augmentative &amp; Alternative Communication)</strong></td>
+<td>Non-verbal</td>
+<td>Symbol-to-TTS</td>
+</tr>
+<tr>
+<td><strong>Speech therapy apps</strong></td>
+<td>Children with speech disorders</td>
+<td>Formant / pitch visualization, pronunciation scoring</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>social impact</strong> of these applications is enormous — a blind user's reading
+speed drops from ~20 pages/day (Braille) to ~200 pages/day (TTS), and a
+hearing-aid user's quality of life improves dramatically with modern
+enhancement. Speech processing is one of the highest-leverage areas of DSP
+for real-world benefit.</p>
+<hr />
+<h2 id="59-chapter-summary">5.9 Chapter summary<a class="headerlink" href="#59-chapter-summary" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Four applications:</strong> recognition, synthesis, speaker ID, coding. Each reuses the analysis tools from Chapter 4.</li>
+<li><strong>Speech recognition</strong> factorizes into acoustic model <span class="arithmatex">\(\Pr(X \mid W)\)</span> and language model <span class="arithmatex">\(\Pr(W)\)</span>; the decoder searches their product.</li>
+<li><strong>DTW</strong> optimally warps the time axis to align two sequences; <span class="arithmatex">\(O(MN)\)</span> with Sakoe–Chiba band reducing it to <span class="arithmatex">\(O(Mr)\)</span>. LB_Keogh enables fast retrieval over databases.</li>
+<li><strong>HMM</strong> is a probabilistic sequence model. Three problems: <strong>evaluation</strong> (forward, <span class="arithmatex">\(O(N^2 T)\)</span>), <strong>decoding</strong> (Viterbi, <span class="arithmatex">\(O(N^2 T)\)</span>), <strong>training</strong> (Baum–Welch EM).</li>
+<li><strong>HMM replaced DTW</strong> because it handles within-class variability, extends naturally to large vocabulary and continuous speech, and integrates cleanly with language models.</li>
+<li><strong>Neural ASR</strong> (2012–present) uses end-to-end networks that learn features and decode jointly; word error rates have dropped to ~2% on standard benchmarks. HMM concepts still underpin the sequence models (CTC, RNN-T).</li>
+<li><strong>TTS</strong> has four generations: formant (robotic), concatenative (natural but rigid), HMM-based (smooth but buzzy), <strong>neural</strong> (nearly human). Neural TTS dominates production.</li>
+<li><strong>Speaker verification</strong> uses MFCC → i-vector / x-vector / ECAPA-TDNN → PLDA scoring. EERs have dropped from ~7% (GMM-UBM) to &lt; 1% (ECAPA-TDNN) — more accurate than humans.</li>
+<li><strong>VoIP</strong> is the engineering application of speech processing: codec + RTP + jitter buffer + PLC + QoS. Latency must stay &lt; 150 ms; packet loss must be handled gracefully.</li>
+<li><strong>Aids to the handicapped</strong> — screen readers, captioning, hearing aids, voice banking — are where speech processing has the largest real-world impact.</li>
+</ol>
+<hr />
+<h2 id="510-quiz">5.10 Quiz<a class="headerlink" href="#510-quiz" title="Permanent link">&para;</a></h2>
+<h3 id="a-multiple-choice">A. Multiple choice<a class="headerlink" href="#a-multiple-choice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Speech recognition factorizes <span class="arithmatex">\(\Pr(W \mid X)\)</span> into:
+   (a) acoustic model only (b) acoustic × language model (c) forward × backward (d) feature × lexicon</p>
+</li>
+<li>
+<p><strong>Dynamic time warping</strong> finds the optimal:
+   (a) time alignment between two sequences (b) frequency alignment (c) phoneme sequence (d) feature vector</p>
+</li>
+<li>
+<p>DTW's time complexity for sequences of length <span class="arithmatex">\(M\)</span> and <span class="arithmatex">\(N\)</span> is:
+   (a) <span class="arithmatex">\(O(M + N)\)</span> (b) <span class="arithmatex">\(O(M \log N)\)</span> (c) <span class="arithmatex">\(O(MN)\)</span> (d) <span class="arithmatex">\(O(M^N)\)</span></p>
+</li>
+<li>
+<p>The <strong>Sakoe–Chiba band</strong> restricts the DTW path to:
+   (a) a circle (b) a diagonal band (c) the entire matrix (d) the anti-diagonal</p>
+</li>
+<li>
+<p>The three fundamental HMM problems are:
+   (a) evaluation, decoding, training (b) input, output, state (c) filter, predict, smooth (d) fit, predict, retrain</p>
+</li>
+<li>
+<p>The <strong>forward algorithm</strong> computes:
+   (a) the best state sequence (b) the probability of the observation sequence (c) the transition matrix (d) the emission distribution</p>
+</li>
+<li>
+<p>The <strong>Viterbi algorithm</strong> finds:
+   (a) the total likelihood (b) the best state sequence (c) the parameters (d) the initial distribution</p>
+</li>
+<li>
+<p>The <strong>Baum–Welch</strong> algorithm is an instance of:
+   (a) gradient descent (b) expectation-maximization (c) Viterbi (d) Newton's method</p>
+</li>
+<li>
+<p><strong>Neural TTS</strong> systems like Tacotron 2 typically output:
+   (a) waveform directly (b) mel spectrogram then waveform (c) phoneme sequence (d) formant tracks</p>
+</li>
+<li>
+<p>The standard metric for TTS naturalness is:
+    (a) PSNR (b) WER (c) MOS (d) EER</p>
+</li>
+<li>
+<p>The <strong>EER</strong> of a speaker-verification system is the threshold where:
+    (a) FAR = 1 (b) FRR = 1 (c) FAR = FRR (d) both are zero</p>
+</li>
+<li>
+<p>Modern state-of-the-art speaker verification uses:
+    (a) GMM-UBM (b) i-vector (c) x-vector (d) ECAPA-TDNN</p>
+</li>
+</ol>
+<h3 id="b-fill-in-the-blank">B. Fill in the blank<a class="headerlink" href="#b-fill-in-the-blank" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Speech recognition uses the <strong>Bayes factorization</strong> <span class="arithmatex">\(\hat W = \arg\max \Pr(X \mid W) \cdot \Pr(\_\_\_\_)\)</span>.</li>
+<li><strong>DTW</strong> finds the optimal <strong>warping path</strong> between two sequences, with complexity <span class="arithmatex">\(O(MN)\)</span>, reduced to <span class="arithmatex">\(O(Mr)\)</span> by the ____–____ band.</li>
+<li>The <strong>LB_Keogh</strong> lower bound ____ the DTW distance.</li>
+<li>In an HMM, the <strong>forward algorithm</strong> computes <span class="arithmatex">\(\Pr(\_\_\_\_ \mid \lambda)\)</span>.</li>
+<li>The <strong>Viterbi</strong> algorithm uses ____ (max or sum?) over previous states.</li>
+<li>The <strong>Baum–Welch</strong> algorithm uses both <strong>forward</strong> <span class="arithmatex">\(\alpha\)</span> and <strong>backward</strong> <span class="arithmatex">\(\beta\)</span> variables to compute ____ posteriors.</li>
+<li><strong>Concatenative synthesis</strong> selects recorded ____ from a large corpus.</li>
+<li><strong>Neural TTS</strong> typically outputs a <strong>mel spectrogram</strong>, then a ____ converts it to a waveform.</li>
+<li><strong>Speaker verification</strong> evaluates via <strong>FAR</strong>, <strong>FRR</strong>, and ____.</li>
+<li><strong>VoIP</strong> uses <strong>RTP</strong> over ____ for real-time audio transport.</li>
+</ol>
+<h3 id="c-define-explain">C. Define / explain<a class="headerlink" href="#c-define-explain" title="Permanent link">&para;</a></h3>
+<ol>
+<li>State the <strong>speech-recognition problem</strong> in its Bayes factorization. What are the acoustic model and the language model, and why is the factorization useful?</li>
+<li>Describe the <strong>DTW algorithm</strong>. Give its recursion, complexity, and one constraint variant (Sakoe–Chiba or Itakura).</li>
+<li>Define the three <strong>fundamental HMM problems</strong>. For each, state the algorithm that solves it and its complexity.</li>
+<li>Derive the <strong>forward algorithm</strong> recursion. Show that computing <span class="arithmatex">\(P(O \mid \lambda)\)</span> naively has cost <span class="arithmatex">\(O(N^T)\)</span> but the forward algorithm reduces it to <span class="arithmatex">\(O(N^2 T)\)</span>.</li>
+<li>Compare <strong>Viterbi</strong> and <strong>forward</strong> — how are they similar, how do they differ, and what does each return?</li>
+<li>State the <strong>Baum–Welch</strong> update equations. Explain why it is an EM algorithm and why it converges to a <strong>local</strong> maximum.</li>
+<li>Explain why <strong>HMM replaced DTW</strong> as the dominant ASR framework. Give three specific reasons.</li>
+<li>Describe the <strong>neural TTS pipeline</strong> (Tacotron + WaveNet). How does it differ from concatenative synthesis?</li>
+<li>Compare <strong>GMM-UBM</strong>, <strong>i-vector</strong>, <strong>x-vector</strong>, and <strong>ECAPA-TDNN</strong> for speaker verification. State the approximate EER of each.</li>
+<li>State the <strong>VoIP stack</strong>: codec, transport, jitter buffer, QoS. What are the latency budget components for a typical call?</li>
+</ol>
+<hr />
+<h2 id="511-answer-key">5.11 Answer key<a class="headerlink" href="#511-answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>A. Multiple choice</summary>
+<ol>
+<li><strong>(b)</strong> — acoustic × language model.</li>
+<li><strong>(a)</strong> — time alignment.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(O(MN)\)</span>.</li>
+<li><strong>(b)</strong> — diagonal band.</li>
+<li><strong>(a)</strong> — evaluation, decoding, training.</li>
+<li><strong>(b)</strong> — probability of observation sequence.</li>
+<li><strong>(b)</strong> — best state sequence.</li>
+<li><strong>(b)</strong> — expectation-maximization.</li>
+<li><strong>(b)</strong> — mel spectrogram then waveform.</li>
+<li><strong>(c)</strong> — MOS.</li>
+<li><strong>(c)</strong> — FAR = FRR.</li>
+<li><strong>(d)</strong> — ECAPA-TDNN.</li>
+</ol>
+</details>
+<details class="success">
+<summary>B. Fill in the blank</summary>
+<ol>
+<li><span class="arithmatex">\(W\)</span></li>
+<li>Sakoe–Chiba</li>
+<li>is a lower bound on (≤)</li>
+<li><span class="arithmatex">\(O \mid \lambda\)</span> (observation sequence given the model)</li>
+<li>max</li>
+<li>state and transition</li>
+<li>units (of speech)</li>
+<li>vocoder</li>
+<li>EER</li>
+<li>UDP</li>
+</ol>
+</details>
+<details class="success">
+<summary>C. Define / explain — model answers</summary>
+<ol>
+<li><em>Problem:</em> <span class="arithmatex">\(\hat W = \arg\max_W \Pr(W \mid X)\)</span>, where <span class="arithmatex">\(X\)</span> is the audio and <span class="arithmatex">\(W\)</span> is the word sequence. Bayes factorizes: <span class="arithmatex">\(\Pr(W \mid X) \propto \Pr(X \mid W)\Pr(W)\)</span>. <em>Acoustic model:</em> <span class="arithmatex">\(\Pr(X \mid W)\)</span> — the probability that the audio <span class="arithmatex">\(X\)</span> was produced from word sequence <span class="arithmatex">\(W\)</span>. Models the mapping from text to acoustics; learned from (audio, transcription) pairs. <em>Language model:</em> <span class="arithmatex">\(\Pr(W)\)</span> — the a priori probability of word sequence <span class="arithmatex">\(W\)</span>. Captures grammar and world knowledge; learned from text corpora. <em>Why useful:</em> separating the acoustic and language parts allows independent training on different data — acoustic model on transcribed speech, language model on much larger text-only corpora. It also lets the decoder score candidates according to both factors, so ambiguous acoustics can be resolved by language context ("I scream" vs. "ice cream").</li>
+<li><em>DTW:</em> given sequences <span class="arithmatex">\(X = (x_1, \ldots, x_M)\)</span> and <span class="arithmatex">\(Y = (y_1, \ldots, y_N)\)</span> with local distance <span class="arithmatex">\(d\)</span>, find the optimal monotonic path <span class="arithmatex">\(\pi\)</span> aligning them. <em>Recursion:</em> <span class="arithmatex">\(C(i,j) = d(x_i, y_j) + \min(C(i-1,j), C(i,j-1), C(i-1,j-1))\)</span>, with DTW distance <span class="arithmatex">\(C(M,N)\)</span>. <em>Complexity:</em> <span class="arithmatex">\(O(MN)\)</span> time and space. <em>Sakoe–Chiba band:</em> restrict <span class="arithmatex">\(|i/M - j/N| \le r\)</span> (or a sample-count version) — reduces to <span class="arithmatex">\(O(Mr)\)</span> time. Prevents pathological warping (aligning one frame to many), and regularizes the solution to stay near the diagonal. Typical <span class="arithmatex">\(r = 0.05\)</span>–<span class="arithmatex">\(0.15\)</span> of the sequence length.</li>
+<li><strong>Evaluation:</strong> given <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(O\)</span>, compute <span class="arithmatex">\(P(O \mid \lambda)\)</span>. Solved by the <strong>forward algorithm</strong> in <span class="arithmatex">\(O(N^2 T)\)</span>. <strong>Decoding:</strong> given <span class="arithmatex">\(\lambda\)</span> and <span class="arithmatex">\(O\)</span>, find <span class="arithmatex">\(\hat Q = \arg\max_Q P(Q \mid O, \lambda)\)</span>. Solved by the <strong>Viterbi algorithm</strong> in <span class="arithmatex">\(O(N^2 T)\)</span>. <strong>Training:</strong> given <span class="arithmatex">\(O\)</span>, find <span class="arithmatex">\(\lambda\)</span> maximizing <span class="arithmatex">\(P(O \mid \lambda)\)</span>. Solved by <strong>Baum–Welch (EM)</strong> in <span class="arithmatex">\(O(N^2 T)\)</span> per iteration (with several iterations to convergence).</li>
+<li><em>Recursion:</em> <span class="arithmatex">\(\alpha_1(i) = \pi_i b_i(o_1)\)</span>; <span class="arithmatex">\(\alpha_t(j) = [\sum_{i} \alpha_{t-1}(i) a_{ij}] b_j(o_t)\)</span>; <span class="arithmatex">\(P(O \mid \lambda) = \sum_i \alpha_T(i)\)</span>. <em>Complexity argument:</em> the naive computation of <span class="arithmatex">\(P(O \mid \lambda)\)</span> enumerates all <span class="arithmatex">\(N^T\)</span> state sequences, each requiring <span class="arithmatex">\(T\)</span> multiplications — total <span class="arithmatex">\(O(N^T)\)</span>. The forward algorithm recognizes that <span class="arithmatex">\(\alpha_t(j)\)</span> is the <strong>same value</strong> regardless of which specific history led to state <span class="arithmatex">\(j\)</span> — so each <span class="arithmatex">\(\alpha_t(j)\)</span> is computed once. There are <span class="arithmatex">\(N\)</span> states × <span class="arithmatex">\(T\)</span> time steps = <span class="arithmatex">\(NT\)</span> alphas, each summing over <span class="arithmatex">\(N\)</span> predecessors → <span class="arithmatex">\(O(N^2 T)\)</span> total. The key insight: <strong>dynamic programming</strong> reuses subproblems to collapse the exponential tree into a polynomial lattice.</li>
+<li><em>Similarity:</em> both are dynamic-programming recursions over the same <span class="arithmatex">\((state, time)\)</span> lattice, with identical complexity <span class="arithmatex">\(O(N^2 T)\)</span>. <em>Difference:</em> forward uses <strong>sum</strong> over predecessors (computes total probability mass reaching state <span class="arithmatex">\(j\)</span>); Viterbi uses <strong>max</strong> over predecessors (finds the single best path ending at <span class="arithmatex">\(j\)</span>). <em>Output:</em> forward returns <span class="arithmatex">\(P(O \mid \lambda)\)</span>, the total probability of the observation under any state sequence. Viterbi returns <span class="arithmatex">\(\hat Q = \arg\max_Q P(Q, O \mid \lambda)\)</span> (and the corresponding max probability) — the single most likely state sequence. <em>Use:</em> forward for evaluation and training; Viterbi for decoding (in ASR, deciding which phoneme was spoken).</li>
+<li><em>Baum–Welch M-step:</em> <span class="arithmatex">\(\hat a_{ij} = \sum_{t} \xi_t(i,j) / \sum_t \gamma_t(i)\)</span>; <span class="arithmatex">\(\hat b_j(k) = \sum_{t:o_t=k} \gamma_t(j) / \sum_t \gamma_t(j)\)</span>; <span class="arithmatex">\(\hat\pi_i = \gamma_1(i)\)</span>; and for GMM emissions, <span class="arithmatex">\(\hat\mu_{jk}\)</span>, <span class="arithmatex">\(\hat\Sigma_{jk}\)</span> are updated with component-level posteriors. <em>Why EM:</em> the E-step computes the <strong>posterior state occupancies</strong> given the current parameters (the expected counts of transitions and emissions). The M-step sets the parameters to the <strong>normalized expectations</strong> — i.e., the maximum-likelihood estimates given the posterior. This is exactly the EM template: iteratively refine the posterior and the parameters. <em>Why local max:</em> the E-step increases a lower bound on the log-likelihood (the ELBO); the M-step maximizes that lower bound. Both steps increase <span class="arithmatex">\(P(O \mid \lambda)\)</span>, and the algorithm converges to a <strong>stationary point</strong> — typically a local maximum but not necessarily the global one. Initialization matters; <strong>multiple restarts</strong> and <strong>good priors</strong> help.</li>
+<li><em>HMM replaced DTW for three reasons:</em> (i) <strong>Probabilistic modelling</strong> — HMM represents within-class variability as distributions (Gaussian emissions, transition probabilities) rather than as a fixed set of templates; requires no template selection. (ii) <strong>Statistical training</strong> — Baum–Welch uses <strong>all training data</strong> to jointly optimize all parameters, whereas DTW only stores templates (and each template captures one recording's characteristics). (iii) <strong>Composability</strong> — HMMs for individual words/phonemes connect via the lexicon and language model into a <strong>sentence HMM</strong>, enabling continuous large-vocabulary speech recognition. DTW-based systems don't compose cleanly into a language model framework. The historical transition (1980s) was driven by these three advantages, at a cost of greater complexity and training time.</li>
+<li><em>Neural TTS pipeline:</em> (i) Text/phoneme encoder — embed the input into a hidden representation. (ii) Attention decoder — autoregressively (Tacotron 2) or in parallel (FastSpeech 2) generate a <strong>mel spectrogram</strong>. (iii) Neural vocoder — convert mel spectrogram to waveform (WaveNet, HiFi-GAN, WaveGlow). <em>Difference from concatenative:</em> concatenative selects and splices recorded units from a large corpus — requires storing hundreds of MB, only speaks what was recorded. Neural TTS is a <strong>parametric model</strong>: it learns a continuous mapping from text to waveform, is <strong>storage-efficient</strong> (tens of MB for the model, no corpus), can speak <strong>arbitrary text</strong>, and is <strong>smoother</strong> because it interpolates in the model's latent space rather than splicing discrete recordings.</li>
+<li><em>Speaker-verification systems:</em> (i) <strong>GMM-UBM</strong> (2000s) — large GMM trained on many speakers (UBM), MAP-adapted per enrolled speaker. EER ~5–10% on VoxCeleb. (ii) <strong>i-vector</strong> (2011) — fixed-length low-rank representation of the GMM supervector. EER ~2–4%. (iii) <strong>x-vector</strong> (2017) — DNN trained for speaker classification, internal layer used as the embedding. EER ~1–2%. (iv) <strong>ECAPA-TDNN</strong> (2020) — 1D-conv + self-attention pooling. EER ~0.5–1%. <em>Trend:</em> increasingly deep, end-to-end, and data-hungry. Each generation roughly <strong>halves the EER</strong> — from ~7% to &lt; 1% in one decade.</li>
+<li><em>VoIP stack:</em> <strong>codec</strong> (G.711 at 64 kbps, G.729 at 8 kbps, AMR-WB at 12.65 kbps, Opus adjustable) → <strong>RTP/UDP/IP transport</strong> → <strong>jitter buffer</strong> (absorbs network delay variation, adds 20–60 ms) → <strong>QoS</strong> (DSCP priority, RSVP reservations). <em>Latency budget:</em> codec 10–30 ms, packetization 20 ms, network 50–100 ms, jitter buffer 20–60 ms, decoder 10–30 ms — total <strong>~110–250 ms one-way</strong>. ITU-T G.114 recommends &lt; 150 ms for toll quality; &gt; 400 ms makes conversation difficult. <em>Packet-loss handling:</em> FEC (redundant packets) + PLC (synthesize missing frames from past).</li>
+</ol>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<p><strong>Recognition</strong></p>
+<ul>
+<li>Rabiner &amp; Juang, <em>Fundamentals of Speech Recognition</em>, Prentice Hall, 1993 — <strong>the HMM reference</strong>; Chapters 5–7 cover the material in §5.4 thoroughly.</li>
+<li>Huang, Acero &amp; Hon, <em>Spoken Language Processing</em>, Prentice Hall, 2001 — comprehensive modern reference (pre-neural).</li>
+<li>Jurafsky &amp; Martin, <em>Speech and Language Processing</em>, 3rd ed., 2024 — free online; the ASR chapters are excellent.</li>
+<li>Jelinek, <em>Statistical Methods for Speech Recognition</em>, MIT Press, 1997 — the classical statistical approach.</li>
+<li>Yu &amp; Deng, <em>Automatic Speech Recognition: A Deep Learning Approach</em>, Springer, 2015 — the DNN transition.</li>
+<li>Graves, <em>Supervised Sequence Labelling with Recurrent Neural Networks</em>, Springer, 2012 — CTC and RNN for ASR.</li>
+<li>Radford et al., "Robust Speech Recognition via Large-Scale Weak Supervision", OpenAI (2022) — the Whisper paper.</li>
+</ul>
+<p><strong>DTW and time-series matching</strong></p>
+<ul>
+<li>Sakoe &amp; Chiba, "Dynamic Programming Algorithm Optimization for Spoken Word Recognition", <em>IEEE Trans. ASSP</em>, 1978 — the classic reference.</li>
+<li>Ratanamahatana &amp; Keogh, "Making Time-Series Classification More Accurate Using Learned Constraints", <em>SDM</em> 2004 — DTW in data mining.</li>
+<li>Rakthanmanon et al., "Searching and Mining Trillions of Time Series Subsequences under Dynamic Time Warping", <em>KDD</em> 2012 — the UCR Suite.</li>
+<li>Müller, <em>Information Retrieval for Music and Motion</em>, Springer, 2007 — DTW with extensions (subsequence DTW, etc.).</li>
+</ul>
+<p><strong>Synthesis</strong></p>
+<ul>
+<li>Taylor, <em>Text-to-Speech Synthesis</em>, Cambridge University Press, 2009 — the classical reference.</li>
+<li>van den Oord et al., "WaveNet: A Generative Model for Raw Audio", <em>arXiv</em> 2016.</li>
+<li>Wang et al., "Tacotron: Towards End-to-End Speech Synthesis", <em>Interspeech</em> 2017.</li>
+<li>Shen et al., "Natural TTS Synthesis by Conditioning WaveNet on Mel Spectrogram Predictions", <em>ICASSP</em> 2018 (Tacotron 2).</li>
+<li>Ren et al., "FastSpeech 2: Fast and High-Quality End-to-End Text to Speech", <em>ICLR</em> 2021.</li>
+<li>Kong, Kim &amp; Bae, "HiFi-GAN: Generative Adversarial Networks for Efficient and High Fidelity Speech Synthesis", <em>NeurIPS</em> 2020.</li>
+</ul>
+<p><strong>Speaker recognition</strong></p>
+<ul>
+<li>Kinnunen &amp; Li, "An Overview of Text-Independent Speaker Recognition", <em>Speech Communication</em>, 52(1), 2010 — the classical survey.</li>
+<li>Dehak et al., "Front-End Factor Analysis for Speaker Verification", <em>IEEE TASLP</em>, 2011 — i-vector.</li>
+<li>Snyder et al., "X-Vectors: Robust DNN Embeddings for Speaker Recognition", <em>ICASSP</em> 2018.</li>
+<li>Desplanques, Thienpondt &amp; Demuynck, "ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification", <em>Interspeech</em> 2020.</li>
+<li>Wu et al., "Anti-Spoofing for Text-Independent Speaker Verification: An Overview", <em>arXiv</em> 2020.</li>
+</ul>
+<p><strong>VoIP</strong></p>
+<ul>
+<li>Hersent, Petit &amp; Gurle, <em>Beyond VoIP Protocols</em>, Wiley, 2005.</li>
+<li>Perkins, <em>RTP: Audio and Video for the Internet</em>, Addison-Wesley, 2003.</li>
+<li>ITU-T Recommendations G.114 (latency), G.711, G.729, G.722.2 (AMR-WB), G.718, G.722.1.</li>
+<li>Valin, Vos &amp; Terriberry, "Definition of the Opus Audio Codec", RFC 6716, IETF, 2012.</li>
+</ul>
+<p><strong>Aids to the handicapped</strong></p>
+<ul>
+<li>Loizou, <em>Speech Enhancement: Theory and Practice</em>, 2nd ed., CRC Press, 2013 — cochlear implant and hearing-aid algorithms.</li>
+<li>Levitt, <em>Aural Rehabilitation</em>, Singular Publishing, 2007.</li>
+</ul>
+<hr />
+<h2 id="suggested-tutorial-and-lab-problems-for-this-chapter">Suggested tutorial and lab problems for this chapter<a class="headerlink" href="#suggested-tutorial-and-lab-problems-for-this-chapter" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>DTW implementation.</strong> Implement DTW from scratch (recursive and iterative). Test on two sequences with known ground-truth alignment. Verify against <code>fastdtw</code> library.</p>
+</li>
+<li>
+<p><strong>DTW for isolated digits.</strong> Record 10 examples of each of 10 digits (0–9). Use 5 as templates, 5 as tests. Compute MFCCs, apply DTW, and report digit recognition accuracy. How does accuracy change with 1, 3, 5 templates?</p>
+</li>
+<li>
+<p><strong>Sakoe–Chiba band and LB_Keogh.</strong> Add the Sakoe–Chiba band to your DTW. Measure the speedup. Then implement LB_Keogh and verify it prunes candidates correctly (lower bound never exceeds true DTW).</p>
+</li>
+<li>
+<p><strong>HMM forward algorithm.</strong> Implement the forward algorithm from scratch. Verify against <code>hmmlearn</code> on a small test HMM. Test the <strong>underflow</strong> issue on a long sequence — then fix it with <strong>scaling</strong> or <strong>log-domain</strong>.</p>
+</li>
+<li>
+<p><strong>HMM Viterbi.</strong> Implement Viterbi. Compare the path with forward's most probable state (via max posterior). Verify that for many sequences, they coincide.</p>
+</li>
+<li>
+<p><strong>HMM Baum–Welch.</strong> Train a 3-state HMM on repeated examples of a single word. Then use it for isolated word recognition (one HMM per word). Report per-word accuracy.</p>
+</li>
+<li>
+<p><strong>GMM-HMM ASR.</strong> Use <code>hmmlearn</code> or <code>python_speech_features</code> to build a small ASR for digits. Train 10 GMM-HMMs (one per digit), test on a separate set. Compare with DTW accuracy.</p>
+</li>
+<li>
+<p><strong>TTS with <code>pyttsx3</code>.</strong> Generate TTS for a paragraph. Vary speaking rate and pitch. Measure MOS informally by having 5 friends rate 10 samples each. Compare with the "expected" MOS of the engine.</p>
+</li>
+<li>
+<p><strong>MOS evaluation.</strong> Collect MOS ratings from 10 listeners on 20 TTS samples (5 from formant, 5 from concatenative, 5 from neural, 5 from human). Compute means and 95% CIs. Which pairs are statistically distinguishable?</p>
+</li>
+<li>
+<p><strong>Speaker verification features.</strong> Extract MFCCs (with deltas) for 5 speakers saying "hello" 10 times each. Train a GMM per speaker (5 Gaussians) on 8 recordings, test on 2. Compute per-speaker accuracy and EER across the 5 speakers.</p>
+</li>
+<li>
+<p><strong>EER calculation.</strong> For the speaker-verification system of Problem 10, plot the DET curve (FAR vs. FRR over all thresholds). Mark the EER point. Compare with the human EER baseline (~2–3%).</p>
+</li>
+<li>
+<p><strong>VoIP bandwidth and latency.</strong> Compute the bandwidth overhead of RTP/UDP/IP headers for a G.711 call, a G.729 call, and an Opus call at 24 kbps. Then compute the latency budget for a call with 60 ms network delay, 30 ms jitter buffer, and 25 ms codec delay. Is it under the 150 ms G.114 threshold?</p>
+</li>
+<li>
+<p><strong>Anti-spoofing exploration.</strong> Use a TTS engine to generate speech in a target voice (from a sample recording — use <code>pyttsx3</code> for a basic attempt, or a cloud API for higher quality). Test whether a simple MFCC-GMM speaker verifier accepts the synthetic sample. Discuss countermeasures.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

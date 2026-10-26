@@ -1,0 +1,4245 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6423/chapters/01-continuous-discrete-images/">
+      
+      
+        <link rel="prev" href="../../schedule/">
+      
+      
+        <link rel="next" href="../02-image-processing-techniques/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>1. Continuous and Discrete Images and Systems - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1-continuous-and-discrete-images-and-systems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Continuous and Discrete Images and Systems
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../eceg-6303/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-light-luminance-brightness-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Light, luminance, brightness, contrast
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Light, luminance, brightness, contrast">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-radiometry-vs-photometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.1 Radiometry vs. photometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.2 Contrast
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-11-contrast-of-a-checkerboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.1 — contrast of a checkerboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-12-dynamic-range-and-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.2 — dynamic range and display
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-the-eye-and-the-monochrome-vision-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 The eye and the monochrome vision model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 The eye and the monochrome vision model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-the-human-eye" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 The human eye
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-the-contrast-sensitivity-function-csf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 The contrast sensitivity function (CSF)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-13-perceptual-quantization-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.3 — perceptual quantization mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-the-monochrome-achromatic-vision-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 The monochrome (achromatic) vision model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-image-processing-problems-and-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Image processing problems and applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Image processing problems and applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-taxonomy-of-image-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 Taxonomy of image processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-vision-camera-and-digital-processing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Vision camera and digital processing system
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Vision camera and digital processing system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-the-sensor-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 The sensor pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-colour-filter-arrays-the-bayer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Colour filter arrays — the Bayer pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-dynamic-range-and-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 Dynamic range and noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-2-d-sampling-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 2-D sampling theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 2-D sampling theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-sampling-an-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.1 Sampling an image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-the-2-d-sampling-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.2 The 2-D sampling theorem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-frequency-domain-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.3 Frequency-domain sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-aliasing-in-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.4 Aliasing in images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-14-2-d-sampling-of-a-sinusoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.4 — 2-D sampling of a sinusoid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-15-subsampling-a-checkerboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.5 — subsampling a checkerboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-image-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 Image quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Image quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-uniform-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Uniform quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-lloydmax-quantizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2 Lloyd–Max quantizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-16-4-level-lloydmax-for-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.6 — 4-level Lloyd–Max for Gaussian
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-dither" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.3 Dither
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-17-dither-on-a-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.7 — dither on a gradient
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-colour-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Colour images
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Colour images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-the-trichromatic-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.1 The trichromatic model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-cie-xyz-the-standard-colorimetric-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.2 CIE XYZ — the standard colorimetric space
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-rgb-ycbcr-hsv-three-colour-spaces-for-three-purposes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.3 RGB, YCbCr, HSV — three colour spaces for three purposes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-why-compression-uses-ycbcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.4 Why compression uses YCbCr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-18-rgb-ycbcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.8 — RGB ↔ YCbCr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-linear-shift-invariant-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Linear shift-invariant systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 Linear shift-invariant systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-2-d-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8.1 2-D convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-common-image-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8.2 Common image filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-19-2-d-gaussian-blur-as-separable-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.9 — 2-D Gaussian blur as separable filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-2-d-fourier-and-z-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9 2-D Fourier and Z transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 2-D Fourier and Z transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-the-2-d-discrete-fourier-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.1 The 2-D discrete Fourier transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-key-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.2 Key properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.3 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-110-2-d-dft-of-a-rectangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.10 — 2-D DFT of a rectangle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-the-2-d-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.4 The 2-D Z transform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-matrix-theory-block-matrices-and-kronecker-products" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10 Matrix theory, block matrices, and Kronecker products
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Matrix theory, block matrices, and Kronecker products">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101-kronecker-product-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.1 Kronecker product — definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102-the-2-d-convolution-as-a-block-toeplitz-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.2 The 2-D convolution as a block Toeplitz matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-111-2-d-filtering-as-a-kronecker-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.11 — 2-D filtering as a Kronecker product
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103-why-kronecker-products-matter-for-image-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.3 Why Kronecker products matter for image processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-112-2-d-dft-as-a-kronecker-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.12 — 2-D DFT as a Kronecker product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.11 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.12 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.13 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-light-luminance-brightness-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Light, luminance, brightness, contrast
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Light, luminance, brightness, contrast">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-radiometry-vs-photometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.1 Radiometry vs. photometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-contrast" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.2 Contrast
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-11-contrast-of-a-checkerboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.1 — contrast of a checkerboard
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-12-dynamic-range-and-display" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.2 — dynamic range and display
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-the-eye-and-the-monochrome-vision-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 The eye and the monochrome vision model
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2 The eye and the monochrome vision model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-the-human-eye" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1 The human eye
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-the-contrast-sensitivity-function-csf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2 The contrast sensitivity function (CSF)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-13-perceptual-quantization-mask" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.3 — perceptual quantization mask
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#123-the-monochrome-achromatic-vision-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.3 The monochrome (achromatic) vision model
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-image-processing-problems-and-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Image processing problems and applications
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Image processing problems and applications">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-taxonomy-of-image-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.1 Taxonomy of image processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-applications" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3.2 Applications
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-vision-camera-and-digital-processing-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Vision camera and digital processing system
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Vision camera and digital processing system">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-the-sensor-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 The sensor pipeline
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-colour-filter-arrays-the-bayer-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Colour filter arrays — the Bayer pattern
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-dynamic-range-and-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 Dynamic range and noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-2-d-sampling-theory" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 2-D sampling theory
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 2-D sampling theory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#151-sampling-an-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.1 Sampling an image
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#152-the-2-d-sampling-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.2 The 2-D sampling theorem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#153-frequency-domain-sampling" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.3 Frequency-domain sampling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#154-aliasing-in-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5.4 Aliasing in images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-14-2-d-sampling-of-a-sinusoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.4 — 2-D sampling of a sinusoid
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-15-subsampling-a-checkerboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.5 — subsampling a checkerboard
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-image-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 Image quantization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 Image quantization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#161-uniform-quantization" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.1 Uniform quantization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#162-lloydmax-quantizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.2 Lloyd–Max quantizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-16-4-level-lloydmax-for-gaussian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.6 — 4-level Lloyd–Max for Gaussian
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#163-dither" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6.3 Dither
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-17-dither-on-a-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.7 — dither on a gradient
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-colour-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Colour images
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Colour images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#171-the-trichromatic-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.1 The trichromatic model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#172-cie-xyz-the-standard-colorimetric-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.2 CIE XYZ — the standard colorimetric space
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#173-rgb-ycbcr-hsv-three-colour-spaces-for-three-purposes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.3 RGB, YCbCr, HSV — three colour spaces for three purposes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#174-why-compression-uses-ycbcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7.4 Why compression uses YCbCr
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-18-rgb-ycbcr" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.8 — RGB ↔ YCbCr
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-linear-shift-invariant-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Linear shift-invariant systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 Linear shift-invariant systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#181-2-d-convolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8.1 2-D convolution
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#182-common-image-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8.2 Common image filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-19-2-d-gaussian-blur-as-separable-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.9 — 2-D Gaussian blur as separable filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-2-d-fourier-and-z-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9 2-D Fourier and Z transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 2-D Fourier and Z transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#191-the-2-d-discrete-fourier-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.1 The 2-D discrete Fourier transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#192-key-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.2 Key properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#193-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.3 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-110-2-d-dft-of-a-rectangle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.10 — 2-D DFT of a rectangle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#194-the-2-d-z-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9.4 The 2-D Z transform
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-matrix-theory-block-matrices-and-kronecker-products" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10 Matrix theory, block matrices, and Kronecker products
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Matrix theory, block matrices, and Kronecker products">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101-kronecker-product-definition" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.1 Kronecker product — definition
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102-the-2-d-convolution-as-a-block-toeplitz-matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.2 The 2-D convolution as a block Toeplitz matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-111-2-d-filtering-as-a-kronecker-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.11 — 2-D filtering as a Kronecker product
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103-why-kronecker-products-matter-for-image-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.3 Why Kronecker products matter for image processing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-112-2-d-dft-as-a-kronecker-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.12 — 2-D DFT as a Kronecker product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.11 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.12 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.12 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.13 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-1-continuous-and-discrete-images-and-systems">Chapter 1 — Continuous and Discrete Images and Systems<a class="headerlink" href="#chapter-1-continuous-and-discrete-images-and-systems" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Chapter at a glance</p>
+<p><strong>Contact hours:</strong> 2 lecture + 2 tutorial + 1 laboratory · <strong>Home study:</strong> 5 h</p>
+<p><strong>Coverage (syllabus):</strong> light, luminance, brightness, contrast · the eye ·
+the monochrome vision model · image processing problems and applications ·
+vision camera · digital processing system · 2-D sampling theory · aliasing ·
+image quantization · Lloyd–Max quantizer · dither · color images · linear
+systems and shift invariance · Fourier transform, Z-transform · matrix
+theory results · block matrices and Kronecker products.</p>
+</div>
+<hr />
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this chapter you should be able to:</p>
+<ol>
+<li>Distinguish <strong>radiometric</strong> from <strong>photometric</strong> quantities; compute
+   <strong>Weber</strong> and <strong>Michelson</strong> contrasts for simple patterns.</li>
+<li>Describe the <strong>human visual system</strong> and state the <strong>contrast sensitivity
+   function</strong> — the physiological basis for perceptual compression.</li>
+<li>Model a <strong>digital camera</strong> pipeline from lens to ADC, and recognize the
+   trade-offs between sensor size, dynamic range, and noise.</li>
+<li>State the <strong>2-D sampling theorem</strong> and derive the <strong>anti-aliasing</strong> condition
+   for images. Explain Moiré patterns.</li>
+<li>Design <strong>uniform</strong> and <strong>Lloyd–Max</strong> quantizers; compute their MSE;
+   understand the role of <strong>dither</strong> in visual quantization.</li>
+<li>Convert between <strong>RGB</strong>, <strong>YCbCr</strong>, and <strong>HSV</strong> colour spaces; explain why
+   colour compression uses luma-chroma separation.</li>
+<li>Model a 2-D <strong>linear shift-invariant (LSI)</strong> system as a <strong>convolution</strong>;
+   compute 2-D Fourier and Z transforms of simple images.</li>
+<li>Use <strong>Kronecker products</strong> and <strong>block matrices</strong> to represent 2-D linear
+   filtering as 1-D matrix algebra — the key algebraic tool for image coding
+   and filtering.</li>
+<li>Implement all of the above in <strong>Python, Java, and C#</strong>.</li>
+</ol>
+<hr />
+<h2 id="11-light-luminance-brightness-contrast">1.1 Light, luminance, brightness, contrast<a class="headerlink" href="#11-light-luminance-brightness-contrast" title="Permanent link">&para;</a></h2>
+<h3 id="111-radiometry-vs-photometry">1.1.1 Radiometry vs. photometry<a class="headerlink" href="#111-radiometry-vs-photometry" title="Permanent link">&para;</a></h3>
+<p><strong>Radiometry</strong> measures light in physical units of energy. <strong>Photometry</strong>
+weights light by the sensitivity of the human eye.</p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Unit</th>
+<th>Weighted by</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Radiant flux</strong> (power)</td>
+<td>W (watt)</td>
+<td>—</td>
+<td>Physical energy per second</td>
+</tr>
+<tr>
+<td><strong>Luminous flux</strong></td>
+<td>lm (lumen)</td>
+<td>V(λ)</td>
+<td>Perceptually weighted power</td>
+</tr>
+<tr>
+<td><strong>Radiance</strong></td>
+<td>W/(sr·m²)</td>
+<td>—</td>
+<td>Power per unit area per solid angle</td>
+</tr>
+<tr>
+<td><strong>Luminance</strong> <span class="arithmatex">\(L\)</span></td>
+<td>cd/m²</td>
+<td>V(λ)</td>
+<td>Perceived brightness (photometric)</td>
+</tr>
+<tr>
+<td><strong>Illuminance</strong></td>
+<td>lux</td>
+<td>V(λ)</td>
+<td>Light falling on a surface</td>
+</tr>
+<tr>
+<td><strong>Reflectance</strong></td>
+<td>—</td>
+<td>—</td>
+<td>Ratio of reflected to incident</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>luminous efficiency function</strong> <span class="arithmatex">\(V(\lambda)\)</span> peaks at <span class="arithmatex">\(\lambda \approx 555\)</span> nm
+(green-yellow) and falls to near zero at the UV (400 nm) and IR (700 nm)
+extremes — human vision occupies only a small portion of the EM spectrum.</p>
+<div class="admonition note">
+<p class="admonition-title">Brightness</p>
+<p><em>Luminance</em> is an objective, measurable quantity (cd/m²). <strong>Brightness</strong> is
+the subjective perception of luminance, and is <strong>nonlinearly</strong> related to it
+— roughly by a power law (Stevens' law: <span class="arithmatex">\(B \propto L^{0.33}\)</span>). This is why
+images are gamma-corrected before display: the file stores an approximately
+perceptual encoding of luminance, not a linear one.</p>
+</div>
+<h3 id="112-contrast">1.1.2 Contrast<a class="headerlink" href="#112-contrast" title="Permanent link">&para;</a></h3>
+<p>Two common definitions of contrast for a region of interest:</p>
+<p><strong>Weber contrast</strong> — relative to the background:</p>
+<div class="arithmatex">\[
+\boxed{\;C_W = \frac{L_{\text{obj}} - L_{\text{bg}}}{L_{\text{bg}}}\;}
+\]</div>
+<p><strong>Michelson contrast</strong> — relative to the average:</p>
+<div class="arithmatex">\[
+\boxed{\;C_M = \frac{L_{\text{max}} - L_{\text{min}}}{L_{\text{max}} + L_{\text{min}}}\;}
+\]</div>
+<p>Michelson contrast lies in <span class="arithmatex">\([0, 1]\)</span> and is symmetric in the two extremes;
+Weber contrast can be any value, and is meaningful only when the background is
+uniform and the object is small.</p>
+<div class="admonition tip">
+<p class="admonition-title">Why two definitions?</p>
+<p>Michelson is used for <strong>periodic patterns</strong> (gratings, sinusoids) — the
+contrast of a sinusoid <span class="arithmatex">\(L + A\sin\)</span> is <span class="arithmatex">\(A/L\)</span> (Weber) or <span class="arithmatex">\(A/L\)</span> (Michelson,
+for zero-mean patterns).</p>
+<p>Weber is used for <strong>targets on backgrounds</strong> — e.g., a defect on a uniform
+surface, a letter on a page, a lesion on a medical image.</p>
+</div>
+<h3 id="worked-example-11-contrast-of-a-checkerboard">Worked example 1.1 — contrast of a checkerboard<a class="headerlink" href="#worked-example-11-contrast-of-a-checkerboard" title="Permanent link">&para;</a></h3>
+<p>A 2-D checkerboard alternates between black squares of luminance <span class="arithmatex">\(L_{\min} = 5\)</span>
+cd/m² and white squares of luminance <span class="arithmatex">\(L_{\max} = 100\)</span> cd/m².</p>
+<p><strong>Michelson contrast.</strong></p>
+<div class="arithmatex">\[
+C_M = \frac{100 - 5}{100 + 5} = \frac{95}{105} \approx 0.905.
+\]</div>
+<p><strong>Weber contrast</strong> (relative to black background, object = white square):</p>
+<div class="arithmatex">\[
+C_W = \frac{100 - 5}{5} = 19.
+\]</div>
+<p><strong>Weber contrast</strong> (relative to white background, object = black square):</p>
+<div class="arithmatex">\[
+C_W = \frac{5 - 100}{100} = -0.95.
+\]</div>
+<p>Michelson is the natural measure for the whole pattern; Weber depends on which
+square is "the object". Both give useful information — Michelson for a whole
+image, Weber for a target detection task.</p>
+<h3 id="worked-example-12-dynamic-range-and-display">Worked example 1.2 — dynamic range and display<a class="headerlink" href="#worked-example-12-dynamic-range-and-display" title="Permanent link">&para;</a></h3>
+<p>A display can show luminances from <span class="arithmatex">\(L_{\min} = 0.5\)</span> cd/m² to <span class="arithmatex">\(L_{\max} = 500\)</span> cd/m².</p>
+<p><strong>Dynamic range in stops</strong> (log₂ of ratio):</p>
+<div class="arithmatex">\[
+\text{DR} = \log_2\frac{L_{\max}}{L_{\min}} = \log_2(1000) \approx 9.97\ \text{stops}.
+\]</div>
+<p><strong>In decibels:</strong> <span class="arithmatex">\(\text{DR} = 20\log_{10}(L_{\max}/L_{\min}) \approx 60\)</span> dB.</p>
+<p><strong>8-bit integer representation</strong> gives 256 levels — a dynamic range of only
+<span class="arithmatex">\(\sim\)</span>48 dB, less than the display. This is the reason <strong>HDR</strong> displays
+(10–12 bits) and <strong>gamma correction</strong> exist: to map a wider range of physical
+luminance into a narrower perceptual scale without banding.</p>
+<hr />
+<h2 id="12-the-eye-and-the-monochrome-vision-model">1.2 The eye and the monochrome vision model<a class="headerlink" href="#12-the-eye-and-the-monochrome-vision-model" title="Permanent link">&para;</a></h2>
+<h3 id="121-the-human-eye">1.2.1 The human eye<a class="headerlink" href="#121-the-human-eye" title="Permanent link">&para;</a></h3>
+<p>The retina has two types of photoreceptors:</p>
+<ul>
+<li><strong>Rods</strong> (~<span class="arithmatex">\(10^8\)</span>) — sensitive to low light, no colour discrimination, peak
+  sensitivity at <span class="arithmatex">\(\lambda \approx 500\)</span> nm (green-blue). Dominate in <strong>scotopic</strong>
+  (dark) vision.</li>
+<li><strong>Cones</strong> (~<span class="arithmatex">\(6 \times 10^6\)</span>) — need bright light, three types (S/M/L — short /
+  medium / long wavelength), peak sensitivity at 420 / 534 / 564 nm. Dominate
+  in <strong>photopic</strong> (bright) vision.</li>
+</ul>
+<p><strong>Distribution.</strong> Cones are concentrated in the <strong>fovea</strong> (centre of gaze),
+which subtends <span class="arithmatex">\(\approx 2°\)</span> of visual angle; rods are more uniformly distributed.
+This is why we see fine detail only in the centre of gaze, and why peripheral
+vision is primarily for motion and low light.</p>
+<p><strong>Optical resolution.</strong> The fovea can resolve <span class="arithmatex">\(\approx 1\)</span> arcminute of visual
+angle — about <span class="arithmatex">\(1/60°\)</span>. At a typical reading distance (40 cm), this corresponds
+to <span class="arithmatex">\(\approx 0.1\)</span> mm spatial resolution, or <span class="arithmatex">\(\approx 250\)</span> pixels per inch.</p>
+<h3 id="122-the-contrast-sensitivity-function-csf">1.2.2 The contrast sensitivity function (CSF)<a class="headerlink" href="#122-the-contrast-sensitivity-function-csf" title="Permanent link">&para;</a></h3>
+<p>The <strong>CSF</strong> describes the inverse of the minimum detectable contrast as a
+function of <strong>spatial frequency</strong> (in cycles per degree of visual angle):</p>
+<div class="arithmatex">\[
+\boxed{\;\text{CSF}(f) = \frac{1}{C_{\min}(f)}\;}
+\]</div>
+<p><strong>Shape.</strong> Band-pass — peaks at <span class="arithmatex">\(\sim\)</span> 4–8 cycles/degree, falls off at both
+low frequencies (lateral inhibition flattens large-scale gradients) and high
+frequencies (optical and neural limits).</p>
+<p><strong>Weber's law</strong> for the low-frequency limit:</p>
+<div class="arithmatex">\[
+\boxed{\;\frac{\Delta L}{L} = \text{constant} \approx 0.01 \ (1\%)\;}
+\]</div>
+<p>A 1% luminance change is just barely detectable under normal viewing conditions.</p>
+<p><strong>Implication for compression.</strong> The CSF tells you <strong>which frequencies you can
+sacrifice</strong>. JPEG and JPEG 2000 quantize their DCT/wavelet coefficients more
+aggressively at high frequencies because the eye is less sensitive there —
+this is the physiological basis of perceptual coding.</p>
+<h3 id="worked-example-13-perceptual-quantization-mask">Worked example 1.3 — perceptual quantization mask<a class="headerlink" href="#worked-example-13-perceptual-quantization-mask" title="Permanent link">&para;</a></h3>
+<p>The CSF peaks at ~8 cycles/degree. For an image displayed at 30 pixels per
+degree (typical mobile viewing), this corresponds to a <strong>spatial frequency</strong> of</p>
+<div class="arithmatex">\[
+f_{\text{peak}} = 8\ \text{cycles/degree} / 30\ \text{pixels/degree} = 0.267\ \text{cycles/pixel}.
+\]</div>
+<p>Above ~<span class="arithmatex">\(0.35\)</span> cycles/pixel (corresponding to ~10.5 cycles/degree, past the
+high-frequency cutoff), the eye's sensitivity drops sharply — the <em>human visual
+cutoff</em> is at <span class="arithmatex">\(\approx 40\)</span>–<span class="arithmatex">\(60\)</span> cycles/degree, corresponding to roughly
+<span class="arithmatex">\(0.25\)</span>–<span class="arithmatex">\(0.35\)</span> cycles/pixel at this viewing distance.</p>
+<p><strong>Compression insight.</strong> An image can be <strong>downsampled</strong> to ~2 pixels per cycle
+of the highest visible frequency — i.e., to <span class="arithmatex">\(\sim\)</span> 60–70 pixels/degree of
+viewing — without perceptual loss. This is why JPEG's "quality" setting maps to
+a quantization matrix that coarsens at high frequencies, and why JPEG 2000's
+wavelet decomposition can be truncated in the finest subbands with minimal
+perceptual cost.</p>
+<h3 id="123-the-monochrome-achromatic-vision-model">1.2.3 The monochrome (achromatic) vision model<a class="headerlink" href="#123-the-monochrome-achromatic-vision-model" title="Permanent link">&para;</a></h3>
+<p>For grayscale images, the HVS is well modelled as a <strong>linear system</strong> with a
+<strong>contrast-sensitivity transfer function</strong> <span class="arithmatex">\(H_{\text{HVS}}(f_x, f_y)\)</span> that
+shapes the input image's spectrum. Its magnitude is the CSF.</p>
+<p><strong>Practical approximations.</strong></p>
+<ul>
+<li><strong>Mannos–Sakrison (1974):</strong> a simple exponential model
+  <span class="arithmatex">\(H_{\text{CSF}}(f) = 2.6(0.0192 + 0.114f)e^{-(0.114f)^{1.1}}\)</span>
+  where <span class="arithmatex">\(f\)</span> is in cycles/degree.</li>
+<li><strong>Daly (1993):</strong> the widely used <strong>Daly visual model</strong> for full-image HVS
+  simulation.</li>
+<li><strong>Watson (1993):</strong> the discrete cosine transform domain model, the basis of
+  the <strong>DCTune</strong> perceptual JPEG quantizer.</li>
+</ul>
+<p>The full HVS also includes <strong>lateral inhibition</strong> (which sharpens edges), <strong>luminance
+adaptation</strong> (Weber's law), and <strong>temporal response</strong> (flicker sensitivity). For
+image compression, the CSF alone captures most of the perceptual redundancy.</p>
+<hr />
+<h2 id="13-image-processing-problems-and-applications">1.3 Image processing problems and applications<a class="headerlink" href="#13-image-processing-problems-and-applications" title="Permanent link">&para;</a></h2>
+<h3 id="131-taxonomy-of-image-processing">1.3.1 Taxonomy of image processing<a class="headerlink" href="#131-taxonomy-of-image-processing" title="Permanent link">&para;</a></h3>
+<p>Image processing is conventionally divided into four levels:</p>
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Input</th>
+<th>Output</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Acquisition / pre-processing</strong></td>
+<td>Sensor signal</td>
+<td>Image</td>
+<td>Sampling, quantization, denoising, colour correction</td>
+</tr>
+<tr>
+<td><strong>Enhancement</strong></td>
+<td>Image</td>
+<td>Image</td>
+<td>Contrast stretching, histogram equalization, sharpening</td>
+</tr>
+<tr>
+<td><strong>Restoration</strong></td>
+<td>Degraded image</td>
+<td>Restored image</td>
+<td>Deconvolution, denoising, inpainting</td>
+</tr>
+<tr>
+<td><strong>Compression</strong></td>
+<td>Image</td>
+<td>Bits</td>
+<td>JPEG, JPEG 2000, predictive, VQ, wavelet</td>
+</tr>
+<tr>
+<td><strong>Analysis / computer vision</strong></td>
+<td>Image</td>
+<td>Features / decisions</td>
+<td>Segmentation, edge detection, object detection, recognition</td>
+</tr>
+</tbody>
+</table>
+<p>This course covers the first four levels (Ch 1–2) for images, then moves to
+speech (Ch 3–5) and video (Ch 6).</p>
+<h3 id="132-applications">1.3.2 Applications<a class="headerlink" href="#132-applications" title="Permanent link">&para;</a></h3>
+<p><strong>Medical imaging.</strong> X-ray, CT, MRI, ultrasound, PET — image restoration,
+segmentation, computer-aided diagnosis. CT and PET reconstruction from
+projections (Radon transform) is the direct application of §2.4.4.</p>
+<p><strong>Remote sensing.</strong> Satellite and aerial imagery — pansharpening, change
+detection, land-cover classification, crop health monitoring. Requires
+geometric and radiometric correction, plus compression for storage and downlink.</p>
+<p><strong>Industrial inspection.</strong> Machine vision for defect detection, quality control,
+robot guidance. High-speed processing, high accuracy, controlled lighting.</p>
+<p><strong>Document processing.</strong> OCR, barcode reading, archival digitization — deskewing,
+binarization, denoising, text enhancement.</p>
+<p><strong>Forensics / security.</strong> Fingerprint enhancement, face recognition, license
+plate reading, video surveillance — image restoration and feature extraction.</p>
+<p><strong>Entertainment / multimedia.</strong> Photography, film, gaming, broadcast — colour
+science, HDR, denoising, compression, style transfer.</p>
+<p><strong>Scientific imaging.</strong> Microscopy, astronomy, particle physics — deconvolution,
+super-resolution, denoising, particle tracking.</p>
+<div class="admonition tip">
+<p class="admonition-title">The recurring theme</p>
+<p>Most of these applications involve the <strong>same core operations</strong> — sampling,
+quantization, transforms, filtering, compression — applied to <strong>different
+data</strong>. The mathematical core (Ch 1) is shared across all of them.</p>
+</div>
+<hr />
+<h2 id="14-vision-camera-and-digital-processing-system">1.4 Vision camera and digital processing system<a class="headerlink" href="#14-vision-camera-and-digital-processing-system" title="Permanent link">&para;</a></h2>
+<h3 id="141-the-sensor-pipeline">1.4.1 The sensor pipeline<a class="headerlink" href="#141-the-sensor-pipeline" title="Permanent link">&para;</a></h3>
+<p>A digital camera pipeline converts <strong>photons</strong> to <strong>bits</strong> through a sequence
+of stages:</p>
+<ol>
+<li><strong>Optics</strong> — lens focuses light onto the sensor. Aperture controls
+   illuminance; diffraction limits resolution.</li>
+<li><strong>Sensor</strong> — CCD or CMOS converts photons to charge / voltage. Each pixel
+   integrates over a small area (typically <span class="arithmatex">\(2\)</span>–<span class="arithmatex">\(7\ \mu\)</span>m). Sensor size
+   (e.g., 1" ≈ 16 mm diagonal for a "one-inch" sensor) and pixel size determine
+   sensitivity, dynamic range, and noise.</li>
+<li><strong>Analog front end</strong> — amplifier + <strong>anti-alias filter</strong> + <strong>ADC</strong> to
+   digital samples. ADC resolution (8, 10, 12, 14 bits) sets dynamic range.</li>
+<li><strong>Digital processing</strong> — demosaicing, white balance, gamma correction,
+   denoising, colour correction, compression.</li>
+</ol>
+<h3 id="142-colour-filter-arrays-the-bayer-pattern">1.4.2 Colour filter arrays — the Bayer pattern<a class="headerlink" href="#142-colour-filter-arrays-the-bayer-pattern" title="Permanent link">&para;</a></h3>
+<p>Most colour sensors use a <strong>colour filter array (CFA)</strong> — a mosaic of red, green,
+and blue filters over the pixel array. The <strong>Bayer pattern</strong> is the standard:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>R G R G R G ...
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>G B G B G B ...
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>R G R G R G ...
+</span></code></pre></div>
+<p>with 2× green pixels per R or B (matching the eye's higher sensitivity to
+green). <strong>Demosaicing</strong> reconstructs full RGB at each pixel from this mosaic.</p>
+<h3 id="143-dynamic-range-and-noise">1.4.3 Dynamic range and noise<a class="headerlink" href="#143-dynamic-range-and-noise" title="Permanent link">&para;</a></h3>
+<p>The <strong>dynamic range</strong> of a sensor is the ratio of its maximum (saturation)
+signal to its noise floor:</p>
+<div class="arithmatex">\[
+\text{DR} = \frac{S_{\max}}{N_{\text{rms}}}.
+\]</div>
+<p>Typical values:</p>
+<table>
+<thead>
+<tr>
+<th>Sensor class</th>
+<th style="text-align: center;">Bit depth</th>
+<th style="text-align: center;">Dynamic range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consumer compact</td>
+<td style="text-align: center;">8–10</td>
+<td style="text-align: center;">40–50 dB</td>
+</tr>
+<tr>
+<td>Consumer DSLR / mirrorless</td>
+<td style="text-align: center;">12–14</td>
+<td style="text-align: center;">70–85 dB</td>
+</tr>
+<tr>
+<td>Scientific / high-end</td>
+<td style="text-align: center;">16–18</td>
+<td style="text-align: center;">90–110 dB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Noise sources.</strong> Photon shot noise (proportional to <span class="arithmatex">\(\sqrt{N}\)</span> photons, the
+fundamental limit), readout noise (constant per pixel), fixed-pattern noise
+(pixel-to-pixel variations, correctable), dark current (temperature-dependent,
+correctable), quantization noise (from the ADC).</p>
+<p><strong>Anti-alias filter.</strong> A slight optical blur is introduced <strong>before</strong> the sensor
+to suppress frequencies above the sensor's Nyquist. This reduces Moiré but
+softens the image slightly — the constant trade-off between resolution and
+aliasing.</p>
+<div class="admonition tip">
+<p class="admonition-title">The Nyquist rule for sensors</p>
+<p>A camera with <span class="arithmatex">\(W\)</span> horizontal pixels can resolve at most <span class="arithmatex">\(W/2\)</span> cycles across
+the sensor — the <strong>Nyquist frequency</strong> of the sensor. The lens and the
+optical anti-alias filter must attenuate frequencies above this to avoid
+aliasing; otherwise checkerboard and line-pattern objects will show
+visible Moiré artifacts. Modern high-resolution sensors often omit the
+anti-alias filter entirely, relying on the lens to provide enough attenuation.</p>
+</div>
+<hr />
+<h2 id="15-2-d-sampling-theory">1.5 2-D sampling theory<a class="headerlink" href="#15-2-d-sampling-theory" title="Permanent link">&para;</a></h2>
+<h3 id="151-sampling-an-image">1.5.1 Sampling an image<a class="headerlink" href="#151-sampling-an-image" title="Permanent link">&para;</a></h3>
+<p>A <strong>continuous image</strong> <span class="arithmatex">\(f(x, y)\)</span> on <span class="arithmatex">\(\mathbb R^2\)</span> is sampled on a lattice</p>
+<div class="arithmatex">\[
+x_m = m \Delta x,\qquad y_n = n \Delta y,\qquad m, n \in \mathbb Z.
+\]</div>
+<p>The <strong>sampled image</strong> is</p>
+<div class="arithmatex">\[
+\boxed{\;f_s[m,n] = f(m \Delta x, n \Delta y).\;}
+\]</div>
+<p>The <strong>sampling frequencies</strong> are <span class="arithmatex">\(f_{s,x} = 1/\Delta x\)</span> and <span class="arithmatex">\(f_{s,y} = 1/\Delta y\)</span>
+(cycles per unit length).</p>
+<h3 id="152-the-2-d-sampling-theorem">1.5.2 The 2-D sampling theorem<a class="headerlink" href="#152-the-2-d-sampling-theorem" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">2-D sampling theorem</p>
+<p>Let <span class="arithmatex">\(f(x,y)\)</span> be a band-limited image with <strong>2-D Fourier transform</strong>
+<span class="arithmatex">\(F(f_x, f_y)\)</span> vanishing outside <span class="arithmatex">\([-F_x, F_x] \times [-F_y, F_y]\)</span>.
+The image is <strong>exactly recoverable</strong> from its samples iff</p>
+<div class="arithmatex">\[
+\boxed{\;\frac{1}{\Delta x} &gt; 2F_x,\qquad \frac{1}{\Delta y} &gt; 2F_y.\;}
+\]</div>
+<p>i.e., the sampling frequencies exceed twice the highest spatial frequencies
+of the image.</p>
+</div>
+<p>The recovery is by <strong>ideal 2-D sinc interpolation</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;f(x,y) = \sum_{m,n} f_s[m,n]\,\operatorname{sinc}\!\left(\frac{x - m\Delta x}{\Delta x}\right)\operatorname{sinc}\!\left(\frac{y - n\Delta y}{\Delta y}\right)\;}
+\]</div>
+<p>where <span class="arithmatex">\(\operatorname{sinc}(u) = \sin(\pi u)/(\pi u)\)</span>.</p>
+<h3 id="153-frequency-domain-sampling">1.5.3 Frequency-domain sampling<a class="headerlink" href="#153-frequency-domain-sampling" title="Permanent link">&para;</a></h3>
+<p>The 2-D spectrum of the sampled image is the <strong>periodic extension</strong> of the
+original spectrum:</p>
+<div class="arithmatex">\[
+\boxed{\;F_s(f_x, f_y) = \frac{1}{\Delta x \Delta y}\sum_{k,l} F\!\left(f_x - \frac{k}{\Delta x},\ f_y - \frac{l}{\Delta y}\right)\;}
+\]</div>
+<p>The original spectrum is replicated at intervals of <span class="arithmatex">\((1/\Delta x, 1/\Delta y)\)</span>
+in the frequency plane. <strong>Aliasing</strong> occurs when these replicas overlap.</p>
+<p>The condition for no aliasing is the <strong>Nyquist condition</strong> of §1.5.2. If it is
+violated, high-frequency content <strong>folds</strong> into lower frequencies — the
+high-frequency spatial features of the image become <strong>aliased</strong> as false
+low-frequency patterns.</p>
+<h3 id="154-aliasing-in-images">1.5.4 Aliasing in images<a class="headerlink" href="#154-aliasing-in-images" title="Permanent link">&para;</a></h3>
+<p>Aliasing in 2-D images has two signature forms:</p>
+<p><strong>Moiré patterns.</strong> A fine periodic pattern (e.g., a picket fence, a striped
+shirt, a screen) sampled at a frequency below its own fundamental produces a
+<strong>beat pattern</strong> at the difference frequency. The resulting Moiré has a
+period that is not present in the original — a <strong>spurious low-frequency
+structure</strong>.</p>
+<p><strong>Checkerboard aliasing.</strong> A checkerboard at the pixel-sampling scale (one
+pixel on, one off) can alias to a <em>different</em> checkerboard at a different
+scale, or to a uniform gray field, depending on the exact sampling offset.</p>
+<h3 id="worked-example-14-2-d-sampling-of-a-sinusoid">Worked example 1.4 — 2-D sampling of a sinusoid<a class="headerlink" href="#worked-example-14-2-d-sampling-of-a-sinusoid" title="Permanent link">&para;</a></h3>
+<p>Consider a continuous sinusoid</p>
+<div class="arithmatex">\[
+f(x, y) = \cos(2\pi(f_x x + f_y y)),\qquad f_x = f_y = 0.6\ \text{cycles/unit}.
+\]</div>
+<p>Sample at spacing <span class="arithmatex">\(\Delta x = \Delta y = 1\)</span> unit ⇒ sampling frequency
+<span class="arithmatex">\(f_s = 1\)</span> cycles/unit. <strong>Nyquist frequency is <span class="arithmatex">\(0.5\)</span> cycles/unit — the signal
+exceeds Nyquist.</strong></p>
+<p><strong>Aliased frequency.</strong> The sampled sinusoid is
+$$
+f_s[m, n] = \cos(2\pi \cdot 0.6 \cdot (m + n)) = \cos(2\pi (0.6m + 0.6n)).
+$$</p>
+<p>Modulo 1 (unit sampling):
+$$
+0.6 \equiv -0.4 \pmod 1 \quad\text{and}\quad 0.6 \equiv -0.4 \pmod 1.
+$$</p>
+<p>So the aliased frequency is at <span class="arithmatex">\(-0.4\)</span> cycles/unit — <strong>below Nyquist</strong>, so the
+sampled image shows a sinusoid at <span class="arithmatex">\(0.4\)</span> cycles/unit instead of the true <span class="arithmatex">\(0.6\)</span>.</p>
+<p><strong>Direction.</strong> The original was along <span class="arithmatex">\((1,1)\)</span>; the alias is along <span class="arithmatex">\((1,1)\)</span> as
+well, but with the opposite apparent propagation direction (negative frequency
+= reversed phase). The visual effect: a slow sinusoid in the same direction as
+the original — a Moiré pattern.</p>
+<p><strong>Anti-aliasing.</strong> Sample at <span class="arithmatex">\(\Delta x = 0.8\)</span> unit instead (<span class="arithmatex">\(f_s = 1.25\)</span>,
+Nyquist = <span class="arithmatex">\(0.625\)</span>): now <span class="arithmatex">\(0.6 &lt; 0.625\)</span>, so the sinusoid is below Nyquist and
+is correctly captured. Or, keep <span class="arithmatex">\(\Delta x = 1\)</span> but first lowpass the signal
+with cutoff <span class="arithmatex">\(&lt; 0.5\)</span> — this attenuates the <span class="arithmatex">\(0.6\)</span>-frequency content, but avoids
+the false alias.</p>
+<h3 id="worked-example-15-subsampling-a-checkerboard">Worked example 1.5 — subsampling a checkerboard<a class="headerlink" href="#worked-example-15-subsampling-a-checkerboard" title="Permanent link">&para;</a></h3>
+<p>A continuous checkerboard with period <span class="arithmatex">\(T = 4\)</span> pixels (i.e., <span class="arithmatex">\(f = 0.25\)</span>
+cycles/pixel) is sampled at <span class="arithmatex">\(1\)</span> pixel spacing (<span class="arithmatex">\(f_s = 1\)</span>, Nyquist = <span class="arithmatex">\(0.5\)</span>).
+The pattern is below Nyquist — no aliasing.</p>
+<p>Now subsample the <strong>sampled</strong> image by <span class="arithmatex">\(M = 3\)</span>: new sampling frequency
+<span class="arithmatex">\(f_s' = 1/3\)</span>, new Nyquist = <span class="arithmatex">\(1/6 \approx 0.167\)</span> cycles/pixel.</p>
+<p>The pattern's apparent frequency (after the original sampling) is <span class="arithmatex">\(0.25\)</span>
+cycles/pixel — above the new Nyquist <span class="arithmatex">\(0.167\)</span>. Aliased frequency:</p>
+<div class="arithmatex">\[
+0.25 \pmod{1/3} = 0.25 - 0.333 \cdot 0 \ldots
+\]</div>
+<p>The alias lives at <span class="arithmatex">\(0.25\)</span> cycles/pixel, which is above the new Nyquist but the
+sampled representation sees it at
+$$
+0.25 - 1/3 \approx -0.083 \Rightarrow \text{frequency } 0.083 \text{ cycles/pixel (alias)}.
+$$</p>
+<p>So the subsampled checkerboard now appears to have period <span class="arithmatex">\(12\)</span> pixels
+(<span class="arithmatex">\(1/0.083\)</span>) — a classic <strong>Moiré beat</strong> between the original <span class="arithmatex">\(4\)</span>-pixel period
+and the <span class="arithmatex">\(3\)</span>-pixel sampling period. This is what you see when a fine grid is
+photographed at low resolution.</p>
+<hr />
+<h2 id="16-image-quantization">1.6 Image quantization<a class="headerlink" href="#16-image-quantization" title="Permanent link">&para;</a></h2>
+<h3 id="161-uniform-quantization">1.6.1 Uniform quantization<a class="headerlink" href="#161-uniform-quantization" title="Permanent link">&para;</a></h3>
+<p>A continuous-amplitude sample <span class="arithmatex">\(f \in [-A, A]\)</span> is quantized to one of <span class="arithmatex">\(L = 2^b\)</span>
+levels (where <span class="arithmatex">\(b\)</span> is the bit depth) with step size</p>
+<div class="arithmatex">\[
+\boxed{\;\Delta = \frac{2A}{L}.\;}
+\]</div>
+<p>The <strong>uniform quantizer</strong> is</p>
+<div class="arithmatex">\[
+\boxed{\;Q(f) = \Delta\left\lfloor \frac{f + A}{\Delta} \right\rfloor + \tfrac{\Delta}{2}\;}
+\]</div>
+<p>The <strong>quantization error</strong> <span class="arithmatex">\(e = Q(f) - f\)</span> is approximately uniform on
+<span class="arithmatex">\([-\Delta/2, \Delta/2]\)</span>, with variance</p>
+<div class="arithmatex">\[
+\boxed{\;\sigma_e^2 \approx \frac{\Delta^2}{12}.\;}
+\]</div>
+<p>This gives the standard <strong>6 dB per bit</strong> rule:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{SNR}_{Q} = 10\log_{10}\!\frac{\sigma_f^2}{\sigma_e^2} \approx 6b + 4.77 - 20\log_{10}\!\frac{f_{\max}}{\sigma_f}\ \text{dB}\;}
+\]</div>
+<p>where <span class="arithmatex">\(f_{\max} / \sigma_f\)</span> is the peak-to-RMS ratio of the signal (often
+<span class="arithmatex">\(\sim\)</span>4 for images).</p>
+<p><strong>For images</strong> with <span class="arithmatex">\(b\)</span>-bit uniform quantization and full-scale Gaussian-like
+statistics, <span class="arithmatex">\(\text{SNR}_Q \approx 6b - 1\)</span> dB. An 8-bit image has ~47 dB of
+quantization SNR — usually more than enough (well above the ~30 dB needed for
+perceptual transparency).</p>
+<h3 id="162-lloydmax-quantizer">1.6.2 Lloyd–Max quantizer<a class="headerlink" href="#162-lloydmax-quantizer" title="Permanent link">&para;</a></h3>
+<p>For a <strong>known distribution</strong> <span class="arithmatex">\(p(f)\)</span> of the signal, the <strong>Lloyd–Max quantizer</strong>
+minimizes the MSE</p>
+<div class="arithmatex">\[
+D = \sum_{i=1}^{L} \int_{t_{i-1}}^{t_i} (f - y_i)^2 p(f)\, df
+\]</div>
+<p>over <strong>reproduction levels</strong> <span class="arithmatex">\(\{y_i\}\)</span> and <strong>decision thresholds</strong> <span class="arithmatex">\(\{t_i\}\)</span>.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Lloyd–Max conditions (necessary for optimality)</p>
+<p>At the optimum:</p>
+<p><strong>Reproduction levels are conditional means:</strong>
+$$
+y_i = \frac{\int_{t_{i-1}}^{t_i} f\, p(f)\, df}{\int_{t_{i-1}}^{t_i} p(f)\, df} = \mathbb E[F \mid t_{i-1} &lt; F &lt; t_i].
+$$</p>
+<p><strong>Decision thresholds are midpoints:</strong>
+$$
+t_i = \frac{y_i + y_{i+1}}{2}.
+$$</p>
+<p>These are solved <strong>iteratively</strong> (alternating the two updates) from an
+initial guess (e.g., uniform).</p>
+</div>
+<p><strong>Properties.</strong></p>
+<ul>
+<li>Lloyd–Max always improves on uniform quantization when <span class="arithmatex">\(p(f)\)</span> is non-uniform.</li>
+<li>The <strong>optimality is local</strong> — the iteration can converge to a local minimum; use multiple starts for confidence.</li>
+<li>For Gaussian data, the Lloyd–Max quantizer is nearly uniform with slight over-weighting in the tails.</li>
+</ul>
+<h3 id="worked-example-16-4-level-lloydmax-for-gaussian">Worked example 1.6 — 4-level Lloyd–Max for Gaussian<a class="headerlink" href="#worked-example-16-4-level-lloydmax-for-gaussian" title="Permanent link">&para;</a></h3>
+<p>Distribution <span class="arithmatex">\(F \sim \mathcal N(0, 1)\)</span>, <span class="arithmatex">\(L = 4\)</span> levels.</p>
+<p><strong>Initial (uniform) thresholds and levels:</strong></p>
+<div class="arithmatex">\[
+t = (-0.75,\ 0,\ 0.75),\qquad y = (-1.5,\ -0.5,\ 0.5,\ 1.5)
+\]</div>
+<p>(thresholds and levels chosen so the four cells cover <span class="arithmatex">\([-\infty, \infty)\)</span> with
+equal-width bins near the mode).</p>
+<p><strong>Iteration 1 — update levels</strong> using the Gaussian conditional means:</p>
+<div class="arithmatex">\[
+y_1 = \mathbb E[F \mid F &lt; -0.75] \approx -1.53,\quad
+y_2 = \mathbb E[F \mid -0.75 &lt; F &lt; 0] \approx -0.34,
+$$
+$$
+y_3 = \mathbb E[F \mid 0 &lt; F &lt; 0.75] \approx 0.34,\quad
+y_4 = \mathbb E[F \mid F &gt; 0.75] \approx 1.53.
+\]</div>
+<p><strong>Update thresholds</strong> to midpoints:</p>
+<div class="arithmatex">\[
+t_1 = \tfrac{y_1 + y_2}{2} \approx -0.935,\quad
+t_2 = \tfrac{y_2 + y_3}{2} = 0,\quad
+t_3 = \tfrac{y_3 + y_4}{2} \approx 0.935.
+\]</div>
+<p><strong>Iteration 2 — update levels</strong> with new thresholds:</p>
+<div class="arithmatex">\[
+y_1 \approx -1.51,\quad y_2 \approx -0.45,\quad y_3 \approx 0.45,\quad y_4 \approx 1.51.
+\]</div>
+<p><strong>Iteration 3:</strong> minimal change — converged.</p>
+<p><strong>Final Lloyd–Max (Gaussian, 4 levels):</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Index</th>
+<th style="text-align: center;">Threshold</th>
+<th style="text-align: center;">Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(-\infty\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-1.51\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="arithmatex">\(-0.98\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(-0.45\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0.45\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="arithmatex">\(0.98\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1.51\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>MSE.</strong> Numerically integrate: <span class="arithmatex">\(D \approx 0.117\)</span>. <strong>Uniform quantization</strong>
+with the same 4 levels (over <span class="arithmatex">\([-3, 3]\)</span>) gives <span class="arithmatex">\(D \approx 0.137\)</span> — Lloyd–Max is
+<strong>~15% better</strong> on MSE for the same number of levels.</p>
+<h3 id="163-dither">1.6.3 Dither<a class="headerlink" href="#163-dither" title="Permanent link">&para;</a></h3>
+<p><strong>The problem.</strong> Uniform quantization of a smooth gradient produces <strong>false
+contours</strong> — visible stair-steps at the quantization boundaries. The eye is
+sensitive to these because they are coherent, low-frequency artifacts.</p>
+<p><strong>The solution — dither.</strong> Add <strong>random noise</strong> before quantization:</p>
+<div class="arithmatex">\[
+\boxed{\;Q_{\text{dithered}}(f) = Q(f + n),\qquad n \sim \mathcal U\!\left[-\tfrac{\Delta}{2}, \tfrac{\Delta}{2}\right].\;}
+\]</div>
+<p>The quantization error becomes <strong>decorrelated</strong> from the signal — it looks like
+white noise rather than structured contours. <strong>Perceptually</strong> much better, even
+though <strong>numerically</strong> the MSE is slightly <strong>higher</strong> (because the dither itself
+adds noise).</p>
+<p><strong>Trade-off.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>With dither</th>
+<th>Without dither</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MSE</td>
+<td>Higher (<span class="arithmatex">\(\sim 1.5\Delta^2/12\)</span>)</td>
+<td>Lower (<span class="arithmatex">\(\sim\Delta^2/12\)</span>)</td>
+</tr>
+<tr>
+<td>Perceived quality</td>
+<td><strong>Better</strong> (no contours)</td>
+<td>Worse (visible bands)</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>None (add noise)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Dither is <strong>standard</strong> in audio CD production (16-bit with dither sounds better
+than 16-bit without) and in image / video codecs when bit depth is very low
+(4-bit greyscale, medical display).</p>
+<h3 id="worked-example-17-dither-on-a-gradient">Worked example 1.7 — dither on a gradient<a class="headerlink" href="#worked-example-17-dither-on-a-gradient" title="Permanent link">&para;</a></h3>
+<p>A smooth gradient from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(1\)</span> is quantized to 4 levels (<span class="arithmatex">\(\Delta = 1/4\)</span>).</p>
+<p><strong>Without dither</strong> — the output is a <strong>staircase</strong>: four flat bands. At each
+boundary, a sharp jump creates a <strong>false edge</strong> visible to the eye.</p>
+<p><strong>With dither</strong> — add uniform noise in <span class="arithmatex">\([-\Delta/2, \Delta/2]\)</span> before quantizing.
+The output is a <strong>speckled</strong> version of the gradient: locally noisy, but
+globally the gradient appears smooth — the eye integrates the noise and
+perceives the underlying gradient. This is <strong>perceptually superior</strong> even though
+the numerical MSE is higher.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">L</span> <span class="o">=</span> <span class="mi">4</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">y_no_dither</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">y_dither</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">/</span><span class="n">L</span><span class="p">,</span> <span class="mf">0.5</span><span class="o">/</span><span class="n">L</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">L</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_no_dither</span><span class="p">);</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'Without dither (false contours)'</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_dither</span><span class="p">);</span>    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">'With dither (perceptually smooth)'</span><span class="p">)</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p>The numerical MSE of the dithered version is <span class="arithmatex">\(\approx 1.4\times\)</span> higher, but the
+false contours are gone — the perceptual gain dominates.</p>
+<hr />
+<h2 id="17-colour-images">1.7 Colour images<a class="headerlink" href="#17-colour-images" title="Permanent link">&para;</a></h2>
+<h3 id="171-the-trichromatic-model">1.7.1 The trichromatic model<a class="headerlink" href="#171-the-trichromatic-model" title="Permanent link">&para;</a></h3>
+<p>Human vision uses <strong>three cone types</strong> (S, M, L — short, medium, long wavelength
+peak sensitivities), so any colour percept is <strong>three-dimensional</strong>. This is the
+foundation of the <strong>trichromatic theory</strong> (Young–Helmholtz, 19th century) and
+of every colour imaging system.</p>
+<p><strong>Any colour can be matched</strong> by a weighted sum of three <strong>primaries</strong> — the
+weights are the <strong>tristimulus values</strong>.</p>
+<h3 id="172-cie-xyz-the-standard-colorimetric-space">1.7.2 CIE XYZ — the standard colorimetric space<a class="headerlink" href="#172-cie-xyz-the-standard-colorimetric-space" title="Permanent link">&para;</a></h3>
+<p>The <strong>CIE 1931 XYZ</strong> space defines three imaginary primaries such that:</p>
+<ul>
+<li><strong>Y</strong> represents <strong>luminance</strong> directly.</li>
+<li><strong>X</strong> and <strong>Z</strong> are constructed so every physical colour has non-negative XYZ values.</li>
+<li>All visible colours map into the <strong>chromaticity diagram</strong> in <span class="arithmatex">\((x, y)\)</span> where
+  <span class="arithmatex">\(x = X/(X+Y+Z)\)</span>, <span class="arithmatex">\(y = Y/(X+Y+Z)\)</span>.</li>
+</ul>
+<p>The <strong>RGB colour primaries</strong> of a display are a specific triangle in the
+chromaticity diagram (sRGB is the standard). Colours inside the triangle are
+displayable; colours outside are not (this is why "wide-gamut" displays are
+needed for saturated colours).</p>
+<h3 id="173-rgb-ycbcr-hsv-three-colour-spaces-for-three-purposes">1.7.3 RGB, YCbCr, HSV — three colour spaces for three purposes<a class="headerlink" href="#173-rgb-ycbcr-hsv-three-colour-spaces-for-three-purposes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Space</th>
+<th>Components</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RGB</strong></td>
+<td>Red, Green, Blue</td>
+<td>Display, sensor output</td>
+</tr>
+<tr>
+<td><strong>YCbCr</strong></td>
+<td>Luma (Y), blue-difference chroma (Cb), red-difference chroma (Cr)</td>
+<td>Compression (JPEG, MPEG), broadcast</td>
+</tr>
+<tr>
+<td><strong>HSV / HSL</strong></td>
+<td>Hue, Saturation, Value / Lightness</td>
+<td>Colour selection, computer graphics</td>
+</tr>
+</tbody>
+</table>
+<p><strong>YCbCr</strong> is <strong>the</strong> colour space for compression. Its <strong>luma</strong> component Y is a
+weighted sum of RGB that roughly matches the eye's luminance sensitivity:</p>
+<div class="arithmatex">\[
+\boxed{\;Y = 0.299\, R + 0.587\, G + 0.114\, B.\;}
+\]</div>
+<p>The <strong>chroma</strong> components:</p>
+<div class="arithmatex">\[
+\boxed{\;C_b = 0.564(B - Y),\qquad C_r = 0.713(R - Y).\;}
+\]</div>
+<p>(Normalized to lie in <span class="arithmatex">\([-0.5, 0.5]\)</span> before 8-bit quantization.)</p>
+<p><strong>Inverse:</strong></p>
+<div class="arithmatex">\[
+R = Y + 1.402\, C_r,\qquad G = Y - 0.344\, C_b - 0.714\, C_r,\qquad B = Y + 1.772\, C_b.
+\]</div>
+<h3 id="174-why-compression-uses-ycbcr">1.7.4 Why compression uses YCbCr<a class="headerlink" href="#174-why-compression-uses-ycbcr" title="Permanent link">&para;</a></h3>
+<p>Two reasons:</p>
+<ol>
+<li><strong>Luminance is more perceptually important</strong> than colour detail. The eye's
+   spatial resolution for colour is much lower than for luminance (this is
+   related to the different distributions of cone types — colour is resolved
+   primarily by the S-cones, which are sparse).</li>
+<li><strong>Chroma can be subsampled.</strong> 4:2:0 chroma subsampling stores the full Y at
+   every pixel but the Cb and Cr only at every 2×2 block — <strong>half the raw
+   data</strong> with almost no perceptual loss. This is the foundation of JPEG and
+   all video codecs.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">The 4<img alt="❌" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/274c.svg" title=":x:" />y notation</p>
+<p>In video, <strong>chroma subsampling</strong> is written as <strong>J<img alt="🅰" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f170.svg" title=":a:" />b</strong>:</p>
+<ul>
+<li><strong>4:4:4</strong> — no subsampling (studio quality).</li>
+<li><strong>4:2:2</strong> — chroma at half horizontal resolution (broadcast).</li>
+<li><strong>4:2:0</strong> — chroma at half horizontal AND vertical (web video, Blu-ray,
+  JPEG standard).</li>
+<li><strong>4:1:1</strong> — chroma at quarter horizontal resolution (older formats).</li>
+</ul>
+</div>
+<h3 id="worked-example-18-rgb-ycbcr">Worked example 1.8 — RGB ↔ YCbCr<a class="headerlink" href="#worked-example-18-rgb-ycbcr" title="Permanent link">&para;</a></h3>
+<p><strong>Forward.</strong> RGB pixel <span class="arithmatex">\((R, G, B) = (200, 100, 50)\)</span>.</p>
+<div class="arithmatex">\[
+Y = 0.299(200) + 0.587(100) + 0.114(50) = 59.8 + 58.7 + 5.7 = 124.2,
+$$
+$$
+C_b = 0.564(B - Y) = 0.564(50 - 124.2) = -41.85,
+$$
+$$
+C_r = 0.713(R - Y) = 0.713(200 - 124.2) = 54.05.
+\]</div>
+<p>For 8-bit storage, add 128 to the chroma:
+<span class="arithmatex">\(C_b^{8} = 86\)</span>, <span class="arithmatex">\(C_r^8 = 182\)</span>. Luma stays at 124.</p>
+<p><strong>Inverse.</strong> Starting from <span class="arithmatex">\((Y, C_b, C_r) = (124.2, -41.85, 54.05)\)</span>:</p>
+<div class="arithmatex">\[
+R = 124.2 + 1.402(54.05) = 124.2 + 75.78 = 200.0,
+$$
+$$
+G = 124.2 - 0.344(-41.85) - 0.714(54.05) = 124.2 + 14.40 - 38.59 = 100.0,
+$$
+$$
+B = 124.2 + 1.772(-41.85) = 124.2 - 74.17 = 50.0.
+\]</div>
+<p><strong>Perfect reconstruction</strong> (in the ideal case). In 8-bit pipelines, the
+rounding of Y and chroma values introduces <span class="arithmatex">\(\pm 1\)</span> LSB error — visually
+imperceptible.</p>
+<hr />
+<h2 id="18-linear-shift-invariant-systems">1.8 Linear shift-invariant systems<a class="headerlink" href="#18-linear-shift-invariant-systems" title="Permanent link">&para;</a></h2>
+<h3 id="181-2-d-convolution">1.8.1 2-D convolution<a class="headerlink" href="#181-2-d-convolution" title="Permanent link">&para;</a></h3>
+<p>A 2-D <strong>linear shift-invariant (LSI)</strong> system with <strong>impulse response</strong>
+<span class="arithmatex">\(h[m, n]\)</span> computes</p>
+<div class="arithmatex">\[
+\boxed{\;y[m, n] = (h * x)[m, n] = \sum_{k} \sum_{l} h[k, l]\, x[m-k, n-l].\;}
+\]</div>
+<p>Equivalently, in the <strong>frequency domain</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;Y(\omega_1, \omega_2) = H(\omega_1, \omega_2)\, X(\omega_1, \omega_2)\;}
+\]</div>
+<p>where <span class="arithmatex">\(X, Y, H\)</span> are the 2-D DTFTs.</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Linearity:</strong> <span class="arithmatex">\(h * (\alpha x_1 + \beta x_2) = \alpha(h * x_1) + \beta(h * x_2)\)</span>.</li>
+<li><strong>Shift invariance:</strong> <span class="arithmatex">\(h * (x \text{ shifted}) = (h * x) \text{ shifted}\)</span>.</li>
+<li><strong>Commutativity:</strong> <span class="arithmatex">\(h_1 * h_2 = h_2 * h_1\)</span>.</li>
+<li><strong>Associativity:</strong> <span class="arithmatex">\((h_1 * h_2) * x = h_1 * (h_2 * x)\)</span>.</li>
+<li><strong>Separability:</strong> if <span class="arithmatex">\(h[m, n] = h_1[m]\, h_2[n]\)</span>, then <span class="arithmatex">\(h * x\)</span> is achieved by filtering <strong>along rows</strong> with <span class="arithmatex">\(h_1\)</span>, then <strong>along columns</strong> with <span class="arithmatex">\(h_2\)</span> — two 1-D passes, cost <span class="arithmatex">\(O(N(M_1 + M_2))\)</span> instead of <span class="arithmatex">\(O(NM_1 M_2)\)</span>.</li>
+</ul>
+<h3 id="182-common-image-filters">1.8.2 Common image filters<a class="headerlink" href="#182-common-image-filters" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Kernel</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Box blur</strong></td>
+<td><span class="arithmatex">\(3\times 3\)</span> uniform <span class="arithmatex">\(1/9\)</span></td>
+<td>Smoothing, noise reduction</td>
+</tr>
+<tr>
+<td><strong>Gaussian</strong></td>
+<td><span class="arithmatex">\(3\times 3\)</span> separable (e.g., <span class="arithmatex">\(h_1 = h_2 = (1, 2, 1)/4\)</span>)</td>
+<td>Isotropic smoothing</td>
+</tr>
+<tr>
+<td><strong>Sobel X</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix} -1 &amp; 0 &amp; 1 \\ -2 &amp; 0 &amp; 2 \\ -1 &amp; 0 &amp; 1\end{bmatrix}\)</span></td>
+<td>Horizontal gradient</td>
+</tr>
+<tr>
+<td><strong>Sobel Y</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix} -1 &amp; -2 &amp; -1 \\ 0 &amp; 0 &amp; 0 \\ 1 &amp; 2 &amp; 1\end{bmatrix}\)</span></td>
+<td>Vertical gradient</td>
+</tr>
+<tr>
+<td><strong>Laplacian</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix} 0 &amp; -1 &amp; 0 \\ -1 &amp; 4 &amp; -1 \\ 0 &amp; -1 &amp; 0\end{bmatrix}\)</span></td>
+<td>Edge detection (2nd derivative)</td>
+</tr>
+<tr>
+<td><strong>Unsharp mask</strong></td>
+<td><span class="arithmatex">\(x + \alpha(x - \text{blur}(x))\)</span></td>
+<td>Sharpening</td>
+</tr>
+</tbody>
+</table>
+<h3 id="worked-example-19-2-d-gaussian-blur-as-separable-filter">Worked example 1.9 — 2-D Gaussian blur as separable filter<a class="headerlink" href="#worked-example-19-2-d-gaussian-blur-as-separable-filter" title="Permanent link">&para;</a></h3>
+<p>The <strong>2-D Gaussian</strong> kernel</p>
+<div class="arithmatex">\[
+h[m, n] = \exp\!\left(-\frac{m^2 + n^2}{2\sigma^2}\right)
+\]</div>
+<p><strong>is separable</strong>:</p>
+<div class="arithmatex">\[
+h[m, n] = h_1[m]\, h_2[n],\qquad h_1[m] = e^{-m^2/(2\sigma^2)},\qquad h_2[n] = e^{-n^2/(2\sigma^2)}.
+\]</div>
+<p><strong>Direct convolution cost:</strong> <span class="arithmatex">\(K^2\)</span> multiplications per pixel (for a <span class="arithmatex">\(K \times K\)</span> kernel).</p>
+<p><strong>Separable cost:</strong> <span class="arithmatex">\(K + K = 2K\)</span> multiplications per pixel — a factor
+<span class="arithmatex">\(K/2\)</span> reduction. For a <span class="arithmatex">\(15 \times 15\)</span> Gaussian, <strong>7.5× faster</strong> — the difference
+between real-time and not.</p>
+<p><strong>Python implementation:</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">convolve1d</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">gaussian_kernel_1d</span><span class="p">(</span><span class="n">sigma</span><span class="p">):</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">half</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">half</span><span class="p">,</span> <span class="n">half</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">gaussian_blur_separable</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="n">k</span> <span class="o">=</span> <span class="n">gaussian_kernel_1d</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">k</span> <span class="o">/=</span> <span class="n">k</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="c1"># Filter rows, then columns</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">tmp</span> <span class="o">=</span> <span class="n">convolve1d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>     <span class="c1"># horizontal</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">return</span> <span class="n">convolve1d</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>       <span class="c1"># vertical</span>
+</span></code></pre></div>
+<p>The two-pass approach gives the <strong>same result</strong> as full 2-D convolution but at
+a fraction of the cost.</p>
+<hr />
+<h2 id="19-2-d-fourier-and-z-transforms">1.9 2-D Fourier and Z transforms<a class="headerlink" href="#19-2-d-fourier-and-z-transforms" title="Permanent link">&para;</a></h2>
+<h3 id="191-the-2-d-discrete-fourier-transform">1.9.1 The 2-D discrete Fourier transform<a class="headerlink" href="#191-the-2-d-discrete-fourier-transform" title="Permanent link">&para;</a></h3>
+<p>For an <span class="arithmatex">\(M \times N\)</span> image <span class="arithmatex">\(x[m, n]\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;X[k, l] = \sum_{m=0}^{M-1}\sum_{n=0}^{N-1} x[m,n]\, e^{-j2\pi\left(\frac{km}{M} + \frac{ln}{N}\right)},\quad k = 0, \dots, M-1,\ l = 0, \dots, N-1.\;}
+\]</div>
+<p><strong>Inverse:</strong></p>
+<div class="arithmatex">\[
+\boxed{\;x[m,n] = \frac{1}{MN}\sum_{k=0}^{M-1}\sum_{l=0}^{N-1} X[k,l]\, e^{j2\pi\left(\frac{km}{M} + \frac{ln}{N}\right)}.\;}
+\]</div>
+<h3 id="192-key-properties">1.9.2 Key properties<a class="headerlink" href="#192-key-properties" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Separability</strong></td>
+<td>2-D DFT = 1-D DFT along rows, then along columns (or vice versa)</td>
+</tr>
+<tr>
+<td><strong>Linearity</strong></td>
+<td><span class="arithmatex">\(\text{DFT}(a x + b y) = a \text{DFT}(x) + b \text{DFT}(y)\)</span></td>
+</tr>
+<tr>
+<td><strong>Shift</strong></td>
+<td><span class="arithmatex">\(\text{DFT}(x[m-m_0, n-n_0]) = X[k,l] e^{-j2\pi(km_0/M + ln_0/N)}\)</span></td>
+</tr>
+<tr>
+<td><strong>Conjugate symmetry</strong> (real <span class="arithmatex">\(x\)</span>)</td>
+<td><span class="arithmatex">\(X[M-k, N-l] = X^*[k,l]\)</span></td>
+</tr>
+<tr>
+<td><strong>Periodicity</strong></td>
+<td><span class="arithmatex">\(X[k+M, l] = X[k, l]\)</span>; <span class="arithmatex">\(X[k, l+N] = X[k, l]\)</span></td>
+</tr>
+<tr>
+<td><strong>Parseval</strong></td>
+<td><span class="arithmatex">\(\sum_{m,n} \lvert x \rvert^2 = \frac{1}{MN}\sum_{k,l}\lvert X \rvert^2\)</span></td>
+</tr>
+<tr>
+<td><strong>Convolution</strong></td>
+<td><span class="arithmatex">\(\text{DFT}(x * h) = X \cdot H\)</span> (circular convolution)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="193-interpretation">1.9.3 Interpretation<a class="headerlink" href="#193-interpretation" title="Permanent link">&para;</a></h3>
+<p>The <strong>magnitude</strong> <span class="arithmatex">\(|X[k,l]|\)</span> describes the <strong>amplitude</strong> of each 2-D frequency
+<span class="arithmatex">\((k, l)\)</span> in the image; the <strong>phase</strong> <span class="arithmatex">\(\angle X[k,l]\)</span> describes the <strong>spatial
+alignment</strong> of that frequency's contribution.</p>
+<ul>
+<li><strong>Low frequencies</strong> (near the origin <span class="arithmatex">\((0,0)\)</span> in the shifted spectrum) correspond to <strong>slow variations</strong> — the overall shape, the smooth content of the image.</li>
+<li><strong>High frequencies</strong> (near the edges of the <span class="arithmatex">\([0, M) \times [0, N)\)</span> grid) correspond to <strong>fast variations</strong> — edges, textures, and noise.</li>
+</ul>
+<p><strong>For display</strong> it is conventional to shift the spectrum so that low frequencies
+are at the centre:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">X_shifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
+</span></code></pre></div>
+<h3 id="worked-example-110-2-d-dft-of-a-rectangle">Worked example 1.10 — 2-D DFT of a rectangle<a class="headerlink" href="#worked-example-110-2-d-dft-of-a-rectangle" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(x[m,n] = 1\)</span> for <span class="arithmatex">\(0 \le m &lt; P, 0 \le n &lt; Q\)</span>, and <span class="arithmatex">\(0\)</span> elsewhere in an
+<span class="arithmatex">\(M \times N\)</span> image.</p>
+<p><strong>By separability:</strong></p>
+<div class="arithmatex">\[
+X[k,l] = \underbrace{\left(\sum_{m=0}^{P-1} e^{-j2\pi km/M}\right)}_{X_1[k]} \cdot \underbrace{\left(\sum_{n=0}^{Q-1} e^{-j2\pi ln/N}\right)}_{X_2[l]}.
+\]</div>
+<p>Each factor is a <strong>geometric series</strong>:</p>
+<div class="arithmatex">\[
+X_1[k] = e^{-j\pi k(P-1)/M}\cdot\frac{\sin(\pi k P/M)}{\sin(\pi k/M)}.
+\]</div>
+<p>Similarly for <span class="arithmatex">\(X_2[l]\)</span>. So the 2-D DFT of a rectangle is a <strong>product of two 1-D
+sinc-like patterns</strong> — a separable 2-D Dirichlet kernel.</p>
+<p><strong>The spectrum</strong> has a broad main lobe around the origin (DC) and ringing
+side-lobes along both axes. The shape of the main lobe along axis <span class="arithmatex">\(k\)</span> is
+inversely proportional to <span class="arithmatex">\(P\)</span> — a larger rectangle has a narrower main lobe,
+the image-domain analogue of a longer signal having a narrower bandwidth.</p>
+<h3 id="194-the-2-d-z-transform">1.9.4 The 2-D Z transform<a class="headerlink" href="#194-the-2-d-z-transform" title="Permanent link">&para;</a></h3>
+<p>For a 2-D sequence <span class="arithmatex">\(x[m,n]\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;X(z_1, z_2) = \sum_{m}\sum_{n} x[m,n]\, z_1^{-m} z_2^{-n}.\;}
+\]</div>
+<p><strong>Properties</strong> (analogous to 1-D):</p>
+<ul>
+<li>The <strong>region of convergence</strong> is a 2-D annulus / torus.</li>
+<li>A 2-D <strong>linear shift-invariant system</strong> has <strong>transfer function</strong> <span class="arithmatex">\(H(z_1, z_2)\)</span>
+  with <strong>impulse response</strong> <span class="arithmatex">\(h[m,n]\)</span>.</li>
+<li><strong>Stability</strong> requires <span class="arithmatex">\(H(z_1, z_2)\)</span> to have no poles on the unit torus
+  <span class="arithmatex">\(|z_1| = |z_2| = 1\)</span>.</li>
+<li><strong>Separability:</strong> if <span class="arithmatex">\(h[m,n] = h_1[m] h_2[n]\)</span>, then <span class="arithmatex">\(H(z_1, z_2) = H_1(z_1) H_2(z_2)\)</span> —
+  a <strong>separable</strong> 2-D Z transform.</li>
+</ul>
+<p>2-D Z transforms appear mostly in <strong>filter design</strong> and <strong>state-space analysis</strong>
+of image systems; the 2-D DFT is more common in practice, since it operates
+directly on the sampled image.</p>
+<hr />
+<h2 id="110-matrix-theory-block-matrices-and-kronecker-products">1.10 Matrix theory, block matrices, and Kronecker products<a class="headerlink" href="#110-matrix-theory-block-matrices-and-kronecker-products" title="Permanent link">&para;</a></h2>
+<h3 id="1101-kronecker-product-definition">1.10.1 Kronecker product — definition<a class="headerlink" href="#1101-kronecker-product-definition" title="Permanent link">&para;</a></h3>
+<p>For matrices <span class="arithmatex">\(A \in \mathbb R^{m \times n}\)</span> and <span class="arithmatex">\(B \in \mathbb R^{p \times q}\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;A \otimes B = \begin{bmatrix} a_{11} B &amp; a_{12} B &amp; \cdots &amp; a_{1n} B \\ a_{21} B &amp; a_{22} B &amp; \cdots &amp; a_{2n} B \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{m1} B &amp; a_{m2} B &amp; \cdots &amp; a_{mn} B\end{bmatrix} \in \mathbb R^{mp \times nq}.\;}
+\]</div>
+<p><strong>Key properties.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mixed-product</strong></td>
+<td><span class="arithmatex">\((A \otimes B)(C \otimes D) = (AC) \otimes (BD)\)</span></td>
+</tr>
+<tr>
+<td><strong>Transpose</strong></td>
+<td><span class="arithmatex">\((A \otimes B)^\top = A^\top \otimes B^\top\)</span></td>
+</tr>
+<tr>
+<td><strong>Inverse</strong></td>
+<td><span class="arithmatex">\((A \otimes B)^{-1} = A^{-1} \otimes B^{-1}\)</span> (if both invertible)</td>
+</tr>
+<tr>
+<td><strong>Vec identity</strong></td>
+<td><span class="arithmatex">\(\text{vec}(AXB) = (B^\top \otimes A)\text{vec}(X)\)</span></td>
+</tr>
+<tr>
+<td><strong>Spectrum</strong></td>
+<td>Eigenvalues of <span class="arithmatex">\(A \otimes B\)</span> are <span class="arithmatex">\(\{\lambda_i(A)\lambda_j(B)\}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>vec identity</strong> is the key to 2-D signal processing: it converts <strong>2-D
+matrix operations</strong> into <strong>1-D matrix-vector multiplications</strong>, which is what
+GPUs and DSPs are optimised for.</p>
+<h3 id="1102-the-2-d-convolution-as-a-block-toeplitz-matrix">1.10.2 The 2-D convolution as a block Toeplitz matrix<a class="headerlink" href="#1102-the-2-d-convolution-as-a-block-toeplitz-matrix" title="Permanent link">&para;</a></h3>
+<p>Given a 2-D convolution</p>
+<div class="arithmatex">\[
+y[m,n] = \sum_{k,l} h[k,l]\, x[m-k, n-l],
+\]</div>
+<p>we can <strong>vectorize</strong> both sides. If <span class="arithmatex">\(x, y \in \mathbb R^{MN}\)</span> are the
+<strong>lexicographic</strong> stackings of the images (row-major or column-major), and <span class="arithmatex">\(H\)</span>
+is the <strong>block Toeplitz</strong> matrix built from <span class="arithmatex">\(h\)</span>, then:</p>
+<div class="arithmatex">\[
+\boxed{\;y = H x.\;}
+\]</div>
+<p><strong>Structure of <span class="arithmatex">\(H\)</span>.</strong> If <span class="arithmatex">\(h\)</span> is separable, <span class="arithmatex">\(H = H_2 \otimes H_1\)</span> (Kronecker
+product of the two 1-D Toeplitz filters). If not, <span class="arithmatex">\(H\)</span> is a <strong>block Toeplitz
+matrix with Toeplitz blocks</strong> — the structure exploited by 2-D convolution
+algorithms.</p>
+<h3 id="worked-example-111-2-d-filtering-as-a-kronecker-product">Worked example 1.11 — 2-D filtering as a Kronecker product<a class="headerlink" href="#worked-example-111-2-d-filtering-as-a-kronecker-product" title="Permanent link">&para;</a></h3>
+<p>Consider a <strong>separable</strong> <span class="arithmatex">\(2 \times 2\)</span> averaging filter:</p>
+<div class="arithmatex">\[
+h = \begin{bmatrix} 1/4 &amp; 1/4 \\ 1/4 &amp; 1/4 \end{bmatrix} = \begin{bmatrix} 1/2 \\ 1/2\end{bmatrix}\begin{bmatrix} 1/2 &amp; 1/2\end{bmatrix} = h_1 h_2^\top.
+\]</div>
+<p><strong>Direct 2-D filtering</strong> of a <span class="arithmatex">\(3 \times 3\)</span> image <span class="arithmatex">\(X\)</span>:</p>
+<div class="arithmatex">\[
+Y = h * X.
+\]</div>
+<p><strong>Kronecker form.</strong> Build the 1-D Toeplitz matrices <span class="arithmatex">\(H_1\)</span> and <span class="arithmatex">\(H_2\)</span> from
+<span class="arithmatex">\(h_1 = (1/2, 1/2)\)</span> and <span class="arithmatex">\(h_2 = (1/2, 1/2)\)</span>:</p>
+<div class="arithmatex">\[
+H_1 = \begin{bmatrix} 1/2 &amp; 0 \\ 1/2 &amp; 1/2 \\ 0 &amp; 1/2\end{bmatrix},\qquad
+H_2 = \begin{bmatrix} 1/2 &amp; 0 \\ 1/2 &amp; 1/2 \\ 0 &amp; 1/2\end{bmatrix}.
+\]</div>
+<p>(These are the <strong>Toeplitz</strong> matrices representing 1-D convolution with the
+1-D filters — input length 3, output length 3, "same" convolution.)</p>
+<p><strong>The vec identity:</strong></p>
+<div class="arithmatex">\[
+\text{vec}(Y) = \text{vec}(H_1 X H_2^\top) = (H_2 \otimes H_1)\,\text{vec}(X).
+\]</div>
+<p>The <span class="arithmatex">\(9 \times 9\)</span> matrix <span class="arithmatex">\(H_2 \otimes H_1\)</span> is the <strong>block Toeplitz representation</strong>
+of the 2-D filter. It has the structure</p>
+<div class="arithmatex">\[
+H_2 \otimes H_1 = \begin{bmatrix} (1/2)H_1 &amp; 0 &amp; 0 \\ (1/2)H_1 &amp; (1/2)H_1 &amp; 0 \\ 0 &amp; (1/2)H_1 &amp; (1/2)H_1\end{bmatrix}.
+\]</div>
+<p><strong>Computation.</strong> Applying <span class="arithmatex">\(H_2 \otimes H_1\)</span> to a vectorized image costs
+<span class="arithmatex">\(O(M^2 N^2)\)</span> flops if done naively — but the <strong>separable structure</strong> means it
+can be done as</p>
+<div class="arithmatex">\[
+\text{vec}(Y) = (H_2 \otimes I_M)\,(I_N \otimes H_1)\,\text{vec}(X),
+\]</div>
+<p>i.e., filter <strong>columns with <span class="arithmatex">\(H_1\)</span></strong>, then <strong>rows with <span class="arithmatex">\(H_2\)</span></strong> — costing
+<span class="arithmatex">\(O(MN(M+N))\)</span> flops. For a <span class="arithmatex">\(1000 \times 1000\)</span> image, this is <span class="arithmatex">\(2 \times 10^9\)</span> vs
+<span class="arithmatex">\(10^{12}\)</span> — a <strong>500× speedup</strong> from exploiting separability.</p>
+<h3 id="1103-why-kronecker-products-matter-for-image-processing">1.10.3 Why Kronecker products matter for image processing<a class="headerlink" href="#1103-why-kronecker-products-matter-for-image-processing" title="Permanent link">&para;</a></h3>
+<p>Three concrete reasons:</p>
+<ol>
+<li><strong>Vectorization.</strong> Every 2-D operation can be represented as a single matrix-vector multiplication. This is how GPUs and tensor processing units (TPUs) accelerate image processing — they love matrix multiplies.</li>
+<li><strong>Separable filters.</strong> Many important filters (Gaussian, box, Sobel, DCT basis functions, wavelet filters) are separable — they can be factored as <span class="arithmatex">\(h = h_1 \otimes h_2\)</span> and implemented as two 1-D passes.</li>
+<li><strong>Algebraic analysis.</strong> Eigenvalues of <span class="arithmatex">\(A \otimes B\)</span> are products <span class="arithmatex">\(\lambda_i \lambda_j\)</span>; singular values of <span class="arithmatex">\(A \otimes B\)</span> are products <span class="arithmatex">\(\sigma_i \sigma_j\)</span>. This makes it possible to derive closed-form properties of 2-D filters from 1-D properties — the basis of every fast algorithm.</li>
+</ol>
+<h3 id="worked-example-112-2-d-dft-as-a-kronecker-product">Worked example 1.12 — 2-D DFT as a Kronecker product<a class="headerlink" href="#worked-example-112-2-d-dft-as-a-kronecker-product" title="Permanent link">&para;</a></h3>
+<p>The 2-D DFT of an <span class="arithmatex">\(N \times N\)</span> image can be written as</p>
+<div class="arithmatex">\[
+\boxed{\;F_{\text{2D}} = F_N \otimes F_N,\;}
+\]</div>
+<p>where <span class="arithmatex">\(F_N\)</span> is the <span class="arithmatex">\(N\)</span>-point 1-D DFT matrix.</p>
+<p><strong>Proof.</strong> From the 2-D DFT definition, using separability of the exponential
+kernel:</p>
+<div class="arithmatex">\[
+X[k,l] = \sum_m\sum_n x[m,n] e^{-j2\pi km/N} e^{-j2\pi ln/N}.
+\]</div>
+<p>This is exactly the matrix-vector identity <span class="arithmatex">\((F_N \otimes F_N)\,\text{vec}(x)\)</span>
+with <span class="arithmatex">\(F_N[k,m] = e^{-j2\pi km/N}\)</span> and the vec convention appropriate for the
+image stacking.</p>
+<p><strong>Implication.</strong> <strong>The 2-D FFT is faster than the 1-D FFT</strong> would suggest:
+<span class="arithmatex">\(O(N^2 \log N)\)</span> via separability, not <span class="arithmatex">\(O(N^4)\)</span> via the naive 2-D DFT
+formula. Every image-processing library uses separable FFT — it's the reason
+2-D filtering in the frequency domain is practical.</p>
+<p><strong>Java implementation</strong> (for the matrix structure):</p>
+<div class="language-java highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Kronecker2DDFT</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="nf">kron</span><span class="p">(</span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">B</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="na">length</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="o">[</span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="o">][</span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">q</span><span class="o">]</span><span class="p">;</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">m</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">q</span><span class="p">;</span><span class="w"> </span><span class="n">l</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">                        </span><span class="n">C</span><span class="o">[</span><span class="n">i</span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">k</span><span class="o">][</span><span class="n">j</span><span class="o">*</span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">l</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">B</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">l</span><span class="o">]</span><span class="p">;</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">C</span><span class="p">;</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="nf">dftMatrix</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">        </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">double</span><span class="o">[</span><span class="n">N</span><span class="o">][</span><span class="n">N</span><span class="o">]</span><span class="p">;</span>
+</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">++</span><span class="p">)</span>
+</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">N</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-18"><a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">                </span><span class="kt">double</span><span class="w"> </span><span class="n">ang</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">PI</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">N</span><span class="p">;</span>
+</span><span id="__span-4-19"><a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">                </span><span class="n">F</span><span class="o">[</span><span class="n">k</span><span class="o">][</span><span class="n">n</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">cos</span><span class="p">(</span><span class="n">ang</span><span class="p">);</span><span class="w">  </span><span class="c1">// real part for simplicity</span>
+</span><span id="__span-4-20"><a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a><span class="w">            </span><span class="p">}</span>
+</span><span id="__span-4-21"><a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">F</span><span class="p">;</span>
+</span><span id="__span-4-22"><a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-23"><a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a>
+</span><span id="__span-4-24"><a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-4-25"><a id="__codelineno-4-25" name="__codelineno-4-25" href="#__codelineno-4-25"></a><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+</span><span id="__span-4-26"><a id="__codelineno-4-26" name="__codelineno-4-26" href="#__codelineno-4-26"></a><span class="w">        </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dftMatrix</span><span class="p">(</span><span class="n">N</span><span class="p">);</span>
+</span><span id="__span-4-27"><a id="__codelineno-4-27" name="__codelineno-4-27" href="#__codelineno-4-27"></a><span class="w">        </span><span class="kt">double</span><span class="o">[][]</span><span class="w"> </span><span class="n">F2D</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kron</span><span class="p">(</span><span class="n">F</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="p">);</span>
+</span><span id="__span-4-28"><a id="__codelineno-4-28" name="__codelineno-4-28" href="#__codelineno-4-28"></a><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">"2-D DFT matrix (N=4) size: "</span>
+</span><span id="__span-4-29"><a id="__codelineno-4-29" name="__codelineno-4-29" href="#__codelineno-4-29"></a><span class="w">                          </span><span class="o">+</span><span class="w"> </span><span class="n">F2D</span><span class="p">.</span><span class="na">length</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">" x "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">F2D</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+</span><span id="__span-4-30"><a id="__codelineno-4-30" name="__codelineno-4-30" href="#__codelineno-4-30"></a><span class="w">        </span><span class="c1">// For an 8x8 image, F2D is 64 x 64.</span>
+</span><span id="__span-4-31"><a id="__codelineno-4-31" name="__codelineno-4-31" href="#__codelineno-4-31"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-4-32"><a id="__codelineno-4-32" name="__codelineno-4-32" href="#__codelineno-4-32"></a><span class="p">}</span>
+</span></code></pre></div>
+<hr />
+<h2 id="111-chapter-summary">1.11 Chapter summary<a class="headerlink" href="#111-chapter-summary" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Photometry vs. radiometry</strong> — human vision weights the physical light by <span class="arithmatex">\(V(\lambda)\)</span>, peaking at ~555 nm. <strong>Luminance</strong> (cd/m²) is the physical quantity; <strong>brightness</strong> is the subjective percept.</li>
+<li><strong>Contrast</strong> — Weber <span class="arithmatex">\(C_W = (L_{\text{obj}} - L_{\text{bg}})/L_{\text{bg}}\)</span> for targets; Michelson <span class="arithmatex">\(C_M = (L_{\max} - L_{\min})/(L_{\max} + L_{\min})\)</span> for patterns.</li>
+<li><strong>The eye</strong> — rods (low light) and cones (colour, fine detail, concentrated in the fovea). The <strong>CSF</strong> is band-pass, peaking at 4–8 cycles/degree, and drops off sharply at high frequencies — this is the physiological basis of perceptual compression.</li>
+<li><strong>Camera pipeline</strong> — optics → sensor → ADC → digital processing. The <strong>Bayer CFA</strong> requires demosaicing; the <strong>anti-alias filter</strong> trades resolution for avoiding Moiré.</li>
+<li><strong>2-D sampling theorem</strong> — sampling must exceed twice the highest spatial frequency in both directions. Aliasing produces Moiré patterns at the beat frequencies between the image content and the sampling lattice.</li>
+<li><strong>Quantization</strong> — uniform quantizer MSE <span class="arithmatex">\(\Delta^2/12\)</span>, giving the <strong>6 dB per bit</strong> rule. <strong>Lloyd–Max</strong> improves MSE for non-uniform distributions, typically by 10–20% for Gaussian data. <strong>Dither</strong> trades numerical MSE for perceptual smoothness — essential for low-bit-depth displays.</li>
+<li><strong>Colour</strong> — <strong>YCbCr</strong> separates luma (perceptually important) from chroma (subsamplable); this is why compression uses it. <strong>4:2:0</strong> halves chroma bandwidth with almost no perceptual cost.</li>
+<li><strong>LSI systems</strong> — 2-D convolution; <strong>separable filters</strong> give massive computational savings (<span class="arithmatex">\(O(M+N)\)</span> per pixel instead of <span class="arithmatex">\(O(MN)\)</span>). Gaussian, box, and Sobel are all separable.</li>
+<li><strong>2-D Fourier</strong> — separable DFT, obtained as row-DFT then column-DFT. <strong>Z-transform</strong> generalises to 2-D rational transfer functions; separability of the transfer function mirrors separability of the filter.</li>
+<li><strong>Kronecker products</strong> — every 2-D operation can be written as matrix-vector multiplication using <span class="arithmatex">\(A \otimes B\)</span>. The <strong>vec identity</strong> <span class="arithmatex">\(\text{vec}(AXB) = (B^\top \otimes A)\text{vec}(X)\)</span> is the bridge between 2-D convolution and 1-D matrix algebra. Separable filters are <span class="arithmatex">\(h = h_1 \otimes h_2\)</span> — the computational shortcut that makes 2-D processing feasible.</li>
+</ol>
+<hr />
+<h2 id="112-quiz">1.12 Quiz<a class="headerlink" href="#112-quiz" title="Permanent link">&para;</a></h2>
+<h3 id="a-multiple-choice">A. Multiple choice<a class="headerlink" href="#a-multiple-choice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>The <strong>Michelson contrast</strong> of a pattern with luminances 10 and 50 cd/m² is:
+   (a) 0.4 (b) 0.67 (c) 4 (d) 0.33</p>
+</li>
+<li>
+<p>Weber's law states that the just-noticeable relative luminance change is:
+   (a) constant (~1%) (b) linear in <span class="arithmatex">\(L\)</span> (c) quadratic in <span class="arithmatex">\(L\)</span> (d) zero</p>
+</li>
+<li>
+<p>The <strong>contrast sensitivity function</strong> peaks at approximately:
+   (a) 0 cycles/degree (b) 4–8 cycles/degree (c) 50 cycles/degree (d) infinite</p>
+</li>
+<li>
+<p>The <strong>Nyquist frequency</strong> for a sampled image with pixel spacing <span class="arithmatex">\(\Delta x\)</span> is:
+   (a) <span class="arithmatex">\(\Delta x\)</span> (b) <span class="arithmatex">\(1/\Delta x\)</span> (c) <span class="arithmatex">\(1/(2\Delta x)\)</span> (d) <span class="arithmatex">\(2\Delta x\)</span></p>
+</li>
+<li>
+<p>Aliasing in 2-D images produces:
+   (a) no visible effect (b) Moiré patterns (c) increased resolution (d) lower noise</p>
+</li>
+<li>
+<p>Uniform quantization with step <span class="arithmatex">\(\Delta\)</span> has MSE approximately:
+   (a) <span class="arithmatex">\(\Delta^2\)</span> (b) <span class="arithmatex">\(\Delta^2/2\)</span> (c) <span class="arithmatex">\(\Delta^2/12\)</span> (d) <span class="arithmatex">\(\Delta/12\)</span></p>
+</li>
+<li>
+<p>The Lloyd–Max quantizer:
+   (a) is uniform (b) minimises MSE for a known distribution (c) has no reproduction levels (d) is unstable</p>
+</li>
+<li>
+<p>Adding <strong>dither</strong> before quantization:
+   (a) increases MSE slightly, improves perceptual quality (b) decreases MSE (c) has no effect (d) always worse</p>
+</li>
+<li>
+<p>In <strong>YCbCr</strong>, the <strong>Y</strong> component represents:
+   (a) blue channel (b) luminance (c) chroma (d) colour saturation</p>
+</li>
+<li>
+<p>4:2:0 chroma subsampling:
+    (a) keeps all chroma (b) halves chroma in both directions (c) removes chroma entirely (d) reduces luma</p>
+</li>
+<li>
+<p>A <strong>separable</strong> filter in 2-D:
+    (a) cannot exist (b) factors as <span class="arithmatex">\(h[m,n] = h_1[m]\,h_2[n]\)</span> (c) is non-linear (d) is always a Gaussian</p>
+</li>
+<li>
+<p>The <strong>Kronecker product</strong> <span class="arithmatex">\(A \otimes B\)</span> of an <span class="arithmatex">\(m \times n\)</span> and a <span class="arithmatex">\(p \times q\)</span> matrix is:
+    (a) <span class="arithmatex">\(m \times n\)</span> (b) <span class="arithmatex">\(p \times q\)</span> (c) <span class="arithmatex">\(mp \times nq\)</span> (d) <span class="arithmatex">\((m+p) \times (n+q)\)</span></p>
+</li>
+</ol>
+<h3 id="b-fill-in-the-blank">B. Fill in the blank<a class="headerlink" href="#b-fill-in-the-blank" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Weber contrast for an object on a background is <span class="arithmatex">\(C_W = (L_{\text{obj}} - L_{\text{bg}})/\)</span>____.</li>
+<li>The luminous efficiency function <span class="arithmatex">\(V(\lambda)\)</span> peaks at <span class="arithmatex">\(\lambda \approx\)</span> ____ nm.</li>
+<li>A camera sensor with <span class="arithmatex">\(W\)</span> pixels can resolve at most <span class="arithmatex">\(W/\)</span>____ cycles.</li>
+<li>The 2-D sampling theorem requires $1/\Delta x &gt; $____ (twice the highest spatial frequency).</li>
+<li>The variance of uniform quantization error is <span class="arithmatex">\(\sigma_e^2 = \Delta^2/\)</span>____.</li>
+<li>The Lloyd–Max reproduction level is the ____ of the corresponding decision interval.</li>
+<li>Dither is added ____ quantization.</li>
+<li>In YCbCr, the Y component is a weighted sum of RGB: $Y = 0.299R + 0.587G + $____.</li>
+<li>A separable filter <span class="arithmatex">\(h[m,n] = h_1[m]h_2[n]\)</span> has Z-transform $H(z_1,z_2) = $____.</li>
+<li>The vec identity for <span class="arithmatex">\(Y = AXB\)</span> is $\text{vec}(Y) = (B^\top \otimes <span class="arithmatex">\(\_\_\_\_\)</span>) \text{vec}(X)$.</li>
+</ol>
+<h3 id="c-define-explain">C. Define / explain<a class="headerlink" href="#c-define-explain" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Distinguish <strong>radiometry</strong> from <strong>photometry</strong>. Why is the human luminous efficiency function important for display engineering?</li>
+<li>Define <strong>Weber</strong> and <strong>Michelson</strong> contrast. Give one application where each is the natural measure.</li>
+<li>State the <strong>contrast sensitivity function</strong> and explain its role in JPEG and JPEG 2000 compression.</li>
+<li>Describe the <strong>camera pipeline</strong> from optics to digital output. What role does the anti-alias filter play?</li>
+<li>State the <strong>2-D sampling theorem</strong>. Derive the aliasing condition and explain what Moiré patterns are.</li>
+<li>Define the <strong>uniform quantizer</strong> and derive its MSE approximation. What is the <strong>6 dB per bit</strong> rule?</li>
+<li>Derive the <strong>Lloyd–Max</strong> optimality conditions (both reproduction and threshold) and describe the iterative algorithm.</li>
+<li>Explain <strong>dither</strong>. Why does adding noise improve perceptual quality even though it increases numerical MSE?</li>
+<li>Convert an RGB triplet <span class="arithmatex">\((R, G, B) = (128, 64, 192)\)</span> to YCbCr. Explain the perceptual reason YCbCr is used for compression.</li>
+<li>State the <strong>2-D convolution</strong> and <strong>2-D DFT</strong>. Show that a separable filter can be implemented as two 1-D operations.</li>
+<li>Define the <strong>Kronecker product</strong>. State and interpret the <strong>vec identity</strong>. Give one application where it is essential.</li>
+</ol>
+<hr />
+<h2 id="113-answer-key">1.13 Answer key<a class="headerlink" href="#113-answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>A. Multiple choice</summary>
+<ol>
+<li><strong>(b)</strong> — <span class="arithmatex">\((50-10)/(50+10) = 40/60 = 0.667\)</span>.</li>
+<li><strong>(a)</strong> — constant (~1%).</li>
+<li><strong>(b)</strong> — 4–8 cycles/degree.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(1/(2\Delta x)\)</span>.</li>
+<li><strong>(b)</strong> — Moiré patterns.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(\Delta^2/12\)</span>.</li>
+<li><strong>(b)</strong> — minimises MSE for known distribution.</li>
+<li><strong>(a)</strong> — slightly higher MSE, much better perceptual quality.</li>
+<li><strong>(b)</strong> — luminance.</li>
+<li><strong>(b)</strong> — halves chroma in both directions.</li>
+<li><strong>(b)</strong> — factors as <span class="arithmatex">\(h_1[m]h_2[n]\)</span>.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(mp \times nq\)</span>.</li>
+</ol>
+</details>
+<details class="success">
+<summary>B. Fill in the blank</summary>
+<ol>
+<li><span class="arithmatex">\(L_{\text{bg}}\)</span> (background luminance)</li>
+<li><span class="arithmatex">\(555\)</span></li>
+<li><span class="arithmatex">\(2\)</span></li>
+<li><span class="arithmatex">\(2F_x\)</span> (twice the highest spatial frequency)</li>
+<li><span class="arithmatex">\(12\)</span></li>
+<li>centroid (or conditional mean)</li>
+<li>before</li>
+<li><span class="arithmatex">\(0.114B\)</span></li>
+<li><span class="arithmatex">\(H_1(z_1)\,H_2(z_2)\)</span></li>
+<li><span class="arithmatex">\(A\)</span></li>
+</ol>
+</details>
+<details class="success">
+<summary>C. Define / explain — model answers</summary>
+<ol>
+<li><em>Radiometry</em> measures light in physical units of energy (watt, W/m²/sr). <em>Photometry</em> weights light by the eye's sensitivity <span class="arithmatex">\(V(\lambda)\)</span>, giving <strong>luminous flux</strong> (lumen), <strong>luminance</strong> (cd/m²), etc. The luminous efficiency function is important for display engineering because it determines what luminance range is perceivable and how display gamma / bit depth should be chosen. It is also the basis of perceptual image and video compression — you allocate bits to frequencies where the eye is most sensitive (CSF).</li>
+<li><em>Weber contrast:</em> <span class="arithmatex">\(C_W = (L_{\text{obj}} - L_{\text{bg}})/L_{\text{bg}}\)</span> — relative to background. Suitable for <strong>target detection</strong> (a defect on a uniform background, a lesion on tissue). <em>Michelson contrast:</em> <span class="arithmatex">\(C_M = (L_{\max} - L_{\min})/(L_{\max} + L_{\min})\)</span> — relative to average. Suitable for <strong>periodic patterns</strong> (gratings, checkerboards), where both extremes are "objects". Weber can be unbounded (and even negative); Michelson is in <span class="arithmatex">\([0,1]\)</span>.</li>
+<li><em>CSF:</em> inverse of minimum detectable contrast at a given spatial frequency. Band-pass, peak at 4–8 cycles/degree. In <strong>JPEG</strong>, the CSF-derived <strong>quantization table</strong> coarsens high-frequency DCT coefficients (which the eye cannot resolve anyway) while preserving low and mid frequencies. In <strong>JPEG 2000</strong>, the wavelet coefficients are similarly weighted — finer subbands are quantized more aggressively. The perceptual gain is 5–15 dB in PSNR at the same bit rate, compared with uniform quantization.</li>
+<li><em>Pipeline:</em> optics (lens, aperture, diffraction limit) → sensor (photons to charge / voltage, pixel size, CFA) → analog front end (amplifier, anti-alias filter, ADC) → digital processing (demosaic, white balance, gamma, denoise, compress). <em>Anti-alias filter role:</em> a slight optical lowpass, attenuates frequencies above the sensor's Nyquist — suppresses Moiré patterns from high-frequency content. Cost: softens the image slightly. Modern high-resolution sensors often omit it (aliasing is rare at very high pixel density, and the lens provides enough rolloff).</li>
+<li><em>2-D sampling theorem:</em> a band-limited image with 2-D spectrum zero outside <span class="arithmatex">\([-F_x, F_x] \times [-F_y, F_y]\)</span> can be reconstructed exactly from samples on a lattice with spacing <span class="arithmatex">\(\Delta x, \Delta y\)</span> iff <span class="arithmatex">\(1/\Delta x &gt; 2F_x\)</span> and <span class="arithmatex">\(1/\Delta y &gt; 2F_y\)</span>. <em>Aliasing condition:</em> if the sampling frequencies are below <span class="arithmatex">\(2F_x, 2F_y\)</span>, the periodic extensions of the spectrum overlap and the high-frequency content <strong>folds</strong> into lower frequencies. <em>Moiré:</em> the visible manifestation — beat patterns produced by the difference between the image's own frequencies and the sampling frequencies. Common in photographs of fine grids, screens, or fabrics.</li>
+<li><em>Uniform quantizer:</em> <span class="arithmatex">\(Q(f) = \Delta \lfloor (f+A)/\Delta \rfloor + \Delta/2\)</span> for input <span class="arithmatex">\(f \in [-A, A]\)</span>; step <span class="arithmatex">\(\Delta = 2A/L\)</span> where <span class="arithmatex">\(L = 2^b\)</span>. <em>MSE:</em> the quantization error is approximately uniform on <span class="arithmatex">\([-\Delta/2, \Delta/2]\)</span>, giving variance <span class="arithmatex">\(\Delta^2/12\)</span>. <em>6 dB per bit:</em> for full-scale signal statistics, <span class="arithmatex">\(\text{SNR}_Q \approx 6b + 4.77 - 20\log_{10}(f_{\max}/\sigma_f)\)</span> dB — each additional bit improves SNR by 6 dB. For images, <span class="arithmatex">\(\text{SNR}_Q \approx 6b - 1\)</span> dB.</li>
+<li><em>Lloyd–Max conditions:</em> (i) <strong>reproduction level</strong> <span class="arithmatex">\(y_i\)</span> is the <strong>centroid</strong> of the probability mass in the corresponding decision interval: <span class="arithmatex">\(y_i = \mathbb E[F \mid t_{i-1} &lt; F &lt; t_i]\)</span>; (ii) <strong>decision threshold</strong> <span class="arithmatex">\(t_i\)</span> is the <strong>midpoint</strong> between adjacent reproduction levels: <span class="arithmatex">\(t_i = (y_i + y_{i+1})/2\)</span>. <em>Algorithm:</em> start with an initial guess (e.g., uniform thresholds and levels), then alternate (i) and (ii) until convergence. Each step <strong>strictly decreases</strong> the MSE; convergence is guaranteed (to a local minimum) by the alternating-projection property. Multiple restarts are needed if the distribution is multimodal.</li>
+<li><em>Dither:</em> add random noise <span class="arithmatex">\(n \sim \mathcal U[-\Delta/2, \Delta/2]\)</span> before quantization. The quantization error becomes decorrelated from the signal — the output is no longer structured (no false contours). <em>Why perceptual &gt; numerical:</em> the human visual system is much more sensitive to <strong>coherent low-frequency structure</strong> (bands, edges) than to <strong>white noise</strong> (which the eye averages out). A high-MSE dithered image looks smoother than a low-MSE banded image. This is an example of <strong>MSE not being the right fidelity metric</strong> for images — a well-known limitation that motivated SSIM, MS-SSIM, and other perceptual metrics.</li>
+<li><em>RGB → YCbCr</em> for <span class="arithmatex">\((R,G,B) = (128, 64, 192)\)</span>:
+   <span class="arithmatex">\(Y = 0.299(128) + 0.587(64) + 0.114(192) = 38.27 + 37.57 + 21.89 = 97.73\)</span>.
+   <span class="arithmatex">\(C_b = 0.564(B - Y) = 0.564(192 - 97.73) = 53.14\)</span>.
+   <span class="arithmatex">\(C_r = 0.713(R - Y) = 0.713(128 - 97.73) = 21.58\)</span>.
+   With 8-bit normalization (add 128): <span class="arithmatex">\(Y = 98\)</span>, <span class="arithmatex">\(C_b = 181\)</span>, <span class="arithmatex">\(C_r = 150\)</span>.
+   <em>Why YCbCr for compression:</em> (i) the eye has much lower spatial resolution for colour than for luminance; (ii) chroma components can therefore be <strong>subsampled</strong> (4:2:0 halves chroma bandwidth) with almost no perceptual loss; (iii) Y is dominated by the green channel, matching the eye's sensitivity peak. Result: ~50% data reduction with no visible artefact — the foundation of JPEG and video compression.</li>
+<li><em>2-D convolution:</em> <span class="arithmatex">\(y[m,n] = \sum_{k,l} h[k,l] x[m-k,n-l]\)</span>. <em>2-D DFT:</em> <span class="arithmatex">\(X[k,l] = \sum_{m,n} x[m,n] e^{-j2\pi(km/M + ln/N)}\)</span>. <em>Separability:</em> if <span class="arithmatex">\(h[m,n] = h_1[m] h_2[n]\)</span>, then convolution is $\sum_k h_1[k] \left(\sum_l h_2[l] x[m-k, n-l]\right) = $ filter rows by <span class="arithmatex">\(h_2\)</span>, then columns by <span class="arithmatex">\(h_1\)</span> (order commutes). Computational cost is <span class="arithmatex">\(O(N(M_1 + M_2))\)</span> per pixel instead of <span class="arithmatex">\(O(N M_1 M_2)\)</span> — a factor of <span class="arithmatex">\(\min(M_1, M_2)\)</span> savings. Gaussian, box, Sobel, and DCT basis functions are all separable.</li>
+<li><em>Kronecker product:</em> <span class="arithmatex">\(A \otimes B\)</span> is the block matrix with blocks <span class="arithmatex">\(a_{ij} B\)</span>. Result size: <span class="arithmatex">\(mp \times nq\)</span> for <span class="arithmatex">\(A\)</span> <span class="arithmatex">\(m \times n\)</span> and <span class="arithmatex">\(B\)</span> <span class="arithmatex">\(p \times q\)</span>. <em>Vec identity:</em> <span class="arithmatex">\(\text{vec}(AXB) = (B^\top \otimes A)\,\text{vec}(X)\)</span> — <strong>crucial</strong> because it converts 2-D matrix operations into 1-D vector operations. <em>Applications:</em> (a) 2-D convolution as a matrix-vector product with a block-Toeplitz (Kronecker-structured) matrix; (b) 2-D DFT as <span class="arithmatex">\(F_N \otimes F_N\)</span> — the basis of the separable 2-D FFT; (c) <strong>separable filtering</strong> — a separable 2-D filter is a single Kronecker product, and the filter is applied as two 1-D passes; (d) fast algorithms for DCT, wavelet transforms, and 2-D linear systems.</li>
+</ol>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Jain, <em>Fundamentals of Digital Image Processing</em>, PHI, 1995 — Chapters 1–3 are the direct source for this chapter.</li>
+<li>Gonzalez &amp; Woods, <em>Digital Image Processing</em>, 4th ed., Pearson, 2018 — Chapters 2–3 for the perceptual and sampling material.</li>
+<li>Pratt, <em>Digital Image Processing</em>, 4th ed., Wiley, 2007 — the encyclopaedic reference, especially for colour spaces and quantization.</li>
+<li>Oppenheim &amp; Schafer, <em>Discrete-Time Signal Processing</em>, PHI — Chapter 13 for 2-D sampling and filtering.</li>
+<li>Van Loan, <em>Computational Frameworks for the Fast Fourier Transform</em>, SIAM, 1992 — the definitive reference for Kronecker-structured algorithms.</li>
+<li>Brewster, <em>Kronecker Products and Matrix Calculus</em>, Dover — a compact algebra reference.</li>
+<li>Sharma &amp; Trussell, "Digital Color Imaging", <em>IEEE Trans. Image Process.</em>, 6(7), 1997 — the standard colour-space reference.</li>
+<li>Poynton, <em>Digital Video and HD</em>, 2nd ed., Morgan Kaufmann, 2012 — the definitive colour and gamma reference.</li>
+<li>Mannos &amp; Sakrison, "The Effects of a Visual Fidelity Criterion on the Encoding of Images", <em>IEEE Trans. Inf. Theory</em>, 20(4), 1974 — the original CSF-based compression work.</li>
+<li><code>scipy.ndimage</code>, <code>scikit-image</code>, <code>Pillow</code>, <code>OpenCV</code> documentation.</li>
+</ul>
+<hr />
+<h2 id="suggested-tutorial-and-lab-problems-for-this-chapter">Suggested tutorial and lab problems for this chapter<a class="headerlink" href="#suggested-tutorial-and-lab-problems-for-this-chapter" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Contrast calculation.</strong> For a pattern with luminances <span class="arithmatex">\(\{L_{\min}, L_{\max}\} = \{20, 200\}\)</span> cd/m², compute both Weber (for each as background) and Michelson contrasts. In what context does each definition give the more useful number?</p>
+</li>
+<li>
+<p><strong>Dynamic range.</strong> A camera has 12-bit ADC and 85 dB dynamic range. What is the effective noise floor in LSBs? At what bit depth would a 70 dB consumer sensor be equivalent?</p>
+</li>
+<li>
+<p><strong>Human vision and compression.</strong> Using the Mannos–Sakrison CSF model, compute the sensitivity at 1, 5, 15, 30 cycles/degree. By what factor should you weight the DCT coefficients at these frequencies to achieve perceptual transparency?</p>
+</li>
+<li>
+<p><strong>2-D sampling and aliasing.</strong> A test image contains a sinusoidal grating with period 8 pixels and a step edge. Sample it at 1×, 2×, 4× subsampling. Identify where Moiré appears in the subsampled versions. Repeat with anti-alias filtering before subsampling.</p>
+</li>
+<li>
+<p><strong>Lloyd–Max quantizer.</strong> Implement the Lloyd–Max algorithm for 4- and 8-level quantization of a Gaussian distribution. Plot the MSE vs. bit depth and compare with uniform quantization.</p>
+</li>
+<li>
+<p><strong>Dither.</strong> Quantize a gradient to 3 bits with and without dither. Compare the visual result. Compute both MSE and SSIM for each version — comment on which metric matches perception better.</p>
+</li>
+<li>
+<p><strong>RGB ↔ YCbCr.</strong> Take a colour image, convert to YCbCr, subsample the chroma to 4:2:0, upsample back with bilinear interpolation, and convert to RGB. Compute the PSNR vs. original. Comment on which image regions show the largest errors (edges, saturated colours, etc.).</p>
+</li>
+<li>
+<p><strong>Separable vs. direct convolution.</strong> Implement a 2-D Gaussian blur with (a) direct convolution with a 15×15 kernel, (b) separable two-pass convolution. Verify identical outputs; measure and compare execution times.</p>
+</li>
+<li>
+<p><strong>2-D FFT.</strong> Compute the 2-D DFT of a synthetic image (rectangle, Gaussian, and a natural image). Plot the magnitude spectrum. Verify Parseval's theorem numerically.</p>
+</li>
+<li>
+<p><strong>Kronecker product.</strong> For a <span class="arithmatex">\(3\times 3\)</span> averaging filter <span class="arithmatex">\(h = h_1 h_2^\top\)</span> with <span class="arithmatex">\(h_1 = h_2 = (1,1,1)/\sqrt{3}\)</span>, build the 9×9 Kronecker matrix and verify it produces the same output as direct 2-D convolution on a small test image.</p>
+</li>
+<li>
+<p><strong>Block-Toeplitz structure.</strong> For a non-separable <span class="arithmatex">\(2\times 2\)</span> filter <span class="arithmatex">\(h = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\end{bmatrix}\)</span>, build the block-Toeplitz matrix by lexicographic vectorization. Verify that applying it to a vectorized image matches the 2-D convolution. Show that the matrix has Toeplitz blocks but is not itself Toeplitz (unless the filter is separable).</p>
+</li>
+<li>
+<p><strong>Real-world colour pipeline.</strong> Take a raw camera file (or simulate one) — demosaic, white balance, gamma-correct, convert to YCbCr, and visualize each stage. Comment on the visual and numerical changes at each step.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

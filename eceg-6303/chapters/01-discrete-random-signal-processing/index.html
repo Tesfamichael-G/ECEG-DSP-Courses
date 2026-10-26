@@ -1,0 +1,3232 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6303/chapters/01-discrete-random-signal-processing/">
+      
+      
+        <link rel="prev" href="../../schedule/">
+      
+      
+        <link rel="next" href="../02-spectrum-estimation/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>1. Discrete Random Signal Processing - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-1-discrete-random-signal-processing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1. Discrete Random Signal Processing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../eceg-6423/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-discrete-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Discrete random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Discrete random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-wide-sense-stationarity-wss" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.1 Wide-sense stationarity (WSS)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-scalar-product-and-energy-of-discrete-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Scalar product and energy of discrete signals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parsevals-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Parseval's theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Parseval's theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-11-parseval-for-a-rectangular-pulse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.1 — Parseval for a rectangular pulse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-12-statistical-parseval-for-an-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.2 — Statistical Parseval for an AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-autocorrelation-and-autocovariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Autocorrelation and autocovariance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Autocorrelation and autocovariance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-autocorrelation-of-common-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Autocorrelation of common processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-sample-autocorrelation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 Sample autocorrelation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-wienerkhinchine-relation-and-power-spectral-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 Wiener–Khinchine relation and power spectral density
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 Wiener–Khinchine relation and power spectral density">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-13-psd-of-the-moving-average-ma1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.3 — PSD of the moving average MA(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-the-periodogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 The periodogram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 The periodogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-14-periodogram-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.4 — periodogram of white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-sum-decomposition-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Sum Decomposition Theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Sum Decomposition Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-15-sum-decomposition-for-an-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.5 — Sum decomposition for an AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-spectral-factorization-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Spectral Factorization Theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 Spectral Factorization Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-factorize-a-rational-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to factorize a rational PSD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-16-factorize-an-arma11-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.6 — factorize an ARMA(1,1) PSD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-17-factorize-an-ar2-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.7 — factorize an AR(2) PSD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-discrete-random-signal-processing-by-linear-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9 Discrete random signal processing by linear systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 Discrete random signal processing by linear systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-18-white-noise-through-a-first-order-lowpass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.8 — white noise through a first-order lowpass
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-simulation-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10 Simulation of white noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Simulation of white noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101-uniform-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.1 Uniform noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102-gaussian-noise-boxmuller-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.2 Gaussian noise — Box–Muller transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103-arbitrary-distribution-inverse-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.3 Arbitrary distribution — inverse CDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1104-sample-autocorrelation-of-simulated-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.4 Sample autocorrelation of simulated white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-19-boxmuller-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.9 — Box–Muller in Python
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-lowpass-filtering-of-white-noise-colouring" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.11 Lowpass filtering of white noise — colouring
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.11 Lowpass filtering of white noise — colouring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-110-ar1-as-filtered-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.10 — AR(1) as filtered white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-111-ideal-lowpass-brick-wall-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.11 — ideal lowpass (brick-wall) filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-112-whitening-a-coloured-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.12 — whitening a coloured process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.12 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.13 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.13 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice-choose-the-single-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice (choose the single best answer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.14 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6423/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6423/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-discrete-random-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 Discrete random processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1 Discrete random processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-wide-sense-stationarity-wss" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.1 Wide-sense stationarity (WSS)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-scalar-product-and-energy-of-discrete-signals" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 Scalar product and energy of discrete signals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-parsevals-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 Parseval's theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Parseval's theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-11-parseval-for-a-rectangular-pulse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.1 — Parseval for a rectangular pulse
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-12-statistical-parseval-for-an-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.2 — Statistical Parseval for an AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-autocorrelation-and-autocovariance" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4 Autocorrelation and autocovariance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 Autocorrelation and autocovariance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.1 Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#142-autocorrelation-of-common-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.2 Autocorrelation of common processes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#143-sample-autocorrelation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.4.3 Sample autocorrelation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#15-wienerkhinchine-relation-and-power-spectral-density" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.5 Wiener–Khinchine relation and power spectral density
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.5 Wiener–Khinchine relation and power spectral density">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-13-psd-of-the-moving-average-ma1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.3 — PSD of the moving average MA(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#16-the-periodogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.6 The periodogram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.6 The periodogram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-14-periodogram-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.4 — periodogram of white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#17-sum-decomposition-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.7 Sum Decomposition Theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.7 Sum Decomposition Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-15-sum-decomposition-for-an-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.5 — Sum decomposition for an AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#18-spectral-factorization-theorem" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.8 Spectral Factorization Theorem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.8 Spectral Factorization Theorem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-factorize-a-rational-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to factorize a rational PSD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-16-factorize-an-arma11-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.6 — factorize an ARMA(1,1) PSD
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-17-factorize-an-ar2-psd" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.7 — factorize an AR(2) PSD
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#19-discrete-random-signal-processing-by-linear-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.9 Discrete random signal processing by linear systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.9 Discrete random signal processing by linear systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-18-white-noise-through-a-first-order-lowpass" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.8 — white noise through a first-order lowpass
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#110-simulation-of-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10 Simulation of white noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.10 Simulation of white noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1101-uniform-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.1 Uniform noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1102-gaussian-noise-boxmuller-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.2 Gaussian noise — Box–Muller transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1103-arbitrary-distribution-inverse-cdf" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.3 Arbitrary distribution — inverse CDF
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1104-sample-autocorrelation-of-simulated-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.10.4 Sample autocorrelation of simulated white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-19-boxmuller-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.9 — Box–Muller in Python
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#111-lowpass-filtering-of-white-noise-colouring" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.11 Lowpass filtering of white noise — colouring
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.11 Lowpass filtering of white noise — colouring">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-110-ar1-as-filtered-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.10 — AR(1) as filtered white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-111-ideal-lowpass-brick-wall-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.11 — ideal lowpass (brick-wall) filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-112-whitening-a-coloured-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 1.12 — whitening a coloured process
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.12 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.13 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.13 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice-choose-the-single-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice (choose the single best answer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#114-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.14 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-1-discrete-random-signal-processing">Chapter 1 — Discrete Random Signal Processing<a class="headerlink" href="#chapter-1-discrete-random-signal-processing" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Chapter at a glance</p>
+<p><strong>Contact hours:</strong> 2 lecture + 3 laboratory · <strong>Home study:</strong> 5 h</p>
+<p><strong>Coverage (syllabus):</strong> discrete random processes · expectation, variance,
+covariance · scalar product and energy of discrete signals · Parseval's
+theorem · Wiener–Khinchine relation · power spectral density · periodogram ·
+sample autocorrelation · Sum Decomposition Theorem · Spectral Factorization
+Theorem · discrete random signal processing by linear systems · simulation
+of white noise · lowpass filtering of white noise.</p>
+</div>
+<hr />
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this chapter you should be able to:</p>
+<ol>
+<li>Define a <strong>discrete-time random process</strong> and compute its <strong>mean, variance,
+   autocovariance, and autocorrelation</strong> from the ensemble definition.</li>
+<li>State and apply <strong>Parseval's theorem</strong> for finite-length and for
+   infinite-energy discrete signals.</li>
+<li>Derive the <strong>Wiener–Khinchine relation</strong> and compute the <strong>power spectral
+   density (PSD)</strong> of a WSS sequence from its autocorrelation.</li>
+<li>Compute and interpret the <strong>periodogram</strong>, and state its bias and variance
+   properties.</li>
+<li>Compute the <strong>sample autocorrelation</strong> in both biased and unbiased forms.</li>
+<li>Apply the <strong>Sum Decomposition Theorem</strong> (discrete Karhunen–Loève) to
+   decompose a finite-length random vector into uncorrelated components.</li>
+<li>State the <strong>Spectral Factorization Theorem</strong> and factor a given rational
+   PSD into causal minimum-phase factors.</li>
+<li>Compute the <strong>output PSD</strong> and output autocorrelation of an LTI system
+   driven by a WSS input.</li>
+<li><strong>Simulate white noise</strong> (uniform, Gaussian, arbitrary distribution) and
+   <strong>colour it</strong> by lowpass filtering.</li>
+</ol>
+<hr />
+<h2 id="11-discrete-random-processes">1.1 Discrete random processes<a class="headerlink" href="#11-discrete-random-processes" title="Permanent link">&para;</a></h2>
+<p>A <strong>discrete-time random process</strong> (also <em>random sequence</em> or <em>stochastic
+sequence</em>) is a family of random variables <span class="arithmatex">\(\{X[n] : n \in \mathbb{Z}\}\)</span>
+indexed by integer time. For each fixed outcome <span class="arithmatex">\(\omega\)</span> in the underlying
+probability space, the sequence <span class="arithmatex">\(n \mapsto X[n, \omega]\)</span> is a <strong>realization</strong>
+or <strong>sample function</strong> of the process; the collection of all realizations is
+the <strong>ensemble</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Conventions</p>
+<p>We use <strong><span class="arithmatex">\(n\)</span></strong> for the discrete-time index, <strong><span class="arithmatex">\([\cdot]\)</span></strong> for discrete-time
+sequences, and <span class="arithmatex">\(\mathbb{Z}\)</span> for the set of all integers. Lowercase <span class="arithmatex">\(x[n]\)</span>
+denotes a <em>specific realization</em>; uppercase <span class="arithmatex">\(X[n]\)</span> the <em>random variable</em> at
+time <span class="arithmatex">\(n\)</span>.</p>
+</div>
+<p>For <strong>real-valued</strong> processes we usually work with the first and second moments:</p>
+<div class="arithmatex">\[
+\mu_X[n] = \mathbb{E}[X[n]],\qquad
+\sigma_X^2[n] = \operatorname{Var}[X[n]] = \mathbb{E}\bigl[(X[n] - \mu_X[n])^2\bigr],
+\]</div>
+<div class="arithmatex">\[
+R_X[m, n] = \mathbb{E}\bigl[X[m] X[n]\bigr],\qquad
+C_X[m, n] = R_X[m,n] - \mu_X[m]\mu_X[n].
+\]</div>
+<p>For <strong>complex-valued</strong> processes, <span class="arithmatex">\(X[n]\)</span> is complex and <span class="arithmatex">\(R_X[m,n] = \mathbb{E}[X[m]X^*[n]]\)</span>, where <span class="arithmatex">\(*\)</span> denotes the complex conjugate.</p>
+<h3 id="111-wide-sense-stationarity-wss">1.1.1 Wide-sense stationarity (WSS)<a class="headerlink" href="#111-wide-sense-stationarity-wss" title="Permanent link">&para;</a></h3>
+<p>A discrete random process is <strong>wide-sense stationary</strong> if:</p>
+<ol>
+<li><span class="arithmatex">\(\mu_X[n] = \mu_X\)</span> is constant (independent of <span class="arithmatex">\(n\)</span>), and</li>
+<li><span class="arithmatex">\(R_X[m, n] = R_X[m - n]\)</span> depends only on the <strong>lag</strong> <span class="arithmatex">\(k = m - n\)</span>.</li>
+</ol>
+<p>For a WSS process, we write <span class="arithmatex">\(R_X[k] = \mathbb{E}[X[n+k] X^*[n]]\)</span> (the convention is
+<span class="arithmatex">\(X[n+k]X^*[n]\)</span>, so the autocorrelation is Hermitian-symmetric: <span class="arithmatex">\(R_X[-k] = R_X^*[k]\)</span>;
+for real processes, <span class="arithmatex">\(R_X[-k] = R_X[k]\)</span>).</p>
+<p><strong>Properties of <span class="arithmatex">\(R_X[k]\)</span> (real WSS):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(R_X[0] = \mathbb{E}[X^2[n]] = \operatorname{Var}[X] + \mu_X^2\)</span></td>
+<td>Power (or energy per sample, if zero-mean)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R_X[-k] = R_X[k]\)</span></td>
+<td>Symmetry</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lvert R_X[k]\rvert \le R_X[0]\)</span></td>
+<td>Peak at lag zero</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(R_X[k]\)</span> positive-definite</td>
+<td>For any coefficients <span class="arithmatex">\(a_i\)</span>: <span class="arithmatex">\(\sum_{i,j} a_i R_X[i-j] a_j^* \ge 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>WSS in the frequency domain</strong> — the PSD <span class="arithmatex">\(S_X(e^{j\omega})\)</span> is the
+DTFT of <span class="arithmatex">\(R_X[k]\)</span> (§1.7), and it inherits non-negativity from the
+positive-definiteness of <span class="arithmatex">\(R_X\)</span>.</p>
+<hr />
+<h2 id="12-scalar-product-and-energy-of-discrete-signals">1.2 Scalar product and energy of discrete signals<a class="headerlink" href="#12-scalar-product-and-energy-of-discrete-signals" title="Permanent link">&para;</a></h2>
+<p>For two deterministic finite-length sequences <span class="arithmatex">\(x[n], y[n]\)</span>, <span class="arithmatex">\(n = 0, \dots, N-1\)</span>, the <strong>inner product</strong> is</p>
+<div class="arithmatex">\[
+\langle x, y\rangle = \sum_{n=0}^{N-1} x[n] y^*[n].
+\]</div>
+<p>This inner product makes <span class="arithmatex">\(\mathbb{C}^N\)</span> a <strong>Hilbert space</strong>. The <strong>norm</strong> (or <strong>energy</strong>) of <span class="arithmatex">\(x\)</span> is</p>
+<div class="arithmatex">\[
+\|x\|^2 = \langle x, x\rangle = \sum_{n=0}^{N-1} |x[n]|^2.
+\]</div>
+<p><strong>For infinite-length sequences</strong>, the energy is</p>
+<div class="arithmatex">\[
+E_x = \sum_{n=-\infty}^{\infty} |x[n]|^2,
+\]</div>
+<p>finite for <em>energy signals</em>; for <em>power signals</em> the relevant quantity is the average power,</p>
+<div class="arithmatex">\[
+P_x = \lim_{N\to\infty} \frac{1}{2N+1} \sum_{n=-N}^{N} |x[n]|^2.
+\]</div>
+<p>For a <strong>WSS random process</strong>, the average power is <span class="arithmatex">\(R_X[0] = \mathbb{E}[|X[n]|^2]\)</span> — the fundamental bridge between the deterministic and the statistical view.</p>
+<hr />
+<h2 id="13-parsevals-theorem">1.3 Parseval's theorem<a class="headerlink" href="#13-parsevals-theorem" title="Permanent link">&para;</a></h2>
+<p>For a finite-length signal <span class="arithmatex">\(x[n]\)</span> with <span class="arithmatex">\(N\)</span>-point DFT <span class="arithmatex">\(X[k] = \sum_{n=0}^{N-1} x[n] e^{-j2\pi kn/N}\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{n=0}^{N-1} |x[n]|^2 = \frac{1}{N} \sum_{k=0}^{N-1} |X[k]|^2\;}
+\]</div>
+<p>The factor <span class="arithmatex">\(1/N\)</span> appears because the DFT convention absorbs <span class="arithmatex">\(N\)</span> into the inverse transform. For the <strong>DTFT</strong> of an infinite-energy sequence, the form is</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{n=-\infty}^{\infty} |x[n]|^2 = \frac{1}{2\pi} \int_{-\pi}^{\pi} |X(e^{j\omega})|^2\, d\omega\;}
+\]</div>
+<p>and for a <strong>WSS random process</strong>, replacing <span class="arithmatex">\(|X|^2\)</span> by the PSD:</p>
+<div class="arithmatex">\[
+\boxed{\;R_X[0] = \frac{1}{2\pi}\int_{-\pi}^{\pi} S_X(e^{j\omega})\, d\omega\;}
+\]</div>
+<p>The last form is the statistical Parseval — the total power equals the integral of the PSD.</p>
+<h3 id="worked-example-11-parseval-for-a-rectangular-pulse">Worked example 1.1 — Parseval for a rectangular pulse<a class="headerlink" href="#worked-example-11-parseval-for-a-rectangular-pulse" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(x[n] = 1\)</span> for <span class="arithmatex">\(n = 0, 1, \dots, N-1\)</span> and zero otherwise.</p>
+<p><strong>Time domain energy.</strong> <span class="arithmatex">\(\sum_{n=0}^{N-1} |x[n]|^2 = N\)</span>.</p>
+<p><strong>Frequency domain.</strong> The <span class="arithmatex">\(N\)</span>-point DFT of <span class="arithmatex">\(x\)</span> is</p>
+<div class="arithmatex">\[
+X[k] = \sum_{n=0}^{N-1} e^{-j2\pi kn/N} = \begin{cases} N, &amp; k = 0, \\ 0, &amp; k \ne 0. \end{cases}
+\]</div>
+<p><strong>Parseval's check.</strong> <span class="arithmatex">\(\frac{1}{N}\sum_{k=0}^{N-1} |X[k]|^2 = \frac{1}{N}\cdot N^2 = N\)</span>. ✓</p>
+<p><strong>DTFT check.</strong> <span class="arithmatex">\(X(e^{j\omega}) = \frac{\sin(N\omega/2)}{\sin(\omega/2)} e^{-j(N-1)\omega/2}\)</span>, so <span class="arithmatex">\(|X|^2 = \sin^2(N\omega/2)/\sin^2(\omega/2)\)</span>. Then <span class="arithmatex">\(\frac{1}{2\pi}\int_{-\pi}^{\pi}\frac{\sin^2(N\omega/2)}{\sin^2(\omega/2)}\,d\omega = N\)</span> ✓.</p>
+<h3 id="worked-example-12-statistical-parseval-for-an-ar1">Worked example 1.2 — Statistical Parseval for an AR(1)<a class="headerlink" href="#worked-example-12-statistical-parseval-for-an-ar1" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(X[n] = a X[n-1] + W[n]\)</span> with <span class="arithmatex">\(|a| &lt; 1\)</span> and <span class="arithmatex">\(W\)</span> white of variance <span class="arithmatex">\(\sigma_W^2\)</span>. From Chapter 5 of ECEG-6201, we have</p>
+<div class="arithmatex">\[
+R_X[k] = \frac{\sigma_W^2}{1-a^2}\, a^{|k|},\qquad
+S_X(e^{j\omega}) = \frac{\sigma_W^2}{|1 - a e^{-j\omega}|^2}.
+\]</div>
+<p><strong>Statistical Parseval.</strong> The right side is</p>
+<div class="arithmatex">\[
+\frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{\sigma_W^2}{|1-ae^{-j\omega}|^2}\, d\omega = \frac{\sigma_W^2}{2\pi}\int_{-\pi}^{\pi} \frac{1}{1-2a\cos\omega + a^2}\, d\omega.
+\]</div>
+<p>The integral evaluates to <span class="arithmatex">\(\frac{2\pi}{1-a^2}\)</span> (standard contour-integral result), so the RHS is <span class="arithmatex">\(\frac{\sigma_W^2}{1-a^2}\)</span>. ✓</p>
+<p>This matches <span class="arithmatex">\(R_X[0] = \frac{\sigma_W^2}{1-a^2}\)</span>. ✓</p>
+<hr />
+<h2 id="14-autocorrelation-and-autocovariance">1.4 Autocorrelation and autocovariance<a class="headerlink" href="#14-autocorrelation-and-autocovariance" title="Permanent link">&para;</a></h2>
+<h3 id="141-definitions">1.4.1 Definitions<a class="headerlink" href="#141-definitions" title="Permanent link">&para;</a></h3>
+<p>For a WSS process <span class="arithmatex">\(X[n]\)</span>:</p>
+<div class="arithmatex">\[
+R_X[k] = \mathbb{E}\bigl[X[n+k]X^*[n]\bigr],\qquad
+C_X[k] = R_X[k] - |\mu_X|^2.
+\]</div>
+<p>The autocorrelation measures <strong>linear dependence</strong> between samples <span class="arithmatex">\(k\)</span> apart; the autocovariance subtracts the mean so that it vanishes when <span class="arithmatex">\(k \to \infty\)</span> (for mixing processes).</p>
+<h3 id="142-autocorrelation-of-common-processes">1.4.2 Autocorrelation of common processes<a class="headerlink" href="#142-autocorrelation-of-common-processes" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Process</th>
+<th><span class="arithmatex">\(R_X[k]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>White noise (variance <span class="arithmatex">\(\sigma^2\)</span>)</td>
+<td><span class="arithmatex">\(\sigma^2 \delta[k]\)</span></td>
+</tr>
+<tr>
+<td>AR(1) (<span class="arithmatex">\(a\)</span>, <span class="arithmatex">\(\sigma_W^2\)</span>)</td>
+<td>$\frac{\sigma_W^2}{1-a^2} a^{</td>
+</tr>
+<tr>
+<td>Complex exponential <span class="arithmatex">\(e^{j\omega_0 n}\)</span> (deterministic)</td>
+<td><span class="arithmatex">\(e^{j\omega_0 k}\)</span></td>
+</tr>
+<tr>
+<td>Random-phase sinusoid</td>
+<td><span class="arithmatex">\(\frac{A^2}{2}\cos(\omega_0 k)\)</span></td>
+</tr>
+<tr>
+<td>Moving average MA(1): <span class="arithmatex">\(X[n] = W[n] + b W[n-1]\)</span></td>
+<td><span class="arithmatex">\(\sigma_W^2(1 + b^2)\delta[k] + b\sigma_W^2(\delta[k-1] + \delta[k+1])\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="143-sample-autocorrelation">1.4.3 Sample autocorrelation<a class="headerlink" href="#143-sample-autocorrelation" title="Permanent link">&para;</a></h3>
+<p>Given a finite realization <span class="arithmatex">\(x[0], \dots, x[N-1]\)</span>, two estimators of <span class="arithmatex">\(R_X[k]\)</span>:</p>
+<p><strong>Biased estimator:</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\hat{R}[k] = \frac{1}{N}\sum_{n=0}^{N-1-|k|} x[n+|k|] x^*[n]\;,\quad |k| \le N-1.\;}
+\]</div>
+<p><strong>Unbiased estimator:</strong></p>
+<div class="arithmatex">\[
+\hat{R}_u[k] = \frac{1}{N - |k|}\sum_{n=0}^{N-1-|k|} x[n+|k|]x^*[n].
+\]</div>
+<p><strong>Trade-offs.</strong></p>
+<ul>
+<li><strong>Bias.</strong> <span class="arithmatex">\(\hat{R}_u\)</span> is unbiased; <span class="arithmatex">\(\hat{R}\)</span> is biased by a factor of <span class="arithmatex">\((N-|k|)/N\)</span>, which is <span class="arithmatex">\(O(1/N)\)</span> for <span class="arithmatex">\(|k| \ll N\)</span>.</li>
+<li><strong>Variance.</strong> <span class="arithmatex">\(\hat{R}_u\)</span> has <em>larger</em> variance (its denominator <span class="arithmatex">\(N-|k|\)</span> becomes small as <span class="arithmatex">\(|k| \to N\)</span>), so <span class="arithmatex">\(\hat{R}\)</span> has <em>lower</em> mean-square error at large lags.</li>
+<li><strong>Positive-definiteness.</strong> <span class="arithmatex">\(\hat{R}\)</span> is guaranteed positive-definite (needed for spectral estimation); <span class="arithmatex">\(\hat{R}_u\)</span> is not.</li>
+</ul>
+<p><strong>Why the biased version is standard.</strong> For spectral estimation, we need the estimated autocorrelation to be a valid PSD generator — i.e., its DTFT must be non-negative. Only the biased <span class="arithmatex">\(\hat{R}\)</span> guarantees this. So we use <span class="arithmatex">\(\hat{R}\)</span>, accepting its <span class="arithmatex">\(O(1/N)\)</span> bias in return for a well-behaved spectrum.</p>
+<hr />
+<h2 id="15-wienerkhinchine-relation-and-power-spectral-density">1.5 Wiener–Khinchine relation and power spectral density<a class="headerlink" href="#15-wienerkhinchine-relation-and-power-spectral-density" title="Permanent link">&para;</a></h2>
+<p>For a WSS process <span class="arithmatex">\(X[n]\)</span> with <span class="arithmatex">\(\sum_{k} |R_X[k]| &lt; \infty\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;S_X(e^{j\omega}) = \sum_{k=-\infty}^{\infty} R_X[k]\, e^{-j\omega k}\;}
+\]</div>
+<p>with inverse</p>
+<div class="arithmatex">\[
+R_X[k] = \frac{1}{2\pi}\int_{-\pi}^{\pi} S_X(e^{j\omega})\, e^{j\omega k}\, d\omega.
+\]</div>
+<p><strong>Properties of the PSD.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Reason</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(S_X(e^{j\omega}) \ge 0\)</span></td>
+<td><span class="arithmatex">\(R_X\)</span> is positive-definite</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S_X(e^{j\omega})\)</span> is <span class="arithmatex">\(2\pi\)</span>-periodic</td>
+<td>Definition as a DTFT</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(S_X(e^{j\omega}) = S_X(e^{-j\omega})\)</span> (real <span class="arithmatex">\(X\)</span>)</td>
+<td><span class="arithmatex">\(R_X[k] = R_X[-k]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\frac{1}{2\pi}\int_{-\pi}^{\pi} S_X(e^{j\omega})\, d\omega = R_X[0]\)</span></td>
+<td>Statistical Parseval</td>
+</tr>
+</tbody>
+</table>
+<p>When the condition <span class="arithmatex">\(\sum |R_X[k]| &lt; \infty\)</span> is violated (e.g., a pure sinusoid), <span class="arithmatex">\(S_X\)</span> contains impulses (Dirac deltas) at the corresponding frequencies, and the integral is interpreted distributionally.</p>
+<h3 id="worked-example-13-psd-of-the-moving-average-ma1">Worked example 1.3 — PSD of the moving average MA(1)<a class="headerlink" href="#worked-example-13-psd-of-the-moving-average-ma1" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(X[n] = W[n] + b W[n-1]\)</span> with <span class="arithmatex">\(W\)</span> white of variance <span class="arithmatex">\(\sigma_W^2\)</span>.</p>
+<p><strong>Autocorrelation.</strong> <span class="arithmatex">\(\mathbb{E}[X[n]X[n+k]] = \sigma_W^2(\delta[k] + b\delta[k-1] + b\delta[k+1] + b^2 \delta[k])\)</span>, so</p>
+<div class="arithmatex">\[
+R_X[0] = \sigma_W^2(1 + b^2),\quad R_X[\pm 1] = b\sigma_W^2,\quad R_X[k] = 0\ (|k| \ge 2).
+\]</div>
+<p><strong>PSD.</strong></p>
+<div class="arithmatex">\[
+S_X(e^{j\omega}) = \sigma_W^2[(1+b^2) + b e^{-j\omega} + b e^{j\omega}] = \sigma_W^2[(1+b^2) + 2b\cos\omega].
+\]</div>
+<p><strong>Check.</strong> <span class="arithmatex">\(\frac{1}{2\pi}\int_{-\pi}^\pi \sigma_W^2[(1+b^2) + 2b\cos\omega]\, d\omega = \sigma_W^2(1+b^2) = R_X[0]\)</span> ✓.</p>
+<p><strong>Non-negativity constraint.</strong> For <span class="arithmatex">\(S_X\)</span> to be a valid PSD we need <span class="arithmatex">\(1 + b^2 + 2b\cos\omega \ge 0\)</span> for all <span class="arithmatex">\(\omega\)</span>; the minimum is <span class="arithmatex">\(1 + b^2 - 2|b| = (1-|b|)^2 \ge 0\)</span>, always satisfied. So MA(1) is always a valid PSD generator.</p>
+<hr />
+<h2 id="16-the-periodogram">1.6 The periodogram<a class="headerlink" href="#16-the-periodogram" title="Permanent link">&para;</a></h2>
+<p>For a finite-length realization <span class="arithmatex">\(x[0], \dots, x[N-1]\)</span>, the <strong>periodogram</strong> is</p>
+<div class="arithmatex">\[
+\boxed{\;\hat{S}_X(e^{j\omega}) = \frac{1}{N}\Bigl|\sum_{n=0}^{N-1} x[n]\, e^{-j\omega n}\Bigr|^2\;}
+\]</div>
+<p>Evaluated at the DFT frequencies <span class="arithmatex">\(\omega_k = 2\pi k/N\)</span>, this equals <span class="arithmatex">\(\frac{1}{N}|X[k]|^2\)</span>, where <span class="arithmatex">\(X[k]\)</span> is the <span class="arithmatex">\(N\)</span>-point DFT.</p>
+<p><strong>Two properties (developed in Chapter 2):</strong></p>
+<ul>
+<li><strong>Asymptotically unbiased:</strong> <span class="arithmatex">\(\mathbb{E}[\hat{S}_X(e^{j\omega})] \to S_X(e^{j\omega})\)</span> as <span class="arithmatex">\(N \to \infty\)</span>, but the bias is nonzero for finite <span class="arithmatex">\(N\)</span> (the periodogram is a smoothed version of <span class="arithmatex">\(S_X\)</span> with the Fejér kernel).</li>
+<li><strong>Inconsistent:</strong> <span class="arithmatex">\(\operatorname{Var}[\hat{S}_X(e^{j\omega})] \approx S_X^2(e^{j\omega})\)</span> regardless of <span class="arithmatex">\(N\)</span>. The estimate fluctuates as much as its mean; averaging over independent segments is required to reduce the variance (Bartlett, Welch; §2.1).</li>
+</ul>
+<h3 id="worked-example-14-periodogram-of-white-noise">Worked example 1.4 — periodogram of white noise<a class="headerlink" href="#worked-example-14-periodogram-of-white-noise" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(x[n]\)</span> be white Gaussian of variance <span class="arithmatex">\(\sigma^2\)</span>, <span class="arithmatex">\(N\)</span> samples.</p>
+<p><strong>Bias.</strong> <span class="arithmatex">\(\mathbb{E}[\hat{S}_X(e^{j\omega_k})] = \sigma^2\)</span> (unbiased at DFT frequencies when <span class="arithmatex">\(x\)</span> is white) — for general <span class="arithmatex">\(S_X\)</span> the expectation is a smoothed version.</p>
+<p><strong>Variance.</strong> <span class="arithmatex">\(\operatorname{Var}[\hat{S}_X(e^{j\omega_k})] = \sigma^4\)</span>, so the standard deviation of <span class="arithmatex">\(\hat{S}_X\)</span> equals its mean. This is the fundamental inconsistency: averaging over the same <span class="arithmatex">\(N\)</span>-sample realization does <strong>not</strong> reduce variance; only averaging over <strong>independent realisations</strong> does.</p>
+<p><strong>Distribution.</strong> <span class="arithmatex">\(\hat{S}_X(e^{j\omega_k})/\sigma^2 \sim \chi^2_2/2 = \mathrm{Exp}(1)\)</span>, independent (asymptotically) across bins. A plot of the periodogram of white noise therefore looks like exponentially-distributed noise, not a flat line — even though its expectation is flat.</p>
+<p><strong>Reducing variance.</strong> Welch's method averages periodograms over <span class="arithmatex">\(K\)</span> segments; the variance drops to <span class="arithmatex">\(\sigma^4/K\)</span>. See Chapter 2 for details.</p>
+<hr />
+<h2 id="17-sum-decomposition-theorem">1.7 Sum Decomposition Theorem<a class="headerlink" href="#17-sum-decomposition-theorem" title="Permanent link">&para;</a></h2>
+<p>For a length-<span class="arithmatex">\(N\)</span> real-valued zero-mean random vector <span class="arithmatex">\(\mathbf{X} = (X[0], \dots, X[N-1])^\top\)</span> with covariance matrix <span class="arithmatex">\(\mathbf{R} = \mathbb{E}[\mathbf{X}\mathbf{X}^\top] \in \mathbb{R}^{N\times N}\)</span>, the <strong>Sum Decomposition Theorem</strong> (also called the <strong>discrete Karhunen–Loève</strong> or <strong>principal-component</strong> decomposition) is the eigen-decomposition</p>
+<div class="arithmatex">\[
+\boxed{\;\mathbf{R} = \sum_{k=1}^{N} \lambda_k\, \mathbf{v}_k\, \mathbf{v}_k^\top\;}
+\]</div>
+<p>with <span class="arithmatex">\(\mathbf{v}_k\)</span> orthonormal eigenvectors and <span class="arithmatex">\(\lambda_1 \ge \lambda_2 \ge \dots \ge \lambda_N \ge 0\)</span> eigenvalues. The corresponding expansion</p>
+<div class="arithmatex">\[
+\boxed{\;\mathbf{X} = \sum_{k=1}^{N} Z_k\, \mathbf{v}_k,\qquad Z_k = \mathbf{v}_k^\top \mathbf{X}\;}
+\]</div>
+<p>has the property that the coefficients <span class="arithmatex">\(Z_k\)</span> are <strong>uncorrelated</strong>: <span class="arithmatex">\(\mathbb{E}[Z_i Z_j] = \lambda_i \delta_{ij}\)</span>.</p>
+<h3 id="worked-example-15-sum-decomposition-for-an-ar1">Worked example 1.5 — Sum decomposition for an AR(1)<a class="headerlink" href="#worked-example-15-sum-decomposition-for-an-ar1" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(\mathbf{X} = (X[0], \dots, X[N-1])^\top\)</span> be a length-<span class="arithmatex">\(N\)</span> block of an AR(1)
+process with <span class="arithmatex">\(R_X[k] = \rho^{|k|}\)</span> (unit variance). The covariance matrix is
+<strong>Toeplitz</strong>:</p>
+<div class="arithmatex">\[
+\mathbf{R} = \begin{bmatrix} 1 &amp; \rho &amp; \rho^2 &amp; \cdots \\ \rho &amp; 1 &amp; \rho &amp; \cdots \\ \rho^2 &amp; \rho &amp; 1 &amp; \cdots \\ \vdots &amp; &amp; &amp; \ddots \end{bmatrix}.
+\]</div>
+<p>For <span class="arithmatex">\(N = 2\)</span>: <span class="arithmatex">\(\mathbf{R} = \begin{bmatrix} 1 &amp; \rho \\ \rho &amp; 1 \end{bmatrix}\)</span>. Eigenvalues <span class="arithmatex">\(\lambda_1 = 1 + \rho\)</span>, <span class="arithmatex">\(\lambda_2 = 1 - \rho\)</span>; eigenvectors <span class="arithmatex">\(\mathbf{v}_1 = (1, 1)/\sqrt 2\)</span>, <span class="arithmatex">\(\mathbf{v}_2 = (1, -1)/\sqrt 2\)</span>.</p>
+<p>For <span class="arithmatex">\(\rho = 0.8\)</span>: <span class="arithmatex">\(\lambda_1 = 1.8\)</span>, <span class="arithmatex">\(\lambda_2 = 0.2\)</span>. Almost all the energy is in the "symmetric" direction; the "antisymmetric" direction is nearly noise. This is why a <strong>first-order linear predictor</strong> captures most of the signal in a highly-correlated process.</p>
+<p>For general <span class="arithmatex">\(N\)</span> and <span class="arithmatex">\(\rho\)</span>, the eigenvectors are <strong>discrete cosine transform (DCT)</strong> basis vectors only in the limit <span class="arithmatex">\(\rho \to 1\)</span>; for finite <span class="arithmatex">\(\rho\)</span> they are slightly different. The <strong>eigenvalues decay</strong> as a geometric-like sequence, and the first few principal components capture most of the variance.</p>
+<p><strong>Compression implication.</strong> Retaining the first <span class="arithmatex">\(M\)</span> components of the expansion — <span class="arithmatex">\(\hat{\mathbf{X}}_M = \sum_{k=1}^{M} Z_k \mathbf{v}_k\)</span> — minimises the mean-square reconstruction error over all rank-<span class="arithmatex">\(M\)</span> linear projections. The residual energy is <span class="arithmatex">\(\sum_{k=M+1}^{N}\lambda_k\)</span>.</p>
+<hr />
+<h2 id="18-spectral-factorization-theorem">1.8 Spectral Factorization Theorem<a class="headerlink" href="#18-spectral-factorization-theorem" title="Permanent link">&para;</a></h2>
+<p>The <strong>Spectral Factorization Theorem</strong> (also called the <strong>Fejér–Riesz theorem</strong> for trigonometric polynomials, and the <strong>Kolmogorov–Wiener</strong> or <strong>Wiener–Hopf</strong> factorization in the stochastic-process setting) is:</p>
+<div class="admonition abstract">
+<p class="admonition-title">Spectral Factorization</p>
+<p>Let <span class="arithmatex">\(S_X(z)\)</span> be a <strong>rational</strong> power spectral density that is <strong>positive on
+the unit circle</strong> (<span class="arithmatex">\(S_X(e^{j\omega}) &gt; 0\)</span> for all <span class="arithmatex">\(\omega\)</span>) and satisfies the
+<strong>Paley–Wiener condition</strong> <span class="arithmatex">\(\int_{-\pi}^{\pi}\log S_X(e^{j\omega})\,d\omega &gt; -\infty\)</span>.
+Then there exists a <strong>unique</strong> factorization</p>
+<div class="arithmatex">\[
+\boxed{\;S_X(z) = \sigma_e^2\, H(z)\, H(z^{-1})\;}
+\]</div>
+<p>where <span class="arithmatex">\(H(z)\)</span> is <strong>causal</strong> (<span class="arithmatex">\(H(z) = \sum_{k\ge 0} h_k z^{-k}\)</span> with <span class="arithmatex">\(h_0 = 1\)</span>),
+<strong>minimum-phase</strong> (all poles and zeros strictly inside <span class="arithmatex">\(|z| &lt; 1\)</span>), and
+<span class="arithmatex">\(\sigma_e^2 = \exp\bigl(\frac{1}{2\pi}\int\log S_X(e^{j\omega})d\omega\bigr) &gt; 0\)</span>
+is the <strong>innovations variance</strong>.</p>
+</div>
+<p><strong>Why rational is not a serious restriction.</strong> Any PSD that arises from a finite-dimensional linear system driven by white noise has rational <span class="arithmatex">\(z\)</span>-transform; this covers every AR, MA, ARMA, and state-space model. Non-rational PSDs are handled by truncation or by the general Paley–Wiener theorem.</p>
+<p><strong>Why minimum-phase matters.</strong> Among all causal filters with a given magnitude response, the minimum-phase factor <span class="arithmatex">\(H(z)\)</span> has the <strong>smallest group delay</strong> and its inverse <span class="arithmatex">\(H^{-1}(z)\)</span> is also causal — so the <strong>whitening filter</strong> <span class="arithmatex">\(1/H(z)\)</span> is realisable in real time. Any other factorization would give a causal <span class="arithmatex">\(H\)</span> with a <strong>larger</strong> <span class="arithmatex">\(\sigma_e^2\)</span> (non-minimum-phase zeros waste innovation energy).</p>
+<h3 id="how-to-factorize-a-rational-psd">How to factorize a rational PSD<a class="headerlink" href="#how-to-factorize-a-rational-psd" title="Permanent link">&para;</a></h3>
+<p>Given <span class="arithmatex">\(S_X(z)\)</span> as a ratio of polynomials in <span class="arithmatex">\(z\)</span>:</p>
+<ol>
+<li><strong>Find the roots of the numerator and denominator polynomials</strong> in <span class="arithmatex">\(z\)</span>.</li>
+<li><strong>Split each root pair</strong> <span class="arithmatex">\(\{z_0, 1/z_0^*\}\)</span>: put <span class="arithmatex">\(z_0\)</span> in <span class="arithmatex">\(H(z^{-1})\)</span> (its zero is at <span class="arithmatex">\(z_0\)</span>, outside the unit circle) and <span class="arithmatex">\(1/z_0^*\)</span> in <span class="arithmatex">\(H(z)\)</span> (its zero is at <span class="arithmatex">\(1/z_0^*\)</span>, inside the unit circle) — or vice versa, depending on the convention. The <strong>minimum-phase</strong> choice puts all interior roots in <span class="arithmatex">\(H(z)\)</span>.</li>
+<li><strong>Normalize</strong> so that <span class="arithmatex">\(H(0) = 1\)</span> (i.e., <span class="arithmatex">\(h_0 = 1\)</span>).</li>
+<li><strong>Compute</strong> <span class="arithmatex">\(\sigma_e^2\)</span> from the leading coefficients.</li>
+</ol>
+<h3 id="worked-example-16-factorize-an-arma11-psd">Worked example 1.6 — factorize an ARMA(1,1) PSD<a class="headerlink" href="#worked-example-16-factorize-an-arma11-psd" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+S_X(z) = \frac{(1 - 0.5 z^{-1})(1 - 0.5 z)}{(1 - 0.8 z^{-1})(1 - 0.8 z)}.
+\]</div>
+<p><strong>Roots.</strong> Numerator: <span class="arithmatex">\(z = 0.5\)</span> (from <span class="arithmatex">\(1 - 0.5z^{-1}\)</span>, zero at <span class="arithmatex">\(z = 0.5\)</span>) and <span class="arithmatex">\(z = 2\)</span> (from <span class="arithmatex">\(1 - 0.5z\)</span>, zero at <span class="arithmatex">\(z = 2\)</span>). Denominator: <span class="arithmatex">\(z = 0.8\)</span> and <span class="arithmatex">\(z = 1.25\)</span>.</p>
+<p><strong>Minimum-phase factor.</strong> Put the interior roots (0.5, 0.8) in <span class="arithmatex">\(H(z)\)</span>:</p>
+<div class="arithmatex">\[
+H(z) = \frac{1 - 0.5 z^{-1}}{1 - 0.8 z^{-1}},\qquad \sigma_e^2 = 1.
+\]</div>
+<p><strong>Verify.</strong></p>
+<div class="arithmatex">\[
+\sigma_e^2 H(z) H(z^{-1}) = \frac{(1 - 0.5z^{-1})(1 - 0.5z)}{(1 - 0.8z^{-1})(1 - 0.8z)} = S_X(z). ✓
+\]</div>
+<p><strong>Whitening filter.</strong> <span class="arithmatex">\(H^{-1}(z) = \frac{1 - 0.8z^{-1}}{1 - 0.5z^{-1}}\)</span> — causal, stable (both poles and zeros inside the unit circle), so realisable.</p>
+<p><strong>Non-minimum-phase alternative.</strong> Using the outer roots:</p>
+<div class="arithmatex">\[
+H_{np}(z) = \frac{1 - 2 z^{-1}}{1 - 1.25 z^{-1}}\cdot\text{(constant)}.
+\]</div>
+<p>This has the same <span class="arithmatex">\(|H(e^{j\omega})|^2\)</span> but is non-minimum-phase — its inverse is not causal. Avoid.</p>
+<h3 id="worked-example-17-factorize-an-ar2-psd">Worked example 1.7 — factorize an AR(2) PSD<a class="headerlink" href="#worked-example-17-factorize-an-ar2-psd" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+S_X(z) = \frac{\sigma_w^2}{(1 - 0.6 z^{-1})(1 - 0.7 z^{-1})(1 - 0.6 z)(1 - 0.7 z)}.
+\]</div>
+<p>Minimum-phase factor:</p>
+<div class="arithmatex">\[
+H(z) = \frac{1}{(1 - 0.6 z^{-1})(1 - 0.7 z^{-1})},\qquad \sigma_e^2 = \sigma_w^2.
+\]</div>
+<p>The <strong>innovations</strong> are exactly the driving white noise <span class="arithmatex">\(w[n]\)</span>, as expected — this is an AR(2) process.</p>
+<p>The <strong>predictor</strong> is <span class="arithmatex">\(a_1 = 0.6 + 0.7 = 1.3\)</span>, <span class="arithmatex">\(a_2 = -0.6\cdot 0.7 = -0.42\)</span>, so <span class="arithmatex">\(\hat x[n] = 1.3 x[n-1] - 0.42 x[n-2]\)</span>, and the innovations (prediction errors) are white.</p>
+<hr />
+<h2 id="19-discrete-random-signal-processing-by-linear-systems">1.9 Discrete random signal processing by linear systems<a class="headerlink" href="#19-discrete-random-signal-processing-by-linear-systems" title="Permanent link">&para;</a></h2>
+<p>Let <span class="arithmatex">\(X[n]\)</span> be WSS input to an LTI system with impulse response <span class="arithmatex">\(h[n]\)</span> and frequency response <span class="arithmatex">\(H(e^{j\omega})\)</span>. The output is</p>
+<div class="arithmatex">\[
+Y[n] = \sum_{k=-\infty}^{\infty} h[k] X[n-k].
+\]</div>
+<p><strong>Output statistics.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;\mu_Y = \mu_X \cdot H(e^{j0}) = \mu_X \sum_k h[k]\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;S_Y(e^{j\omega}) = |H(e^{j\omega})|^2\, S_X(e^{j\omega})\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;R_Y[k] = R_X[k] * \bigl(h * h^\dagger\bigr)[k]\;}
+\]</div>
+<p>where <span class="arithmatex">\(h^\dagger[k] = h^*[-k]\)</span> is the <strong>matched (time-reversed conjugate)</strong> filter, and <span class="arithmatex">\(*\)</span> denotes convolution.</p>
+<p><strong>Interpretation of the three formulas.</strong></p>
+<ul>
+<li>The <strong>mean</strong> is filtered by <span class="arithmatex">\(H(e^{j0})\)</span>: only the DC component passes; if <span class="arithmatex">\(H\)</span> has a zero at DC, the output mean is zero.</li>
+<li>The <strong>PSD</strong> is <em>multiplied</em> by <span class="arithmatex">\(|H|^2\)</span>: each frequency is attenuated or amplified independently.</li>
+<li>The <strong>autocorrelation</strong> is <span class="arithmatex">\(R_X\)</span> convolved with the deterministic autocorrelation <span class="arithmatex">\(h * h^\dagger\)</span> of the filter — a generalisation of the deterministic formula <span class="arithmatex">\(y = h * x \Rightarrow r_{yy} = r_{xx} * (h*h^\dagger)\)</span>.</li>
+</ul>
+<p>The <strong>output variance</strong> is</p>
+<div class="arithmatex">\[
+\sigma_Y^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi} |H(e^{j\omega})|^2 S_X(e^{j\omega})\, d\omega,
+\]</div>
+<p>the weighted average of <span class="arithmatex">\(S_X\)</span> over <span class="arithmatex">\(|H|^2\)</span>.</p>
+<h3 id="worked-example-18-white-noise-through-a-first-order-lowpass">Worked example 1.8 — white noise through a first-order lowpass<a class="headerlink" href="#worked-example-18-white-noise-through-a-first-order-lowpass" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X[n]\)</span> white of variance <span class="arithmatex">\(\sigma_w^2\)</span>, filtered by <span class="arithmatex">\(H(z) = \frac{1-a}{1 - a z^{-1}}\)</span> with <span class="arithmatex">\(|a| &lt; 1\)</span> (DC gain <span class="arithmatex">\(H(1) = 1\)</span>).</p>
+<p><strong>Output PSD.</strong></p>
+<div class="arithmatex">\[
+S_Y(e^{j\omega}) = \sigma_w^2 \cdot \frac{(1-a)^2}{(1 - a e^{-j\omega})(1 - a e^{j\omega})} = \frac{\sigma_w^2(1-a)^2}{1 - 2a\cos\omega + a^2}.
+\]</div>
+<p><strong>Output autocorrelation</strong> (inverse DTFT of <span class="arithmatex">\(S_Y\)</span>):</p>
+<div class="arithmatex">\[
+R_Y[k] = \sigma_w^2\, \frac{1-a}{1+a}\, a^{|k|}.
+\]</div>
+<p><strong>Check variance.</strong> <span class="arithmatex">\(R_Y[0] = \sigma_w^2 \frac{1-a}{1+a}\)</span>. For <span class="arithmatex">\(a = 0\)</span>: <span class="arithmatex">\(R_Y[0] = \sigma_w^2\)</span> ✓ (filter is identity, output = input). For <span class="arithmatex">\(a \to 1\)</span>: <span class="arithmatex">\(R_Y[0] \to 0\)</span> ✓ (filter becomes an ideal DC selector; white noise has zero DC; output is zero).</p>
+<p><strong>Output mean.</strong> <span class="arithmatex">\(\mu_Y = \mu_X \cdot H(1) = \mu_X \cdot 1 = \mu_X\)</span>. For zero-mean white noise, output is zero-mean.</p>
+<p><strong>Correlation time.</strong> The decay rate of <span class="arithmatex">\(R_Y[k]\)</span> is <span class="arithmatex">\(a^{|k|}\)</span>; the <strong>integrated autocorrelation time</strong> is <span class="arithmatex">\(\tau_{int} = \sum_k R_Y[k]/R_Y[0] = (1+a)/(1-a)\)</span>. As <span class="arithmatex">\(a \to 1\)</span>, the output is highly correlated; as <span class="arithmatex">\(a \to 0\)</span>, it approaches white noise.</p>
+<hr />
+<h2 id="110-simulation-of-white-noise">1.10 Simulation of white noise<a class="headerlink" href="#110-simulation-of-white-noise" title="Permanent link">&para;</a></h2>
+<p>To simulate a <strong>white noise sequence</strong> <span class="arithmatex">\(X[n]\)</span> (IID with a given distribution):</p>
+<h3 id="1101-uniform-noise">1.10.1 Uniform noise<a class="headerlink" href="#1101-uniform-noise" title="Permanent link">&para;</a></h3>
+<p>Any PRNG (Mersenne Twister, xorshift, PCG) produces approximately uniform <span class="arithmatex">\(\mathcal U[0,1)\)</span> samples. In Python: <code>np.random.rand()</code>. In Java: <code>java.util.Random.nextDouble()</code>. In C#: <code>System.Random.NextDouble()</code>.</p>
+<p>For <span class="arithmatex">\(\mathcal U[a, b]\)</span>: <span class="arithmatex">\(X = a + (b-a)U\)</span>.</p>
+<h3 id="1102-gaussian-noise-boxmuller-transform">1.10.2 Gaussian noise — Box–Muller transform<a class="headerlink" href="#1102-gaussian-noise-boxmuller-transform" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(U_1, U_2\)</span> are independent <span class="arithmatex">\(\mathcal U(0,1)\)</span> samples, then</p>
+<div class="arithmatex">\[
+\boxed{\;Z_1 = \sqrt{-2\ln U_1}\,\cos(2\pi U_2),\qquad Z_2 = \sqrt{-2\ln U_1}\,\sin(2\pi U_2)\;}
+\]</div>
+<p>are independent <span class="arithmatex">\(\mathcal N(0,1)\)</span> samples. This is the <strong>Box–Muller transform</strong>.</p>
+<p><strong>Derivation sketch.</strong> Transform <span class="arithmatex">\((U_1, U_2)\)</span> to polar <span class="arithmatex">\((R, \Theta)\)</span>: <span class="arithmatex">\(R = \sqrt{-2\ln U_1}\)</span> and <span class="arithmatex">\(\Theta = 2\pi U_2\)</span>. The Jacobian gives the joint density</p>
+<div class="arithmatex">\[
+f_{R,\Theta}(r,\theta) = \frac{r}{2\pi} e^{-r^2/2},\quad r \ge 0,\ 0 \le \theta &lt; 2\pi,
+\]</div>
+<p>which factors into <span class="arithmatex">\(R \sim \mathrm{Rayleigh}(1)\)</span> and <span class="arithmatex">\(\Theta \sim \mathcal U[0, 2\pi)\)</span>. Then <span class="arithmatex">\(Z_1 = R\cos\Theta\)</span>, <span class="arithmatex">\(Z_2 = R\sin\Theta\)</span> are the Cartesian coordinates of a 2-D standard Gaussian. ✓</p>
+<h3 id="1103-arbitrary-distribution-inverse-cdf">1.10.3 Arbitrary distribution — inverse CDF<a class="headerlink" href="#1103-arbitrary-distribution-inverse-cdf" title="Permanent link">&para;</a></h3>
+<p>If <span class="arithmatex">\(F\)</span> is the CDF of the desired distribution and <span class="arithmatex">\(U \sim \mathcal U(0,1)\)</span>, then</p>
+<div class="arithmatex">\[
+X = F^{-1}(U)
+\]</div>
+<p>has CDF <span class="arithmatex">\(F\)</span>. This is the <strong>inverse transform sampling</strong> method. Works for any strictly increasing <span class="arithmatex">\(F\)</span>; for distributions with atoms, handle them by intervals of <span class="arithmatex">\(U\)</span>.</p>
+<h3 id="1104-sample-autocorrelation-of-simulated-white-noise">1.10.4 Sample autocorrelation of simulated white noise<a class="headerlink" href="#1104-sample-autocorrelation-of-simulated-white-noise" title="Permanent link">&para;</a></h3>
+<p>For <span class="arithmatex">\(N\)</span> samples of white noise with variance <span class="arithmatex">\(\sigma^2\)</span>:</p>
+<div class="arithmatex">\[
+\mathbb{E}[\hat{R}[k]] = \begin{cases} \sigma^2 &amp; k = 0 \\ 0 &amp; k \ne 0 \end{cases},\qquad
+\operatorname{Var}[\hat{R}[k]] \approx \frac{\sigma^4}{N}.
+\]</div>
+<p>So <span class="arithmatex">\(|\hat{R}[k]| \le 3\sigma^2/\sqrt N\)</span> for <span class="arithmatex">\(k \ne 0\)</span> with 99% confidence. This is the <strong>white-noise confidence band</strong> — any empirical autocorrelation that stays within <span class="arithmatex">\(\pm 3\sigma/\sqrt N\)</span> for <span class="arithmatex">\(k \ne 0\)</span> is consistent with white noise.</p>
+<h3 id="worked-example-19-boxmuller-in-python">Worked example 1.9 — Box–Muller in Python<a class="headerlink" href="#worked-example-19-boxmuller-in-python" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">box_muller</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="n">U1</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">U2</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">U1</span><span class="p">))</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">Z1</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">U2</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    <span class="n">Z2</span> <span class="o">=</span> <span class="n">R</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">U2</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">Z1</span><span class="p">,</span> <span class="n">Z2</span><span class="p">])</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">z</span> <span class="o">=</span> <span class="n">box_muller</span><span class="p">(</span><span class="mi">100_000</span><span class="p">)</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"mean: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, var: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># ≈ 0, 1</span>
+</span></code></pre></div>
+<p>This produces <span class="arithmatex">\(2n\)</span> samples from a single pair of length-<span class="arithmatex">\(n\)</span> uniform arrays. Empirical mean <span class="arithmatex">\(\approx 0\)</span>, variance <span class="arithmatex">\(\approx 1\)</span> — verifying the transform.</p>
+<hr />
+<h2 id="111-lowpass-filtering-of-white-noise-colouring">1.11 Lowpass filtering of white noise — colouring<a class="headerlink" href="#111-lowpass-filtering-of-white-noise-colouring" title="Permanent link">&para;</a></h2>
+<p><strong>The point.</strong> White noise is an abstraction — no physical process has infinite bandwidth. Every real signal is <strong>white noise filtered</strong> by some LTI system (the source of the "colour"). Conversely, simulating a coloured process with a given PSD <span class="arithmatex">\(S_X\)</span> amounts to</p>
+<ol>
+<li>Generating white noise <span class="arithmatex">\(W[n]\)</span> of unit variance,</li>
+<li>Filtering it with the <strong>spectral factor</strong> <span class="arithmatex">\(H(z)\)</span> from §1.8: <span class="arithmatex">\(X[n] = h * W[n]\)</span>.</li>
+</ol>
+<p>This works because <span class="arithmatex">\(S_X = |H|^2\)</span> when <span class="arithmatex">\(W\)</span> has unit PSD.</p>
+<h3 id="worked-example-110-ar1-as-filtered-white-noise">Worked example 1.10 — AR(1) as filtered white noise<a class="headerlink" href="#worked-example-110-ar1-as-filtered-white-noise" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X[n] = a X[n-1] + W[n]\)</span>, <span class="arithmatex">\(|a| &lt; 1\)</span>, <span class="arithmatex">\(W\)</span> white of variance <span class="arithmatex">\(\sigma_W^2\)</span>. The filter is <span class="arithmatex">\(H(z) = 1/(1-az^{-1})\)</span>; output PSD <span class="arithmatex">\(S_X = \sigma_W^2/(1-2a\cos\omega + a^2)\)</span>.</p>
+<p><strong>Simulation (Python):</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">lfilter</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">simulate_ar1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">sigma_w</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">w</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma_w</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span>     <span class="c1"># burn-in</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">lfilter</span><span class="p">([</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">],</span> <span class="n">w</span><span class="p">)[</span><span class="mi">200</span><span class="p">:]</span>           <span class="c1"># discard transient</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">return</span> <span class="n">x</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">x</span> <span class="o">=</span> <span class="n">simulate_ar1</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">sigma_w</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100_000</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"empirical mean: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>                 <span class="c1"># ≈ 0</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"empirical variance: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>              <span class="c1"># ≈ 1/(1-a²) = 5.263</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"empirical R_x[1]: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:])[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>  <span class="c1"># ≈ a = 0.9</span>
+</span></code></pre></div>
+<h3 id="worked-example-111-ideal-lowpass-brick-wall-filter">Worked example 1.11 — ideal lowpass (brick-wall) filter<a class="headerlink" href="#worked-example-111-ideal-lowpass-brick-wall-filter" title="Permanent link">&para;</a></h3>
+<p>Ideal lowpass with cutoff <span class="arithmatex">\(\omega_c\)</span>: <span class="arithmatex">\(|H(e^{j\omega})|^2 = 1\)</span> for <span class="arithmatex">\(|\omega| \le \omega_c\)</span>, zero otherwise.</p>
+<p><strong>Output PSD.</strong> <span class="arithmatex">\(S_Y(e^{j\omega}) = \sigma_w^2\)</span> for <span class="arithmatex">\(|\omega| \le \omega_c\)</span>, zero otherwise.</p>
+<p><strong>Output autocorrelation.</strong> Inverse DTFT:</p>
+<div class="arithmatex">\[
+R_Y[k] = \frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\sigma_w^2\, e^{j\omega k}\,d\omega = \sigma_w^2\,\frac{\sin(\omega_c k)}{\pi k}.
+\]</div>
+<p><strong>Output variance.</strong> <span class="arithmatex">\(R_Y[0] = \sigma_w^2 \omega_c/\pi\)</span> — proportional to bandwidth. The <strong>fractional bandwidth</strong> <span class="arithmatex">\(\omega_c/\pi\)</span> is the fraction of white-noise power that survives.</p>
+<p>The ideal lowpass is <strong>not causal</strong> (its impulse response is a sinc), so it can only be approximated in real time. This is why <strong>finite-length FIR approximations</strong> are used in practice, and why the AR(1) filter (causal, recursive, infinite-order) is so popular as a "practical lowpass" — one coefficient controls the cutoff.</p>
+<h3 id="worked-example-112-whitening-a-coloured-process">Worked example 1.12 — whitening a coloured process<a class="headerlink" href="#worked-example-112-whitening-a-coloured-process" title="Permanent link">&para;</a></h3>
+<p>Given a coloured process <span class="arithmatex">\(Y[n]\)</span> with PSD <span class="arithmatex">\(S_Y = \sigma_e^2 |H|^2\)</span>, the <strong>whitening filter</strong> is <span class="arithmatex">\(G(z) = 1/H(z)\)</span>. Its output has PSD</p>
+<div class="arithmatex">\[
+S_{Y_{\text{white}}}(e^{j\omega}) = |G(e^{j\omega})|^2 S_Y(e^{j\omega}) = \sigma_e^2
+\]</div>
+<p>— flat, i.e., white noise of variance <span class="arithmatex">\(\sigma_e^2\)</span>. This is the <strong>inverse filter</strong> of the spectral factor.</p>
+<p>For AR(1) with <span class="arithmatex">\(a = 0.9\)</span>: <span class="arithmatex">\(G(z) = 1 - 0.9 z^{-1}\)</span>, i.e., <span class="arithmatex">\(Y_{white}[n] = Y[n] - 0.9 Y[n-1]\)</span>. The output is white with variance <span class="arithmatex">\(\sigma_e^2 = \sigma_W^2\)</span>. <strong>Practical implication:</strong> the first-order difference <span class="arithmatex">\(Y[n] - 0.9 Y[n-1]\)</span> is a whitening filter — a fact used throughout speech processing (where speech is approximated as AR) and Kalman filtering (where the innovations are the whitened observations).</p>
+<hr />
+<h2 id="112-chapter-summary">1.12 Chapter summary<a class="headerlink" href="#112-chapter-summary" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Discrete random processes</strong> are families of random variables indexed by integer <span class="arithmatex">\(n\)</span>. Wide-sense stationarity means constant mean and autocorrelation depending only on lag.</li>
+<li><strong>Parseval's theorem</strong> — <span class="arithmatex">\(\sum_n |x[n]|^2 = \frac{1}{2\pi}\int_{-\pi}^{\pi}|X(e^{j\omega})|^2 d\omega\)</span> — extends to WSS processes with <span class="arithmatex">\(R_X[0] = \frac{1}{2\pi}\int S_X\,d\omega\)</span>.</li>
+<li><strong>Wiener–Khinchine</strong> makes the PSD the DTFT of the autocorrelation; it is non-negative, <span class="arithmatex">\(2\pi\)</span>-periodic, and integrates to <span class="arithmatex">\(R_X[0]\)</span>.</li>
+<li><strong>The periodogram</strong> is the natural estimator; asymptotically unbiased but inconsistent (<span class="arithmatex">\(\mathrm{Var} \approx S_X^2\)</span>).</li>
+<li><strong>Sample autocorrelation</strong> — use the biased form to guarantee a valid PSD; use the unbiased form only for descriptive statistics.</li>
+<li><strong>Sum Decomposition</strong> = eigen-decomposition of the covariance matrix; the KL / PCA expansion in finite dimension.</li>
+<li><strong>Spectral Factorization</strong> — every rational PSD with <span class="arithmatex">\(\int\log S &gt; -\infty\)</span> has a unique causal, minimum-phase factor <span class="arithmatex">\(S_X = \sigma_e^2|H|^2\)</span>; the innovations variance <span class="arithmatex">\(\sigma_e^2\)</span> is the geometric mean of <span class="arithmatex">\(S_X\)</span>.</li>
+<li><strong>Linear systems</strong> — <span class="arithmatex">\(S_Y = |H|^2 S_X\)</span>; output autocorrelation is <span class="arithmatex">\(R_X * (h*h^\dagger)\)</span>; the output mean is <span class="arithmatex">\(\mu_X H(1)\)</span>.</li>
+<li><strong>White noise simulation</strong> — uniform from any PRNG, Gaussian from Box–Muller, arbitrary from inverse CDF.</li>
+<li><strong>Coloured noise simulation</strong> — filter white noise with the spectral factor; <strong>whitening</strong> is the inverse filter.</li>
+</ol>
+<hr />
+<h2 id="113-quiz">1.13 Quiz<a class="headerlink" href="#113-quiz" title="Permanent link">&para;</a></h2>
+<h3 id="a-multiple-choice-choose-the-single-best-answer">A. Multiple choice (choose the single best answer)<a class="headerlink" href="#a-multiple-choice-choose-the-single-best-answer" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>A WSS sequence has:
+   (a) constant variance, arbitrary mean (b) constant mean, autocorrelation depending only on lag (c) Gaussian distribution (d) finite energy</p>
+</li>
+<li>
+<p>The energy of a sequence <span class="arithmatex">\(x[n]\)</span> is <span class="arithmatex">\(\sum |x[n]|^2\)</span>. Parseval's theorem for finite-length sequences with the <span class="arithmatex">\(N\)</span>-point DFT expresses this as:
+   (a) <span class="arithmatex">\(\sum |X[k]|^2\)</span> (b) <span class="arithmatex">\(\frac{1}{N}\sum |X[k]|^2\)</span> (c) <span class="arithmatex">\(N\sum |X[k]|^2\)</span> (d) <span class="arithmatex">\(\frac{1}{N^2}\sum |X[k]|^2\)</span></p>
+</li>
+<li>
+<p>The Wiener–Khinchine relation states that:
+   (a) the PSD equals the DTFT of the autocorrelation (b) the autocorrelation is the DFT of the signal (c) the signal is the PSD (d) the noise is white</p>
+</li>
+<li>
+<p>For a WSS process, <span class="arithmatex">\(R_X[0]\)</span> equals:
+   (a) the mean (b) the variance (c) the total power (variance plus mean squared) (d) zero</p>
+</li>
+<li>
+<p>The <strong>biased</strong> sample autocorrelation is preferred over the <strong>unbiased</strong> form because:
+   (a) it is unbiased (b) it has lower variance and is positive-definite (c) it is easier to compute (d) it is a better estimator of the mean</p>
+</li>
+<li>
+<p>The <strong>periodogram</strong> of white noise:
+   (a) is a flat line (b) has mean <span class="arithmatex">\(S_X\)</span> but standard deviation equal to the mean (c) is Gaussian (d) is zero at all frequencies</p>
+</li>
+<li>
+<p>The Sum Decomposition Theorem is equivalent to:
+   (a) the FFT (b) the eigen-decomposition of the covariance matrix (c) the Z-transform (d) the DFT</p>
+</li>
+<li>
+<p>The Spectral Factorization Theorem says every rational PSD with <span class="arithmatex">\(\int\log S &gt; -\infty\)</span> has a unique causal, minimum-phase factor <span class="arithmatex">\(H(z)\)</span> with:
+   (a) <span class="arithmatex">\(S_X = |H|^2\)</span> (b) <span class="arithmatex">\(S_X = \sigma_e^2 |H|^2\)</span> (c) <span class="arithmatex">\(S_X = H\)</span> (d) <span class="arithmatex">\(S_X = 1/H\)</span></p>
+</li>
+<li>
+<p>For white noise through an LTI filter with response <span class="arithmatex">\(H\)</span>:
+   (a) output PSD = input PSD (b) output PSD = <span class="arithmatex">\(|H|^2 \times\)</span> input PSD (c) output is white (d) output is non-stationary</p>
+</li>
+<li>
+<p>The Box–Muller transform generates:
+    (a) uniform samples (b) exponential samples (c) Gaussian samples (d) Poisson samples</p>
+</li>
+<li>
+<p>The <strong>output variance</strong> of white noise of variance <span class="arithmatex">\(\sigma_w^2\)</span> through a filter with impulse response <span class="arithmatex">\(h\)</span> is:
+    (a) <span class="arithmatex">\(\sigma_w^2\)</span> (b) <span class="arithmatex">\(\sigma_w^2 \sum_k |h[k]|^2\)</span> (c) <span class="arithmatex">\(\sigma_w^2 \sum_k h[k]\)</span> (d) <span class="arithmatex">\(0\)</span></p>
+</li>
+<li>
+<p>The <strong>whitening filter</strong> for a process with spectral factor <span class="arithmatex">\(H(z)\)</span> is:
+    (a) <span class="arithmatex">\(H(z)\)</span> (b) <span class="arithmatex">\(H(z^{-1})\)</span> (c) <span class="arithmatex">\(1/H(z)\)</span> (d) <span class="arithmatex">\(H(z) H(z^{-1})\)</span></p>
+</li>
+</ol>
+<h3 id="b-fill-in-the-blank">B. Fill in the blank<a class="headerlink" href="#b-fill-in-the-blank" title="Permanent link">&para;</a></h3>
+<ol>
+<li>A WSS process has constant mean and autocorrelation depending only on ____.</li>
+<li><span class="arithmatex">\(R_X[0]\)</span> equals $\sigma_X^2 + $____ for a WSS process.</li>
+<li>Parseval's theorem for finite-length sequences is <span class="arithmatex">\(\sum|x[n]|^2 = \frac{1}{N}\sum |X[k]|^2\)</span> (with the <span class="arithmatex">\(N\)</span>-point DFT); this holds because the DFT is ____-preserving.</li>
+<li>The Wiener–Khinchine relation is $S_X(e^{j\omega}) = \sum_{k} $____ <span class="arithmatex">\(\,e^{-j\omega k}\)</span>.</li>
+<li>The periodogram is <span class="arithmatex">\(\hat{S}_X = \frac{1}{N}\bigl|\sum_{n}\)</span>____<span class="arithmatex">\(\bigr|^2\)</span>.</li>
+<li>The Sum Decomposition Theorem expresses a random vector as <span class="arithmatex">\(\mathbf{X} = \sum_k Z_k \mathbf{v}_k\)</span> with $\mathbb{E}[Z_i Z_j] = $____ <span class="arithmatex">\(\delta_{ij}\)</span>.</li>
+<li>The Spectral Factorization Theorem gives $S_X(z) = $____ <span class="arithmatex">\(H(z) H(z^{-1})\)</span> with <span class="arithmatex">\(H\)</span> minimum-phase.</li>
+<li>For white noise of variance <span class="arithmatex">\(\sigma_w^2\)</span> through a filter with impulse response <span class="arithmatex">\(h\)</span>, the output variance is <span class="arithmatex">\(\sigma_w^2 \sum_k\)</span> ____.</li>
+<li>The whitening filter for a process with spectral factor <span class="arithmatex">\(H\)</span> is ____.</li>
+<li>Box–Muller transforms two uniform samples into two ____ samples.</li>
+</ol>
+<h3 id="c-define-explain">C. Define / explain<a class="headerlink" href="#c-define-explain" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Define a <strong>discrete-time random process</strong> and state the conditions for <strong>wide-sense stationarity</strong>. Give one example that is WSS but not strictly stationary.</li>
+<li>State <strong>Parseval's theorem</strong> for finite-length sequences and for WSS processes. What is the interpretation in each case?</li>
+<li>State the <strong>Wiener–Khinchine relation</strong>. What is the physical interpretation of the PSD's non-negativity?</li>
+<li>Define the <strong>sample autocorrelation</strong> in both biased and unbiased forms. Why is the biased form preferred in spectral estimation?</li>
+<li>Define the <strong>periodogram</strong> and discuss its bias and variance as <span class="arithmatex">\(N \to \infty\)</span>. Why is it inconsistent?</li>
+<li>State the <strong>Sum Decomposition Theorem</strong> and interpret it as a data-compression scheme. What is the truncated approximation error?</li>
+<li>State the <strong>Spectral Factorization Theorem</strong>. Why is the minimum-phase factor unique and important?</li>
+<li>For WSS input to an LTI system with response <span class="arithmatex">\(H\)</span>, derive the output PSD, output autocorrelation, and output mean.</li>
+<li>Describe the <strong>Box–Muller transform</strong> and state what it is used for. Give the two formulas for <span class="arithmatex">\(Z_1, Z_2\)</span>.</li>
+<li>Explain what it means to <strong>colour</strong> white noise, and how the <strong>spectral factor</strong> is used in simulation.</li>
+</ol>
+<hr />
+<h2 id="114-answer-key">1.14 Answer key<a class="headerlink" href="#114-answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>A. Multiple choice</summary>
+<ol>
+<li><strong>(b)</strong> — constant mean + autocorrelation depends only on lag.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(\frac{1}{N}\sum|X[k]|^2\)</span>.</li>
+<li><strong>(a)</strong> — PSD = DTFT of autocorrelation.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(R_X[0] = \sigma_X^2 + |\mu_X|^2\)</span> (total power).</li>
+<li><strong>(b)</strong> — lower variance, positive-definite.</li>
+<li><strong>(b)</strong> — mean = <span class="arithmatex">\(S_X\)</span>, std = mean.</li>
+<li><strong>(b)</strong> — eigen-decomposition of covariance.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(S_X = \sigma_e^2 |H|^2\)</span>.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(|H|^2 \times\)</span> input PSD.</li>
+<li><strong>(c)</strong> — Gaussian samples.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(\sigma_w^2 \sum |h[k]|^2\)</span>.</li>
+<li><strong>(c)</strong> — <span class="arithmatex">\(1/H(z)\)</span>.</li>
+</ol>
+</details>
+<details class="success">
+<summary>B. Fill in the blank</summary>
+<ol>
+<li>lag</li>
+<li><span class="arithmatex">\(|\mu_X|^2\)</span> (or mean squared)</li>
+<li>energy</li>
+<li><span class="arithmatex">\(R_X[k]\)</span></li>
+<li><span class="arithmatex">\(x[n] e^{-j\omega n}\)</span></li>
+<li><span class="arithmatex">\(\lambda_i\)</span> (eigenvalues)</li>
+<li><span class="arithmatex">\(\sigma_e^2\)</span></li>
+<li><span class="arithmatex">\(|h[k]|^2\)</span></li>
+<li><span class="arithmatex">\(1/H(z)\)</span> (or <span class="arithmatex">\(H^{-1}(z)\)</span>)</li>
+<li>Gaussian (independent standard normal)</li>
+</ol>
+</details>
+<details class="success">
+<summary>C. Define / explain — model answers</summary>
+<ol>
+<li><em>Discrete-time random process:</em> family <span class="arithmatex">\(\{X[n]\}_{n\in\mathbb Z}\)</span> of random variables on a common probability space. <em>WSS:</em> (i) <span class="arithmatex">\(\mu_X[n] = \mu_X\)</span> constant; (ii) <span class="arithmatex">\(R_X[m,n] = \mathbb{E}[X[m]X^*[n]]\)</span> depends only on <span class="arithmatex">\(m - n\)</span>. <em>Example WSS but not SSS:</em> <span class="arithmatex">\(X[n] = A\cos(\omega_0 n + \Theta)\)</span> with <span class="arithmatex">\(A\)</span> a non-constant random amplitude (e.g., <span class="arithmatex">\(A \sim\)</span> Rayleigh) independent of <span class="arithmatex">\(\Theta \sim \mathcal U(0,2\pi)\)</span>. Mean is zero, <span class="arithmatex">\(R_X[k] = \frac{\mathbb{E}[A^2]}{2}\cos(\omega_0 k)\)</span> — WSS. But <span class="arithmatex">\(\mathbb{E}[X[n]^3] = \frac{\mathbb{E}[A^3]}{4}\cos(3\omega_0 n + \cdots)\)</span> depends on <span class="arithmatex">\(n\)</span>, so the third-order moments are time-varying — not strictly stationary.</li>
+<li><em>Finite-length:</em> <span class="arithmatex">\(\sum_{n=0}^{N-1}|x[n]|^2 = \frac{1}{N}\sum_{k=0}^{N-1}|X[k]|^2\)</span> where <span class="arithmatex">\(X[k]\)</span> is the <span class="arithmatex">\(N\)</span>-point DFT. Interpretation: energy in time = energy in frequency (the DFT is a unitary transform up to the factor <span class="arithmatex">\(N\)</span>). <em>WSS:</em> <span class="arithmatex">\(R_X[0] = \frac{1}{2\pi}\int_{-\pi}^{\pi}S_X(e^{j\omega})d\omega\)</span>. Interpretation: total power = integral of PSD.</li>
+<li><span class="arithmatex">\(S_X(e^{j\omega}) = \sum_k R_X[k]e^{-j\omega k}\)</span>. <em>Non-negativity interpretation:</em> <span class="arithmatex">\(S_X \ge 0\)</span> means that the autocorrelation is positive-definite, which reflects that power at any frequency cannot be negative — a physical necessity. Equivalently, the PSD is a "weight" for the spectral content of the process, so its negativity would imply negative energy at some frequency, which is impossible.</li>
+<li><em>Biased:</em> <span class="arithmatex">\(\hat R[k] = \frac{1}{N}\sum_{n=0}^{N-1-|k|} x[n+|k|]x^*[n]\)</span>. <em>Unbiased:</em> <span class="arithmatex">\(\hat R_u[k] = \frac{1}{N-|k|}\sum x[n+|k|]x^*[n]\)</span>. <em>Why biased:</em> (i) it is positive-definite — its DTFT is a valid PSD; (ii) it has lower mean-square error at large lags (the variance of <span class="arithmatex">\(\hat R_u\)</span> blows up as <span class="arithmatex">\(|k| \to N\)</span>); (iii) its <span class="arithmatex">\(O(1/N)\)</span> bias vanishes asymptotically. For <strong>spectral estimation</strong> it is therefore the standard choice.</li>
+<li><span class="arithmatex">\(\hat S_X(e^{j\omega}) = \frac{1}{N}|\sum x[n]e^{-j\omega n}|^2\)</span>. <em>Bias:</em> <span class="arithmatex">\(\mathbb{E}[\hat S_X] \to S_X\)</span> as <span class="arithmatex">\(N \to \infty\)</span>, with <span class="arithmatex">\(O(1/N)\)</span> bias for finite <span class="arithmatex">\(N\)</span>. <em>Variance:</em> <span class="arithmatex">\(\operatorname{Var}[\hat S_X] \approx S_X^2\)</span> for all <span class="arithmatex">\(N\)</span> — independent of record length. <em>Why inconsistent:</em> the variance does not shrink to zero, so increasing <span class="arithmatex">\(N\)</span> at fixed realization does not improve accuracy. The fix is averaging over independent <strong>segments</strong> (Bartlett, Welch), or over independent realizations.</li>
+<li>Sum Decomposition: <span class="arithmatex">\(\mathbf{R} = \sum_k \lambda_k \mathbf{v}_k \mathbf{v}_k^\top\)</span>; the covariance matrix eigen-decomposition. <em>Data-compression interpretation:</em> the truncated expansion <span class="arithmatex">\(\hat{\mathbf{X}}_M = \sum_{k=1}^M Z_k \mathbf{v}_k\)</span> retains the <span class="arithmatex">\(M\)</span> largest-eigenvalue directions and discards the rest. <em>Truncation error:</em> <span class="arithmatex">\(\mathbb{E}[\|\mathbf{X} - \hat{\mathbf{X}}_M\|^2] = \sum_{k=M+1}^N \lambda_k\)</span>. This is the optimal rank-<span class="arithmatex">\(M\)</span> linear compression in mean-square sense — the theoretical basis of PCA / KL / DCT-based compression.</li>
+<li><em>Statement:</em> for a rational PSD positive on <span class="arithmatex">\(|z|=1\)</span> with <span class="arithmatex">\(\int\log S &gt; -\infty\)</span>, there exists a unique factorization <span class="arithmatex">\(S_X(z) = \sigma_e^2 H(z)H(z^{-1})\)</span> with <span class="arithmatex">\(H\)</span> causal, monic, minimum-phase. <em>Uniqueness:</em> among all factors with the same magnitude response, exactly one is minimum-phase (all zeros inside the unit circle). <em>Importance:</em> (i) <span class="arithmatex">\(H^{-1}\)</span> is causal — the whitening filter is realizable; (ii) it gives the smallest innovations variance <span class="arithmatex">\(\sigma_e^2\)</span> — the most efficient representation; (iii) it is the basis of every AR/ARMA model and every innovations representation.</li>
+<li><em>Output PSD:</em> <span class="arithmatex">\(S_Y(e^{j\omega}) = |H(e^{j\omega})|^2 S_X(e^{j\omega})\)</span>. Derivation: <span class="arithmatex">\(\mathbb{E}[Y[n+k]Y^*[n]] = \sum_{i,j} h[i]h^*[j] R_X[k + i - j]\)</span>; taking the DTFT and reordering gives the product form. <em>Output autocorrelation:</em> <span class="arithmatex">\(R_Y[k] = R_X[k] * (h*h^\dagger)[k]\)</span> — convolution of input autocorrelation with the filter's deterministic autocorrelation. <em>Output mean:</em> <span class="arithmatex">\(\mu_Y = \mu_X H(e^{j0}) = \mu_X \sum_k h[k]\)</span> — the filter's DC gain.</li>
+<li><em>Box–Muller:</em> generates two independent <span class="arithmatex">\(\mathcal N(0,1)\)</span> samples from two independent <span class="arithmatex">\(\mathcal U(0,1)\)</span> samples. <span class="arithmatex">\(Z_1 = \sqrt{-2\ln U_1}\cos(2\pi U_2)\)</span>, <span class="arithmatex">\(Z_2 = \sqrt{-2\ln U_1}\sin(2\pi U_2)\)</span>. <em>Use:</em> simulating Gaussian noise when only a uniform PRNG is available; also gives insight into the polar decomposition of the 2-D Gaussian.</li>
+<li><em>Colouring</em> = passing white noise through a filter so the output has the desired PSD. If the target PSD is <span class="arithmatex">\(S_X = \sigma_w^2 |H|^2\)</span>, filtering unit-variance white noise through <span class="arithmatex">\(H(z)\)</span> gives output with PSD <span class="arithmatex">\(S_X\)</span>. The spectral factor <span class="arithmatex">\(H\)</span> is obtained from §1.8. The <strong>simulation recipe:</strong> (i) generate white noise of unit variance; (ii) apply <span class="arithmatex">\(H\)</span> via <code>scipy.signal.lfilter</code> or its Java/C# equivalent; (iii) the output is the simulated process. Conversely, <strong>whitening</strong> applies <span class="arithmatex">\(H^{-1}\)</span> to remove the correlation and produce white noise.</li>
+</ol>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hayes, <em>Statistical Digital Signal Processing and Modeling</em>, Wiley, 1996 — Chapters 1–3, the exact match to this chapter.</li>
+<li>Proakis &amp; Manolakis, <em>Digital Signal Processing</em>, Pearson, 2007 — Chapter 2 for review; Chapter 14 for spectral estimation.</li>
+<li>Oppenheim &amp; Schafer, <em>Discrete-Time Signal Processing</em>, PHI — Chapters 2, 4, 10 for the deterministic foundations.</li>
+<li>Kay, <em>Modern Spectral Estimation</em>, Prentice-Hall, 1988 — the reference for periodogram analysis and the Sum Decomposition.</li>
+<li>Papoulis &amp; Pillai, <em>Probability, Random Variables, and Stochastic Processes</em>, 4th ed. — Chapters 9–10 for the statistical background.</li>
+<li>Stoica &amp; Moses, <em>Spectral Analysis of Signals</em>, Prentice-Hall, 2005 — for the general spectral factorization theory.</li>
+</ul>
+<hr />
+<h2 id="suggested-tutorial-and-lab-problems-for-this-chapter">Suggested tutorial and lab problems for this chapter<a class="headerlink" href="#suggested-tutorial-and-lab-problems-for-this-chapter" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Parseval check.</strong> For <span class="arithmatex">\(x[n] = a^n u[n]\)</span> with <span class="arithmatex">\(|a| &lt; 1\)</span>, verify Parseval's theorem for infinite-length energy signals: <span class="arithmatex">\(\sum |x[n]|^2 = \frac{1}{2\pi}\int |X(e^{j\omega})|^2 d\omega\)</span>.</li>
+<li><strong>Autocorrelation derivation.</strong> Derive <span class="arithmatex">\(R_X[k]\)</span> for <span class="arithmatex">\(X[n] = A\cos(\omega_0 n + \Theta)\)</span> with <span class="arithmatex">\(\Theta\)</span> uniform and <span class="arithmatex">\(A\)</span> fixed. Compare with the continuous-time result.</li>
+<li><strong>Wiener–Khinchine inverse.</strong> Given <span class="arithmatex">\(S_X(e^{j\omega}) = \frac{1 - a^2}{|1 - a e^{-j\omega}|^2}\)</span> with <span class="arithmatex">\(|a| &lt; 1\)</span>, compute <span class="arithmatex">\(R_X[k]\)</span> by inverse DTFT. Verify the answer is <span class="arithmatex">\(\rho^{|k|}\)</span> with <span class="arithmatex">\(\rho = a\)</span>.</li>
+<li><strong>Periodogram variance study.</strong> Simulate <span class="arithmatex">\(N = 256\)</span> samples of white Gaussian noise, compute the periodogram, and plot its histogram over frequencies. Verify that <span class="arithmatex">\(\hat S_X/\sigma^2 \sim \mathrm{Exp}(1)\)</span>. Repeat for <span class="arithmatex">\(N = 4096\)</span> and <span class="arithmatex">\(N = 65536\)</span> — does the variance change?</li>
+<li><strong>Sum decomposition.</strong> For an AR(1) with <span class="arithmatex">\(\rho = 0.9\)</span> and <span class="arithmatex">\(N = 16\)</span>, compute the eigen-decomposition of the covariance matrix numerically. Plot the eigenvalues. How many components capture 99% of the variance? Compare with <span class="arithmatex">\(\rho = 0.5\)</span>.</li>
+<li><strong>Spectral factorization exercise.</strong> Factorize <span class="arithmatex">\(S_X(z) = \frac{(1 - 0.3z^{-1})(1 - 0.3z)}{(1 - 0.9z^{-1})(1 - 0.9z)}\)</span> into a causal, minimum-phase <span class="arithmatex">\(H(z)\)</span> with <span class="arithmatex">\(\sigma_e^2\)</span>. Compute the whitening filter <span class="arithmatex">\(1/H\)</span>.</li>
+<li><strong>Filtering of white noise.</strong> White noise of variance <span class="arithmatex">\(1\)</span> passes through <span class="arithmatex">\(H(z) = 1 + 0.5 z^{-1}\)</span>. Compute the output PSD, autocorrelation, and variance. Verify by simulation.</li>
+<li><strong>Box–Muller statistics.</strong> Generate 100,000 Gaussian samples using Box–Muller. Verify the empirical mean, variance, skewness, and kurtosis against the theoretical <span class="arithmatex">\(\mathcal N(0,1)\)</span> values. Plot the histogram and compare to the Gaussian PDF.</li>
+<li><strong>Colouring exercise.</strong> Generate white noise, apply an AR(2) filter with <span class="arithmatex">\(a_1 = 1.3\)</span>, <span class="arithmatex">\(a_2 = -0.42\)</span>. Plot the empirical PSD (using Welch) and compare against the theoretical <span class="arithmatex">\(S_X = \sigma_w^2/|1 - 1.3e^{-j\omega} + 0.42e^{-2j\omega}|^2\)</span>.</li>
+<li><strong>Whitening speech.</strong> Download a segment of voiced speech (or use <code>pyroomacoustics</code> sample). Fit an AR(10) model, apply the whitening filter, and verify the residual is close to white (its autocorrelation outside lag 0 is within <span class="arithmatex">\(\pm 3/\sqrt N\)</span>). Interpret the result in terms of the <strong>source-filter</strong> model of speech.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

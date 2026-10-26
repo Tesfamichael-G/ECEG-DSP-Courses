@@ -1,0 +1,4341 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6303/chapters/03-linear-estimation-prediction/">
+      
+      
+        <link rel="prev" href="../02-spectrum-estimation/">
+      
+      
+        <link rel="next" href="../04-adaptive-filters/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>3. Linear Estimation and Prediction - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-3-linear-estimation-and-prediction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. Linear Estimation and Prediction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../eceg-6423/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-overview-what-estimation-problems-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Overview — what estimation problems look like
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-maximum-likelihood-and-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Maximum likelihood and efficiency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Maximum likelihood and efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-the-ml-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 The ML criterion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-properties-of-the-mle-under-regularity-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 Properties of the MLE (under regularity conditions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-the-cramerrao-lower-bound-crlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.3 The Cramér–Rao lower bound (CRLB)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-31-estimating-amplitude-in-gaussian-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.1 — estimating amplitude in Gaussian noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-32-estimating-frequency-in-complex-gaussian-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.2 — estimating frequency in complex Gaussian noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-least-mean-squared-error-mmse-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Least-mean-squared-error (MMSE) criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Least-mean-squared-error (MMSE) criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-linear-mmse-lmmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 Linear MMSE (LMMSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-closed-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.3 Closed form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-gaussian-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.4 Gaussian case
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-33-lmmse-of-a-random-signal-in-additive-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.3 — LMMSE of a random signal in additive noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-the-wiener-filter-non-causal" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 The Wiener filter — non-causal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 The Wiener filter — non-causal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-orthogonality-in-the-time-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.2 Orthogonality in the time domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-solution-in-the-frequency-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.3 Solution in the frequency domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.4 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-34-non-causal-wiener-filter-for-ar1-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.4 — non-causal Wiener filter for AR(1) + white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-the-finite-impulse-response-fir-wienerhopf-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 The finite-impulse-response (FIR) Wiener–Hopf equations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 The finite-impulse-response (FIR) Wiener–Hopf equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.1 Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-35-3-tap-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.5 — 3-tap Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-numerical-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.2 Numerical conditioning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-the-causal-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 The causal Wiener filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 The causal Wiener filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362-solution-via-spectral-factorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.2 Solution via spectral factorization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#363-the-smoothing-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.3 The "smoothing" correction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-36-causal-wiener-filter-for-ar1-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.6 — causal Wiener filter for AR(1) + white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#364-comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.4 Comparison table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-the-kalman-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7 The Kalman filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 The Kalman filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371-state-space-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.1 State-space model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372-the-recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.2 The recursion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#373-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.3 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-37-scalar-kalman-filter-two-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.7 — scalar Kalman filter, two steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-38-steady-state-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.8 — steady-state behaviour
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#374-the-riccati-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.4 The Riccati equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#375-why-kalman-is-more-general-than-wiener" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.5 Why Kalman is more general than Wiener
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-linear-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8 Linear prediction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8 Linear prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#381-the-one-step-forward-predictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.1 The one-step forward predictor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#382-normal-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.2 Normal equations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#383-minimum-prediction-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.3 Minimum prediction error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-39-one-step-predictor-for-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.9 — one-step predictor for AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#384-order-p-prediction-and-the-lattice" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.4 Order-\(p\) prediction and the lattice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#385-backward-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.5 Backward prediction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-whitening-filter-and-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9 Whitening filter and inverse filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.9 Whitening filter and inverse filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#391-the-whitening-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9.1 The whitening filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#392-the-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9.2 The inverse filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-310-speech-analysis-and-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.10 — speech analysis and synthesis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-levinson-recursion-for-toeplitz-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10 Levinson recursion for Toeplitz systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.10 Levinson recursion for Toeplitz systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3101-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.1 Recap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3102-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.2 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3103-split-levinson-and-other-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.3 Split-Levinson and other variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3104-complexity-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.4 Complexity comparison
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-lattice-realization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11 Lattice realization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.11 Lattice realization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3111-the-lattice-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.1 The lattice structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3112-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.2 Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3113-from-lattice-back-to-direct-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.3 From lattice back to direct form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-311-lattice-for-ar2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.11 — lattice for AR(2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#312-comparison-and-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12 Comparison and summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.12 Comparison and summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3121-summary-of-the-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.1 Summary of the estimators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3122-when-to-use-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.2 When to use what
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3123-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.3 Chapter summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#313-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.13 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.13 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice-choose-the-single-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice (choose the single best answer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#314-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.14 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6423/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/chapters/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6423/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6423/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31-overview-what-estimation-problems-look-like" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 Overview — what estimation problems look like
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32-maximum-likelihood-and-efficiency" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 Maximum likelihood and efficiency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Maximum likelihood and efficiency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321-the-ml-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 The ML criterion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322-properties-of-the-mle-under-regularity-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 Properties of the MLE (under regularity conditions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#323-the-cramerrao-lower-bound-crlb" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.3 The Cramér–Rao lower bound (CRLB)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-31-estimating-amplitude-in-gaussian-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.1 — estimating amplitude in Gaussian noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-32-estimating-frequency-in-complex-gaussian-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.2 — estimating frequency in complex Gaussian noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33-least-mean-squared-error-mmse-criterion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 Least-mean-squared-error (MMSE) criterion
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Least-mean-squared-error (MMSE) criterion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332-linear-mmse-lmmse" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 Linear MMSE (LMMSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#333-closed-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.3 Closed form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#334-gaussian-case" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.4 Gaussian case
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-33-lmmse-of-a-random-signal-in-additive-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.3 — LMMSE of a random signal in additive noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34-the-wiener-filter-non-causal" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 The Wiener filter — non-causal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 The Wiener filter — non-causal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342-orthogonality-in-the-time-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.2 Orthogonality in the time domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343-solution-in-the-frequency-domain" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.3 Solution in the frequency domain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#344-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.4 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-34-non-causal-wiener-filter-for-ar1-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.4 — non-causal Wiener filter for AR(1) + white noise
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#35-the-finite-impulse-response-fir-wienerhopf-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5 The finite-impulse-response (FIR) Wiener–Hopf equations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.5 The finite-impulse-response (FIR) Wiener–Hopf equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#351-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.1 Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-35-3-tap-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.5 — 3-tap Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#352-numerical-conditioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5.2 Numerical conditioning
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36-the-causal-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 The causal Wiener filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 The causal Wiener filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361-problem-statement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.1 Problem statement
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362-solution-via-spectral-factorization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.2 Solution via spectral factorization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#363-the-smoothing-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.3 The "smoothing" correction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-36-causal-wiener-filter-for-ar1-white-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.6 — causal Wiener filter for AR(1) + white noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#364-comparison-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.4 Comparison table
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#37-the-kalman-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7 The Kalman filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.7 The Kalman filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#371-state-space-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.1 State-space model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#372-the-recursion" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.2 The recursion
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#373-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.3 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-37-scalar-kalman-filter-two-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.7 — scalar Kalman filter, two steps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-38-steady-state-behaviour" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.8 — steady-state behaviour
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#374-the-riccati-equation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.4 The Riccati equation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#375-why-kalman-is-more-general-than-wiener" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.7.5 Why Kalman is more general than Wiener
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#38-linear-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8 Linear prediction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.8 Linear prediction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#381-the-one-step-forward-predictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.1 The one-step forward predictor
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#382-normal-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.2 Normal equations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#383-minimum-prediction-error" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.3 Minimum prediction error
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-39-one-step-predictor-for-ar1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.9 — one-step predictor for AR(1)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#384-order-p-prediction-and-the-lattice" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.4 Order-\(p\) prediction and the lattice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#385-backward-prediction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.8.5 Backward prediction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#39-whitening-filter-and-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9 Whitening filter and inverse filter
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.9 Whitening filter and inverse filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#391-the-whitening-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9.1 The whitening filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#392-the-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.9.2 The inverse filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-310-speech-analysis-and-synthesis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.10 — speech analysis and synthesis
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#310-levinson-recursion-for-toeplitz-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10 Levinson recursion for Toeplitz systems
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.10 Levinson recursion for Toeplitz systems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3101-recap" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.1 Recap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3102-interpretation" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.2 Interpretation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3103-split-levinson-and-other-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.3 Split-Levinson and other variants
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3104-complexity-comparison" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.10.4 Complexity comparison
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#311-lattice-realization" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11 Lattice realization
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.11 Lattice realization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3111-the-lattice-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.1 The lattice structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3112-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.2 Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3113-from-lattice-back-to-direct-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.11.3 From lattice back to direct form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-311-lattice-for-ar2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 3.11 — lattice for AR(2)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#312-comparison-and-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12 Comparison and summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.12 Comparison and summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3121-summary-of-the-estimators" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.1 Summary of the estimators
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3122-when-to-use-what" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.2 When to use what
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3123-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.12.3 Chapter summary
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#313-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.13 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.13 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice-choose-the-single-best-answer" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice (choose the single best answer)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#314-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.14 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-3-linear-estimation-and-prediction">Chapter 3 — Linear Estimation and Prediction<a class="headerlink" href="#chapter-3-linear-estimation-and-prediction" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Chapter at a glance</p>
+<p><strong>Contact hours:</strong> 2 lecture + 3 laboratory · <strong>Home study:</strong> 5 h</p>
+<p><strong>Coverage (syllabus):</strong> maximum likelihood criterion · efficiency of estimator ·
+least-mean-squared-error criterion · Wiener filter · discrete Wiener–Hopf
+equations · recursive estimators · Kalman filter · linear prediction ·
+prediction error · whitening filter · inverse filter · Levinson recursion ·
+lattice realization · Levinson recursion for Toeplitz systems.</p>
+</div>
+<hr />
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this chapter you should be able to:</p>
+<ol>
+<li>State and apply the <strong>maximum likelihood (ML)</strong> criterion; derive the ML
+   estimator of a scalar parameter in Gaussian noise; compute the
+   <strong>Cramér–Rao lower bound (CRLB)</strong> and check whether an estimator is
+   <strong>efficient</strong>.</li>
+<li>State the <strong>least-mean-squared-error (MMSE)</strong> criterion; distinguish the
+   <strong>optimal (possibly nonlinear) MMSE</strong> from the <strong>linear MMSE (LMMSE)</strong>.</li>
+<li>Derive the <strong>orthogonality principle</strong> and use it to solve LMMSE problems
+   for <strong>random vectors</strong> and <strong>random processes</strong>.</li>
+<li>Formulate and solve the <strong>Wiener–Hopf</strong> equations for the <strong>FIR</strong> Wiener
+   filter; derive the <strong>causal IIR</strong> Wiener filter via <strong>spectral factorization</strong>.</li>
+<li>Derive and apply the <strong>discrete Kalman filter</strong> (scalar and vector form);
+   interpret the <strong>predict-update</strong> recursion and the <strong>Riccati equation</strong>.</li>
+<li>Derive the <strong>forward and backward linear prediction</strong> equations; interpret
+   <strong>prediction error</strong> and the <strong>prediction-error filter</strong>.</li>
+<li>Design the <strong>whitening filter</strong> and the <strong>inverse filter</strong> as an application
+   of spectral factorization and prediction-error filtering.</li>
+<li>Apply <strong>Levinson–Durbin</strong> (recap from Chapter 2) to solve the <strong>Toeplitz
+   normal equations</strong> of linear prediction; state its <span class="arithmatex">\(O(p^2)\)</span> complexity.</li>
+<li>Derive the <strong>lattice filter</strong> from the reflection coefficients and explain
+   its numerical and structural advantages (stability, modularity, order
+   adaptation).</li>
+<li>Implement all of the above in <strong>Python, Java, and C#</strong>.</li>
+</ol>
+<hr />
+<h2 id="31-overview-what-estimation-problems-look-like">3.1 Overview — what estimation problems look like<a class="headerlink" href="#31-overview-what-estimation-problems-look-like" title="Permanent link">&para;</a></h2>
+<p>Every estimation problem has three ingredients:</p>
+<ul>
+<li>A <strong>parameter</strong> or <strong>signal</strong> to be estimated (scalar <span class="arithmatex">\(\theta\)</span>, vector
+  <span class="arithmatex">\(\boldsymbol\theta\)</span>, or a random process <span class="arithmatex">\(S[n]\)</span>).</li>
+<li><strong>Observations</strong> <span class="arithmatex">\(Y\)</span> (a vector of samples, or a full observation record).</li>
+<li>A <strong>criterion</strong> to optimise — what makes one estimate "better" than another.</li>
+</ul>
+<p>The three criteria we will develop, in increasing generality:</p>
+<table>
+<thead>
+<tr>
+<th>Criterion</th>
+<th>Optimises</th>
+<th>Requires</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Maximum likelihood</strong></td>
+<td>Probability of observations</td>
+<td>Full probabilistic model of <span class="arithmatex">\(Y \mid \theta\)</span></td>
+</tr>
+<tr>
+<td><strong>MMSE (optimal)</strong></td>
+<td><span class="arithmatex">\(\mathbb E[(S - \hat S)^2]\)</span> over <em>all</em> estimators</td>
+<td>Joint distribution of <span class="arithmatex">\((S, Y)\)</span></td>
+</tr>
+<tr>
+<td><strong>LMMSE</strong></td>
+<td><span class="arithmatex">\(\mathbb E[(S - \hat S)^2]\)</span> over <em>linear</em> estimators</td>
+<td>Only second-order statistics (means and covariances)</td>
+</tr>
+</tbody>
+</table>
+<p>The LMMSE criterion is the workhorse of digital signal processing: it requires only
+first and second moments, it is linear — hence computationally tractable — and
+for <strong>jointly Gaussian</strong> signals it <strong>coincides</strong> with the true MMSE.</p>
+<p>The Wiener filter is the LMMSE estimator for <strong>stationary processes</strong> (frequency-domain
+solution); the Kalman filter is the LMMSE estimator for <strong>state-space models</strong>
+(recursive time-domain solution). They are two views of the same problem.</p>
+<hr />
+<h2 id="32-maximum-likelihood-and-efficiency">3.2 Maximum likelihood and efficiency<a class="headerlink" href="#32-maximum-likelihood-and-efficiency" title="Permanent link">&para;</a></h2>
+<h3 id="321-the-ml-criterion">3.2.1 The ML criterion<a class="headerlink" href="#321-the-ml-criterion" title="Permanent link">&para;</a></h3>
+<p>Given <span class="arithmatex">\(N\)</span> observations <span class="arithmatex">\(Y = (y[0], \dots, y[N-1])^\top\)</span> with joint density
+<span class="arithmatex">\(p_Y(y; \theta)\)</span> indexed by a parameter <span class="arithmatex">\(\theta\)</span>, the <strong>maximum likelihood estimator (MLE)</strong>
+is</p>
+<div class="arithmatex">\[
+\boxed{\;\hat\theta_{\text{ML}} = \arg\max_\theta p_Y(Y; \theta)\;}
+\]</div>
+<p>equivalently, maximising the <strong>log-likelihood</strong> <span class="arithmatex">\(\ell(\theta) = \ln p_Y(Y; \theta)\)</span>:</p>
+<div class="arithmatex">\[
+\hat\theta_{\text{ML}} = \arg\max_\theta\, \ell(\theta).
+\]</div>
+<p>For an i.i.d. sample, <span class="arithmatex">\(\ell(\theta) = \sum_n \ln p_y(y[n]; \theta)\)</span>.</p>
+<h3 id="322-properties-of-the-mle-under-regularity-conditions">3.2.2 Properties of the MLE (under regularity conditions)<a class="headerlink" href="#322-properties-of-the-mle-under-regularity-conditions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Consistency</strong></td>
+<td><span class="arithmatex">\(\hat\theta_{\text{ML}} \to \theta\)</span> in probability as <span class="arithmatex">\(N \to \infty\)</span></td>
+</tr>
+<tr>
+<td><strong>Asymptotic normality</strong></td>
+<td><span class="arithmatex">\(\sqrt N (\hat\theta_{\text{ML}} - \theta) \to \mathcal N(0, I^{-1}(\theta))\)</span></td>
+</tr>
+<tr>
+<td><strong>Asymptotic efficiency</strong></td>
+<td>Attains the CRLB asymptotically (smallest possible variance)</td>
+</tr>
+<tr>
+<td><strong>Invariance</strong></td>
+<td>If <span class="arithmatex">\(\hat\theta\)</span> is MLE of <span class="arithmatex">\(\theta\)</span>, then <span class="arithmatex">\(g(\hat\theta)\)</span> is MLE of <span class="arithmatex">\(g(\theta)\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="323-the-cramerrao-lower-bound-crlb">3.2.3 The Cramér–Rao lower bound (CRLB)<a class="headerlink" href="#323-the-cramerrao-lower-bound-crlb" title="Permanent link">&para;</a></h3>
+<p>For any <strong>unbiased</strong> estimator <span class="arithmatex">\(\hat\theta\)</span> of a scalar parameter <span class="arithmatex">\(\theta\)</span>,</p>
+<div class="arithmatex">\[
+\boxed{\;\operatorname{Var}[\hat\theta] \ge \frac{1}{I(\theta)},\qquad
+I(\theta) = -\mathbb E\Bigl[\frac{\partial^2 \ell(\theta)}{\partial \theta^2}\Bigr] = \mathbb E\Bigl[\Bigl(\frac{\partial \ell}{\partial \theta}\Bigr)^2\Bigr]\;}
+\]</div>
+<p>where <span class="arithmatex">\(I(\theta)\)</span> is the <strong>Fisher information</strong>. The bound is <strong>achieved</strong> (equality)
+iff the log-likelihood has the exponential-family form
+<span class="arithmatex">\(\ell(\theta) = a(\theta)\hat\theta + b(\hat\theta) + c(\theta) + d\)</span>.</p>
+<p>An estimator is <strong>efficient</strong> if it achieves the CRLB at finite <span class="arithmatex">\(N\)</span>; the MLE is
+asymptotically efficient under regularity.</p>
+<h3 id="worked-example-31-estimating-amplitude-in-gaussian-noise">Worked example 3.1 — estimating amplitude in Gaussian noise<a class="headerlink" href="#worked-example-31-estimating-amplitude-in-gaussian-noise" title="Permanent link">&para;</a></h3>
+<p>Observations <span class="arithmatex">\(y[n] = A + w[n]\)</span>, <span class="arithmatex">\(n = 0, \dots, N-1\)</span>, with <span class="arithmatex">\(w[n] \sim \mathcal N(0, \sigma^2)\)</span>
+i.i.d. Estimate the constant amplitude <span class="arithmatex">\(A\)</span>.</p>
+<p><strong>Log-likelihood.</strong></p>
+<div class="arithmatex">\[
+\ell(A) = -\frac{N}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{n=0}^{N-1}(y[n] - A)^2.
+\]</div>
+<p><strong>MLE.</strong></p>
+<div class="arithmatex">\[
+\frac{d\ell}{dA} = \frac{1}{\sigma^2}\sum_n (y[n] - A) = 0
+\;\Longrightarrow\;
+\boxed{\;\hat A_{\text{ML}} = \frac{1}{N}\sum_{n=0}^{N-1} y[n] = \bar y\;}
+\]</div>
+<p>the <strong>sample mean</strong> — as expected for a Gaussian.</p>
+<p><strong>CRLB.</strong></p>
+<div class="arithmatex">\[
+\frac{d^2\ell}{dA^2} = -\frac{N}{\sigma^2} \;\Longrightarrow\; I(A) = \frac{N}{\sigma^2}.
+\]</div>
+<p>So <span class="arithmatex">\(\operatorname{Var}[\hat A] \ge \sigma^2/N\)</span>.</p>
+<p><strong>Efficiency.</strong> <span class="arithmatex">\(\operatorname{Var}[\hat A_{\text{ML}}] = \operatorname{Var}[\bar y] = \sigma^2/N\)</span>.
+The sample mean <strong>attains</strong> the CRLB for every finite <span class="arithmatex">\(N\)</span> — it is an <strong>efficient</strong>
+estimator. This is the finite-<span class="arithmatex">\(N\)</span> exception; in general only asymptotically efficient.</p>
+<h3 id="worked-example-32-estimating-frequency-in-complex-gaussian-noise">Worked example 3.2 — estimating frequency in complex Gaussian noise<a class="headerlink" href="#worked-example-32-estimating-frequency-in-complex-gaussian-noise" title="Permanent link">&para;</a></h3>
+<p>Observations <span class="arithmatex">\(y[n] = A e^{j(\omega_0 n + \theta)} + w[n]\)</span>, <span class="arithmatex">\(w\)</span> complex white
+Gaussian with variance <span class="arithmatex">\(\sigma^2\)</span> per real dimension, estimate <span class="arithmatex">\(\omega_0\)</span> with
+<span class="arithmatex">\(A\)</span>, <span class="arithmatex">\(\theta\)</span> known.</p>
+<p><strong>Log-likelihood.</strong> The dominant term for large <span class="arithmatex">\(N\)</span> is proportional to the real
+part of the <strong>correlation</strong> between observations and the assumed signal:</p>
+<div class="arithmatex">\[
+\ell(\omega) \approx \frac{2 A}{\sigma^2}\,\Re\Bigl\{e^{-j\theta}\sum_n y[n]e^{-j\omega n}\Bigr\}.
+\]</div>
+<p><strong>MLE.</strong> Maximising <span class="arithmatex">\(\ell(\omega)\)</span> is equivalent to maximising
+<span class="arithmatex">\(\bigl|\sum_n y[n]e^{-j\omega n}\bigr|^2\)</span> — the <strong>periodogram</strong>! The MLE of a
+sinusoidal frequency is the <strong>peak of the periodogram</strong>. This connects Chapter 2
+(spectrum estimation) and Chapter 3 (ML estimation) into one framework.</p>
+<p><strong>CRLB.</strong> The Fisher information is</p>
+<div class="arithmatex">\[
+I(\omega_0) = \frac{2 A^2}{\sigma^2}\sum_n n^2 \sim \frac{2 A^2 N^3}{3\sigma^2},
+\]</div>
+<p>so <span class="arithmatex">\(\operatorname{Var}[\hat\omega_0] \ge \frac{3\sigma^2}{2 A^2 N^3} \propto 1/N^3\)</span> —
+<strong>faster</strong> than the usual <span class="arithmatex">\(1/N\)</span> rate. Frequency estimation is unusually accurate.</p>
+<p>The CRLB is only tight in the <strong>high-SNR</strong> regime
+(<span class="arithmatex">\(\text{SNR} = A^2 N / \sigma^2 \gg 1\)</span>); below the <strong>threshold SNR</strong> (typically
+~10 dB for periodogram-frequency estimation), the MLE loses lock and the actual
+variance is much larger than the CRLB.</p>
+<hr />
+<h2 id="33-least-mean-squared-error-mmse-criterion">3.3 Least-mean-squared-error (MMSE) criterion<a class="headerlink" href="#33-least-mean-squared-error-mmse-criterion" title="Permanent link">&para;</a></h2>
+<h3 id="331-problem-statement">3.3.1 Problem statement<a class="headerlink" href="#331-problem-statement" title="Permanent link">&para;</a></h3>
+<p>Given observations <span class="arithmatex">\(Y\)</span> and a target <span class="arithmatex">\(S\)</span>, the <strong>MMSE estimator</strong> is</p>
+<div class="arithmatex">\[
+\boxed{\;\hat S_{\text{MMSE}} = \arg\min_{\hat S(Y)}\, \mathbb E\bigl[(S - \hat S)^2\bigr]\;}
+\]</div>
+<p>where the minimisation is over <strong>all functions</strong> <span class="arithmatex">\(\hat S : \mathcal Y \to \mathbb R\)</span>.
+The optimal solution is the <strong>conditional mean</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat S_{\text{MMSE}}(Y) = \mathbb E[S \mid Y]\;}
+\]</div>
+<p>with minimum MSE <span class="arithmatex">\(\operatorname{Var}[S \mid Y]\)</span> (the conditional variance).</p>
+<p><strong>Consequences.</strong></p>
+<ul>
+<li>The optimal estimator is generally <strong>nonlinear</strong> (except when <span class="arithmatex">\((S, Y)\)</span> are jointly Gaussian).</li>
+<li>It depends on the <strong>full joint distribution</strong> of <span class="arithmatex">\((S, Y)\)</span> — much stronger information than the second moments alone.</li>
+<li>In practice, the conditional mean is often hard to compute, motivating the <strong>linear</strong> restriction.</li>
+</ul>
+<h3 id="332-linear-mmse-lmmse">3.3.2 Linear MMSE (LMMSE)<a class="headerlink" href="#332-linear-mmse-lmmse" title="Permanent link">&para;</a></h3>
+<p>Restrict the estimator to <strong>affine</strong> functions of <span class="arithmatex">\(Y\)</span>:</p>
+<div class="arithmatex">\[
+\hat S_{\text{LMMSE}} = a + b^\top Y.
+\]</div>
+<p>Then the solution is given by the <strong>orthogonality principle</strong>:</p>
+<div class="admonition abstract">
+<p class="admonition-title">Orthogonality principle</p>
+<p>The LMMSE estimator <span class="arithmatex">\(\hat S\)</span> satisfies
+$$
+\boxed{\;\mathbb E\bigl[(S - \hat S)\, Y^\top\bigr] = 0\;}
+$$
+and (by the affine structure) <span class="arithmatex">\(\mathbb E[S - \hat S] = 0\)</span>. The <strong>estimation error
+is orthogonal to the observation space</strong>.</p>
+</div>
+<h3 id="333-closed-form">3.3.3 Closed form<a class="headerlink" href="#333-closed-form" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(\mu_S = \mathbb E[S]\)</span>, <span class="arithmatex">\(\mu_Y = \mathbb E[Y]\)</span>, <span class="arithmatex">\(\Sigma_{SY} = \mathbb E[(S - \mu_S)(Y - \mu_Y)^\top]\)</span>, <span class="arithmatex">\(\Sigma_{YY} = \mathbb E[(Y - \mu_Y)(Y - \mu_Y)^\top]\)</span>. Then</p>
+<div class="arithmatex">\[
+\boxed{\;\hat S_{\text{LMMSE}} = \mu_S + \Sigma_{SY}\,\Sigma_{YY}^{-1}\,(Y - \mu_Y)\;}
+\]</div>
+<p>with minimum MSE</p>
+<div class="arithmatex">\[
+\boxed{\;\operatorname{MSE}_{\text{min}} = \Sigma_{SS} - \Sigma_{SY}\,\Sigma_{YY}^{-1}\,\Sigma_{YS}\;}
+\]</div>
+<p>where <span class="arithmatex">\(\Sigma_{SS} = \operatorname{Var}[S]\)</span> (scalar) and <span class="arithmatex">\(\Sigma_{YS} = \Sigma_{SY}^\top\)</span>.</p>
+<h3 id="334-gaussian-case">3.3.4 Gaussian case<a class="headerlink" href="#334-gaussian-case" title="Permanent link">&para;</a></h3>
+<div class="admonition abstract">
+<p class="admonition-title">Linear = optimal for Gaussian</p>
+<p>If <span class="arithmatex">\((S, Y)\)</span> are <strong>jointly Gaussian</strong>, then the conditional mean is <strong>affine</strong>
+in <span class="arithmatex">\(Y\)</span>, so the LMMSE estimator <strong>is</strong> the MMSE estimator. This is the
+fundamental reason Kalman filtering is optimal for linear Gaussian systems,
+and why LMMSE is so useful in practice — Gaussianity makes it exact.</p>
+</div>
+<h3 id="worked-example-33-lmmse-of-a-random-signal-in-additive-noise">Worked example 3.3 — LMMSE of a random signal in additive noise<a class="headerlink" href="#worked-example-33-lmmse-of-a-random-signal-in-additive-noise" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(S \sim \mathcal N(0, \sigma_S^2)\)</span> and <span class="arithmatex">\(V \sim \mathcal N(0, \sigma_V^2)\)</span> be
+independent, with <span class="arithmatex">\(Y = S + V\)</span>. Estimate <span class="arithmatex">\(S\)</span> from <span class="arithmatex">\(Y\)</span>.</p>
+<p><strong>Second moments.</strong> <span class="arithmatex">\(\Sigma_{SY} = \mathbb E[SY] = \mathbb E[S(S+V)] = \sigma_S^2\)</span>;
+<span class="arithmatex">\(\Sigma_{YY} = \sigma_S^2 + \sigma_V^2\)</span>.</p>
+<p><strong>LMMSE.</strong></p>
+<div class="arithmatex">\[
+\hat S = 0 + \frac{\sigma_S^2}{\sigma_S^2 + \sigma_V^2}\, Y = \frac{\text{SNR}}{1 + \text{SNR}}\, Y,
+\quad \text{SNR} = \sigma_S^2/\sigma_V^2.
+\]</div>
+<p><strong>Interpretation.</strong></p>
+<ul>
+<li>Large SNR (<span class="arithmatex">\(\sigma_V^2 \to 0\)</span>): <span class="arithmatex">\(\hat S \to Y\)</span> — trust the observation.</li>
+<li>Small SNR (<span class="arithmatex">\(\sigma_V^2 \to \infty\)</span>): <span class="arithmatex">\(\hat S \to 0\)</span> — trust the prior mean (zero).</li>
+</ul>
+<p><strong>Minimum MSE.</strong></p>
+<div class="arithmatex">\[
+\operatorname{MSE}_{\text{min}} = \sigma_S^2 - \frac{\sigma_S^4}{\sigma_S^2 + \sigma_V^2} = \frac{\sigma_S^2 \sigma_V^2}{\sigma_S^2 + \sigma_V^2} = \frac{1}{\sigma_S^{-2} + \sigma_V^{-2}}.
+\]</div>
+<p>Notice the <strong>harmonic sum</strong> form: the posterior precision is the sum of the
+prior precision (<span class="arithmatex">\(1/\sigma_S^2\)</span>) and the measurement precision (<span class="arithmatex">\(1/\sigma_V^2\)</span>).
+This is exactly the <strong>information form</strong> of the Kalman filter update — a preview
+of §3.7.</p>
+<p>Since the model is jointly Gaussian, this LMMSE <strong>equals</strong> the MMSE. No
+nonlinear estimator can do better.</p>
+<hr />
+<h2 id="34-the-wiener-filter-non-causal">3.4 The Wiener filter — non-causal<a class="headerlink" href="#34-the-wiener-filter-non-causal" title="Permanent link">&para;</a></h2>
+<h3 id="341-problem-statement">3.4.1 Problem statement<a class="headerlink" href="#341-problem-statement" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(X[n]\)</span> be a WSS desired signal, <span class="arithmatex">\(Y[n]\)</span> an observed WSS process, both jointly
+WSS. We want a <strong>linear time-invariant</strong> filter <span class="arithmatex">\(h[n]\)</span> such that</p>
+<div class="arithmatex">\[
+\hat X[n] = \sum_{k=-\infty}^{\infty} h[k]\, Y[n-k]
+\]</div>
+<p>minimises <span class="arithmatex">\(\mathbb E[(X[n] - \hat X[n])^2]\)</span>.</p>
+<p><strong>No causality requirement</strong> — the filter may use future observations. This
+is the <strong>non-causal</strong> (or <em>smoothing</em>) Wiener filter.</p>
+<h3 id="342-orthogonality-in-the-time-domain">3.4.2 Orthogonality in the time domain<a class="headerlink" href="#342-orthogonality-in-the-time-domain" title="Permanent link">&para;</a></h3>
+<p>By the orthogonality principle applied at every lag <span class="arithmatex">\(m\)</span>:</p>
+<div class="arithmatex">\[
+\mathbb E\bigl[(X[n] - \hat X[n])Y^*[n-m]\bigr] = 0,\quad \forall m.
+\]</div>
+<p>This gives the <strong>normal equations</strong> (Wiener–Hopf equations in infinite form):</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{k=-\infty}^{\infty} h[k]\, R_Y[m-k] = R_{XY}[m],\quad \forall m \in \mathbb Z.\;}
+\]</div>
+<h3 id="343-solution-in-the-frequency-domain">3.4.3 Solution in the frequency domain<a class="headerlink" href="#343-solution-in-the-frequency-domain" title="Permanent link">&para;</a></h3>
+<p>Take the DTFT of both sides. The convolution becomes a product:</p>
+<div class="arithmatex">\[
+H(e^{j\omega})\, S_Y(e^{j\omega}) = S_{XY}(e^{j\omega}),
+\qquad
+\boxed{\;H_{\text{nc}}(e^{j\omega}) = \frac{S_{XY}(e^{j\omega})}{S_Y(e^{j\omega})}\;}
+\]</div>
+<p>where <span class="arithmatex">\(S_{XY}\)</span> is the <strong>cross-power spectral density</strong>, <span class="arithmatex">\(S_{XY}(e^{j\omega}) = \sum_k R_{XY}[k]e^{-j\omega k}\)</span>.</p>
+<p><strong>For the signal-in-noise case</strong> with <span class="arithmatex">\(Y[n] = X[n] + V[n]\)</span>, <span class="arithmatex">\(X \perp V\)</span>:</p>
+<div class="arithmatex">\[
+S_{XY} = S_{XX},\qquad S_Y = S_{XX} + S_{VV}
+\;\Longrightarrow\;
+\boxed{\;H_{\text{nc}}(e^{j\omega}) = \frac{S_{XX}(e^{j\omega})}{S_{XX}(e^{j\omega}) + S_{VV}(e^{j\omega})}\;}
+\]</div>
+<h3 id="344-interpretation">3.4.4 Interpretation<a class="headerlink" href="#344-interpretation" title="Permanent link">&para;</a></h3>
+<p>The non-causal Wiener filter shapes the passband according to the <strong>local SNR</strong>:</p>
+<ul>
+<li>Where <span class="arithmatex">\(S_{XX} \gg S_{VV}\)</span> (high SNR): <span class="arithmatex">\(H \approx 1\)</span> — pass the signal.</li>
+<li>Where <span class="arithmatex">\(S_{XX} \ll S_{VV}\)</span> (low SNR): <span class="arithmatex">\(H \approx 0\)</span> — reject the noise.</li>
+<li>Where <span class="arithmatex">\(S_{XX} = S_{VV}\)</span>: <span class="arithmatex">\(H \approx 1/2\)</span> — half pass, half reject.</li>
+</ul>
+<p>The <strong>minimum MSE</strong> is</p>
+<div class="arithmatex">\[
+\operatorname{MSE}_{\text{min}} = \frac{1}{2\pi}\int_{-\pi}^{\pi} S_{XX}(e^{j\omega})\bigl(1 - H_{\text{nc}}(e^{j\omega})\bigr)\, d\omega = \frac{1}{2\pi}\int_{-\pi}^{\pi} \frac{S_{XX} S_{VV}}{S_{XX} + S_{VV}}\, d\omega.
+\]</div>
+<h3 id="worked-example-34-non-causal-wiener-filter-for-ar1-white-noise">Worked example 3.4 — non-causal Wiener filter for AR(1) + white noise<a class="headerlink" href="#worked-example-34-non-causal-wiener-filter-for-ar1-white-noise" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(X[n]\)</span> is AR(1): <span class="arithmatex">\(X[n] = a X[n-1] + W[n]\)</span>, <span class="arithmatex">\(|a| &lt; 1\)</span>, <span class="arithmatex">\(\sigma_W^2 = 1\)</span>.
+<span class="arithmatex">\(V[n]\)</span> is white, <span class="arithmatex">\(\sigma_V^2 = 0.5\)</span>, independent of <span class="arithmatex">\(X\)</span>.</p>
+<p><strong>Spectra.</strong></p>
+<div class="arithmatex">\[
+S_{XX}(e^{j\omega}) = \frac{1}{|1 - a e^{-j\omega}|^2}
+= \frac{1}{1 - 2a\cos\omega + a^2},
+\quad S_{VV} = 0.5.
+\]</div>
+<p><strong>Wiener filter.</strong></p>
+<div class="arithmatex">\[
+H_{\text{nc}}(e^{j\omega}) = \frac{1}{1 - 2a\cos\omega + a^2 + 0.5(1 - 2a\cos\omega + a^2)}
+= \frac{1}{1.5(1 - 2a\cos\omega + a^2)}.
+\]</div>
+<p>Not a low-pass — it is a <strong>notch-rejecting</strong> filter that attenuates the frequencies
+where <span class="arithmatex">\(S_{XX}\)</span> is small (high frequencies when <span class="arithmatex">\(a &gt; 0\)</span>).</p>
+<p><strong>MSE reduction.</strong> For <span class="arithmatex">\(a = 0.7\)</span>, numeric integration gives
+<span class="arithmatex">\(\operatorname{MSE}_{\text{min}} / \operatorname{Var}[X] \approx 0.31\)</span> — the
+Wiener filter eliminates ~70% of the estimation error, using <strong>future observations</strong>.</p>
+<p>The <strong>causal</strong> filter (§3.6) cannot use future observations, so it does
+<strong>not</strong> achieve the same MSE. The gap between the non-causal and causal MSEs
+quantifies the "cost of real-time".</p>
+<hr />
+<h2 id="35-the-finite-impulse-response-fir-wienerhopf-equations">3.5 The finite-impulse-response (FIR) Wiener–Hopf equations<a class="headerlink" href="#35-the-finite-impulse-response-fir-wienerhopf-equations" title="Permanent link">&para;</a></h2>
+<h3 id="351-setup">3.5.1 Setup<a class="headerlink" href="#351-setup" title="Permanent link">&para;</a></h3>
+<p>In practice, <span class="arithmatex">\(h[n]\)</span> is finite-length: <span class="arithmatex">\(h[0], \dots, h[M-1]\)</span>. The estimation is</p>
+<div class="arithmatex">\[
+\hat X[n] = \sum_{k=0}^{M-1} h[k]\, Y[n-k],
+\]</div>
+<p>and the orthogonality principle gives <strong><span class="arithmatex">\(M\)</span> linear equations</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{k=0}^{M-1} h[k]\, R_Y[m-k] = R_{XY}[m],\quad m = 0, \dots, M-1.\;}
+\]</div>
+<p>Matrix form (Toeplitz):</p>
+<div class="arithmatex">\[
+\boxed{\;\mathbf R_Y\, \mathbf h = \mathbf r_{XY}\;}
+\]</div>
+<p>where <span class="arithmatex">\(\mathbf R_Y\)</span> is the <span class="arithmatex">\(M \times M\)</span> Toeplitz matrix with <span class="arithmatex">\([\mathbf R_Y]_{ij} = R_Y[i-j]\)</span>, and <span class="arithmatex">\(\mathbf r_{XY} = (R_{XY}[0], \dots, R_{XY}[M-1])^\top\)</span>.</p>
+<p>The solution is <span class="arithmatex">\(\mathbf h = \mathbf R_Y^{-1}\mathbf r_{XY}\)</span>, computed via
+<strong>Levinson–Durbin</strong> if <span class="arithmatex">\(\mathbf R_Y\)</span> is Toeplitz (which it is, for WSS data).</p>
+<h3 id="worked-example-35-3-tap-wiener-filter">Worked example 3.5 — 3-tap Wiener filter<a class="headerlink" href="#worked-example-35-3-tap-wiener-filter" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(Y[n] = X[n] + V[n]\)</span>, <span class="arithmatex">\(X \perp V\)</span>. Known:</p>
+<div class="arithmatex">\[
+R_X[0] = 4,\quad R_X[1] = 2,\quad R_X[k] = 0\ (|k| \ge 2);\qquad
+R_V[0] = 1,\quad R_V[k] = 0\ (k \ne 0).
+\]</div>
+<p>Design a <strong>3-tap</strong> Wiener filter <span class="arithmatex">\(h[0], h[1], h[2]\)</span> to estimate <span class="arithmatex">\(X[n]\)</span> from <span class="arithmatex">\(Y\)</span>.</p>
+<p><strong>Correlations.</strong></p>
+<div class="arithmatex">\[
+R_Y[k] = R_X[k] + R_V[k] \quad\Rightarrow\quad
+R_Y[0] = 5,\ R_Y[\pm 1] = 2,\ R_Y[k] = 0\ (|k| \ge 2).
+\]</div>
+<div class="arithmatex">\[
+R_{XY}[m] = \mathbb E[X[n]Y[n-m]] = R_X[m].
+\]</div>
+<p><strong>Toeplitz system.</strong></p>
+<div class="arithmatex">\[
+\begin{bmatrix} R_Y[0] &amp; R_Y[1] &amp; R_Y[2] \\ R_Y[1] &amp; R_Y[0] &amp; R_Y[1] \\ R_Y[2] &amp; R_Y[1] &amp; R_Y[0]\end{bmatrix}\begin{bmatrix} h_0 \\ h_1 \\ h_2\end{bmatrix}
+= \begin{bmatrix} R_X[0] \\ R_X[1] \\ R_X[2]\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\begin{bmatrix} 5 &amp; 2 &amp; 0 \\ 2 &amp; 5 &amp; 2 \\ 0 &amp; 2 &amp; 5\end{bmatrix}\begin{bmatrix} h_0 \\ h_1 \\ h_2\end{bmatrix} = \begin{bmatrix} 4 \\ 2 \\ 0\end{bmatrix}.
+\]</div>
+<p><strong>Solve.</strong> From row 3: <span class="arithmatex">\(2h_1 + 5h_2 = 0 \Rightarrow h_2 = -0.4h_1\)</span>.
+Row 1: <span class="arithmatex">\(5h_0 + 2h_1 = 4 \Rightarrow h_0 = 0.8 - 0.4h_1\)</span>.
+Row 2: <span class="arithmatex">\(2h_0 + 5h_1 + 2h_2 = 2 \Rightarrow 2(0.8 - 0.4h_1) + 5h_1 + 2(-0.4h_1) = 2\)</span>.</p>
+<div class="arithmatex">\[
+1.6 - 0.8h_1 + 5h_1 - 0.8h_1 = 2 \Rightarrow 1.6 + 3.4h_1 = 2 \Rightarrow h_1 = 0.4/3.4 = 0.1176.
+\]</div>
+<p>Then <span class="arithmatex">\(h_0 = 0.8 - 0.4\cdot 0.1176 = 0.7529\)</span>, <span class="arithmatex">\(h_2 = -0.0471\)</span>.</p>
+<p><strong>Filter.</strong> <span class="arithmatex">\(\mathbf h = (0.7529,\ 0.1176,\ -0.0471)\)</span>.</p>
+<p><strong>Sanity check.</strong> The centre tap dominates (as expected for a lightly-smoothed
+signal), the lags are small, and <span class="arithmatex">\(h_0 + h_1 + h_2 = 0.8234\)</span> — the filter's DC gain
+is less than 1 because it needs to reject noise at DC as well.</p>
+<p><strong>Minimum MSE.</strong> <span class="arithmatex">\(\sigma_X^2 - \mathbf r_{XY}^\top \mathbf h = 4 - (4\cdot 0.7529 + 2\cdot 0.1176 + 0\cdot (-0.0471)) = 4 - 3.2468 = 0.7532\)</span>.</p>
+<p>Compare with the "pass-through" MSE <span class="arithmatex">\(\sigma_V^2 = 1\)</span>: the Wiener filter reduces
+estimation error by ~25%.</p>
+<h3 id="352-numerical-conditioning">3.5.2 Numerical conditioning<a class="headerlink" href="#352-numerical-conditioning" title="Permanent link">&para;</a></h3>
+<p>The Wiener–Hopf matrix <span class="arithmatex">\(\mathbf R_Y\)</span> is <strong>Toeplitz</strong> and <strong>positive-definite</strong>
+(from <span class="arithmatex">\(R_Y\)</span> being a valid autocorrelation). Its condition number <span class="arithmatex">\(\kappa(\mathbf R_Y)\)</span>
+depends on the SNR and the autocorrelation length:</p>
+<ul>
+<li><strong>High SNR, highly coloured</strong> (autocorrelation decays slowly): <span class="arithmatex">\(\kappa\)</span> large — the filter is effectively ill-conditioned; small errors in <span class="arithmatex">\(R_Y\)</span> estimates produce large filter errors.</li>
+<li><strong>Low SNR, white</strong>: <span class="arithmatex">\(\kappa\)</span> near 1 — well-conditioned, robust filter.</li>
+</ul>
+<p><strong>Practical guidance.</strong> Estimate <span class="arithmatex">\(R_Y\)</span>, <span class="arithmatex">\(R_{XY}\)</span> from data using the <strong>biased</strong>
+sample autocorrelation (positive-definiteness guaranteed by Chapter 1 §1.4.3);
+solve with <strong>Levinson–Durbin</strong> for numerical stability. Avoid naive Gaussian
+elimination when <span class="arithmatex">\(\kappa\)</span> exceeds <span class="arithmatex">\(10^4\)</span>.</p>
+<hr />
+<h2 id="36-the-causal-wiener-filter">3.6 The causal Wiener filter<a class="headerlink" href="#36-the-causal-wiener-filter" title="Permanent link">&para;</a></h2>
+<h3 id="361-problem-statement">3.6.1 Problem statement<a class="headerlink" href="#361-problem-statement" title="Permanent link">&para;</a></h3>
+<p>Same as the non-causal case, but with the <strong>causality</strong> constraint
+<span class="arithmatex">\(h[n] = 0\)</span> for <span class="arithmatex">\(n &lt; 0\)</span>. This is the <strong>real-time</strong> filter; it cannot use
+future observations.</p>
+<p>The orthogonality principle still holds, but <strong>only for non-negative lags</strong>:</p>
+<div class="arithmatex">\[
+\mathbb E\bigl[(X[n] - \hat X[n])Y^*[n-m]\bigr] = 0,\quad m \ge 0.
+\]</div>
+<p>The <strong>Wiener–Hopf equations</strong> are now <strong>one-sided</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{k=0}^{\infty} h[k]\, R_Y[m-k] = R_{XY}[m],\quad m \ge 0.\;}
+\]</div>
+<p>This is the <strong>discrete Wiener–Hopf equation</strong> — harder than the two-sided (non-causal)
+case because a DTFT of both sides introduces unknown terms for <span class="arithmatex">\(m &lt; 0\)</span>.</p>
+<h3 id="362-solution-via-spectral-factorization">3.6.2 Solution via spectral factorization<a class="headerlink" href="#362-solution-via-spectral-factorization" title="Permanent link">&para;</a></h3>
+<p>The classical solution uses <strong>spectral factorization</strong> (Chapter 1 §1.8) plus a
+causal-part operation. Step-by-step:</p>
+<p><strong>Step 1 — Factor <span class="arithmatex">\(S_Y\)</span>.</strong> Find the <strong>causal, monic, minimum-phase</strong> <span class="arithmatex">\(L(z)\)</span> and
+<span class="arithmatex">\(\sigma_e^2\)</span> such that</p>
+<div class="arithmatex">\[
+S_Y(z) = \sigma_e^2\, L(z)\, L(z^{-1}).
+\]</div>
+<p><strong>Step 2 — Compute the causal part.</strong> Form</p>
+<div class="arithmatex">\[
+G(z) = \frac{S_{XY}(z)}{\sigma_e^2\, L(z^{-1})},
+\]</div>
+<p>and take the <strong>causal part</strong> <span class="arithmatex">\([G(z)]_+\)</span> — the part of the Laurent expansion in
+non-negative powers of <span class="arithmatex">\(z^{-1}\)</span> (i.e. terms <span class="arithmatex">\(z^0, z^{-1}, z^{-2}, \dots\)</span>).</p>
+<p><strong>Step 3 — Compose the filter.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;H_{\text{causal}}(z) = \frac{[G(z)]_+}{L(z)}\;}
+\]</div>
+<p>The numerator is realisable (causal) and the denominator is causal-minimum-phase,
+so <span class="arithmatex">\(H_{\text{causal}}\)</span> is <strong>stable and causal</strong>.</p>
+<h3 id="363-the-smoothing-correction">3.6.3 The "smoothing" correction<a class="headerlink" href="#363-the-smoothing-correction" title="Permanent link">&para;</a></h3>
+<p>An equivalent statement: the causal Wiener filter is</p>
+<div class="arithmatex">\[
+H_{\text{causal}}(z) = \frac{1}{\sigma_e^2 L(z)}\Bigl[\frac{S_{XY}(z)}{L(z^{-1})}\Bigr]_+.
+\]</div>
+<p>The operation <span class="arithmatex">\([\cdot]_+\)</span> is what distinguishes causal from non-causal:
+without it, <span class="arithmatex">\(H = S_{XY}/(\sigma_e^2 L L^{-1}) = S_{XY}/S_Y\)</span> — the non-causal filter
+of §3.4.</p>
+<p><strong>Interpretation.</strong> The causal filter is the non-causal filter <strong>projected onto
+the causal subspace</strong> in a particular weighted inner product (weighted by the
+whitening filter <span class="arithmatex">\(1/L\)</span>). This projection is what makes the causal filter optimal
+<em>among causal filters</em>.</p>
+<h3 id="worked-example-36-causal-wiener-filter-for-ar1-white-noise">Worked example 3.6 — causal Wiener filter for AR(1) + white noise<a class="headerlink" href="#worked-example-36-causal-wiener-filter-for-ar1-white-noise" title="Permanent link">&para;</a></h3>
+<p>Same setup as Example 3.4: <span class="arithmatex">\(X\)</span> AR(1) with <span class="arithmatex">\(a = 0.7\)</span>, <span class="arithmatex">\(\sigma_W = 1\)</span>, <span class="arithmatex">\(V\)</span> white
+<span class="arithmatex">\(\sigma_V = 0.5\)</span>.</p>
+<p><strong>Step 1 — Factor <span class="arithmatex">\(S_Y\)</span>.</strong> From Example 3.4:</p>
+<div class="arithmatex">\[
+S_Y(e^{j\omega}) = S_{XX} + S_{VV} = \frac{1 + 0.5(1 - 2a\cos\omega + a^2)}{1 - 2a\cos\omega + a^2}.
+\]</div>
+<p>Write as <span class="arithmatex">\(S_Y(z) = \sigma_e^2 L(z)L(z^{-1})\)</span> with <span class="arithmatex">\(L(z) = (1 + bz^{-1})/(1 - az^{-1})\)</span>
+by factoring the numerator and denominator polynomials in <span class="arithmatex">\(z\)</span>. Matching
+coefficients gives <span class="arithmatex">\(b \approx 0.2648\)</span> (a small positive root), and
+<span class="arithmatex">\(\sigma_e^2 \approx 0.5\)</span>.</p>
+<p><strong>Step 2 — Causal part.</strong> <span class="arithmatex">\(S_{XY}(z) = S_{XX}(z) = \frac{1}{(1-az^{-1})(1-az)}\)</span>. Then</p>
+<div class="arithmatex">\[
+G(z) = \frac{S_{XX}(z)}{\sigma_e^2 L(z^{-1})} = \frac{1}{\sigma_e^2(1-az)} \cdot \frac{1-az}{1+bz} \cdot \frac{1}{1-az^{-1}} = \frac{1}{\sigma_e^2}\cdot\frac{1}{(1+bz)(1-az^{-1})}.
+\]</div>
+<p>Partial-fraction expansion with causal-part extraction gives</p>
+<div class="arithmatex">\[
+[G(z)]_+ = \frac{A}{1-az^{-1}},\quad A = \frac{1}{\sigma_e^2(1+ab)}.
+\]</div>
+<p><strong>Step 3 — Compose.</strong></p>
+<div class="arithmatex">\[
+H_{\text{causal}}(z) = \frac{A/(1-az^{-1})}{(1+bz^{-1})/(1-az^{-1})} = \frac{A}{1+bz^{-1}}.
+\]</div>
+<p><strong>Result.</strong> The causal Wiener filter is a <strong>first-order IIR filter</strong> with pole at
+<span class="arithmatex">\(-b \approx -0.2648\)</span> and gain <span class="arithmatex">\(A\)</span>. Compare with the non-causal filter, which is
+not rational — a direct consequence of the causality constraint.</p>
+<p><strong>MSE penalty.</strong> Numerically, the causal MSE is <span class="arithmatex">\(\approx 0.42\)</span> versus the non-causal
+<span class="arithmatex">\(\approx 0.31\)</span> — about <strong>35% more error</strong>, the price of causality.</p>
+<h3 id="364-comparison-table">3.6.4 Comparison table<a class="headerlink" href="#364-comparison-table" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Filter</th>
+<th>Formula</th>
+<th>Requires</th>
+<th>Optimal among</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Non-causal Wiener</td>
+<td><span class="arithmatex">\(S_{XY}/S_Y\)</span></td>
+<td>Full PSDs</td>
+<td><strong>All</strong> linear filters</td>
+</tr>
+<tr>
+<td>Causal Wiener</td>
+<td><span class="arithmatex">\([S_{XY}/(\sigma_e^2 L^{-1})]_+ / L\)</span></td>
+<td>PSDs + spectral factorization</td>
+<td><strong>Causal</strong> linear filters</td>
+</tr>
+<tr>
+<td>Kalman (§3.7)</td>
+<td>Recursive; steady state equals causal Wiener for stationary <span class="arithmatex">\(S_Y\)</span></td>
+<td>State-space model</td>
+<td><strong>Causal</strong> linear filters (equivalently)</td>
+</tr>
+</tbody>
+</table>
+<p>Kalman and causal Wiener give the <strong>same</strong> filter in steady state when the process
+is stationary and both are causal. The Kalman formulation has computational
+advantages (recursive, no large-matrix inversion, handles non-stationarity and
+multi-channel observations naturally).</p>
+<hr />
+<h2 id="37-the-kalman-filter">3.7 The Kalman filter<a class="headerlink" href="#37-the-kalman-filter" title="Permanent link">&para;</a></h2>
+<h3 id="371-state-space-model">3.7.1 State-space model<a class="headerlink" href="#371-state-space-model" title="Permanent link">&para;</a></h3>
+<p>The Kalman filter solves the LMMSE problem for <strong>state-space models</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;x[n] = A x[n-1] + B u[n]\;}\quad\text{(state equation)}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;y[n] = C x[n] + v[n]\;}\quad\text{(observation equation)}
+\]</div>
+<p>with:</p>
+<ul>
+<li><span class="arithmatex">\(x[n] \in \mathbb R^d\)</span> — state vector (unknown, to be estimated).</li>
+<li><span class="arithmatex">\(y[n] \in \mathbb R^m\)</span> — observation vector.</li>
+<li><span class="arithmatex">\(u[n] \sim \mathcal N(0, Q)\)</span> — <strong>process noise</strong> (white, independent across <span class="arithmatex">\(n\)</span>).</li>
+<li><span class="arithmatex">\(v[n] \sim \mathcal N(0, R)\)</span> — <strong>measurement noise</strong> (white, independent of <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(x[0]\)</span>).</li>
+<li><span class="arithmatex">\(x[0] \sim \mathcal N(\hat x_{0|0}, P_{0|0})\)</span> — initial state prior.</li>
+</ul>
+<p>The matrices <span class="arithmatex">\(A, B, C, Q, R\)</span> are known. The goal is the recursive LMMSE estimate
+<span class="arithmatex">\(\hat x_{n|k} = \mathbb E[x[n] \mid y[1], \dots, y[k]]\)</span>.</p>
+<p>Two cases:
+- <strong>Filtering</strong> (<span class="arithmatex">\(k = n\)</span>): estimate the current state.
+- <strong>Prediction</strong> (<span class="arithmatex">\(k &lt; n\)</span>): forecast future states (used in control and tracking).
+- <strong>Smoothing</strong> (<span class="arithmatex">\(k &gt; n\)</span>): estimate past states given all future observations (used in offline estimation).</p>
+<p>The <strong>Kalman filter</strong> is the <strong>filtering</strong> case; it is a <strong>predict-update</strong> recursion.</p>
+<h3 id="372-the-recursion">3.7.2 The recursion<a class="headerlink" href="#372-the-recursion" title="Permanent link">&para;</a></h3>
+<p>Initialise <span class="arithmatex">\(\hat x_{0|0}\)</span>, <span class="arithmatex">\(P_{0|0}\)</span>. For <span class="arithmatex">\(n = 1, 2, \dots\)</span>:</p>
+<p><strong>Predict step</strong> (extrapolate the state and its covariance):</p>
+<div class="arithmatex">\[
+\boxed{\;\hat x_{n|n-1} = A\,\hat x_{n-1|n-1}\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;P_{n|n-1} = A P_{n-1|n-1} A^\top + B Q B^\top\;}
+\]</div>
+<p><strong>Kalman gain</strong> (how much to trust the observation):</p>
+<div class="arithmatex">\[
+\boxed{\;K_n = P_{n|n-1} C^\top \bigl(C P_{n|n-1} C^\top + R\bigr)^{-1}\;}
+\]</div>
+<p><strong>Update step</strong> (correct the prediction using the observation):</p>
+<div class="arithmatex">\[
+\boxed{\;\hat x_{n|n} = \hat x_{n|n-1} + K_n \bigl(y[n] - C \hat x_{n|n-1}\bigr)\;}
+\]</div>
+<div class="arithmatex">\[
+\boxed{\;P_{n|n} = (I - K_n C) P_{n|n-1}\;}
+\]</div>
+<p>The term <span class="arithmatex">\(\nu_n = y[n] - C\hat x_{n|n-1}\)</span> is the <strong>innovation</strong> (or prediction
+error) — the part of the observation not predicted by the model. If the model is
+correct, <span class="arithmatex">\(\nu_n\)</span> is white with covariance <span class="arithmatex">\(C P_{n|n-1} C^\top + R\)</span>.</p>
+<h3 id="373-interpretation">3.7.3 Interpretation<a class="headerlink" href="#373-interpretation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\hat x_{n\|n-1}\)</span></td>
+<td>Prior mean — belief about <span class="arithmatex">\(x[n]\)</span> <strong>before</strong> seeing <span class="arithmatex">\(y[n]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P_{n\|n-1}\)</span></td>
+<td>Prior covariance — uncertainty in the prior</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(K_n\)</span></td>
+<td><strong>Weight</strong> on the innovation — the optimal compromise between prior and observation</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y[n] - C\hat x_{n\|n-1}\)</span></td>
+<td>Innovation — new information in <span class="arithmatex">\(y[n]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\hat x_{n\|n}\)</span></td>
+<td>Posterior mean — belief <strong>after</strong> seeing <span class="arithmatex">\(y[n]\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P_{n\|n}\)</span></td>
+<td>Posterior covariance — reduced uncertainty</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Limit cases of the Kalman gain.</strong></p>
+<ul>
+<li><span class="arithmatex">\(R \to 0\)</span> (noiseless observations): <span class="arithmatex">\(K_n \to C^{-1}\)</span>, so <span class="arithmatex">\(\hat x_{n|n} \to C^{-1}y[n]\)</span> — trust the observation completely.</li>
+<li><span class="arithmatex">\(R \to \infty\)</span> (useless observations): <span class="arithmatex">\(K_n \to 0\)</span>, so <span class="arithmatex">\(\hat x_{n|n} \to \hat x_{n|n-1}\)</span> — ignore the observation.</li>
+<li><span class="arithmatex">\(P_{n|n-1} \to 0\)</span> (perfect prior): <span class="arithmatex">\(K_n \to 0\)</span> — trust the prior.</li>
+</ul>
+<p>The Kalman filter <strong>interpolates</strong> between these extremes according to the
+<strong>relative uncertainty</strong>.</p>
+<h3 id="worked-example-37-scalar-kalman-filter-two-steps">Worked example 3.7 — scalar Kalman filter, two steps<a class="headerlink" href="#worked-example-37-scalar-kalman-filter-two-steps" title="Permanent link">&para;</a></h3>
+<p>Model: <span class="arithmatex">\(x[n] = 0.9\, x[n-1] + u[n]\)</span>, <span class="arithmatex">\(u[n] \sim \mathcal N(0, 0.1)\)</span>;
+<span class="arithmatex">\(y[n] = x[n] + v[n]\)</span>, <span class="arithmatex">\(v[n] \sim \mathcal N(0, 1)\)</span>. Initial: <span class="arithmatex">\(\hat x_{0|0} = 0\)</span>, <span class="arithmatex">\(P_{0|0} = 1\)</span>.
+Observations: <span class="arithmatex">\(y[1] = 2\)</span>, <span class="arithmatex">\(y[2] = 1.5\)</span>.</p>
+<p><strong>Step 1 — predict.</strong></p>
+<div class="arithmatex">\[
+\hat x_{1|0} = 0.9 \cdot 0 = 0,\qquad P_{1|0} = 0.9^2 \cdot 1 + 0.1 = 0.91.
+\]</div>
+<p><strong>Kalman gain.</strong></p>
+<div class="arithmatex">\[
+K_1 = P_{1|0}(P_{1|0} + R)^{-1} = 0.91/(0.91 + 1) = 0.4764.
+\]</div>
+<p><strong>Update.</strong></p>
+<div class="arithmatex">\[
+\hat x_{1|1} = 0 + 0.4764\,(2 - 0) = 0.9529,\qquad
+P_{1|1} = (1 - 0.4764) \cdot 0.91 = 0.4764.
+\]</div>
+<p><strong>Step 2 — predict.</strong></p>
+<div class="arithmatex">\[
+\hat x_{2|1} = 0.9 \cdot 0.9529 = 0.8576,\qquad P_{2|1} = 0.9^2 \cdot 0.4764 + 0.1 = 0.486.
+\]</div>
+<p><strong>Kalman gain.</strong></p>
+<div class="arithmatex">\[
+K_2 = 0.486/(0.486 + 1) = 0.327.
+\]</div>
+<p><strong>Update.</strong></p>
+<div class="arithmatex">\[
+\hat x_{2|2} = 0.8576 + 0.327\,(1.5 - 0.8576) = 1.067,\qquad P_{2|2} = (1 - 0.327)\cdot 0.486 = 0.327.
+\]</div>
+<p><strong>Interpretation.</strong> The first observation (<span class="arithmatex">\(y[1] = 2\)</span>) pulls the estimate up to
+<span class="arithmatex">\(0.95\)</span>, but <span class="arithmatex">\(K_1 &lt; 1\)</span> means we don't fully trust it (noise variance = 1, comparable
+to prior variance = 0.91). The second observation (<span class="arithmatex">\(y[2] = 1.5\)</span>) is <em>lower</em> than
+predicted (<span class="arithmatex">\(0.858\)</span>), so it nudges the estimate to <span class="arithmatex">\(1.067\)</span>. The posterior variance
+shrinks from <span class="arithmatex">\(1 \to 0.476 \to 0.327\)</span> — uncertainty <strong>decreases</strong> with more data.</p>
+<h3 id="worked-example-38-steady-state-behaviour">Worked example 3.8 — steady-state behaviour<a class="headerlink" href="#worked-example-38-steady-state-behaviour" title="Permanent link">&para;</a></h3>
+<p>Repeat the same scalar model for many steps. The Riccati recursion
+<span class="arithmatex">\(P_{n|n} = f(P_{n-1|n-1})\)</span> converges to a <strong>fixed point</strong> <span class="arithmatex">\(P^\star\)</span> satisfying</p>
+<div class="arithmatex">\[
+P^\star = \frac{(A^2 P^\star + Q) R}{A^2 P^\star + Q + R}.
+\]</div>
+<p>For <span class="arithmatex">\(A = 0.9\)</span>, <span class="arithmatex">\(Q = 0.1\)</span>, <span class="arithmatex">\(R = 1\)</span>:</p>
+<div class="arithmatex">\[
+P^\star = \frac{(0.81 P^\star + 0.1) \cdot 1}{0.81 P^\star + 0.1 + 1}
+\;\Rightarrow\;
+P^\star \approx 0.327.
+\]</div>
+<p>The steady-state Kalman gain is <span class="arithmatex">\(K^\star = P^\star/(P^\star + 1) \approx 0.246\)</span>.</p>
+<p><strong>After convergence</strong>, the Kalman filter is a <strong>linear time-invariant filter</strong>:</p>
+<div class="arithmatex">\[
+\hat x_{n|n} = A(1 - K^\star)\hat x_{n-1|n-1} + K^\star y[n] \quad\text{(scalar case)}
+= 0.9\cdot 0.754\,\hat x_{n-1|n-1} + 0.246\, y[n].
+\]</div>
+<p>This LTI recursion is exactly what the <strong>causal Wiener filter</strong> of §3.6 produces
+for the same process. The Kalman filter is the <strong>state-space implementation</strong> of
+the causal Wiener filter, and it converges to it exponentially fast.</p>
+<h3 id="374-the-riccati-equation">3.7.4 The Riccati equation<a class="headerlink" href="#374-the-riccati-equation" title="Permanent link">&para;</a></h3>
+<p>The <strong>discrete algebraic Riccati equation (DARE)</strong> for the steady-state covariance is</p>
+<div class="arithmatex">\[
+\boxed{\;P = A P A^\top + B Q B^\top - A P C^\top (C P C^\top + R)^{-1} C P A^\top.\;}
+\]</div>
+<p><strong>Existence and uniqueness.</strong> Under <strong>stabilisability</strong> (unstable modes of <span class="arithmatex">\(A\)</span>
+are affected by the process noise) and <strong>detectability</strong> (unstable modes are
+observable through <span class="arithmatex">\(C\)</span>), the DARE has a <strong>unique positive-definite solution</strong>
+<span class="arithmatex">\(P^\star &gt; 0\)</span>. Under these conditions, the Kalman filter converges to the
+steady-state gain <span class="arithmatex">\(K^\star\)</span> from any initial <span class="arithmatex">\(P_{0|0} \ge 0\)</span>.</p>
+<p><strong>Solving the DARE in practice.</strong> Iterating the Riccati recursion (the Kalman
+recursion for <span class="arithmatex">\(P\)</span> alone) converges in <span class="arithmatex">\(O(\log(1/\epsilon))\)</span> iterations —
+quadratic convergence for small <span class="arithmatex">\(Q/R\)</span>. For very large <span class="arithmatex">\(d\)</span>, use the <strong>structure-preserving
+methods</strong> (Potter, Joseph form, square-root filters) to avoid numerical loss of
+positive-definiteness.</p>
+<h3 id="375-why-kalman-is-more-general-than-wiener">3.7.5 Why Kalman is more general than Wiener<a class="headerlink" href="#375-why-kalman-is-more-general-than-wiener" title="Permanent link">&para;</a></h3>
+<p>The Wiener filter assumes:
+- <strong>Stationarity</strong> of all processes involved.
+- <strong>Known</strong> second-order statistics.
+- <strong>Single-channel</strong> observations.
+- <strong>Time-invariant</strong> filter (in steady state).</p>
+<p>The Kalman filter handles:
+- <strong>Non-stationary</strong> processes (time-varying <span class="arithmatex">\(A, C, Q, R\)</span>).
+- <strong>Multi-channel</strong> observations with cross-correlated noise.
+- <strong>Unknown initial conditions</strong> — the covariance recursion handles it naturally.
+- <strong>Real-time</strong> recursive computation — <span class="arithmatex">\(O(d^3)\)</span> per step, not a large-matrix inversion.</p>
+<p>When the Kalman filter is used for a stationary process, <strong>it converges to the causal Wiener filter</strong> in steady state.</p>
+<hr />
+<h2 id="38-linear-prediction">3.8 Linear prediction<a class="headerlink" href="#38-linear-prediction" title="Permanent link">&para;</a></h2>
+<h3 id="381-the-one-step-forward-predictor">3.8.1 The one-step forward predictor<a class="headerlink" href="#381-the-one-step-forward-predictor" title="Permanent link">&para;</a></h3>
+<p>Predict <span class="arithmatex">\(x[n]\)</span> from past samples <span class="arithmatex">\(x[n-1], \dots, x[n-p]\)</span> using a linear predictor:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat x[n] = -\sum_{k=1}^{p} a_k\, x[n-k]\;}
+\]</div>
+<p>The <strong>prediction error</strong> (also called the <strong>residual</strong> or <strong>innovation</strong>) is</p>
+<div class="arithmatex">\[
+\boxed{\;e[n] = x[n] - \hat x[n] = x[n] + \sum_{k=1}^{p} a_k x[n-k]\;}
+\]</div>
+<p>and the <strong>predictor coefficients</strong> <span class="arithmatex">\(a_k\)</span> are chosen to <strong>minimise the mean-square
+prediction error</strong> <span class="arithmatex">\(\mathbb E[e[n]^2]\)</span>.</p>
+<h3 id="382-normal-equations">3.8.2 Normal equations<a class="headerlink" href="#382-normal-equations" title="Permanent link">&para;</a></h3>
+<p>Apply the orthogonality principle to <span class="arithmatex">\(e[n]\)</span> and each past sample:</p>
+<div class="arithmatex">\[
+\mathbb E\bigl[e[n] x[n-k]\bigr] = 0,\quad k = 1, \dots, p.
+\]</div>
+<p>Expanding:</p>
+<div class="arithmatex">\[
+R_X[k] + \sum_{m=1}^{p} a_m R_X[k-m] = 0,\quad k = 1, \dots, p.
+\]</div>
+<p>These are <strong>identical</strong> to the Yule–Walker equations from Chapter 2 (§2.10)! The
+<strong>optimal linear predictor</strong> for a WSS process is the <strong>AR coefficient vector</strong> of
+the process. The <strong>prediction error</strong> is exactly the <strong>innovations</strong>.</p>
+<div class="arithmatex">\[
+\boxed{\;\text{MMSE linear prediction} \;\equiv\; \text{AR}(p)\ \text{model estimation}.\;}
+\]</div>
+<p>This identity is fundamental: it says that <strong>the Wold decomposition</strong> of a WSS
+process into AR<span class="arithmatex">\((\infty)\)</span> + innovations <strong>is</strong> the optimal linear predictor.</p>
+<h3 id="383-minimum-prediction-error">3.8.3 Minimum prediction error<a class="headerlink" href="#383-minimum-prediction-error" title="Permanent link">&para;</a></h3>
+<p>The MMSE is</p>
+<div class="arithmatex">\[
+\boxed{\;P_p = \mathbb E[e^2[n]] = R_X[0] + \sum_{k=1}^{p} a_k R_X[-k] = \sigma_{w,p}^2.\;}
+\]</div>
+<p>This is the <strong>prediction-error variance</strong> — the same quantity as <span class="arithmatex">\(\sigma_p^2\)</span>
+in Levinson–Durbin (§2.10).</p>
+<p>For white noise, <span class="arithmatex">\(R_X[k] = 0\)</span> for <span class="arithmatex">\(k \ne 0\)</span>, so all <span class="arithmatex">\(a_k = 0\)</span> and <span class="arithmatex">\(P_p = R_X[0]\)</span>:
+no predictability.</p>
+<p>For a perfectly predictable signal (e.g. a sinusoid at a known frequency), the
+prediction error can go to zero with sufficient <span class="arithmatex">\(p\)</span> — a <strong>line spectral</strong> process.</p>
+<h3 id="worked-example-39-one-step-predictor-for-ar1">Worked example 3.9 — one-step predictor for AR(1)<a class="headerlink" href="#worked-example-39-one-step-predictor-for-ar1" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x[n] = a x[n-1] + w[n]\)</span>, <span class="arithmatex">\(|a| &lt; 1\)</span>, <span class="arithmatex">\(\sigma_w^2\)</span> given. <span class="arithmatex">\(R_X[k] = \frac{\sigma_w^2}{1-a^2}a^{|k|}\)</span>.</p>
+<p><strong>AR(1) prediction:</strong> <span class="arithmatex">\(\hat x[n] = -a_1 x[n-1]\)</span> with <span class="arithmatex">\(a_1 = -a\)</span> (Yule–Walker for
+<span class="arithmatex">\(p=1\)</span>: <span class="arithmatex">\(R_X[1] + a_1 R_X[0] = 0 \Rightarrow a_1 = -a\)</span>).</p>
+<p><strong>MMSE:</strong> <span class="arithmatex">\(P_1 = R_X[0](1 - \rho^2)\)</span> with <span class="arithmatex">\(\rho = R_X[1]/R_X[0] = a\)</span>. So
+<span class="arithmatex">\(P_1 = \sigma_w^2/(1-a^2) \cdot (1 - a^2) = \sigma_w^2\)</span>.</p>
+<p>The prediction error is exactly <span class="arithmatex">\(w[n]\)</span> — the innovations of the AR(1). This
+matches the identity above.</p>
+<p><strong>Prediction gain.</strong> <span class="arithmatex">\(P_1/\sigma_X^2 = 1 - a^2\)</span>. For <span class="arithmatex">\(a = 0.9\)</span>, the prediction
+error is only 19% of the signal variance; 81% of the signal is predictable
+from the previous sample. For <span class="arithmatex">\(a = 0.5\)</span>, only 25% is predictable.</p>
+<h3 id="384-order-p-prediction-and-the-lattice">3.8.4 Order-<span class="arithmatex">\(p\)</span> prediction and the lattice<a class="headerlink" href="#384-order-p-prediction-and-the-lattice" title="Permanent link">&para;</a></h3>
+<p>For order <span class="arithmatex">\(p &gt; 1\)</span>, the predictor is obtained via Levinson–Durbin (Chapter 2
+§2.10). The intermediate coefficients <span class="arithmatex">\(a^{(m)}\)</span> at each order give the
+<strong>order-<span class="arithmatex">\(m\)</span> predictor</strong>; the reflection coefficients <span class="arithmatex">\(k_m\)</span> are the <strong>partial
+autocorrelations</strong> and satisfy <span class="arithmatex">\(|k_m| &lt; 1\)</span> for a stable process.</p>
+<p>The <strong>minimum prediction error</strong> at order <span class="arithmatex">\(m\)</span> is</p>
+<div class="arithmatex">\[
+\boxed{\;P_m = P_{m-1}(1 - k_m^2)\;}
+\]</div>
+<p>with <span class="arithmatex">\(P_0 = R_X[0]\)</span>. This monotone decreasing sequence converges to <span class="arithmatex">\(\sigma_w^2\)</span>
+(the innovations variance) as <span class="arithmatex">\(m \to \infty\)</span>. The <strong>reflection coefficient</strong>
+<span class="arithmatex">\(k_m\)</span> measures the <em>fractional</em> improvement in prediction error gained by adding
+lag <span class="arithmatex">\(m\)</span> to the predictor. A magnitude near 1 means a large improvement; near 0
+means lag <span class="arithmatex">\(m\)</span> carries little new information beyond lags <span class="arithmatex">\(1\)</span> to <span class="arithmatex">\(m-1\)</span>.</p>
+<h3 id="385-backward-prediction">3.8.5 Backward prediction<a class="headerlink" href="#385-backward-prediction" title="Permanent link">&para;</a></h3>
+<p>Similarly, predict <span class="arithmatex">\(x[n-p]\)</span> from the <em>future</em> samples <span class="arithmatex">\(x[n-p+1], \dots, x[n]\)</span>:</p>
+<div class="arithmatex">\[
+\hat x[n-p] = -\sum_{k=1}^{p} c_k\, x[n-p+k].
+\]</div>
+<p>For a WSS process, the backward predictor coefficients <span class="arithmatex">\(c_k\)</span> equal the <strong>reversed</strong>
+forward predictor coefficients: <span class="arithmatex">\(c_k = a_{p+1-k}\)</span>. This symmetry is the structural
+basis of the lattice filter (§3.11).</p>
+<hr />
+<h2 id="39-whitening-filter-and-inverse-filter">3.9 Whitening filter and inverse filter<a class="headerlink" href="#39-whitening-filter-and-inverse-filter" title="Permanent link">&para;</a></h2>
+<h3 id="391-the-whitening-filter">3.9.1 The whitening filter<a class="headerlink" href="#391-the-whitening-filter" title="Permanent link">&para;</a></h3>
+<p>Given a WSS process <span class="arithmatex">\(X[n]\)</span> with rational PSD <span class="arithmatex">\(S_X(e^{j\omega})\)</span>, the <strong>whitening
+filter</strong> is</p>
+<div class="arithmatex">\[
+\boxed{\;H_w(e^{j\omega}) = \frac{1}{H(e^{j\omega})},\qquad
+S_X = \sigma_e^2 |H|^2.\;}
+\]</div>
+<p>Its output <span class="arithmatex">\(E[n] = h_w * X[n]\)</span> is <strong>white</strong> of variance <span class="arithmatex">\(\sigma_e^2\)</span>.</p>
+<p><strong>Interpretation.</strong> The whitening filter is the <strong>prediction-error filter</strong>: it
+subtracts the best linear prediction of <span class="arithmatex">\(X[n]\)</span> from the past, leaving only the
+unpredictable part — the innovations.</p>
+<p><strong>For AR(<span class="arithmatex">\(p\)</span>):</strong> the whitening filter is the <strong>FIR</strong> filter <span class="arithmatex">\(1 + \sum_{k=1}^p a_k z^{-k}\)</span>,
+so</p>
+<div class="arithmatex">\[
+e[n] = x[n] + \sum_{k=1}^p a_k x[n-k].
+\]</div>
+<p>This is exactly the AR prediction error — the input to the AR model. The
+whitening filter for an AR process is <strong>FIR</strong> because AR is an all-pole model
+(its inverse is all-zero).</p>
+<p><strong>For MA(<span class="arithmatex">\(q\)</span>):</strong> the whitening filter is IIR (the inverse of an all-zero filter),
+with coefficients determined by spectral factorization.</p>
+<p><strong>For ARMA(<span class="arithmatex">\(p, q\)</span>):</strong> the whitening filter is IIR (ratio of two FIR filters) and
+requires factoring the MA polynomial.</p>
+<h3 id="392-the-inverse-filter">3.9.2 The inverse filter<a class="headerlink" href="#392-the-inverse-filter" title="Permanent link">&para;</a></h3>
+<p>The <strong>inverse filter</strong> restores the original process from the white innovations:</p>
+<div class="arithmatex">\[
+X[n] = h * E[n],\qquad h = 1/h_w.
+\]</div>
+<p>For an AR process, <span class="arithmatex">\(H(z) = 1/(1 + \sum a_k z^{-k})\)</span> — an IIR filter with feedback.
+The pair <span class="arithmatex">\((H, H_w)\)</span> is a <strong>synthesis/analysis</strong> pair, used throughout
+communications and audio:</p>
+<ul>
+<li><strong>Synthesis:</strong> generate <span class="arithmatex">\(X\)</span> from white noise <span class="arithmatex">\(E\)</span> via <span class="arithmatex">\(H\)</span> (e.g., speech synthesis).</li>
+<li><strong>Analysis:</strong> recover <span class="arithmatex">\(E\)</span> from <span class="arithmatex">\(X\)</span> via <span class="arithmatex">\(H_w\)</span> (e.g., speech recognition, LPC).</li>
+</ul>
+<h3 id="worked-example-310-speech-analysis-and-synthesis">Worked example 3.10 — speech analysis and synthesis<a class="headerlink" href="#worked-example-310-speech-analysis-and-synthesis" title="Permanent link">&para;</a></h3>
+<p>The <strong>source-filter model</strong> of speech:</p>
+<ul>
+<li><strong>Source:</strong> the glottal pulse train (voiced) or turbulent noise (unvoiced) — modeled as white noise.</li>
+<li><strong>Filter:</strong> the vocal tract — modeled as an AR(<span class="arithmatex">\(p\)</span>) filter with <span class="arithmatex">\(p \approx 10\)</span> for <span class="arithmatex">\(f_s = 8\)</span> kHz.</li>
+</ul>
+<p><strong>Analysis (encoder):</strong> apply the whitening filter <span class="arithmatex">\(1/A(z)\)</span> to the speech
+<span class="arithmatex">\(x[n]\)</span>, obtain the prediction-error (residual) <span class="arithmatex">\(e[n]\)</span>. The residuals contain
+the pitch information and the gain; the AR coefficients <span class="arithmatex">\(a_k\)</span> contain the
+spectral envelope (formants).</p>
+<p><strong>Synthesis (decoder):</strong> drive the AR filter <span class="arithmatex">\(1/A(z)\)</span> with the residual <span class="arithmatex">\(e[n]\)</span>
+to reconstruct <span class="arithmatex">\(\tilde x[n]\)</span>.</p>
+<p><strong>Compression.</strong> For <span class="arithmatex">\(p = 10\)</span> at <span class="arithmatex">\(f_s = 8\)</span> kHz and 20 ms frames, the
+parameters per frame are: <span class="arithmatex">\(10\)</span> AR coefficients (~30 bits) + pitch (~7 bits) + gain
+(~5 bits) + residual (~0–160 bits depending on codec) — total ~50–200 bits per
+20 ms ≈ 2.5–10 kbps. Compare to raw PCM at 128 kbps — a <strong>10–50× compression</strong>,
+the basis of <strong>LPC-10</strong>, <strong>CELP</strong>, <strong>MP3</strong>, and modern speech codecs.</p>
+<p>The identity <strong>prediction error = innovations</strong> is what makes this possible: the
+residual is white and can be efficiently encoded with scalar quantisation or
+vector quantisation.</p>
+<hr />
+<h2 id="310-levinson-recursion-for-toeplitz-systems">3.10 Levinson recursion for Toeplitz systems<a class="headerlink" href="#310-levinson-recursion-for-toeplitz-systems" title="Permanent link">&para;</a></h2>
+<h3 id="3101-recap">3.10.1 Recap<a class="headerlink" href="#3101-recap" title="Permanent link">&para;</a></h3>
+<p>From Chapter 2 §2.10, the <strong>Levinson–Durbin</strong> recursion solves the Toeplitz system</p>
+<div class="arithmatex">\[
+\mathbf R_p\, \mathbf a = -\mathbf r_p
+\]</div>
+<p>in <span class="arithmatex">\(O(p^2)\)</span> operations, producing the AR coefficients at each order <span class="arithmatex">\(m = 1, \dots, p\)</span>:</p>
+<div class="arithmatex">\[
+k_m = -\frac{r_m + \sum_{i=1}^{m-1} a_i^{(m-1)} r_{m-i}}{\sigma_{m-1}^2},\qquad
+a_i^{(m)} = a_i^{(m-1)} + k_m a_{m-i}^{(m-1)},\qquad
+\sigma_m^2 = (1-k_m^2)\sigma_{m-1}^2.
+\]</div>
+<h3 id="3102-interpretation">3.10.2 Interpretation<a class="headerlink" href="#3102-interpretation" title="Permanent link">&para;</a></h3>
+<p>Levinson–Durbin builds the <strong>predictor of order <span class="arithmatex">\(p\)</span></strong> incrementally:</p>
+<ol>
+<li>Start with order 1: <span class="arithmatex">\(a_1^{(1)} = -r_1/r_0\)</span> — the single-lag predictor.</li>
+<li>Add lag 2: update <span class="arithmatex">\(a_1^{(1)} \to a_1^{(2)}\)</span> and add <span class="arithmatex">\(a_2^{(2)}\)</span> — the two-lag predictor.</li>
+<li>Continue to order <span class="arithmatex">\(p\)</span>.</li>
+</ol>
+<p><strong>Each step adds one lag and updates the previous coefficients via the reflection
+coefficient <span class="arithmatex">\(k_m\)</span>.</strong> This is not just a numerical trick — it exposes the
+<strong>hierarchical structure</strong> of the predictor, which the lattice filter (§3.11)
+exploits directly.</p>
+<h3 id="3103-split-levinson-and-other-variants">3.10.3 Split-Levinson and other variants<a class="headerlink" href="#3103-split-levinson-and-other-variants" title="Permanent link">&para;</a></h3>
+<p>For very long <span class="arithmatex">\(p\)</span> (e.g., <span class="arithmatex">\(p &gt; 1000\)</span> in audio), the standard recursion is <span class="arithmatex">\(O(p^2)\)</span>.
+The <strong>split-Levinson</strong> algorithm reduces to <span class="arithmatex">\(O(p \log^2 p)\)</span> and is used in
+real-time high-order predictors. For most signal-processing applications
+(<span class="arithmatex">\(p \le 50\)</span>), standard Levinson is fast enough.</p>
+<p><strong>Bareiss and Schur algorithms</strong> are alternative <span class="arithmatex">\(O(p^2)\)</span> Toeplitz solvers with
+better numerical stability; <strong>Levinson is exact in exact arithmetic</strong>, but the
+recursion can lose accuracy for ill-conditioned matrices (large condition number,
+close to singular). In practice, the <strong>biased</strong> sample autocorrelation guarantees
+positive-definiteness, so the recursion is stable.</p>
+<h3 id="3104-complexity-comparison">3.10.4 Complexity comparison<a class="headerlink" href="#3104-complexity-comparison" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Complexity</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gaussian elimination</td>
+<td><span class="arithmatex">\(O(p^3)\)</span></td>
+<td>General matrices; does not exploit Toeplitz</td>
+</tr>
+<tr>
+<td>Levinson–Durbin</td>
+<td><span class="arithmatex">\(O(p^2)\)</span></td>
+<td>Toeplitz, symmetric, positive-definite</td>
+</tr>
+<tr>
+<td>Bareiss</td>
+<td><span class="arithmatex">\(O(p^2)\)</span></td>
+<td>Better numerical stability</td>
+</tr>
+<tr>
+<td>Split-Levinson</td>
+<td><span class="arithmatex">\(O(p \log^2 p)\)</span></td>
+<td>Very long <span class="arithmatex">\(p\)</span></td>
+</tr>
+<tr>
+<td>FFT-based</td>
+<td><span class="arithmatex">\(O(p \log p)\)</span></td>
+<td>Circulant embedding (used in practice)</td>
+</tr>
+</tbody>
+</table>
+<p>For <span class="arithmatex">\(p = 50\)</span>: Gaussian <span class="arithmatex">\(= 125{,}000\)</span> ops, Levinson <span class="arithmatex">\(= 2{,}500\)</span> ops — a 50×
+speedup. For <span class="arithmatex">\(p = 500\)</span>: <span class="arithmatex">\(5 \times 10^7\)</span> vs <span class="arithmatex">\(5 \times 10^5\)</span> — a 100× speedup.
+For real-time speech coding at <span class="arithmatex">\(p = 10\)</span>, either is fine; for audio at <span class="arithmatex">\(p = 1000\)</span>,
+the difference is the feasibility boundary.</p>
+<hr />
+<h2 id="311-lattice-realization">3.11 Lattice realization<a class="headerlink" href="#311-lattice-realization" title="Permanent link">&para;</a></h2>
+<h3 id="3111-the-lattice-structure">3.11.1 The lattice structure<a class="headerlink" href="#3111-the-lattice-structure" title="Permanent link">&para;</a></h3>
+<p>The <strong>lattice filter</strong> implements the prediction-error filter using the
+<strong>reflection coefficients</strong> <span class="arithmatex">\(k_1, \dots, k_p\)</span> as its parameters, in a cascade
+of <strong>identical 2-port stages</strong>:</p>
+<div class="arithmatex">\[
+\boxed{\;f_m[n] = f_{m-1}[n] + k_m\, g_{m-1}[n-1],\qquad
+g_m[n] = g_{m-1}[n-1] + k_m\, f_{m-1}[n]\;}
+\]</div>
+<p>with initial conditions <span class="arithmatex">\(f_0[n] = g_0[n] = x[n]\)</span>.</p>
+<p><strong>Here:</strong></p>
+<ul>
+<li><span class="arithmatex">\(f_m[n]\)</span> = <strong>forward prediction error</strong> at order <span class="arithmatex">\(m\)</span> — the error when predicting <span class="arithmatex">\(x[n]\)</span> from <span class="arithmatex">\(m\)</span> past samples.</li>
+<li><span class="arithmatex">\(g_m[n]\)</span> = <strong>backward prediction error</strong> at order <span class="arithmatex">\(m\)</span> — the error when predicting <span class="arithmatex">\(x[n-m]\)</span> from the next <span class="arithmatex">\(m\)</span> samples.</li>
+</ul>
+<p>The forward error at order <span class="arithmatex">\(p\)</span> is the output: <span class="arithmatex">\(e[n] = f_p[n]\)</span>.</p>
+<h3 id="3112-properties">3.11.2 Properties<a class="headerlink" href="#3112-properties" title="Permanent link">&para;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Why lattice filters are preferred in some applications</p>
+<p><strong>1. Stability is guaranteed by <span class="arithmatex">\(|k_m| &lt; 1\)</span>.</strong> Any set of reflection coefficients
+within <span class="arithmatex">\((-1, 1)\)</span> produces a stable synthesis filter. This is not true of the
+direct-form <span class="arithmatex">\(a_k\)</span> representation, where stability depends on all roots of
+<span class="arithmatex">\(1 + \sum a_k z^{-k}\)</span> being inside the unit circle.</p>
+<p><strong>2. Modular and order-recursive.</strong> Each stage is identical and can be added
+or removed without recomputing the others. This is useful for <strong>order-adaptive
+filtering</strong> (choose <span class="arithmatex">\(p\)</span> at runtime).</p>
+<p><strong>3. Numerically robust under quantization.</strong> Coefficients are bounded in
+magnitude, so fixed-point implementations do not overflow or lose stability.</p>
+<p><strong>4. Provides both forward and backward errors.</strong> Useful in two-sided
+estimation problems (smoothing, Burg spectral estimation).</p>
+<p><strong>5. Matched to the Levinson recursion.</strong> The <span class="arithmatex">\(k_m\)</span> are computed by Levinson
+as a by-product; no extra work is needed to obtain the lattice form.</p>
+</div>
+<h3 id="3113-from-lattice-back-to-direct-form">3.11.3 From lattice back to direct form<a class="headerlink" href="#3113-from-lattice-back-to-direct-form" title="Permanent link">&para;</a></h3>
+<p>To convert lattice to direct form, apply the <strong>step-up</strong> recursion (the inverse of
+Levinson–Durbin):</p>
+<div class="arithmatex">\[
+a_m^{(m)} = k_m,\qquad
+a_i^{(m)} = a_i^{(m-1)} + k_m a_{m-i}^{(m-1)},\quad i = 1, \dots, m-1.
+\]</div>
+<p>To convert direct form to lattice, use the <strong>step-down</strong> recursion (Levinson itself).</p>
+<h3 id="worked-example-311-lattice-for-ar2">Worked example 3.11 — lattice for AR(2)<a class="headerlink" href="#worked-example-311-lattice-for-ar2" title="Permanent link">&para;</a></h3>
+<p>From Example 2.8 in Chapter 2: AR(2) with <span class="arithmatex">\(r_0 = 6\)</span>, <span class="arithmatex">\(r_1 = 4\)</span>, <span class="arithmatex">\(r_2 = 1\)</span> gave
+reflection coefficients <span class="arithmatex">\(k_1 = -2/3\)</span>, <span class="arithmatex">\(k_2 = 1/2\)</span> and AR coefficients
+<span class="arithmatex">\(a_1 = -1\)</span>, <span class="arithmatex">\(a_2 = 0.5\)</span>.</p>
+<p><strong>Stage 1 (<span class="arithmatex">\(m = 1\)</span>).</strong></p>
+<div class="arithmatex">\[
+f_1[n] = x[n] + k_1\, g_0[n-1] = x[n] - \tfrac{2}{3}x[n-1],
+\]</div>
+<div class="arithmatex">\[
+g_1[n] = x[n-1] + k_1\, x[n] = x[n-1] - \tfrac{2}{3}x[n].
+\]</div>
+<p><strong>Stage 2 (<span class="arithmatex">\(m = 2\)</span>).</strong></p>
+<div class="arithmatex">\[
+f_2[n] = f_1[n] + k_2\, g_1[n-1] = \bigl(x[n] - \tfrac{2}{3}x[n-1]\bigr) + \tfrac{1}{2}\bigl(x[n-2] - \tfrac{2}{3}x[n-1]\bigr)
+\]</div>
+<div class="arithmatex">\[
+= x[n] - \tfrac{2}{3}x[n-1] - \tfrac{1}{3}x[n-1] + \tfrac{1}{2}x[n-2] = x[n] - x[n-1] + \tfrac{1}{2}x[n-2].
+\]</div>
+<p>So <span class="arithmatex">\(f_2[n] = x[n] + a_1 x[n-1] + a_2 x[n-2] = x[n] - x[n-1] + 0.5 x[n-2]\)</span> — matching
+the direct-form predictor from Example 2.7. ✓</p>
+<p><strong>Interpretation.</strong> The lattice adds one reflection coefficient per stage. Each
+<span class="arithmatex">\(|k_m| &lt; 1\)</span> guarantees a stable all-pole synthesis filter of order <span class="arithmatex">\(m\)</span> — the
+<strong>hierarchical stability</strong> property.</p>
+<hr />
+<h2 id="312-comparison-and-summary">3.12 Comparison and summary<a class="headerlink" href="#312-comparison-and-summary" title="Permanent link">&para;</a></h2>
+<h3 id="3121-summary-of-the-estimators">3.12.1 Summary of the estimators<a class="headerlink" href="#3121-summary-of-the-estimators" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Estimator</th>
+<th>Criterion</th>
+<th>Model</th>
+<th>Form</th>
+<th>Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MLE</strong></td>
+<td>Max likelihood</td>
+<td>Full pdf</td>
+<td><span class="arithmatex">\(\arg\max p(Y;\theta)\)</span></td>
+<td><span class="arithmatex">\(O(N)\)</span> – <span class="arithmatex">\(O(N^3)\)</span></td>
+</tr>
+<tr>
+<td><strong>MMSE</strong></td>
+<td>Mean-square</td>
+<td>Joint pdf</td>
+<td><span class="arithmatex">\(\mathbb E[S \mid Y]\)</span></td>
+<td>Usually intractable</td>
+</tr>
+<tr>
+<td><strong>LMMSE (vector)</strong></td>
+<td>Mean-square, linear</td>
+<td>Covariance only</td>
+<td><span class="arithmatex">\(\Sigma_{SY}\Sigma_{YY}^{-1}(Y - \mu_Y)\)</span></td>
+<td><span class="arithmatex">\(O(m^3)\)</span> matrix inverse</td>
+</tr>
+<tr>
+<td><strong>Wiener (non-causal)</strong></td>
+<td>LMMSE, stationary</td>
+<td>PSDs</td>
+<td><span class="arithmatex">\(S_{XY}/S_Y\)</span></td>
+<td>Closed form</td>
+</tr>
+<tr>
+<td><strong>Wiener (FIR)</strong></td>
+<td>LMMSE, finite-length</td>
+<td>Autocorr</td>
+<td>Solve Toeplitz system</td>
+<td><span class="arithmatex">\(O(p^2)\)</span> Levinson</td>
+</tr>
+<tr>
+<td><strong>Causal Wiener</strong></td>
+<td>LMMSE, causal</td>
+<td>PSDs + spectral factorization</td>
+<td><span class="arithmatex">\([S_{XY}/L]^{+}/L\)</span></td>
+<td><span class="arithmatex">\(O(p \log p)\)</span></td>
+</tr>
+<tr>
+<td><strong>Kalman</strong></td>
+<td>LMMSE, state-space</td>
+<td>State model</td>
+<td>Predict-update recursion</td>
+<td><span class="arithmatex">\(O(d^3)\)</span> per step</td>
+</tr>
+<tr>
+<td><strong>Linear predictor</strong></td>
+<td>LMMSE, past only</td>
+<td>Autocorr</td>
+<td>Solve Yule–Walker</td>
+<td><span class="arithmatex">\(O(p^2)\)</span> Levinson</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3122-when-to-use-what">3.12.2 When to use what<a class="headerlink" href="#3122-when-to-use-what" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Full pdf known, non-Gaussian</strong></td>
+<td>MLE (or exact MMSE if tractable)</td>
+</tr>
+<tr>
+<td><strong>Jointly Gaussian, stationary, offline</strong></td>
+<td>Non-causal Wiener filter</td>
+</tr>
+<tr>
+<td><strong>Jointly Gaussian, stationary, real-time</strong></td>
+<td>Causal Wiener filter (via factorization)</td>
+</tr>
+<tr>
+<td><strong>Jointly Gaussian, real-time, state-space</strong></td>
+<td>Kalman filter</td>
+</tr>
+<tr>
+<td><strong>Jointly Gaussian, FIR wanted</strong></td>
+<td>FIR Wiener (Toeplitz solve)</td>
+</tr>
+<tr>
+<td><strong>Signal modeling, compression, speech</strong></td>
+<td>Linear prediction (Levinson)</td>
+</tr>
+<tr>
+<td><strong>Whitening, coding</strong></td>
+<td>Prediction-error filter (= spectral factor inverse)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3123-chapter-summary">3.12.3 Chapter summary<a class="headerlink" href="#3123-chapter-summary" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>ML criterion</strong> maximises the likelihood of the data; efficient under regularity; the <strong>CRLB</strong> is the variance floor for unbiased estimators.</li>
+<li><strong>MMSE</strong> (optimal, possibly nonlinear) equals the <strong>conditional mean</strong> <span class="arithmatex">\(\mathbb E[S \mid Y]\)</span>; <strong>LMMSE</strong> restricts to linear estimators and equals the optimal <strong>only for jointly Gaussian</strong> problems.</li>
+<li><strong>Orthogonality principle</strong> — <span class="arithmatex">\(\mathbb E[(S - \hat S)Y^\top] = 0\)</span> — is the operational condition for LMMSE, giving the closed form <span class="arithmatex">\(\hat S = \mu_S + \Sigma_{SY}\Sigma_{YY}^{-1}(Y - \mu_Y)\)</span>.</li>
+<li><strong>Wiener filter</strong> is the LMMSE for stationary processes. <strong>Non-causal:</strong> <span class="arithmatex">\(H = S_{XY}/S_Y\)</span> — simple, closed form. <strong>Causal:</strong> requires spectral factorization; solved via one-sided Wiener–Hopf.</li>
+<li><strong>FIR Wiener</strong> reduces to a <strong>Toeplitz</strong> linear system, solved by <strong>Levinson–Durbin</strong> in <span class="arithmatex">\(O(p^2)\)</span>.</li>
+<li><strong>Kalman filter</strong> is the LMMSE for state-space models; <strong>predict-update</strong> recursion; <strong>Riccati</strong> recursion for covariance; steady state = causal Wiener for stationary processes.</li>
+<li><strong>Linear prediction</strong> is the identity: optimal predictor = AR coefficients; prediction error = innovations; MMSE = innovations variance.</li>
+<li><strong>Whitening filter</strong> removes correlation, producing white innovations; its <strong>inverse</strong> reconstructs the signal. Basis of <strong>LPC speech coding</strong>.</li>
+<li><strong>Levinson–Durbin</strong> solves Toeplitz systems in <span class="arithmatex">\(O(p^2)\)</span>; the <strong>reflection coefficients</strong> <span class="arithmatex">\(k_m\)</span> encode stability and the hierarchical structure.</li>
+<li><strong>Lattice filter</strong> implements prediction-error filtering using <span class="arithmatex">\(k_m\)</span>; provides guaranteed stability, modularity, and numerical robustness.</li>
+</ol>
+<hr />
+<h2 id="313-quiz">3.13 Quiz<a class="headerlink" href="#313-quiz" title="Permanent link">&para;</a></h2>
+<h3 id="a-multiple-choice-choose-the-single-best-answer">A. Multiple choice (choose the single best answer)<a class="headerlink" href="#a-multiple-choice-choose-the-single-best-answer" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>The <strong>maximum likelihood</strong> estimator maximises:
+   (a) the prior probability (b) the data likelihood (c) the conditional mean (d) the posterior probability</p>
+</li>
+<li>
+<p>The <strong>CRLB</strong> gives:
+   (a) a lower bound on the bias of an estimator (b) a lower bound on the variance of any unbiased estimator (c) the optimal MSE (d) the Fisher information</p>
+</li>
+<li>
+<p>For i.i.d. Gaussian data <span class="arithmatex">\(y[n] = A + w[n]\)</span>, the ML estimator of <span class="arithmatex">\(A\)</span> is:
+   (a) median (b) sample mean (c) sample variance (d) RMS</p>
+</li>
+<li>
+<p>The optimal <strong>MMSE</strong> estimator <span class="arithmatex">\(\mathbb E[(S - \hat S)^2]\)</span> is:
+   (a) always linear (b) the conditional mean <span class="arithmatex">\(\mathbb E[S \mid Y]\)</span> (c) always Gaussian (d) the sample mean</p>
+</li>
+<li>
+<p>The <strong>LMMSE</strong> estimator is:
+   (a) <span class="arithmatex">\(\mathbb E[S \mid Y]\)</span> always (b) <span class="arithmatex">\(\mu_S + \Sigma_{SY}\Sigma_{YY}^{-1}(Y - \mu_Y)\)</span> (c) <span class="arithmatex">\(\mu_S\)</span> (d) <span class="arithmatex">\(\Sigma_{SY}\Sigma_{YY}^{-1}\)</span></p>
+</li>
+<li>
+<p>The <strong>orthogonality principle</strong> requires:
+   (a) <span class="arithmatex">\(\mathbb E[(S - \hat S)Y] = 0\)</span> (b) <span class="arithmatex">\(\mathbb E[(S - \hat S)Y^\top] = 0\)</span> (c) <span class="arithmatex">\(\mathbb E[SY] = 0\)</span> (d) <span class="arithmatex">\(\mathbb E[(S - \hat S)^2] = 0\)</span></p>
+</li>
+<li>
+<p>The <strong>non-causal Wiener filter</strong> is:
+   (a) <span class="arithmatex">\(S_{XY}/S_Y\)</span> (b) <span class="arithmatex">\(S_Y/S_{XY}\)</span> (c) <span class="arithmatex">\(S_{XY}S_Y\)</span> (d) <span class="arithmatex">\(\sigma_e^2 |H|^2\)</span></p>
+</li>
+<li>
+<p>The <strong>causal Wiener filter</strong> requires:
+   (a) solving a Toeplitz system (b) spectral factorization and causal-part extraction (c) ML (d) Kalman recursion</p>
+</li>
+<li>
+<p>The <strong>Kalman gain</strong> <span class="arithmatex">\(K_n\)</span> becomes small when:
+   (a) observation noise <span class="arithmatex">\(R\)</span> is small (b) observation noise <span class="arithmatex">\(R\)</span> is large (c) prior covariance <span class="arithmatex">\(P_{n|n-1}\)</span> is small (d) both (b) and (c)</p>
+</li>
+<li>
+<p>The <strong>prediction error</strong> <span class="arithmatex">\(e[n] = x[n] - \hat x[n]\)</span> for the optimal linear predictor is:
+    (a) always zero (b) the innovations process (white) (c) Gaussian always (d) the autocorrelation of <span class="arithmatex">\(x\)</span></p>
+</li>
+<li>
+<p>The <strong>whitening filter</strong> for an AR(<span class="arithmatex">\(p\)</span>) process is:
+    (a) an FIR filter with coefficients <span class="arithmatex">\(a_k\)</span> (b) an IIR filter (c) an all-pass filter (d) a Kalman filter</p>
+</li>
+<li>
+<p>The <strong>lattice filter</strong> stability condition is:
+    (a) <span class="arithmatex">\(|a_k| &lt; 1\)</span> for all <span class="arithmatex">\(k\)</span> (b) <span class="arithmatex">\(|k_m| &lt; 1\)</span> for all <span class="arithmatex">\(m\)</span> (c) all poles inside the unit circle (d) it is always unstable</p>
+</li>
+</ol>
+<h3 id="b-fill-in-the-blank">B. Fill in the blank<a class="headerlink" href="#b-fill-in-the-blank" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The MLE of a scalar parameter <span class="arithmatex">\(\theta\)</span> is <span class="arithmatex">\(\arg\max\)</span>_____ where <span class="arithmatex">\(\ell\)</span> is the log-likelihood.</li>
+<li>The CRLB says <span class="arithmatex">\(\operatorname{Var}[\hat\theta] \ge 1/\)</span>____ where <span class="arithmatex">\(I\)</span> is the Fisher information.</li>
+<li>The <strong>efficient</strong> estimator achieves the ____ at finite <span class="arithmatex">\(N\)</span>.</li>
+<li>The MMSE estimator is the conditional mean <span class="arithmatex">\(\mathbb E[S \mid \_\_\_\_]\)</span>.</li>
+<li>For jointly Gaussian signals, the LMMSE estimator equals the ____ estimator.</li>
+<li>The <strong>non-causal</strong> Wiener filter is $H_{\text{nc}} = $_____.</li>
+<li>The <strong>causal</strong> Wiener filter requires ____ factorization of <span class="arithmatex">\(S_Y\)</span>.</li>
+<li>The Kalman filter's steady-state behaviour matches the causal ____ filter for stationary signals.</li>
+<li>The <strong>whitening filter</strong> produces a <strong>white</strong> output from a coloured process; the prediction-error filter is the ____ filter for an AR(<span class="arithmatex">\(p\)</span>) signal.</li>
+<li>The lattice filter is parameterized by the ______ coefficients <span class="arithmatex">\(k_1, \dots, k_p\)</span>.</li>
+</ol>
+<h3 id="c-define-explain">C. Define / explain<a class="headerlink" href="#c-define-explain" title="Permanent link">&para;</a></h3>
+<ol>
+<li>State the <strong>ML criterion</strong> and derive the MLE of the noise variance <span class="arithmatex">\(\sigma^2\)</span> for i.i.d. Gaussian data <span class="arithmatex">\(y[n] \sim \mathcal N(0, \sigma^2)\)</span>. State whether the MLE is unbiased, and if not, propose the unbiased version.</li>
+<li>State the <strong>CRLB</strong> and derive the Fisher information for the Gaussian-mean problem in Example 3.1. Show that the sample mean is efficient.</li>
+<li>Distinguish <strong>MMSE</strong> and <strong>LMMSE</strong>. Under what conditions do they coincide? Give an example where they differ.</li>
+<li>State the <strong>orthogonality principle</strong> and derive the LMMSE closed form for random vectors. Interpret each matrix in the formula.</li>
+<li>Derive the <strong>Wiener–Hopf equations</strong> for the FIR Wiener filter from the orthogonality principle. Show that they reduce to a Toeplitz linear system.</li>
+<li>Derive the <strong>causal Wiener filter</strong> formula via spectral factorization. Explain the role of the causal-part operation <span class="arithmatex">\([\cdot]_+\)</span>.</li>
+<li>State the <strong>Kalman filter recursion</strong> (predict and update) and interpret each step. Why does the Kalman gain converge as <span class="arithmatex">\(n \to \infty\)</span>?</li>
+<li>Derive the <strong>Yule–Walker</strong> equations for linear prediction from the orthogonality principle. Show that they are identical to the AR parameter equations from Chapter 2.</li>
+<li>Define the <strong>whitening filter</strong> and the <strong>prediction-error filter</strong>. Explain why they are identical for AR processes but different for ARMA.</li>
+<li>Describe the <strong>lattice filter</strong> structure and state its key advantage over the direct-form filter. Why is <span class="arithmatex">\(|k_m| &lt; 1\)</span> the stability condition?</li>
+</ol>
+<hr />
+<h2 id="314-answer-key">3.14 Answer key<a class="headerlink" href="#314-answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>A. Multiple choice</summary>
+<ol>
+<li><strong>(b)</strong> — the data likelihood.</li>
+<li><strong>(b)</strong> — lower bound on the variance of any unbiased estimator.</li>
+<li><strong>(b)</strong> — sample mean.</li>
+<li><strong>(b)</strong> — conditional mean.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(\mu_S + \Sigma_{SY}\Sigma_{YY}^{-1}(Y - \mu_Y)\)</span>.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(\mathbb E[(S - \hat S)Y^\top] = 0\)</span>.</li>
+<li><strong>(a)</strong> — <span class="arithmatex">\(S_{XY}/S_Y\)</span>.</li>
+<li><strong>(b)</strong> — spectral factorization + causal part.</li>
+<li><strong>(d)</strong> — both large <span class="arithmatex">\(R\)</span> and small <span class="arithmatex">\(P_{n|n-1}\)</span> reduce <span class="arithmatex">\(K_n\)</span>.</li>
+<li><strong>(b)</strong> — innovations (white).</li>
+<li><strong>(a)</strong> — FIR with AR coefficients <span class="arithmatex">\(a_k\)</span>.</li>
+<li><strong>(b)</strong> — <span class="arithmatex">\(|k_m| &lt; 1\)</span> for all <span class="arithmatex">\(m\)</span>.</li>
+</ol>
+</details>
+<details class="success">
+<summary>B. Fill in the blank</summary>
+<ol>
+<li><span class="arithmatex">\(\ell(\theta)\)</span> (the log-likelihood)</li>
+<li><span class="arithmatex">\(I(\theta)\)</span> (Fisher information)</li>
+<li>CRLB</li>
+<li><span class="arithmatex">\(Y\)</span> (observations)</li>
+<li>MMSE</li>
+<li><span class="arithmatex">\(S_{XY}/S_Y\)</span></li>
+<li>spectral</li>
+<li>Wiener</li>
+<li>whitening (or prediction-error)</li>
+<li>reflection</li>
+</ol>
+</details>
+<details class="success">
+<summary>C. Define / explain — model answers</summary>
+<ol>
+<li><em>ML criterion:</em> <span class="arithmatex">\(\hat\theta_{\text{ML}} = \arg\max_\theta p_Y(Y; \theta)\)</span>; equivalently <span class="arithmatex">\(\arg\max \ell(\theta) = \log p_Y(Y; \theta)\)</span>. <em>Derivation for variance:</em> <span class="arithmatex">\(\ell(\sigma^2) = -\frac{N}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_n y[n]^2\)</span>. Setting <span class="arithmatex">\(d\ell/d\sigma^2 = 0\)</span>: <span class="arithmatex">\(-\frac{N}{2\sigma^2} + \frac{1}{2\sigma^4}\sum y[n]^2 = 0\)</span> ⇒ <span class="arithmatex">\(\hat\sigma^2_{\text{ML}} = \frac{1}{N}\sum y[n]^2\)</span>. <em>Bias:</em> <span class="arithmatex">\(\mathbb E[\hat\sigma^2_{\text{ML}}] = \sigma^2\)</span> if the data are zero-mean, so it is unbiased for zero-mean Gaussian (but biased by a factor <span class="arithmatex">\(N/(N-1)\)</span> when the mean is estimated as well). <em>Unbiased version (mean unknown):</em> <span class="arithmatex">\(s^2 = \frac{1}{N-1}\sum(y[n] - \bar y)^2\)</span> — the sample variance with <span class="arithmatex">\(N-1\)</span> denominator.</li>
+<li><em>CRLB:</em> for any unbiased estimator <span class="arithmatex">\(\hat\theta\)</span>, <span class="arithmatex">\(\operatorname{Var}[\hat\theta] \ge 1/I(\theta)\)</span> with <span class="arithmatex">\(I(\theta) = -\mathbb E[\partial^2\ell/\partial\theta^2]\)</span>. <em>Fisher information for the Gaussian-mean problem:</em> <span class="arithmatex">\(\ell(A) = -\frac{N}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum(y[n]-A)^2\)</span>; <span class="arithmatex">\(\partial^2\ell/\partial A^2 = -N/\sigma^2\)</span>, so <span class="arithmatex">\(I(A) = N/\sigma^2\)</span>. <em>Sample mean:</em> <span class="arithmatex">\(\operatorname{Var}[\bar y] = \sigma^2/N = 1/I(A)\)</span> — equality holds, so the sample mean is <strong>efficient</strong> (attains the CRLB) for every <span class="arithmatex">\(N\)</span>.</li>
+<li><em>MMSE:</em> minimises <span class="arithmatex">\(\mathbb E[(S-\hat S)^2]\)</span> over <strong>all</strong> estimators <span class="arithmatex">\(\hat S(Y)\)</span>; solution is the conditional mean <span class="arithmatex">\(\mathbb E[S \mid Y]\)</span>. <em>LMMSE:</em> minimises the same criterion over <strong>linear</strong> estimators <span class="arithmatex">\(\hat S = a + b^\top Y\)</span>; solution is <span class="arithmatex">\(\mu_S + \Sigma_{SY}\Sigma_{YY}^{-1}(Y - \mu_Y)\)</span>. <em>Equivalence:</em> for <strong>jointly Gaussian</strong> <span class="arithmatex">\((S, Y)\)</span>, the conditional mean is affine in <span class="arithmatex">\(Y\)</span>, so the two coincide. <em>Difference example:</em> <span class="arithmatex">\(S\)</span> uniform on <span class="arithmatex">\(\{-1, +1\}\)</span>, <span class="arithmatex">\(Y = S + V\)</span> with <span class="arithmatex">\(V\)</span> uniform on <span class="arithmatex">\([-0.5, 0.5]\)</span>. The MMSE is <span class="arithmatex">\(\mathrm{sign}(Y)\)</span> — a nonlinear estimator. The LMMSE is a linear function, which has a larger MSE. The difference is small for small noise, but exact-MMSE beats LMMSE when the prior is non-Gaussian.</li>
+<li><em>Orthogonality:</em> <span class="arithmatex">\(\mathbb E[(S - \hat S)Y^\top] = 0\)</span> and <span class="arithmatex">\(\mathbb E[S - \hat S] = 0\)</span>. <em>Derivation:</em> write <span class="arithmatex">\(\hat S = a + b^\top Y\)</span>; the orthogonality of the error to <span class="arithmatex">\(1\)</span> gives <span class="arithmatex">\(a = \mu_S - b^\top\mu_Y\)</span>; the orthogonality to <span class="arithmatex">\(Y\)</span> gives <span class="arithmatex">\(\Sigma_{SY} - b^\top\Sigma_{YY} = 0\)</span>, so <span class="arithmatex">\(b = \Sigma_{YY}^{-1}\Sigma_{SY}^\top = \Sigma_{YY}^{-1}\Sigma_{YS}\)</span>. <em>Interpretation:</em> <span class="arithmatex">\(\Sigma_{SY}\)</span> = cross-covariance (how correlated the target is with the observations); <span class="arithmatex">\(\Sigma_{YY}^{-1}\)</span> = inverse observation covariance (how much each observation is worth); the product weights each observation by its information and correlation to the target.</li>
+<li><em>Orthogonality:</em> <span class="arithmatex">\(\mathbb E[(x[n] - \hat x[n])y[n-m]] = 0\)</span> for <span class="arithmatex">\(m = 0, \dots, M-1\)</span>. <em>Expansion:</em> substituting <span class="arithmatex">\(\hat x[n] = \sum_{k=0}^{M-1}h[k]y[n-k]\)</span> and taking expectations gives <span class="arithmatex">\(\sum_k h[k] R_Y[m-k] = R_{XY}[m]\)</span>. <em>Toeplitz form:</em> the left side is a convolution of <span class="arithmatex">\(h\)</span> with <span class="arithmatex">\(R_Y\)</span>, evaluated at <span class="arithmatex">\(m\)</span>. In matrix form with <span class="arithmatex">\(\mathbf h = (h[0],\dots,h[M-1])^\top\)</span> and Toeplitz <span class="arithmatex">\(\mathbf R_Y\)</span> with <span class="arithmatex">\([\mathbf R_Y]_{ij} = R_Y[i-j]\)</span>, the system is <span class="arithmatex">\(\mathbf R_Y\mathbf h = \mathbf r_{XY}\)</span> where <span class="arithmatex">\(\mathbf r_{XY} = (R_{XY}[0],\dots,R_{XY}[M-1])^\top\)</span>. Solve by Levinson–Durbin in <span class="arithmatex">\(O(M^2)\)</span>.</li>
+<li><em>Formula:</em> <span class="arithmatex">\(H_{\text{cas}}(z) = [S_{XY}(z)/(\sigma_e^2 L(z^{-1}))]_+ / L(z)\)</span> where <span class="arithmatex">\(S_Y = \sigma_e^2 L L^{-1}\)</span> is the spectral factorization. <em>Role of <span class="arithmatex">\([\cdot]_+\)</span>:</em> the one-sided Wiener–Hopf has orthogonality only for <span class="arithmatex">\(m \ge 0\)</span>. In the <span class="arithmatex">\(z\)</span>-domain, this means we can only use the causal part of the Laurent expansion — terms <span class="arithmatex">\(z^0, z^{-1}, z^{-2}, \dots\)</span>. The operation <span class="arithmatex">\([\cdot]_+\)</span> takes exactly those terms, discarding the anti-causal part. Without it, we would recover the non-causal filter <span class="arithmatex">\(S_{XY}/S_Y\)</span>, which uses future observations and is not realisable.</li>
+<li><em>Recursion:</em> predict step <span class="arithmatex">\(\hat x_{n|n-1} = A\hat x_{n-1|n-1}\)</span>, <span class="arithmatex">\(P_{n|n-1} = AP_{n-1|n-1}A^\top + BQB^\top\)</span>; Kalman gain <span class="arithmatex">\(K_n = P_{n|n-1}C^\top(CP_{n|n-1}C^\top + R)^{-1}\)</span>; update step <span class="arithmatex">\(\hat x_{n|n} = \hat x_{n|n-1} + K_n(y[n] - C\hat x_{n|n-1})\)</span>, <span class="arithmatex">\(P_{n|n} = (I - K_nC)P_{n|n-1}\)</span>. <em>Convergence:</em> the Riccati recursion <span class="arithmatex">\(P_{n|n} = f(P_{n-1|n-1})\)</span> is a contraction under stabilisability and detectability, so <span class="arithmatex">\(P_{n|n} \to P^\star\)</span> and <span class="arithmatex">\(K_n \to K^\star\)</span>, independent of <span class="arithmatex">\(P_{0|0}\)</span>. The steady-state filter is LTI, matching the causal Wiener filter.</li>
+<li><em>Orthogonality:</em> <span class="arithmatex">\(\mathbb E[e[n]x[n-k]] = 0\)</span> for <span class="arithmatex">\(k = 1, \dots, p\)</span>, where <span class="arithmatex">\(e[n] = x[n] + \sum_{m=1}^p a_m x[n-m]\)</span>. <em>Expansion:</em> <span class="arithmatex">\(\mathbb E[x[n]x[n-k]] + \sum_m a_m \mathbb E[x[n-m]x[n-k]] = 0\)</span> gives <span class="arithmatex">\(R_X[k] + \sum_m a_m R_X[k-m] = 0\)</span> for <span class="arithmatex">\(k = 1, \dots, p\)</span>. <em>Yule–Walker:</em> exactly the AR model equations from §2.10. This shows the optimal linear predictor is the <strong>AR coefficient vector</strong> — the same vector that defines the AR model — and the MMSE prediction error equals the innovations variance <span class="arithmatex">\(\sigma_w^2\)</span>.</li>
+<li><em>Whitening filter:</em> an LTI filter <span class="arithmatex">\(H_w = 1/H\)</span> such that <span class="arithmatex">\(H_w * X\)</span> is white. <em>Prediction-error filter:</em> the filter whose output is the prediction error of the optimal linear predictor. <em>Identity for AR:</em> for AR(<span class="arithmatex">\(p\)</span>), the AR polynomial <span class="arithmatex">\(1 + \sum a_k z^{-k}\)</span> is precisely the prediction-error filter; its output is the input to the AR model, i.e., the innovations — so <span class="arithmatex">\(H_w = 1 + \sum a_k z^{-k}\)</span> is FIR and <span class="arithmatex">\(H_w\)</span> = prediction-error filter. <em>Difference for ARMA:</em> for an ARMA(<span class="arithmatex">\(p,q\)</span>), the optimal predictor is still IIR from the AR part, but the <strong>whitening filter</strong> must also invert the MA part <span class="arithmatex">\(1 + \sum b_k z^{-k}\)</span>, which is <strong>IIR</strong> (a non-trivial all-pole filter). So the whitening filter is IIR, not the same as the (FIR) prediction-error filter that only handles the AR part.</li>
+<li><em>Structure:</em> a cascade of <span class="arithmatex">\(p\)</span> stages, each parameterised by a single reflection coefficient <span class="arithmatex">\(k_m\)</span>. Stage <span class="arithmatex">\(m\)</span> takes inputs <span class="arithmatex">\((f_{m-1}, g_{m-1})\)</span> and outputs <span class="arithmatex">\((f_m, g_m)\)</span> via <span class="arithmatex">\(f_m = f_{m-1} + k_m g_{m-1}z^{-1}\)</span>, <span class="arithmatex">\(g_m = g_{m-1}z^{-1} + k_m f_{m-1}\)</span>. <em>Key advantages:</em> (i) <strong>guaranteed stability</strong> iff <span class="arithmatex">\(|k_m| &lt; 1\)</span> for all <span class="arithmatex">\(m\)</span> — a simple, local condition, unlike the global root condition for direct-form <span class="arithmatex">\(a_k\)</span>; (ii) <strong>modular</strong> — stages can be added/removed without recomputing others; (iii) <strong>robust under quantization</strong> — coefficients bounded in magnitude; (iv) <strong>order-adaptive</strong> — easily grow/shrink <span class="arithmatex">\(p\)</span> at runtime; (v) <strong>provides both forward and backward errors</strong> — useful for smoothing and Burg methods. <em>Stability:</em> each stage is an all-pass in the reverse direction; if <span class="arithmatex">\(|k_m| &lt; 1\)</span>, the reflected energy is less than the incident energy, so the cascade cannot have poles outside the unit circle. This gives the <strong>hierarchical stability</strong> property: every lower-order filter in the cascade is also stable.</li>
+</ol>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hayes, <em>Statistical Digital Signal Processing and Modeling</em>, Wiley, 1996 — <strong>Chapters 4–7 and 9</strong>. The closest match to this chapter.</li>
+<li>Kay, <em>Fundamentals of Statistical Signal Processing: Estimation Theory</em>, Prentice-Hall, 1993 — the definitive reference for ML, CRLB, and MMSE. Chapters 3–7.</li>
+<li>Kay, <em>Modern Spectral Estimation</em>, Prentice-Hall, 1988 — for the linear-prediction and lattice chapters.</li>
+<li>Kailath, Sayed &amp; Hassibi, <em>Linear Estimation</em>, Prentice-Hall, 2000 — the unified framework for LMMSE, Wiener, and Kalman. Rigorous, comprehensive.</li>
+<li>Anderson &amp; Moore, <em>Optimal Filtering</em>, Dover, 2005 — the classical Kalman filter reference.</li>
+<li>Simon, <em>Optimal State Estimation</em>, Wiley, 2006 — modern unified treatment, with practical implementation advice.</li>
+<li>Haykin, <em>Adaptive Filter Theory</em>, Pearson, 5th ed., 2014 — Chapter 1 for prediction and lattice; Chapters 2–3 for Wiener; Chapters 4–9 for adaptive (Chapter 4 of this course).</li>
+<li>Makhoul, "Linear Prediction: A Tutorial Review", <em>Proc. IEEE</em>, 63(4), 1975 — the classic pedagogical reference for LPC and lattice.</li>
+<li>Markel &amp; Gray, <em>Linear Prediction of Speech</em>, Springer, 1976 — the definitive source for the source-filter model and LPC.</li>
+<li>SciPy <code>signal.lfilter</code>, <code>statsmodels.tsa</code>, <code>filterpy.kalman</code>; MATLAB <code>dsp.KalmanFilter</code>, <code>levinson</code>, <code>aryule</code>, <code>lpc</code>, <code>dsp.LatticeFilter</code>.</li>
+</ul>
+<hr />
+<h2 id="suggested-tutorial-and-lab-problems-for-this-chapter">Suggested tutorial and lab problems for this chapter<a class="headerlink" href="#suggested-tutorial-and-lab-problems-for-this-chapter" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>CRLB exercise.</strong> <span class="arithmatex">\(y[n] = \theta s[n] + w[n]\)</span> for known <span class="arithmatex">\(s[n]\)</span>, <span class="arithmatex">\(w\)</span> white Gaussian. Derive the MLE of <span class="arithmatex">\(\theta\)</span> and its CRLB. Show the MLE is <span class="arithmatex">\(\hat\theta = \sum y[n]s[n]/\sum s^2[n]\)</span>, and its variance equals the CRLB.</li>
+<li><strong>LMMSE with correlated observations.</strong> <span class="arithmatex">\(Y_1 = S + V_1\)</span>, <span class="arithmatex">\(Y_2 = S + V_2\)</span>, with <span class="arithmatex">\(S \sim \mathcal N(0, 1)\)</span>, <span class="arithmatex">\(V_i \sim \mathcal N(0, 0.5)\)</span>, <span class="arithmatex">\(V_1 \perp V_2\)</span>. Compute the LMMSE of <span class="arithmatex">\(S\)</span> from <span class="arithmatex">\((Y_1, Y_2)\)</span> and compare with the LMMSE from <span class="arithmatex">\(Y_1\)</span> alone.</li>
+<li><strong>Non-causal Wiener filter.</strong> For <span class="arithmatex">\(Y[n] = X[n] + V[n]\)</span> with <span class="arithmatex">\(X \sim\)</span> AR(1) (<span class="arithmatex">\(a = 0.8\)</span>, <span class="arithmatex">\(\sigma_W = 1\)</span>), <span class="arithmatex">\(V\)</span> white (<span class="arithmatex">\(\sigma_V = 0.3\)</span>), compute <span class="arithmatex">\(H_{\text{nc}}(e^{j\omega})\)</span>. Numerically integrate to find the MSE.</li>
+<li><strong>Causal Wiener via factorization.</strong> Same setup as Problem 3, compute the causal Wiener filter using spectral factorization (following Example 3.6). Compare MSE with the non-causal case.</li>
+<li><strong>Kalman filter scalar.</strong> Model <span class="arithmatex">\(x[n] = 0.95 x[n-1] + u[n]\)</span>, <span class="arithmatex">\(u \sim \mathcal N(0, 0.05)\)</span>; <span class="arithmatex">\(y[n] = 2x[n] + v[n]\)</span>, <span class="arithmatex">\(v \sim \mathcal N(0, 1)\)</span>. Simulate 100 steps, run the Kalman filter, and plot the true state, observation, and filtered estimate. Verify the Riccati recursion converges.</li>
+<li><strong>Kalman vs. Wiener.</strong> For the stationary model of Problem 5, run the Kalman filter for 1000 steps and compare the steady-state gain with the causal Wiener filter designed from the AR spectrum. Verify they match to <span class="arithmatex">\(10^{-4}\)</span>.</li>
+<li><strong>Linear predictor.</strong> For <span class="arithmatex">\(R_X[0] = 10\)</span>, <span class="arithmatex">\(R_X[1] = 8\)</span>, <span class="arithmatex">\(R_X[2] = 6\)</span>, <span class="arithmatex">\(R_X[k] = 0\)</span> for <span class="arithmatex">\(|k| &gt; 2\)</span>, find the optimal order-2 predictor and the minimum prediction error. Use Levinson–Durbin.</li>
+<li><strong>Whitening.</strong> Design the whitening filter for the AR(2) process of Example 2.8. Verify that passing the AR(2) process through the whitening filter yields a white residual (autocorrelation within <span class="arithmatex">\(\pm 3/\sqrt N\)</span> for <span class="arithmatex">\(k \ne 0\)</span>).</li>
+<li><strong>Lattice conversion.</strong> Given the AR(3) coefficients <span class="arithmatex">\(a = (-1.5, 1.1, -0.3)\)</span>, compute the reflection coefficients using step-down (inverse Levinson). Implement the lattice filter, verify that it produces the same prediction error as the direct-form filter.</li>
+<li><strong>Speech LPC.</strong> Record a segment of voiced speech (~2 s at 16 kHz). Implement a pitch-synchronous LPC analyser with <span class="arithmatex">\(p = 12\)</span>. Plot the LPC spectrum overlaid on the Welch spectrum. Verify that the peaks of the LPC spectrum correspond to the formants (F1, F2, F3).</li>
+<li><strong>Riccati convergence.</strong> For the scalar model <span class="arithmatex">\(A = 1.0\)</span>, <span class="arithmatex">\(Q = 0.1\)</span>, <span class="arithmatex">\(R = 1\)</span>, plot <span class="arithmatex">\(P_{n|n}\)</span> vs. <span class="arithmatex">\(n\)</span> starting from <span class="arithmatex">\(P_{0|0} = 100\)</span>. Verify convergence to the fixed point in under 20 iterations. Repeat with <span class="arithmatex">\(Q = 0.001\)</span>; comment on the convergence rate.</li>
+<li><strong>Real-time consideration.</strong> In the causal Wiener filter of Problem 4, compare its performance on a <strong>finite</strong> sample (N = 200) to the non-causal filter. Plot the two filters' outputs on the same axes and compute the MSE. Explain the intuition behind the ~35% error penalty.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

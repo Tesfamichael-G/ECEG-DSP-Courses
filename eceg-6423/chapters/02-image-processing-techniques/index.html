@@ -1,0 +1,4588 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Multimedia Signal Processing & Advanced DSP">
+      
+      
+        <meta name="author" content="Dr. Tesfamichael Gebregziabher">
+      
+      
+        <link rel="canonical" href="https://tesfamichael-g.github.io/ECEG-DSP-Courses/eceg-6423/chapters/02-image-processing-techniques/">
+      
+      
+        <link rel="prev" href="../01-continuous-discrete-images/">
+      
+      
+        <link rel="next" href="../03-speech-processing-intro/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.3">
+    
+    
+      
+        <title>2. Image Processing Techniques - MSc DSP Courses — ECEG-6423 & ECEG-6303</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#chapter-2-image-processing-techniques" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-header__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MSc DSP Courses — ECEG-6423 & ECEG-6303
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              2. Image Processing Techniques
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/dsp-primer/" class="md-tabs__link">
+        
+  
+    
+  
+  DSP Primer
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/software/" class="md-tabs__link">
+        
+  
+    
+  
+  Software
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../eceg-6303/" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6303 — Advanced DSP
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  ECEG-6423 — Multimedia Signal Processing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../shared/references/" class="md-tabs__link">
+        
+  
+    
+  
+  References
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../feedback/" class="md-tabs__link">
+        
+  
+    
+  
+  Feedback
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MSc DSP Courses — ECEG-6423 &amp; ECEG-6303" class="md-nav__button md-logo" aria-label="MSc DSP Courses — ECEG-6423 & ECEG-6303" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 19v1h18v2H2V2h2v15c3 0 6-2 8.1-5.6 3-5 6.3-7.4 9.9-7.4v2c-2.8 0-5.5 2.1-8.1 6.5C11.3 16.6 7.7 19 4 19Z"/></svg>
+
+    </a>
+    MSc DSP Courses — ECEG-6423 & ECEG-6303
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/dsp-primer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DSP Primer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/software/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6303 — Advanced DSP
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6303 — Advanced DSP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Discrete Random Signal Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. Spectrum Estimation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Linear Estimation and Prediction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Adaptive Filters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/chapters/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Multirate DSP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../eceg-6303/solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/01-discrete-random-signal-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/02-spectrum-estimation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/03-linear-estimation-prediction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/04-adaptive-filters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/solutions/05-multirate-dsp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../eceg-6303/resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    ECEG-6423 — Multimedia Signal Processing
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            ECEG-6423 — Multimedia Signal Processing
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../syllabus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Syllabus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../schedule/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Schedule
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Chapters
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Chapters
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. Continuous and Discrete Images and Systems
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    2. Image Processing Techniques
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-the-four-pillars" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 The four pillars
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-image-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Image transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Image transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-orthogonal-and-unitary-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 Orthogonal and unitary transforms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-2-d-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 2-D DFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-the-2-d-discrete-cosine-transform-dct" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 The 2-D discrete cosine transform (DCT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-other-sinusoidal-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.4 Other sinusoidal transforms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-walshhadamard-transform-wht" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.5 Walsh–Hadamard transform (WHT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-the-haar-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.6 The Haar transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-the-slant-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.7 The Slant transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228-the-karhunenloeve-transform-klt" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.8 The Karhunen–Loève transform (KLT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229-singular-value-decomposition-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.9 Singular value decomposition (SVD)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210-comparison-and-practical-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.10 Comparison and practical choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-21-2-d-dft-of-a-small-image-and-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.1 — 2-D DFT of a small image and Parseval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-22-dct-of-a-constant-88-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.2 — DCT of a constant 8×8 block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-23-walshhadamard-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.3 — Walsh–Hadamard transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-24-haar-transform-1-d-2-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.4 — Haar transform (1-D, 2-level)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-25-kl-transform-on-a-22-correlated-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.5 — KL transform on a 2×2 correlated signal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-26-svd-of-a-small-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.6 — SVD of a small image
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-image-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Image enhancement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Image enhancement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-point-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 Point operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-histograms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 Histograms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-27-histogram-equalization-by-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.7 — Histogram equalization by hand
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-28-histogram-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.8 — Histogram specification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-spatial-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.3 Spatial filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-median-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.4 Median filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-29-median-vs-mean-on-impulse-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.9 — median vs mean on impulse noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#235-edge-enhancement-2-d-fir-and-iir" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.5 Edge enhancement — 2-D FIR and IIR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-210-unsharp-masking-by-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.10 — Unsharp masking by hand
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#236-homomorphic-filtering-and-cepstrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.6 Homomorphic filtering and cepstrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#237-colour-image-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.7 Colour image enhancement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-image-restoration" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Image restoration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Image restoration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-degradation-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.1 Degradation model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.2 Inverse filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-211-inverse-filter-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.11 — Inverse filter failure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-wiener-filter-minimum-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.3 Wiener filter (minimum MSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-212-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.12 — Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244-geometric-mean-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.4 Geometric mean filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-constrained-least-squares-cls" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.5 Constrained least squares (CLS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-213-cls-restoration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.13 — CLS restoration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-nonlinear-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Nonlinear filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247-smoothing-splines-and-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7 Smoothing splines and interpolation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-image-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Image compression
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Image compression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-data-rates-and-redundancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.1 Data rates and redundancy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-predictive-coding-dpcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.2 Predictive coding (DPCM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-214-1-d-dpcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.14 — 1-D DPCM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-transform-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.3 Transform coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-215-dct-block-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.15 — DCT block coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#254-vector-quantization-vq" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.4 Vector quantization (VQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#255-block-truncation-coding-btc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.5 Block truncation coding (BTC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-216-btc-on-a-44-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.16 — BTC on a 4×4 block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#256-wavelet-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.6 Wavelet coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#257-colour-image-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.7 Colour image coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#258-jpeg-vs-jpeg-2000-vs-heic-vs-avif" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.8 JPEG vs. JPEG 2000 vs. HEIC vs. AVIF
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-reconstruction-from-projections" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Reconstruction from projections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Reconstruction from projections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#261-the-radon-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.1 The Radon transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#262-back-projection-unfiltered" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.2 Back-projection (unfiltered)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#263-filtered-back-projection-fbp" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.3 Filtered back-projection (FBP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-217-radon-transform-of-a-point-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.17 — Radon transform of a point object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#264-fan-beam-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.4 Fan-beam geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#265-algebraic-reconstruction-techniques-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.5 Algebraic reconstruction techniques (ART)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.9 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. Introduction to Digital Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4. Time and Frequency Domain Speech Methods
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5. Applications of Speech Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6. Digital Video Processing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../solutions/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Solutions
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5_5" id="__nav_5_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Solutions
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/01-continuous-discrete-images/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 1
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/02-image-processing-techniques/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 2
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/03-speech-processing-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/04-speech-processing-methods/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 4
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/05-speech-applications/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 5
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../solutions/06-video-processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chapter 6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../exam-bank/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exam Bank
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assessment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assessment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../shared/references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../feedback/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Feedback
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-outcomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Learning outcomes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#21-the-four-pillars" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1 The four pillars
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#22-image-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2 Image transforms
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 Image transforms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#221-orthogonal-and-unitary-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.1 Orthogonal and unitary transforms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#222-2-d-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.2 2-D DFT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#223-the-2-d-discrete-cosine-transform-dct" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.3 The 2-D discrete cosine transform (DCT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#224-other-sinusoidal-transforms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.4 Other sinusoidal transforms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#225-walshhadamard-transform-wht" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.5 Walsh–Hadamard transform (WHT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#226-the-haar-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.6 The Haar transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#227-the-slant-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.7 The Slant transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#228-the-karhunenloeve-transform-klt" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.8 The Karhunen–Loève transform (KLT)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#229-singular-value-decomposition-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.9 Singular value decomposition (SVD)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2210-comparison-and-practical-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2.10 Comparison and practical choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-21-2-d-dft-of-a-small-image-and-parseval" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.1 — 2-D DFT of a small image and Parseval
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-22-dct-of-a-constant-88-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.2 — DCT of a constant 8×8 block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-23-walshhadamard-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.3 — Walsh–Hadamard transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-24-haar-transform-1-d-2-level" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.4 — Haar transform (1-D, 2-level)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-25-kl-transform-on-a-22-correlated-signal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.5 — KL transform on a 2×2 correlated signal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-26-svd-of-a-small-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.6 — SVD of a small image
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#23-image-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3 Image enhancement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.3 Image enhancement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#231-point-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.1 Point operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#232-histograms" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.2 Histograms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-27-histogram-equalization-by-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.7 — Histogram equalization by hand
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-28-histogram-specification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.8 — Histogram specification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#233-spatial-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.3 Spatial filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#234-median-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.4 Median filtering
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-29-median-vs-mean-on-impulse-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.9 — median vs mean on impulse noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#235-edge-enhancement-2-d-fir-and-iir" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.5 Edge enhancement — 2-D FIR and IIR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-210-unsharp-masking-by-hand" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.10 — Unsharp masking by hand
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#236-homomorphic-filtering-and-cepstrum" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.6 Homomorphic filtering and cepstrum
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#237-colour-image-enhancement" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3.7 Colour image enhancement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#24-image-restoration" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4 Image restoration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.4 Image restoration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#241-degradation-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.1 Degradation model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#242-inverse-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.2 Inverse filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-211-inverse-filter-failure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.11 — Inverse filter failure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#243-wiener-filter-minimum-mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.3 Wiener filter (minimum MSE)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-212-wiener-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.12 — Wiener filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#244-geometric-mean-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.4 Geometric mean filter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#245-constrained-least-squares-cls" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.5 Constrained least squares (CLS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-213-cls-restoration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.13 — CLS restoration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#246-nonlinear-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.6 Nonlinear filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#247-smoothing-splines-and-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.4.7 Smoothing splines and interpolation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#25-image-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5 Image compression
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 Image compression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251-data-rates-and-redundancy" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.1 Data rates and redundancy
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252-predictive-coding-dpcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.2 Predictive coding (DPCM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-214-1-d-dpcm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.14 — 1-D DPCM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#253-transform-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.3 Transform coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-215-dct-block-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.15 — DCT block coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#254-vector-quantization-vq" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.4 Vector quantization (VQ)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#255-block-truncation-coding-btc" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.5 Block truncation coding (BTC)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-216-btc-on-a-44-block" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.16 — BTC on a 4×4 block
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#256-wavelet-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.6 Wavelet coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#257-colour-image-coding" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.7 Colour image coding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#258-jpeg-vs-jpeg-2000-vs-heic-vs-avif" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.5.8 JPEG vs. JPEG 2000 vs. HEIC vs. AVIF
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#26-reconstruction-from-projections" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6 Reconstruction from projections
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.6 Reconstruction from projections">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#261-the-radon-transform" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.1 The Radon transform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#262-back-projection-unfiltered" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.2 Back-projection (unfiltered)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#263-filtered-back-projection-fbp" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.3 Filtered back-projection (FBP)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#worked-example-217-radon-transform-of-a-point-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Worked example 2.17 — Radon transform of a point object
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#264-fan-beam-geometry" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.4 Fan-beam geometry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#265-algebraic-reconstruction-techniques-art" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.6.5 Algebraic reconstruction techniques (ART)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#27-chapter-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.7 Chapter summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#28-quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.8 Quiz
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.8 Quiz">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-multiple-choice" class="md-nav__link">
+    <span class="md-ellipsis">
+      A. Multiple choice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-fill-in-the-blank" class="md-nav__link">
+    <span class="md-ellipsis">
+      B. Fill in the blank
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-define-explain" class="md-nav__link">
+    <span class="md-ellipsis">
+      C. Define / explain
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#29-answer-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.9 Answer key
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#further-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      Further reading
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-tutorial-and-lab-problems-for-this-chapter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Suggested tutorial and lab problems for this chapter
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="chapter-2-image-processing-techniques">Chapter 2 — Image Processing Techniques<a class="headerlink" href="#chapter-2-image-processing-techniques" title="Permanent link">&para;</a></h1>
+<div class="admonition abstract">
+<p class="admonition-title">Chapter at a glance</p>
+<p><strong>Contact hours:</strong> 2 lecture + 2 tutorial + 1 laboratory · <strong>Home study:</strong> 5 h</p>
+<p><strong>Coverage (syllabus):</strong> image transforms (2-D orthogonal and unitary, DFT, DCT,
+DST, Walsh, Hadamard, Haar, Slant, KL, SVD) · image enhancement (point
+operations, histograms, spatial filtering, edge enhancement, colour
+enhancement) · image restoration (observation models, inverse and Wiener
+filtering, geometric mean, nonlinear filters, splines, constrained least
+squares) · image compression and reconstruction from projections (data
+rates, predictive, transform, vector, BTC, wavelet coding, JPEG/JPEG 2000,
+Radon transform, back-projection, fan-beam, algebraic reconstruction).</p>
+</div>
+<p>This is the longest chapter in the course — it covers the four pillars of
+classical image processing: <strong>transform</strong>, <strong>enhance</strong>, <strong>restore</strong>, <strong>compress</strong>.</p>
+<hr />
+<h2 id="learning-outcomes">Learning outcomes<a class="headerlink" href="#learning-outcomes" title="Permanent link">&para;</a></h2>
+<p>By the end of this chapter you should be able to:</p>
+<ol>
+<li>Apply <strong>2-D orthogonal and unitary transforms</strong> to images, and state the
+   energy-compaction properties of the DCT, KL, and DWT.</li>
+<li>Choose between <strong>DFT, DCT, Walsh–Hadamard, Haar, Slant, KL, and SVD</strong> based
+   on their properties (energy compaction, computational cost, basis structure,
+   data dependence).</li>
+<li>Perform <strong>point operations</strong> (contrast stretching, clipping, thresholding,
+   density slicing) and <strong>histogram-based</strong> processing (equalization,
+   modification, specification).</li>
+<li>Design <strong>spatial filters</strong> (averaging, LP, HP, BP, directional, median) and
+   <strong>edge-enhancement filters</strong> (FIR and IIR, Laplacian, Sobel, unsharp mask).</li>
+<li>Model image <strong>degradation</strong> and design <strong>restoration filters</strong>: inverse,
+   Wiener (minimum MSE), geometric mean, constrained least squares.</li>
+<li>Design <strong>predictive, transform, vector, block-truncation, and wavelet</strong> image
+   coders; state the JPEG and JPEG 2000 pipelines.</li>
+<li>Derive and apply the <strong>Radon transform</strong>, <strong>back-projection</strong>, <strong>filtered
+   back-projection</strong>, <strong>fan-beam</strong>, and <strong>algebraic reconstruction</strong> algorithms.</li>
+<li>Implement all of the above in <strong>Python, Java, and C#</strong>.</li>
+</ol>
+<hr />
+<h2 id="21-the-four-pillars">2.1 The four pillars<a class="headerlink" href="#21-the-four-pillars" title="Permanent link">&para;</a></h2>
+<p>Image processing techniques fall into four families:</p>
+<table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Input → Output</th>
+<th>Question it answers</th>
+<th>Representative methods</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Transform</strong></td>
+<td>Image → Coefficients</td>
+<td>"What is the image made of?"</td>
+<td>DFT, DCT, DWT, KL, SVD</td>
+</tr>
+<tr>
+<td><strong>Enhancement</strong></td>
+<td>Image → Better image</td>
+<td>"How do I make it look better?"</td>
+<td>Histogram, filtering, sharpening</td>
+</tr>
+<tr>
+<td><strong>Restoration</strong></td>
+<td>Degraded image → Original estimate</td>
+<td>"How do I undo the damage?"</td>
+<td>Inverse, Wiener, CLS</td>
+</tr>
+<tr>
+<td><strong>Compression</strong></td>
+<td>Image → Bits</td>
+<td>"How do I represent it compactly?"</td>
+<td>DPCM, DCT, VQ, wavelet</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The transform</strong> is the foundation — every compression and some enhancement and
+restoration methods operate <strong>in a transform domain</strong>. The transform is chosen so
+that the image's energy concentrates in a few coefficients (energy compaction),
+which is what makes compression possible.</p>
+<hr />
+<h2 id="22-image-transforms">2.2 Image transforms<a class="headerlink" href="#22-image-transforms" title="Permanent link">&para;</a></h2>
+<h3 id="221-orthogonal-and-unitary-transforms">2.2.1 Orthogonal and unitary transforms<a class="headerlink" href="#221-orthogonal-and-unitary-transforms" title="Permanent link">&para;</a></h3>
+<p>A <strong>linear transform</strong> of a vector <span class="arithmatex">\(\mathbf x \in \mathbb R^N\)</span> is a matrix-vector
+product <span class="arithmatex">\(\mathbf y = A \mathbf x\)</span>. The transform is <strong>unitary</strong> if</p>
+<div class="arithmatex">\[
+\boxed{\;A\, A^H = A^H A = I \quad \Longleftrightarrow \quad A^{-1} = A^H.\;}
+\]</div>
+<p>For real matrices (<span class="arithmatex">\(A^H = A^\top\)</span>), it is <strong>orthogonal</strong>: <span class="arithmatex">\(A^{-1} = A^\top\)</span>.</p>
+<p><strong>Consequences of orthogonality/unitarity.</strong></p>
+<ul>
+<li><strong>Parseval (energy preservation):</strong> <span class="arithmatex">\(\|\mathbf y\|^2 = \|\mathbf x\|^2\)</span>.</li>
+<li><strong>Inverse is cheap:</strong> <span class="arithmatex">\(\mathbf x = A^H \mathbf y\)</span> — no matrix inverse required.</li>
+<li><strong>Condition number 1</strong> — numerically perfectly conditioned.</li>
+</ul>
+<p><strong>2-D extension.</strong> For an <span class="arithmatex">\(N \times N\)</span> image <span class="arithmatex">\(X\)</span>, the 2-D transform is</p>
+<div class="arithmatex">\[
+\boxed{\;Y = A\, X\, B^\top\;}
+\]</div>
+<p>with inverse</p>
+<div class="arithmatex">\[
+\boxed{\;X = A^H\, Y\, B.\;}
+\]</div>
+<p>If <span class="arithmatex">\(A = B\)</span> (symmetric transform), this simplifies to <span class="arithmatex">\(Y = A X A^\top\)</span>.</p>
+<p><strong>Separability.</strong> The 2-D transform is <strong>separable</strong>: apply the 1-D transform <span class="arithmatex">\(B\)</span>
+to the columns of <span class="arithmatex">\(X\)</span>, then the 1-D transform <span class="arithmatex">\(A\)</span> to the rows. Cost: <span class="arithmatex">\(O(N^2 (A_{\text{cost}} + B_{\text{cost}}))\)</span>,
+much less than the <span class="arithmatex">\(O(N^4)\)</span> of direct 2-D multiplication.</p>
+<h3 id="222-2-d-dft">2.2.2 2-D DFT<a class="headerlink" href="#222-2-d-dft" title="Permanent link">&para;</a></h3>
+<p>Already introduced in Chapter 1 §1.9.1. Recap:</p>
+<div class="arithmatex">\[
+\boxed{\;X[k,l] = \sum_{m=0}^{M-1}\sum_{n=0}^{N-1} x[m,n]\, e^{-j2\pi(km/M + ln/N)},\quad k,l \in [0, M-1] \times [0, N-1].\;}
+\]</div>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Basis:</strong> complex exponentials (sines and cosines) — pure frequencies.</li>
+<li><strong>Inverse:</strong> <span class="arithmatex">\(x[m,n] = \frac{1}{MN}\sum_{k,l} X[k,l] e^{j2\pi(km/M + ln/N)}\)</span>.</li>
+<li><strong>Separable:</strong> 1-D DFT on rows, then on columns.</li>
+<li><strong>Fast:</strong> FFT gives <span class="arithmatex">\(O(MN\log MN)\)</span> instead of <span class="arithmatex">\(O(M^2 N^2)\)</span>.</li>
+<li><strong>Not optimal for compression:</strong> the DFT of a typical image has energy spread over many coefficients (beyond the DC), because most images are not periodic — boundary discontinuities create high-frequency content.</li>
+<li><strong>Two main drawbacks for compression:</strong> (i) it produces <strong>complex</strong> coefficients (need to encode magnitude and phase); (ii) the <strong>discontinuities</strong> at block boundaries waste energy.</li>
+</ul>
+<p>The <strong>DCT</strong> fixes both problems.</p>
+<h3 id="223-the-2-d-discrete-cosine-transform-dct">2.2.3 The 2-D discrete cosine transform (DCT)<a class="headerlink" href="#223-the-2-d-discrete-cosine-transform-dct" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boxed{\;X[k,l] = c_k c_l \sum_{m=0}^{N-1}\sum_{n=0}^{N-1} x[m,n]\, \cos\frac{(2m+1)k\pi}{2N} \cos\frac{(2n+1)l\pi}{2N}\;}
+\]</div>
+<p>with normalization</p>
+<div class="arithmatex">\[
+c_0 = \sqrt{1/N},\qquad c_k = \sqrt{2/N}\quad (k = 1, \ldots, N-1).
+\]</div>
+<p><strong>Inverse.</strong></p>
+<div class="arithmatex">\[
+\boxed{\;x[m,n] = \sum_{k=0}^{N-1}\sum_{l=0}^{N-1} c_k c_l\, X[k,l]\, \cos\frac{(2m+1)k\pi}{2N}\cos\frac{(2n+1)l\pi}{2N}.\;}
+\]</div>
+<p><strong>Key properties.</strong></p>
+<ul>
+<li><strong>Real and orthogonal</strong> — no complex arithmetic, coefficients are real.</li>
+<li><strong>Even-symmetric extension</strong> — the DCT of an <span class="arithmatex">\(N\)</span>-point vector is equivalent to the DFT of its <strong>even-symmetric</strong> extension to <span class="arithmatex">\(2N\)</span> points. This avoids the boundary discontinuity that plagues the DFT.</li>
+<li><strong>Excellent energy compaction</strong> — for typical natural images, the DCT of an <span class="arithmatex">\(8\times 8\)</span> block concentrates 80–95% of the energy in the first 5–10 coefficients. This is why <strong>JPEG</strong> uses the DCT (not the DFT).</li>
+<li><strong>Computable in <span class="arithmatex">\(O(N\log N)\)</span></strong> — the <strong>fast DCT</strong> (FDCT) is a minor variant of the FFT.</li>
+</ul>
+<p><strong>Why the DCT and not the DFT for compression.</strong> Two reasons:</p>
+<ol>
+<li><strong>Boundary discontinuity.</strong> An <span class="arithmatex">\(8\times 8\)</span> image block is not periodic, so the DFT of the block has energy in high frequencies due to the artificial jump from the last pixel to the first. The DCT of the same block has no such jump (even symmetric extension is smooth), so its high-frequency coefficients are small. Fewer high-frequency coefficients to encode = better compression.</li>
+<li><strong>Real coefficients.</strong> The DCT of a real image is real; the DFT is complex. Encoding real numbers is simpler and, for the DCT, more efficient in practice.</li>
+</ol>
+<p><strong>The 8×8 DCT basis.</strong> Each of the 64 coefficients <span class="arithmatex">\(X[k,l]\)</span> corresponds to a 2-D cosine basis function. The DC coefficient <span class="arithmatex">\(X[0,0]\)</span> is the mean; higher <span class="arithmatex">\((k,l)\)</span> correspond to higher spatial frequencies in each direction. Visualize <span class="arithmatex">\(k,l\)</span> as "horizontal frequency" and "vertical frequency" indices — the coefficients form a 2-D array from low-frequency (top-left) to high-frequency (bottom-right).</p>
+<h3 id="224-other-sinusoidal-transforms">2.2.4 Other sinusoidal transforms<a class="headerlink" href="#224-other-sinusoidal-transforms" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>DST (discrete sine transform):</strong> uses odd-symmetric extension. Similar energy compaction to DCT; used in some audio coding.</li>
+<li><strong>Hartley:</strong> real-valued, both DFT and DCT are special cases. Rarely used in practice.</li>
+</ul>
+<p>These are primarily of historical interest; the DCT is the practical choice.</p>
+<h3 id="225-walshhadamard-transform-wht">2.2.5 Walsh–Hadamard transform (WHT)<a class="headerlink" href="#225-walshhadamard-transform-wht" title="Permanent link">&para;</a></h3>
+<p>The <strong>Walsh–Hadamard transform</strong> uses <strong>±1 basis functions</strong> (Walsh functions).
+For <span class="arithmatex">\(N = 2^n\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;H_N = \frac{1}{\sqrt N}\begin{bmatrix} H_{N/2} &amp; H_{N/2} \\ H_{N/2} &amp; -H_{N/2}\end{bmatrix},\qquad H_2 = \frac{1}{\sqrt 2}\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1\end{bmatrix}.\;}
+\]</div>
+<p>This is a <strong>recursive</strong> construction — <span class="arithmatex">\(H_N\)</span> is built by doubling <span class="arithmatex">\(H_{N/2}\)</span> with
+sign changes. The transform is <span class="arithmatex">\(Y = H_N X H_N^\top\)</span> (2-D).</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Basis:</strong> <span class="arithmatex">\(\pm 1\)</span> sequences — no multiplication needed for the transform itself (just sign flips and sums).</li>
+<li><strong>Fast:</strong> <span class="arithmatex">\(O(N\log N)\)</span> via a <strong>fast Walsh–Hadamard transform</strong> (essentially the FFT but with ±1 instead of complex exponentials).</li>
+<li><strong>Not optimal for compression:</strong> the WHT's energy compaction is worse than the DCT and KL for natural images. Its basis functions are square-wave, which don't match the smooth structure of images.</li>
+<li><strong>Used historically</strong> in some early image codecs and as a building block for the <strong>Haar</strong> wavelet.</li>
+</ul>
+<p><strong>Practical use.</strong> The WHT is used mainly in <strong>digital watermarking</strong> and <strong>cryptography</strong> because its ±1 basis is easy to compute and invert.</p>
+<h3 id="226-the-haar-transform">2.2.6 The Haar transform<a class="headerlink" href="#226-the-haar-transform" title="Permanent link">&para;</a></h3>
+<p>The <strong>Haar transform</strong> is the simplest <strong>wavelet transform</strong>. For <span class="arithmatex">\(N = 2^n\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;h_0 = \frac{1}{\sqrt 2}(1, 1),\qquad h_1 = \frac{1}{\sqrt 2}(1, -1).\;}
+\]</div>
+<p>The 1-level Haar transform of an <span class="arithmatex">\(N\)</span>-point signal applies <span class="arithmatex">\(h_0\)</span> and <span class="arithmatex">\(h_1\)</span>
+successively to adjacent pairs; multi-level DWT iterates on the low-pass
+output. (See ECEG-6303 Chapter 5 §5.9 for the full DWT treatment.)</p>
+<p><strong>2-D Haar transform.</strong> Apply 1-D Haar to each row, then to each column. The
+result is a 4-subband decomposition: <strong>LL</strong> (low-low), <strong>LH</strong> (low-high),
+<strong>HL</strong> (high-low), <strong>HH</strong> (high-high) — the 2-D analogue of subband coding.</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Basis:</strong> piecewise constant — <strong>compact support</strong> (2-tap filters).</li>
+<li><strong>Fast:</strong> <span class="arithmatex">\(O(N)\)</span> for a 1-level transform; <span class="arithmatex">\(O(N\log N)\)</span> for a full multi-level DWT.</li>
+<li><strong>Decent energy compaction for piecewise-smooth images</strong> — better than WHT, worse than DCT for natural images with strong edges.</li>
+<li><strong>Used in JPEG 2000</strong> for its biorthogonal <strong>CDF 9/7</strong> wavelet — a much smoother variant of Haar.</li>
+</ul>
+<h3 id="227-the-slant-transform">2.2.7 The Slant transform<a class="headerlink" href="#227-the-slant-transform" title="Permanent link">&para;</a></h3>
+<p>A variant of the Walsh–Hadamard that adds a <strong>linear ramp</strong> as its second basis
+function (after the constant). The slant basis is a good match for images
+with <strong>linear gradients</strong>.</p>
+<div class="arithmatex">\[
+\text{Slant}_2 = \frac{1}{\sqrt 2}\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; -1\end{bmatrix} \quad\text{(same as Haar)}, \qquad
+\text{Slant}_4 = \frac{1}{2}\begin{bmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; -1 &amp; -1 \\ 1 &amp; -1 &amp; -1 &amp; 1 \\ 1 &amp; -1 &amp; 1 &amp; -1\end{bmatrix}.
+\]</div>
+<p>The Slant transform is <strong>rarely used today</strong> — the DCT and DWT dominate. It
+was historically used in some image codecs.</p>
+<h3 id="228-the-karhunenloeve-transform-klt">2.2.8 The Karhunen–Loève transform (KLT)<a class="headerlink" href="#228-the-karhunenloeve-transform-klt" title="Permanent link">&para;</a></h3>
+<p>The <strong>KL transform</strong> (also <strong>Hotelling transform</strong>, or <strong>principal component
+analysis</strong>) is the <strong>optimal</strong> transform in the mean-square-error sense. It
+depends on the <strong>signal statistics</strong> — the covariance matrix <span class="arithmatex">\(C_x\)</span>.</p>
+<div class="admonition abstract">
+<p class="admonition-title">KL transform</p>
+<p>Let <span class="arithmatex">\(C_x = \mathbb E[(\mathbf x - \mu)(\mathbf x - \mu)^\top]\)</span> be the
+covariance of the vectorized image. Let <span class="arithmatex">\(C_x = U \Lambda U^\top\)</span> be its
+eigen-decomposition. Then the <strong>KL basis</strong> is <span class="arithmatex">\(U\)</span>, and the transform is</p>
+<div class="arithmatex">\[
+\boxed{\;\mathbf y = U^\top(\mathbf x - \mu).\;}
+\]</div>
+<p>The transformed coefficients have covariance <span class="arithmatex">\(\Lambda\)</span> — <strong>diagonal</strong>. The
+coefficients are <strong>uncorrelated</strong>, and their variances are the eigenvalues
+<span class="arithmatex">\(\lambda_1 \ge \lambda_2 \ge \cdots \ge \lambda_N\)</span>.</p>
+</div>
+<p><strong>Optimality.</strong> Among <strong>all</strong> linear transforms (orthogonal or not), the KL
+transform minimises the MSE when the transformed coefficients are truncated
+to <span class="arithmatex">\(M &lt; N\)</span> components. The retained energy is <span class="arithmatex">\(\sum_{k=1}^M \lambda_k\)</span>; the
+discarded energy is <span class="arithmatex">\(\sum_{k=M+1}^N \lambda_k\)</span>.</p>
+<p><strong>The catch.</strong> The KL basis depends on the <strong>covariance</strong>, which is <strong>different
+for each image</strong> (and must be estimated from a training set). So the transform
+is <strong>data-dependent</strong> — you have to transmit the basis to the decoder, which
+defeats the purpose of compression. For this reason the KLT is <strong>not used in
+practical codecs</strong>; it is the theoretical benchmark against which other
+transforms are measured.</p>
+<p><strong>Approximation.</strong> For a <strong>stationary</strong> process with separable exponential
+covariance <span class="arithmatex">\(R[m,n] = \rho^{|m-n|}\)</span> (a <strong>1-D AR(1)</strong> process), the KL basis
+asymptotically becomes the <strong>DCT</strong> as <span class="arithmatex">\(\rho \to 1\)</span>. This is the theoretical
+reason the DCT is so good for natural images: natural-image autocorrelation is
+roughly exponential with <span class="arithmatex">\(\rho \approx 0.9\)</span>–<span class="arithmatex">\(0.95\)</span>, so the DCT is nearly optimal.</p>
+<h3 id="229-singular-value-decomposition-svd">2.2.9 Singular value decomposition (SVD)<a class="headerlink" href="#229-singular-value-decomposition-svd" title="Permanent link">&para;</a></h3>
+<p>For an <span class="arithmatex">\(M \times N\)</span> image matrix <span class="arithmatex">\(A\)</span> (rank <span class="arithmatex">\(r \le \min(M,N)\)</span>):</p>
+<div class="arithmatex">\[
+\boxed{\;A = U \Sigma V^\top = \sum_{k=1}^r \sigma_k\, \mathbf u_k\, \mathbf v_k^\top\;}
+\]</div>
+<p>with <span class="arithmatex">\(U\)</span> (<span class="arithmatex">\(M\times M\)</span>) and <span class="arithmatex">\(V\)</span> (<span class="arithmatex">\(N\times N\)</span>) orthogonal, <span class="arithmatex">\(\Sigma\)</span> diagonal with
+<strong>singular values</strong> <span class="arithmatex">\(\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r &gt; 0\)</span>.</p>
+<p><strong>Interpretation.</strong> Each term <span class="arithmatex">\(\sigma_k \mathbf u_k \mathbf v_k^\top\)</span> is a
+<strong>rank-1 "layer"</strong> of the image, ordered by importance (<span class="arithmatex">\(\sigma_1\)</span> is the most
+important). The truncated SVD</p>
+<div class="arithmatex">\[
+A_M = \sum_{k=1}^M \sigma_k \mathbf u_k \mathbf v_k^\top,\quad M &lt; r
+\]</div>
+<p>is the <strong>best rank-<span class="arithmatex">\(M\)</span> approximation</strong> of <span class="arithmatex">\(A\)</span> in both the Frobenius norm and
+the 2-norm (Eckart–Young theorem).</p>
+<p><strong>Compression potential.</strong> To represent <span class="arithmatex">\(A\)</span> by its rank-<span class="arithmatex">\(M\)</span> approximation,
+store:</p>
+<ul>
+<li><span class="arithmatex">\(U_M\)</span>: <span class="arithmatex">\(M \times M\)</span> matrix (or just the first <span class="arithmatex">\(M\)</span> columns).</li>
+<li><span class="arithmatex">\(\Sigma_M\)</span>: <span class="arithmatex">\(M\)</span> singular values.</li>
+<li><span class="arithmatex">\(V_M\)</span>: <span class="arithmatex">\(M \times N\)</span> matrix (first <span class="arithmatex">\(M\)</span> columns of <span class="arithmatex">\(V\)</span>).</li>
+</ul>
+<p>Total parameters: <span class="arithmatex">\(M(M + 1 + N)\)</span> vs original <span class="arithmatex">\(MN\)</span>. For <span class="arithmatex">\(M \ll r\)</span>, this is
+much smaller. <strong>But</strong> — like the KLT, the SVD is <strong>data-dependent</strong> (the <span class="arithmatex">\(U, V\)</span>
+factors must be transmitted), so it is <strong>not used in practical codecs</strong>. It is
+excellent for <strong>image denoising</strong> and <strong>low-rank modelling</strong>, where the storage
+overhead is acceptable.</p>
+<h3 id="2210-comparison-and-practical-choice">2.2.10 Comparison and practical choice<a class="headerlink" href="#2210-comparison-and-practical-choice" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Transform</th>
+<th>Basis</th>
+<th style="text-align: center;">Data-dependent?</th>
+<th>Energy compaction</th>
+<th>Cost</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DFT</strong></td>
+<td>Complex exponentials</td>
+<td style="text-align: center;">No</td>
+<td>Moderate</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td>Filtering, analysis</td>
+</tr>
+<tr>
+<td><strong>DCT</strong></td>
+<td>Real cosines</td>
+<td style="text-align: center;">No</td>
+<td><strong>Excellent</strong></td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td><strong>JPEG</strong>, video codecs</td>
+</tr>
+<tr>
+<td><strong>DST</strong></td>
+<td>Real sines</td>
+<td style="text-align: center;">No</td>
+<td>Good</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td>Audio (rarely)</td>
+</tr>
+<tr>
+<td><strong>WHT</strong></td>
+<td>±1 square waves</td>
+<td style="text-align: center;">No</td>
+<td>Moderate</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span>, ±1 only</td>
+<td>Watermarking, education</td>
+</tr>
+<tr>
+<td><strong>Haar</strong></td>
+<td>Piecewise constant</td>
+<td style="text-align: center;">No</td>
+<td>Good for edges</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td>Fast wavelet (JPEG 2000 uses CDF 9/7)</td>
+</tr>
+<tr>
+<td><strong>Slant</strong></td>
+<td>Linear ramps</td>
+<td style="text-align: center;">No</td>
+<td>Moderate</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td>Historical</td>
+</tr>
+<tr>
+<td><strong>KLT</strong></td>
+<td>Eigenvectors of covariance</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td><strong>Optimal</strong></td>
+<td><span class="arithmatex">\(O(N^2)\)</span> per image</td>
+<td>Benchmark only</td>
+</tr>
+<tr>
+<td><strong>SVD</strong></td>
+<td>Singular vectors</td>
+<td style="text-align: center;"><strong>Yes</strong></td>
+<td><strong>Optimal</strong></td>
+<td><span class="arithmatex">\(O(N^3)\)</span></td>
+<td>Denoising, low-rank</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Practical choice:</strong></p>
+<ul>
+<li><strong>JPEG, MPEG, H.264</strong> → 8×8 DCT.</li>
+<li><strong>JPEG 2000</strong> → CDF 9/7 DWT.</li>
+<li><strong>HEVC, AV1</strong> → DCT (and DST in some modes).</li>
+<li><strong>Denoising / low-rank restoration</strong> → SVD or KLT (used offline).</li>
+</ul>
+<h3 id="worked-example-21-2-d-dft-of-a-small-image-and-parseval">Worked example 2.1 — 2-D DFT of a small image and Parseval<a class="headerlink" href="#worked-example-21-2-d-dft-of-a-small-image-and-parseval" title="Permanent link">&para;</a></h3>
+<p>Image <span class="arithmatex">\(f = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\end{bmatrix}\)</span>.</p>
+<div class="arithmatex">\[
+F[k,l] = \sum_{m=0}^1 \sum_{n=0}^1 f[m,n] e^{-j2\pi(km/2 + ln/2)}.
+\]</div>
+<ul>
+<li><span class="arithmatex">\(F[0,0] = 1 + 2 + 3 + 4 = 10\)</span></li>
+<li><span class="arithmatex">\(F[0,1] = 1 + 2(-1) + 3 + 4(-1) = 1 - 2 + 3 - 4 = -2\)</span></li>
+<li><span class="arithmatex">\(F[1,0] = 1 + 2 + 3(-1) + 4(-1) = 1 + 2 - 3 - 4 = -4\)</span></li>
+<li><span class="arithmatex">\(F[1,1] = 1 - 2 - 3 + 4 = 0\)</span></li>
+</ul>
+<p><strong>Parseval.</strong> <span class="arithmatex">\(\frac{1}{4}(|10|^2 + |-2|^2 + |-4|^2 + |0|^2) = \frac{1}{4}(100+4+16) = 30\)</span>.
+<span class="arithmatex">\(\sum f^2 = 1 + 4 + 9 + 16 = 30\)</span>. ✓</p>
+<p><strong>Interpretation.</strong> The DC coefficient <span class="arithmatex">\(F[0,0] = 10\)</span> is <span class="arithmatex">\(100/4 = 25\)</span> times larger
+than the energy of any other coefficient — this <strong>DC concentration</strong> is what
+makes even the DFT useful for compression of smooth images.</p>
+<h3 id="worked-example-22-dct-of-a-constant-88-block">Worked example 2.2 — DCT of a constant 8×8 block<a class="headerlink" href="#worked-example-22-dct-of-a-constant-88-block" title="Permanent link">&para;</a></h3>
+<p>Block <span class="arithmatex">\(f[m,n] = 128\)</span> for all <span class="arithmatex">\(m,n\)</span>.</p>
+<p>For <span class="arithmatex">\(k = l = 0\)</span>: <span class="arithmatex">\(c_0 c_0 = 1/8\)</span>.</p>
+<div class="arithmatex">\[
+X[0,0] = \frac{1}{8}\sum_{m,n} 128 \cdot 1 \cdot 1 = \frac{1}{8}\cdot 64\cdot 128 = 1024.
+\]</div>
+<p>For any <span class="arithmatex">\((k,l) \ne (0,0)\)</span>: one of the sums <span class="arithmatex">\(\sum_m \cos(\ldots)\)</span> or
+<span class="arithmatex">\(\sum_n \cos(\ldots)\)</span> vanishes by orthogonality, so <span class="arithmatex">\(X[k,l] = 0\)</span>.</p>
+<p><strong>Result:</strong> the DCT of a constant block is a <strong>single nonzero coefficient</strong> —
+all 63 AC coefficients are exactly zero. This is why uniform regions compress
+to almost nothing with JPEG.</p>
+<p>The <strong>checkerboard</strong> block <span class="arithmatex">\(f[m,n] = 128\cdot(-1)^{m+n}\)</span> has the opposite
+extreme: energy concentrated in <span class="arithmatex">\(X[7,7]\)</span> — the highest-frequency coefficient.</p>
+<h3 id="worked-example-23-walshhadamard-transform">Worked example 2.3 — Walsh–Hadamard transform<a class="headerlink" href="#worked-example-23-walshhadamard-transform" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x = (1, 2, 3, 4)\)</span>, <span class="arithmatex">\(N = 4\)</span>.</p>
+<div class="arithmatex">\[
+H_4 = \frac{1}{2}\begin{bmatrix} 1&amp;1&amp;1&amp;1\\ 1&amp;1&amp;-1&amp;-1\\ 1&amp;-1&amp;-1&amp;1\\ 1&amp;-1&amp;1&amp;-1\end{bmatrix}.
+\]</div>
+<p><span class="arithmatex">\(y = H_4 x\)</span>:</p>
+<div class="arithmatex">\[
+y_0 = \tfrac12(1+2+3+4) = 5,\quad
+y_1 = \tfrac12(1+2-3-4) = -2,
+$$
+$$
+y_2 = \tfrac12(1-2-3+4) = 0,\quad
+y_3 = \tfrac12(1-2+3-4) = -1.
+\]</div>
+<p><strong>Energy check.</strong> <span class="arithmatex">\(25 + 4 + 0 + 1 = 30\)</span>. Original: <span class="arithmatex">\(1 + 4 + 9 + 16 = 30\)</span>. ✓</p>
+<p>The signal (increasing ramp) concentrates in <span class="arithmatex">\(y_0\)</span> — the WHT doesn't capture
+the smooth trend as well as the DCT would, but it is <strong>cheap</strong> (all operations
+are adds/subtracts).</p>
+<h3 id="worked-example-24-haar-transform-1-d-2-level">Worked example 2.4 — Haar transform (1-D, 2-level)<a class="headerlink" href="#worked-example-24-haar-transform-1-d-2-level" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x = (4, 6, 10, 12)\)</span>.</p>
+<p><strong>Level 1.</strong></p>
+<div class="arithmatex">\[
+a_1 = \frac{1}{\sqrt 2}(x[0]+x[1],\ x[2]+x[3]) = (10/\sqrt 2,\ 22/\sqrt 2) \approx (7.07,\ 15.56),
+$$
+$$
+d_1 = \frac{1}{\sqrt 2}(x[0]-x[1],\ x[2]-x[3]) = (-2/\sqrt 2,\ -2/\sqrt 2) \approx (-1.41,\ -1.41).
+\]</div>
+<p><strong>Level 2.</strong></p>
+<div class="arithmatex">\[
+a_2 = \frac{1}{\sqrt 2}(a_1[0] + a_1[1]) = \frac{10+22}{2} = 16,
+$$
+$$
+d_2 = \frac{1}{\sqrt 2}(a_1[0] - a_1[1]) = \frac{10-22}{2} = -6.
+\]</div>
+<p><strong>Final DWT coefficients:</strong> <span class="arithmatex">\((a_2, d_2, d_1[0], d_1[1]) = (16, -6, -1.41, -1.41)\)</span>.</p>
+<p><strong>Reconstruction:</strong></p>
+<div class="arithmatex">\[
+a_1 = \frac{1}{\sqrt 2}(a_2 + d_2,\ a_2 - d_2) = (10/\sqrt 2,\ 22/\sqrt 2)
+\;\rightarrow\;
+x[0] = \frac{a_1[0]+d_1[0]}{\sqrt 2} = 4, \ldots
+\]</div>
+<p>Exact. ✓</p>
+<p><strong>Energy compaction.</strong> The largest coefficient is <span class="arithmatex">\(a_2 = 16\)</span> (energy <span class="arithmatex">\(256\)</span>);
+original total energy is <span class="arithmatex">\(4^2+6^2+10^2+12^2 = 296\)</span>. So <strong>86% of the energy</strong> is
+in <strong>one</strong> coefficient.</p>
+<h3 id="worked-example-25-kl-transform-on-a-22-correlated-signal">Worked example 2.5 — KL transform on a 2×2 correlated signal<a class="headerlink" href="#worked-example-25-kl-transform-on-a-22-correlated-signal" title="Permanent link">&para;</a></h3>
+<p>Covariance <span class="arithmatex">\(C_x = \begin{bmatrix} 1 &amp; 0.9 \\ 0.9 &amp; 1\end{bmatrix}\)</span>.</p>
+<p>Eigen-decomposition:
+$$
+C_x = \underbrace{\begin{bmatrix} 1/\sqrt 2 &amp; -1/\sqrt 2 \ 1/\sqrt 2 &amp; 1/\sqrt 2\end{bmatrix}}<em _Lambda="\Lambda">{U}
+\underbrace{\begin{bmatrix} 1.9 &amp; 0 \ 0 &amp; 0.1\end{bmatrix}}</em>
+\underbrace{\begin{bmatrix} 1/\sqrt 2 &amp; 1/\sqrt 2 \ -1/\sqrt 2 &amp; 1/\sqrt 2\end{bmatrix}}_{U^\top}.
+$$</p>
+<p><strong>KL coefficients' variances:</strong> <span class="arithmatex">\(\lambda_1 = 1.9\)</span>, <span class="arithmatex">\(\lambda_2 = 0.1\)</span>.</p>
+<p><strong>Energy compaction.</strong> <span class="arithmatex">\(\frac{1.9}{1.9+0.1} = 95\%\)</span> of the variance is in the
+first component. Keeping only <span class="arithmatex">\(y_1\)</span> captures 95% of the signal energy — a 2:1
+compression with only 5% MSE loss.</p>
+<p><strong>Comparison with the DCT.</strong> The DCT of the same signal (orthonormal DCT-2)
+also concentrates energy in the first coefficient but less efficiently — for
+<span class="arithmatex">\(\rho = 0.9\)</span>, the DCT captures about 92% (versus 95% for the optimal KLT). The
+gap shrinks as <span class="arithmatex">\(\rho \to 1\)</span>; this is the theoretical basis for DCT's dominance.</p>
+<h3 id="worked-example-26-svd-of-a-small-image">Worked example 2.6 — SVD of a small image<a class="headerlink" href="#worked-example-26-svd-of-a-small-image" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6 \\ 7 &amp; 8 &amp; 9\end{bmatrix}\)</span>.</p>
+<p>Compute <span class="arithmatex">\(A^\top A = \begin{bmatrix} 66 &amp; 78 &amp; 90 \\ 78 &amp; 93 &amp; 108 \\ 90 &amp; 108 &amp; 126\end{bmatrix}\)</span>.</p>
+<p>Eigenvalues: <span class="arithmatex">\(272.6, 12.4, 0\)</span> (rank 2). Singular values:
+<span class="arithmatex">\(\sigma_1 \approx 16.51, \sigma_2 \approx 3.52, \sigma_3 = 0\)</span>.</p>
+<p><strong>Best rank-1 approximation.</strong></p>
+<div class="arithmatex">\[
+A_1 = \sigma_1 \mathbf u_1 \mathbf v_1^\top
+\]</div>
+<p>Numerically, <span class="arithmatex">\(\mathbf u_1 \approx (0.23, 0.53, 0.81)\)</span>, <span class="arithmatex">\(\mathbf v_1 \approx (0.48, 0.55, 0.62)\)</span>.</p>
+<div class="arithmatex">\[
+A_1 \approx 16.51\begin{bmatrix} 0.11 &amp; 0.13 &amp; 0.14 \\ 0.26 &amp; 0.29 &amp; 0.33 \\ 0.39 &amp; 0.44 &amp; 0.50\end{bmatrix}
+\approx \begin{bmatrix} 1.82 &amp; 2.10 &amp; 2.36 \\ 4.28 &amp; 4.82 &amp; 5.42 \\ 6.72 &amp; 7.53 &amp; 8.49\end{bmatrix}.
+\]</div>
+<p><strong>Approximation error:</strong> <span class="arithmatex">\(\|A - A_1\|_F = \sqrt{\sigma_2^2 + \sigma_3^2} = 3.52\)</span>.
+Relative error: <span class="arithmatex">\(3.52/\sqrt{272.6+12.4} = 3.52/16.88 = 20.8\%\)</span>.</p>
+<p><strong>Energy captured by 1 coefficient:</strong> <span class="arithmatex">\(\sigma_1^2/\sum \sigma_i^2 = 272.6/285 = 95.6\%\)</span>.
+The rank-1 approximation captures 95.6% of the Frobenius energy with 1/3 of the
+rank — a strong "compression" but, as noted, it requires transmitting <span class="arithmatex">\(\mathbf u_1, \mathbf v_1\)</span>.</p>
+<hr />
+<h2 id="23-image-enhancement">2.3 Image enhancement<a class="headerlink" href="#23-image-enhancement" title="Permanent link">&para;</a></h2>
+<p>Enhancement is <strong>subjective</strong> — "better" is defined by the observer or the task,
+not by an exact mathematical criterion. The goal is to make features of interest
+more visible: contrast, edges, structure.</p>
+<h3 id="231-point-operations">2.3.1 Point operations<a class="headerlink" href="#231-point-operations" title="Permanent link">&para;</a></h3>
+<p>A <strong>point operation</strong> modifies each pixel based solely on its value:
+<span class="arithmatex">\(g[m,n] = T(f[m,n])\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Formula</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity</strong></td>
+<td><span class="arithmatex">\(g = f\)</span></td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Brightness offset</strong></td>
+<td><span class="arithmatex">\(g = f + b\)</span></td>
+<td>Shifts the intensity</td>
+</tr>
+<tr>
+<td><strong>Contrast scaling</strong></td>
+<td><span class="arithmatex">\(g = a f\)</span></td>
+<td>Amplifies / reduces contrast</td>
+</tr>
+<tr>
+<td><strong>Clipping</strong></td>
+<td><span class="arithmatex">\(g = \min(255, \max(0, f))\)</span></td>
+<td>Prevents overflow</td>
+</tr>
+<tr>
+<td><strong>Threshold</strong></td>
+<td><span class="arithmatex">\(g = 255\)</span> if <span class="arithmatex">\(f &gt; T\)</span>, else <span class="arithmatex">\(0\)</span></td>
+<td>Binarization</td>
+</tr>
+<tr>
+<td><strong>Contrast stretch</strong></td>
+<td><span class="arithmatex">\(g = 255 \cdot \frac{f - f_{\min}}{f_{\max} - f_{\min}}\)</span></td>
+<td>Full dynamic range</td>
+</tr>
+<tr>
+<td><strong>Log</strong></td>
+<td><span class="arithmatex">\(g = c \log(1 + f)\)</span></td>
+<td>Compresses dynamic range</td>
+</tr>
+<tr>
+<td><strong>Gamma</strong></td>
+<td><span class="arithmatex">\(g = 255 (f/255)^\gamma\)</span></td>
+<td><span class="arithmatex">\(\gamma &lt; 1\)</span> brightens, <span class="arithmatex">\(\gamma &gt; 1\)</span> darkens</td>
+</tr>
+<tr>
+<td><strong>Density slicing</strong></td>
+<td><span class="arithmatex">\(g\)</span> piecewise-linear in <span class="arithmatex">\(f\)</span></td>
+<td>Highlights a specific intensity range</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Contrast stretching</strong> is the simplest useful operation — extend the intensity
+range so it occupies the full <span class="arithmatex">\([0, L-1]\)</span> interval.</p>
+<h3 id="232-histograms">2.3.2 Histograms<a class="headerlink" href="#232-histograms" title="Permanent link">&para;</a></h3>
+<p>The <strong>histogram</strong> of an image is the frequency of each intensity level:
+$h(k) = $ number of pixels with value <span class="arithmatex">\(k\)</span>. The normalized histogram
+<span class="arithmatex">\(p(k) = h(k)/N\)</span> is the <strong>empirical PDF</strong>.</p>
+<p><strong>Histogram equalization.</strong> Choose a point operation that makes the histogram
+<strong>approximately uniform</strong> — maximising visual contrast without information
+loss.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Histogram equalization</p>
+<p>For an <span class="arithmatex">\(L\)</span>-level image with CDF</p>
+<div class="arithmatex">\[
+C(k) = \sum_{j=0}^{k} p(j)
+\]</div>
+<p>the equalization map is</p>
+<div class="arithmatex">\[
+\boxed{\;s_k = \lfloor (L-1)\, C(k) \rfloor.\;}
+\]</div>
+<p>This is the <strong>discrete</strong> version of the continuous mapping <span class="arithmatex">\(s = (L-1) C(r)\)</span>.
+It is a <strong>monotone</strong> transformation (preserves pixel ordering).</p>
+</div>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Automatic</strong> — no parameters to tune.</li>
+<li><strong>Global</strong> — uses the full-image histogram. Fails when the image has locally uniform regions (part of the image may be over- or under-enhanced).</li>
+<li><strong>Produces the most uniform histogram</strong> possible with discrete levels (not perfectly uniform because of quantization).</li>
+</ul>
+<p><strong>Histogram modification.</strong> Replace the target uniform distribution with an
+arbitrary target PDF <span class="arithmatex">\(p_{\text{target}}(k)\)</span>. Compute the target CDF <span class="arithmatex">\(C_{\text{target}}\)</span>
+and map:</p>
+<div class="arithmatex">\[
+s = C_{\text{target}}^{-1}\bigl(C_{\text{in}}(r)\bigr).
+\]</div>
+<p>This is <strong>histogram specification</strong> (or <strong>matching</strong>) — the most general
+histogram-based point operation.</p>
+<p><strong>Applications.</strong></p>
+<ul>
+<li><strong>Medical imaging:</strong> enhance contrast in X-ray / CT without windowing.</li>
+<li><strong>Photography:</strong> recover detail in under-/over-exposed images (equalization is the global version of the "Auto-Levels" tool).</li>
+<li><strong>Remote sensing:</strong> balance illumination across a satellite scene.</li>
+<li><strong>Video:</strong> stabilise brightness across frames (per-frame equalization is often too aggressive; use adaptive / CLAHE).</li>
+</ul>
+<h3 id="worked-example-27-histogram-equalization-by-hand">Worked example 2.7 — Histogram equalization by hand<a class="headerlink" href="#worked-example-27-histogram-equalization-by-hand" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(L = 4\)</span> gray levels. Histogram of a 10-pixel image: <span class="arithmatex">\(n_0 = 4, n_1 = 3, n_2 = 2, n_3 = 1\)</span>.</p>
+<p><strong>CDF.</strong></p>
+<div class="arithmatex">\[
+C(0) = 0.4,\ C(1) = 0.7,\ C(2) = 0.9,\ C(3) = 1.0.
+\]</div>
+<p><strong>Mapping</strong> <span class="arithmatex">\(s_k = \lfloor 3 \cdot C(k) \rfloor\)</span>:</p>
+<div class="arithmatex">\[
+s_0 = \lfloor 1.2 \rfloor = 1,\quad
+s_1 = \lfloor 2.1 \rfloor = 2,\quad
+s_2 = \lfloor 2.7 \rfloor = 2,\quad
+s_3 = \lfloor 3.0 \rfloor = 3.
+\]</div>
+<p><strong>New histogram:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">New level</th>
+<th>Pixels</th>
+<th style="text-align: center;">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td>—</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td>from level 0</td>
+<td style="text-align: center;">4</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td>from levels 1 and 2</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td>from level 3</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p>The new histogram is roughly uniform except for level 0 (empty). The
+<strong>dynamic range is spread</strong> from 4 levels to 3 occupied levels — for this
+small example, the entropy has increased from <span class="arithmatex">\(\sim 1.85\)</span> bits to <span class="arithmatex">\(\sim 1.36\)</span> bits
+(the original was more concentrated than the new one, hmm — let me recheck:
+original entropy = <span class="arithmatex">\(-0.4\log 0.4 - 0.3\log 0.3 - 0.2\log 0.2 - 0.1\log 0.1 ≈ 1.85\)</span>;
+new = <span class="arithmatex">\(-0.4\log 0.4 - 0.5\log 0.5 - 0.1\log 0.1 ≈ 1.36\)</span>). Interesting — the new
+histogram has <strong>lower</strong> entropy in this case because the mapping collapsed two
+levels into one.</p>
+<p><strong>In practice</strong>, histograms of real images are much more skewed (heavily
+peaked near dark or bright), and equalization increases entropy. The small
+example above is atypical.</p>
+<h3 id="worked-example-28-histogram-specification">Worked example 2.8 — Histogram specification<a class="headerlink" href="#worked-example-28-histogram-specification" title="Permanent link">&para;</a></h3>
+<p>Input <span class="arithmatex">\(L = 4\)</span> with histogram <span class="arithmatex">\(n = (4, 3, 2, 1)\)</span>. Target PDF: <span class="arithmatex">\(p_{\text{target}} = (0.25, 0.25, 0.25, 0.25)\)</span>.</p>
+<p>Target CDF: <span class="arithmatex">\(C_{\text{target}} = (0.25, 0.50, 0.75, 1.0)\)</span>.</p>
+<p>Inverse: <span class="arithmatex">\(C_{\text{target}}^{-1}(0.25) = 0\)</span>, <span class="arithmatex">\(C^{-1}(0.50) = 1\)</span>, <span class="arithmatex">\(C^{-1}(0.75) = 2\)</span>, <span class="arithmatex">\(C^{-1}(1.0) = 3\)</span>.</p>
+<p>Input CDF: <span class="arithmatex">\(C_{\text{in}} = (0.4, 0.7, 0.9, 1.0)\)</span>.</p>
+<p><strong>Mapping:</strong> <span class="arithmatex">\(s_k = C_{\text{target}}^{-1}(C_{\text{in}}(k))\)</span>.</p>
+<div class="arithmatex">\[
+s_0 = C_{\text{target}}^{-1}(0.4) = 1,\quad
+s_1 = C^{-1}(0.7) = 2,\quad
+s_2 = C^{-1}(0.9) = 3,\quad
+s_3 = C^{-1}(1.0) = 3.
+\]</div>
+<p>New histogram: level 0 (0), level 1 (4), level 2 (3), level 3 (3). More
+uniform than the original (4, 3, 2, 1), but not exactly the target (2.5, 2.5,
+2.5, 2.5) — the discrete quantization prevents perfection. The algorithm is
+still the right one.</p>
+<h3 id="233-spatial-filtering">2.3.3 Spatial filtering<a class="headerlink" href="#233-spatial-filtering" title="Permanent link">&para;</a></h3>
+<p><strong>Spatial filtering</strong> is convolution with a small kernel:</p>
+<div class="arithmatex">\[
+\boxed{\;g[m,n] = \sum_{k=-K}^{K}\sum_{l=-L}^{L} w[k,l]\, f[m-k, n-l].\;}
+\]</div>
+<p>Categories:</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Kernel</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Averaging (box)</strong></td>
+<td>Uniform <span class="arithmatex">\(1/9\)</span> (3×3)</td>
+<td>Blurs, reduces noise</td>
+</tr>
+<tr>
+<td><strong>Gaussian</strong></td>
+<td><span class="arithmatex">\(\propto e^{-(m^2+n^2)/(2\sigma^2)}\)</span></td>
+<td>Blurs, smoother than box</td>
+</tr>
+<tr>
+<td><strong>Lowpass</strong></td>
+<td>Any kernel with positive sum</td>
+<td>Blurs</td>
+</tr>
+<tr>
+<td><strong>Highpass</strong></td>
+<td><span class="arithmatex">\(\delta - \text{lowpass}\)</span></td>
+<td>Sharpens, enhances edges</td>
+</tr>
+<tr>
+<td><strong>Bandpass</strong></td>
+<td>Difference of two lowpass</td>
+<td>Enhances textures in a frequency range</td>
+</tr>
+<tr>
+<td><strong>Directional</strong></td>
+<td>Oriented kernel</td>
+<td>Enhances edges in a specific direction</td>
+</tr>
+<tr>
+<td><strong>Laplacian</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix} 0&amp;-1&amp;0\\-1&amp;4&amp;-1\\0&amp;-1&amp;0\end{bmatrix}\)</span></td>
+<td>Detects edges (2nd derivative)</td>
+</tr>
+<tr>
+<td><strong>Sobel X</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix}-1&amp;0&amp;1\\-2&amp;0&amp;2\\-1&amp;0&amp;1\end{bmatrix}\)</span></td>
+<td>Horizontal gradient</td>
+</tr>
+<tr>
+<td><strong>Sobel Y</strong></td>
+<td><span class="arithmatex">\(\begin{bmatrix}-1&amp;-2&amp;-1\\0&amp;0&amp;0\\1&amp;2&amp;1\end{bmatrix}\)</span></td>
+<td>Vertical gradient</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Boundary handling.</strong> Padding choices:</p>
+<ul>
+<li><strong>Zero padding:</strong> assume <span class="arithmatex">\(f = 0\)</span> outside. Introduces dark borders.</li>
+<li><strong>Replicate:</strong> extend with edge values. Preserves brightness.</li>
+<li><strong>Mirror:</strong> reflect at boundaries. Smooth.</li>
+<li><strong>Wrap:</strong> circular. Good for FFT-based filtering.</li>
+</ul>
+<h3 id="234-median-filtering">2.3.4 Median filtering<a class="headerlink" href="#234-median-filtering" title="Permanent link">&para;</a></h3>
+<p>Replace each pixel with the <strong>median</strong> of its <span class="arithmatex">\(K \times K\)</span> neighborhood.
+<strong>Nonlinear</strong> — does not commute with sum, cannot be written as a convolution.</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Excellent for impulse (salt-and-pepper) noise</strong> — an isolated outlier is
+  eliminated (it's not the median unless the majority of the neighborhood is
+  also outliers).</li>
+<li><strong>Preserves edges</strong> — because the median of a step neighbourhood still lies
+  on the step, whereas averaging would blur it.</li>
+<li><strong>Slower than convolution</strong> — requires sorting (or selection) per pixel.</li>
+<li><strong>Not a linear filter</strong> — frequency-domain analysis does not apply directly.</li>
+</ul>
+<h3 id="worked-example-29-median-vs-mean-on-impulse-noise">Worked example 2.9 — median vs mean on impulse noise<a class="headerlink" href="#worked-example-29-median-vs-mean-on-impulse-noise" title="Permanent link">&para;</a></h3>
+<p>3×3 patch centered on a salt pixel (<span class="arithmatex">\(255\)</span>):</p>
+<div class="arithmatex">\[
+P = \begin{bmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 255 &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}.
+\]</div>
+<p><strong>Mean filter (3×3 uniform):</strong> output = <span class="arithmatex">\(\frac{1}{9}(8 \cdot 0 + 255) = 28.3\)</span>.</p>
+<p><strong>Median filter:</strong> sort the 9 values: <span class="arithmatex">\(\{0,0,0,0,0,0,0,0,255\}\)</span>. Median = 0.</p>
+<p><strong>Conclusion.</strong> The mean filter leaves a residual "halo" of <span class="arithmatex">\(28.3\)</span> at each
+salt pixel — the noise is spread over the whole neighbourhood. The median
+filter <strong>exactly removes</strong> isolated impulses — the center pixel is restored to 0.</p>
+<p>This is why <strong>median filtering is the default for impulse-noise removal</strong>;
+averaging is the default for Gaussian-noise removal.</p>
+<p><strong>Weaknesses.</strong> Median filtering destroys fine textures and thin lines (line
+thinner than <span class="arithmatex">\(K/2\)</span> pixels is removed). For these, use <strong>weighted median</strong>,
+<strong>stack filters</strong>, or <strong>bilateral filtering</strong> (edge-preserving smoothing).</p>
+<h3 id="235-edge-enhancement-2-d-fir-and-iir">2.3.5 Edge enhancement — 2-D FIR and IIR<a class="headerlink" href="#235-edge-enhancement-2-d-fir-and-iir" title="Permanent link">&para;</a></h3>
+<p><strong>The Laplacian.</strong> The 2-D second derivative:</p>
+<div class="arithmatex">\[
+\boxed{\;\nabla^2 f = \frac{\partial^2 f}{\partial x^2} + \frac{\partial^2 f}{\partial y^2} \approx f[m+1,n] + f[m-1,n] + f[m,n+1] + f[m,n-1] - 4 f[m,n].\;}
+\]</div>
+<p>Kernel: <span class="arithmatex">\(\begin{bmatrix}0&amp;1&amp;0\\1&amp;-4&amp;1\\0&amp;1&amp;0\end{bmatrix}\)</span>. Zero response on constant
+regions; peaks at edges. <strong>Edge enhancement</strong> by adding the Laplacian:</p>
+<div class="arithmatex">\[
+\boxed{\;g = f - \nabla^2 f\quad\text{(2nd-derivative sharpening)}.\;}
+\]</div>
+<p><strong>Unsharp masking.</strong> A more robust edge enhancement:</p>
+<div class="arithmatex">\[
+\boxed{\;g = f + k\,(f - \text{lowpass}(f)) = (1+k) f - k \cdot \text{lowpass}(f).\;}
+\]</div>
+<p>The <strong>highpass</strong> component <span class="arithmatex">\(f - \text{lowpass}(f)\)</span> contains the edges; adding it
+amplifies them. The parameter <span class="arithmatex">\(k\)</span> controls the amount of sharpening.</p>
+<p><strong>High-boost filtering.</strong> A generalisation:</p>
+<div class="arithmatex">\[
+g = A f - \text{lowpass}(f),\quad A \ge 1.
+\]</div>
+<p><span class="arithmatex">\(A = 1\)</span> gives unsharp masking; <span class="arithmatex">\(A &gt; 1\)</span> adds the original image back — deeper
+shadows / brighter highlights.</p>
+<p><strong>2-D FIR filters.</strong> Small kernels (3×3, 5×5) implemented as direct
+convolution. Common edge detectors:</p>
+<ul>
+<li><strong>Sobel</strong> — good gradient approximation, less noisy than simple differences.</li>
+<li><strong>Prewitt</strong> — same structure, different weighting.</li>
+<li><strong>Roberts</strong> — 2×2 diagonal kernels; noisier but faster.</li>
+<li><strong>Canny</strong> — Gaussian smoothing + gradient + non-max suppression + hysteresis; the best general-purpose edge detector (not a simple convolution).</li>
+</ul>
+<p><strong>2-D IIR filters.</strong> Larger kernels implemented as recursive filters —
+e.g., a Gaussian approximated by a cascade of first-order IIR filters. Used
+when the kernel is too large for direct FIR (e.g., <span class="arithmatex">\(\sigma \ge 5\)</span>).</p>
+<h3 id="worked-example-210-unsharp-masking-by-hand">Worked example 2.10 — Unsharp masking by hand<a class="headerlink" href="#worked-example-210-unsharp-masking-by-hand" title="Permanent link">&para;</a></h3>
+<p>1-D signal <span class="arithmatex">\(f = (10, 10, 10, 50, 50, 50)\)</span> — step edge.</p>
+<p>3-point box lowpass: <span class="arithmatex">\(f_{\text{lp}} = (10, 10, 23.3, 36.7, 50, 50)\)</span>.</p>
+<p>Highpass <span class="arithmatex">\(f - f_{\text{lp}} = (0, 0, -13.3, 13.3, 0, 0)\)</span>.</p>
+<p><strong>Unsharp masking</strong> with <span class="arithmatex">\(k = 1\)</span>:</p>
+<div class="arithmatex">\[
+g = f + (f - f_{\text{lp}}) = (10, 10, -3.3, 63.3, 50, 50).
+\]</div>
+<p>Clipped to <span class="arithmatex">\([0, 255]\)</span>: same (no clipping needed). The <strong>edges are now overshoot
+and undershoot</strong> — the rise from 10 to 50 is amplified to a rise from
+<span class="arithmatex">\(-3.3\)</span> to <span class="arithmatex">\(63.3\)</span>, appearing <strong>sharper</strong> to the eye because the derivative is
+larger at the edge.</p>
+<p><strong>Exaggerating <span class="arithmatex">\(k = 2\)</span>:</strong></p>
+<div class="arithmatex">\[
+g = (10, 10, -16.7, 76.7, 50, 50).
+\]</div>
+<p>Overshoot is now <span class="arithmatex">\(-16.7\)</span> and <span class="arithmatex">\(76.7\)</span> — more dramatic, but risks clipping and
+visible "halo" artifacts.</p>
+<h3 id="236-homomorphic-filtering-and-cepstrum">2.3.6 Homomorphic filtering and cepstrum<a class="headerlink" href="#236-homomorphic-filtering-and-cepstrum" title="Permanent link">&para;</a></h3>
+<p><strong>The problem.</strong> Illumination is multiplicative: <span class="arithmatex">\(f[m,n] = i[m,n] \cdot r[m,n]\)</span>
+where <span class="arithmatex">\(i\)</span> is the illumination (slowly varying, low-frequency) and <span class="arithmatex">\(r\)</span> is the
+reflectance (rapidly varying, high-frequency). Standard linear filters
+operate on <strong>additive</strong> signals — they distort multiplicative ones.</p>
+<p><strong>The homomorphic trick.</strong></p>
+<ol>
+<li><strong>Log:</strong> <span class="arithmatex">\(\log f = \log i + \log r\)</span> — converts multiplicative to additive.</li>
+<li><strong>Linear filter</strong> on <span class="arithmatex">\(\log f\)</span>: highpass to boost reflectance and suppress
+   illumination variations.</li>
+<li><strong>Exp:</strong> <span class="arithmatex">\(\hat f = e^{\text{filtered}}\)</span>.</li>
+</ol>
+<p>The filter is typically a <strong>highpass</strong> (attenuates the low-frequency
+illumination, passes the high-frequency reflectance) — the opposite of
+lowpass smoothing. This is <strong>homomorphic filtering</strong>.</p>
+<p><strong>Cepstrum.</strong> Take the Fourier transform of the log:</p>
+<div class="arithmatex">\[
+\boxed{\;\text{cepstrum}(x) = \mathcal F^{-1}\{\log|\mathcal F\{x\}|\}.\;}
+\]</div>
+<p>The cepstrum separates the <strong>source</strong> (periodic) from the <strong>filter</strong>
+(smooth envelope) — used in speech pitch estimation (ECEG-6303 Ch 4) and
+image deconvolution (restoring an image blurred by an unknown PSF, when the
+PSF is "narrow" in the cepstral domain).</p>
+<h3 id="237-colour-image-enhancement">2.3.7 Colour image enhancement<a class="headerlink" href="#237-colour-image-enhancement" title="Permanent link">&para;</a></h3>
+<p>Colour enhancement is trickier because it must preserve <strong>hue</strong> while modifying
+<strong>brightness</strong> or <strong>saturation</strong>. Two strategies:</p>
+<p><strong>Per-channel processing.</strong> Apply the enhancement to R, G, B separately.
+Pros: simple. Cons: changes hue — a bright red pixel may become pink.</p>
+<p><strong>Decoupled processing.</strong> Convert to YCbCr (or HSV), enhance only Y (luminance),
+convert back. Pros: preserves hue. Cons: does not adjust saturation.</p>
+<p>For most applications, <strong>Y-enhancement</strong> (YCbCr or HSV-V) is the standard
+approach.</p>
+<hr />
+<h2 id="24-image-restoration">2.4 Image restoration<a class="headerlink" href="#24-image-restoration" title="Permanent link">&para;</a></h2>
+<p>Restoration is <strong>objective</strong> — the goal is to recover the <strong>original</strong> image
+from a known or estimated degradation. Contrast with enhancement, which is
+subjective.</p>
+<h3 id="241-degradation-model">2.4.1 Degradation model<a class="headerlink" href="#241-degradation-model" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boxed{\;g[m,n] = (h * f)[m,n] + \nu[m,n]\;}
+\]</div>
+<p>where <span class="arithmatex">\(f\)</span> is the original image, <span class="arithmatex">\(h\)</span> is the <strong>point-spread function (PSF)</strong>
+(blur), <span class="arithmatex">\(\nu\)</span> is additive noise, <span class="arithmatex">\(g\)</span> is the observed image.</p>
+<p>In the frequency domain:</p>
+<div class="arithmatex">\[
+\boxed{\;G(u, v) = H(u,v)\, F(u,v) + N(u,v).\;}
+\]</div>
+<p><strong>Common degradation sources.</strong></p>
+<ul>
+<li><strong>Motion blur:</strong> <span class="arithmatex">\(h\)</span> is a 1-D box along the motion direction (or a triangle for accelerating motion).</li>
+<li><strong>Out-of-focus blur:</strong> <span class="arithmatex">\(h\)</span> is a disk of radius <span class="arithmatex">\(R\)</span> — a "pillbox" PSF.</li>
+<li><strong>Atmospheric turbulence:</strong> <span class="arithmatex">\(h\)</span> is a Gaussian with <span class="arithmatex">\(\sigma \propto\)</span> distance.</li>
+<li><strong>Sensor noise:</strong> additive Gaussian, Poisson (shot noise), or salt-and-pepper.</li>
+</ul>
+<h3 id="242-inverse-filter">2.4.2 Inverse filter<a class="headerlink" href="#242-inverse-filter" title="Permanent link">&para;</a></h3>
+<p>The naive restoration: divide by the PSF:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat F(u,v) = \frac{G(u,v)}{H(u,v)} = F(u,v) + \frac{N(u,v)}{H(u,v)}.\;}
+\]</div>
+<p><strong>The fatal flaw.</strong> Wherever <span class="arithmatex">\(H(u,v)\)</span> is small or zero, the noise term
+<span class="arithmatex">\(N/H\)</span> <strong>blows up</strong>. Even a tiny amount of noise (which is always present)
+amplifies enormously in those frequency bins — the restored image is dominated
+by noise. <strong>Inverse filtering fails in practice</strong> unless (i) the noise is zero
+(unrealistic) or (ii) <span class="arithmatex">\(H\)</span> is bounded away from zero and flat (rare).</p>
+<h3 id="worked-example-211-inverse-filter-failure">Worked example 2.11 — Inverse filter failure<a class="headerlink" href="#worked-example-211-inverse-filter-failure" title="Permanent link">&para;</a></h3>
+<p>Blur <span class="arithmatex">\(H(f) = e^{-(f/f_0)^2}\)</span> (Gaussian). Noise <span class="arithmatex">\(\nu \sim \mathcal N(0, \sigma^2)\)</span>,
+<span class="arithmatex">\(\sigma = 10^{-3}\)</span>, image amplitude <span class="arithmatex">\(\sim 1\)</span>. So <strong>input SNR = 60 dB</strong> — excellent.</p>
+<p>Inverse filter at <span class="arithmatex">\(f = 2f_0\)</span>: <span class="arithmatex">\(H = e^{-4} \approx 0.018\)</span>. Amplified noise:
+<span class="arithmatex">\(\sigma/H = 10^{-3}/0.018 \approx 0.056\)</span> — <strong>noise is now 5% of the signal,
+SNR drops to 25 dB</strong>.</p>
+<p>At <span class="arithmatex">\(f = 3f_0\)</span>: <span class="arithmatex">\(H = e^{-9} \approx 10^{-4}\)</span>. Noise <span class="arithmatex">\(10^{-3}/10^{-4} = 10\)</span> —
+<strong>noise is 10× the signal. Image unusable.</strong></p>
+<p><strong>The Gaussian's tails</strong> are what kill the inverse filter — they decay
+faster than the noise floor. Any real blur has tails, and any real noise has a
+finite level; the ratio is a disaster in the far tails.</p>
+<h3 id="243-wiener-filter-minimum-mse">2.4.3 Wiener filter (minimum MSE)<a class="headerlink" href="#243-wiener-filter-minimum-mse" title="Permanent link">&para;</a></h3>
+<p>The <strong>Wiener filter</strong> minimises the <strong>mean-square error</strong> between <span class="arithmatex">\(\hat f\)</span> and
+the true <span class="arithmatex">\(f\)</span>, given the statistics of the signal and noise:</p>
+<div class="arithmatex">\[
+\boxed{\;W(u,v) = \frac{H^*(u,v)\, S_f(u,v)}{|H(u,v)|^2 S_f(u,v) + S_\nu(u,v)}.\;}
+\]</div>
+<p>Equivalently:</p>
+<div class="arithmatex">\[
+\boxed{\;W(u,v) = \frac{H^*(u,v)}{|H(u,v)|^2 + S_\nu(u,v)/S_f(u,v)}.\;}
+\]</div>
+<p>Here <span class="arithmatex">\(S_f = |F|^2\)</span> is the <strong>signal power spectrum</strong> and <span class="arithmatex">\(S_\nu = |N|^2\)</span> is the
+<strong>noise power spectrum</strong>.</p>
+<p><strong>Interpretation.</strong></p>
+<ul>
+<li>Where SNR is <strong>high</strong> (<span class="arithmatex">\(S_f \gg S_\nu\)</span>): <span class="arithmatex">\(W \approx 1/H\)</span> — <strong>inverse filter</strong>, perfect restoration.</li>
+<li>Where SNR is <strong>low</strong> (<span class="arithmatex">\(S_f \ll S_\nu\)</span>): <span class="arithmatex">\(W \approx 0\)</span> — <strong>attenuate</strong>, avoid amplifying noise.</li>
+<li>The filter <strong>smoothly interpolates</strong> between these regimes.</li>
+</ul>
+<p><strong>Practical form.</strong> Replace <span class="arithmatex">\(S_f, S_\nu\)</span> by constants (often <span class="arithmatex">\(S_\nu/S_f \approx K\)</span>
+estimated from a noise-only region) to get the <strong>approximate Wiener filter</strong>:</p>
+<div class="arithmatex">\[
+W(u,v) = \frac{H^*(u,v)}{|H(u,v)|^2 + K}.
+\]</div>
+<p>The scalar <span class="arithmatex">\(K\)</span> is the <strong>regularisation parameter</strong> — it prevents division by
+small <span class="arithmatex">\(H\)</span>.</p>
+<h3 id="worked-example-212-wiener-filter">Worked example 2.12 — Wiener filter<a class="headerlink" href="#worked-example-212-wiener-filter" title="Permanent link">&para;</a></h3>
+<p>Blur <span class="arithmatex">\(H(f) = e^{-(f/f_0)^2}\)</span> (same as 2.11). Signal PSD <span class="arithmatex">\(S_f = |F(f)|^2\)</span> —
+typical natural-image power spectrum <span class="arithmatex">\(S_f \propto 1/f^2\)</span>. Noise PSD
+<span class="arithmatex">\(S_\nu = 10^{-6}\)</span> (60 dB SNR).</p>
+<p><strong>At low frequency</strong> (<span class="arithmatex">\(f = 0.1 f_0\)</span>): <span class="arithmatex">\(H \approx 1\)</span>, SNR <span class="arithmatex">\(\approx 10^6\)</span>,
+<span class="arithmatex">\(W \approx 1\)</span>. Noise not amplified.</p>
+<p><strong>At high frequency</strong> (<span class="arithmatex">\(f = 3 f_0\)</span>): <span class="arithmatex">\(H = 10^{-4}\)</span>, <span class="arithmatex">\(H^2 = 10^{-8}\)</span>,
+<span class="arithmatex">\(S_f \propto 1/9 \approx 0.11\)</span>, <span class="arithmatex">\(S_\nu/S_f = 10^{-6}/0.11 \approx 10^{-5}\)</span>.
+Then <span class="arithmatex">\(W = H/(H^2 + 10^{-5}) = 10^{-4}/(10^{-8} + 10^{-5}) \approx 10^{-4}/10^{-5} = 10\)</span>.</p>
+<p><strong>Output at high frequency:</strong> <span class="arithmatex">\(W \cdot G = 10 \cdot (H F + N) = 10 \cdot (10^{-4} F + N) = 10^{-3} F + 10 N\)</span>.
+The noise contribution is amplified by <span class="arithmatex">\(10\)</span> (vs. <span class="arithmatex">\(10^4\)</span> for inverse) — <strong>1000×
+better</strong>. But the signal is still heavily attenuated; the Wiener filter
+<strong>accepts</strong> this because the SNR there is too low to recover.</p>
+<p><strong>MSE.</strong> The Wiener filter's MSE is the minimum among all linear filters for
+this problem — the theoretical optimum.</p>
+<h3 id="244-geometric-mean-filter">2.4.4 Geometric mean filter<a class="headerlink" href="#244-geometric-mean-filter" title="Permanent link">&para;</a></h3>
+<p>Interpolates between the <strong>inverse</strong> and <strong>Wiener</strong> filters:</p>
+<div class="arithmatex">\[
+\boxed{\;W_{\alpha}(u,v) = \frac{H^*(u,v)}{|H(u,v)|^2 + \alpha\, S_\nu/S_f},\quad \alpha \in [0,1].\;}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\alpha = 1\)</span> → Wiener filter (minimum MSE).</li>
+<li><span class="arithmatex">\(\alpha = 0\)</span> → inverse filter (perfect restoration, worst noise).</li>
+<li><span class="arithmatex">\(\alpha \in (0,1)\)</span> → trade-off.</li>
+</ul>
+<p>The name comes from the <strong>geometric mean</strong> form used in some texts: <span class="arithmatex">\(W_\alpha = \left[\frac{1}{H}\right]^\alpha \left[\frac{H^*}{|H|^2 + S_\nu/S_f}\right]^{1-\alpha}\)</span>
+(though the exact form varies). The general principle is the same:
+<strong>one knob trades restoration fidelity against noise amplification</strong>.</p>
+<h3 id="245-constrained-least-squares-cls">2.4.5 Constrained least squares (CLS)<a class="headerlink" href="#245-constrained-least-squares-cls" title="Permanent link">&para;</a></h3>
+<p>When the noise PSD is unknown, use a <strong>smoothness prior</strong> instead of the
+Wiener's explicit noise model:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat F = \arg\min_F\, \|G - H F\|^2 + \gamma\, \|P F\|^2.\;}
+\]</div>
+<p>Here <span class="arithmatex">\(P\)</span> is a <strong>highpass operator</strong> (e.g., the Laplacian), so <span class="arithmatex">\(\|PF\|^2\)</span>
+measures the <strong>roughness</strong> of the restored image. The solution:</p>
+<div class="arithmatex">\[
+\boxed{\;\hat F = \frac{H^*}{|H|^2 + \gamma |P|^2}\, G.\;}
+\]</div>
+<p><strong>Comparison with Wiener.</strong></p>
+<ul>
+<li>Wiener uses <strong>statistical</strong> priors (<span class="arithmatex">\(S_f, S_\nu\)</span>).</li>
+<li>CLS uses <strong>deterministic</strong> priors (smoothness).</li>
+<li>Both have a <strong>regularisation parameter</strong> (<span class="arithmatex">\(K\)</span> or <span class="arithmatex">\(\gamma\)</span>) that controls the
+  fidelity/smoothness trade-off.</li>
+<li><strong>CLS is often preferred</strong> when the noise level is unknown but smoothness is
+  a reasonable prior — as in astronomical imaging.</li>
+</ul>
+<h3 id="worked-example-213-cls-restoration">Worked example 2.13 — CLS restoration<a class="headerlink" href="#worked-example-213-cls-restoration" title="Permanent link">&para;</a></h3>
+<p>Same blur <span class="arithmatex">\(H(f) = e^{-(f/f_0)^2}\)</span>. Use Laplacian <span class="arithmatex">\(P(f) = -4\pi^2 f^2\)</span> (in the
+Fourier domain), <span class="arithmatex">\(\gamma = 0.01\)</span>.</p>
+<p><strong>At low frequency</strong> (<span class="arithmatex">\(f = 0.1 f_0\)</span>): <span class="arithmatex">\(P \approx 0.4 f_0^2\)</span>, <span class="arithmatex">\(\gamma P^2 \approx 0.0016 f_0^4\)</span>.
+This is small compared to <span class="arithmatex">\(H^2 \approx 1\)</span>, so <span class="arithmatex">\(W \approx H^* \approx 1\)</span> — full restoration.</p>
+<p><strong>At high frequency</strong> (<span class="arithmatex">\(f = 3 f_0\)</span>): <span class="arithmatex">\(H^2 \approx 10^{-8}\)</span>, <span class="arithmatex">\(P^2 \approx 36 f_0^4\)</span>,
+<span class="arithmatex">\(\gamma P^2 = 0.36 f_0^4\)</span>. This <strong>dominates</strong> <span class="arithmatex">\(H^2\)</span>, so <span class="arithmatex">\(W \approx H^*/(0.36 f_0^4) \approx 3 \cdot 10^{-4}\)</span>
+— the filter <strong>cuts off</strong> the high frequencies before they can amplify noise.</p>
+<p><strong>MSE vs. Wiener.</strong> CLS is slightly worse than Wiener when the true
+<span class="arithmatex">\(S_f, S_\nu\)</span> are known, but <strong>more robust</strong> when they are not. The regularization
+parameter can be tuned to match the visual quality.</p>
+<h3 id="246-nonlinear-filters">2.4.6 Nonlinear filters<a class="headerlink" href="#246-nonlinear-filters" title="Permanent link">&para;</a></h3>
+<p>For non-Gaussian noise or edge-preserving smoothing:</p>
+<ul>
+<li><strong>Median filter</strong> — best for salt-and-pepper.</li>
+<li><strong>Bilateral filter</strong> — edge-preserving smoothing: averages nearby pixels weighted by <strong>both spatial distance and intensity similarity</strong>. Preserves edges while removing noise.</li>
+<li><strong>Non-local means</strong> — averages similar patches anywhere in the image. Excellent for Gaussian noise; slow.</li>
+<li><strong>BM3D</strong> — block-matching + 3D filtering; the state-of-the-art denoiser for many years.</li>
+<li><strong>Total variation</strong> — minimises the total variation <span class="arithmatex">\(\int |\nabla f|\)</span> subject to data fidelity. Excellent for piecewise-smooth images (medical, astronomical).</li>
+</ul>
+<h3 id="247-smoothing-splines-and-interpolation">2.4.7 Smoothing splines and interpolation<a class="headerlink" href="#247-smoothing-splines-and-interpolation" title="Permanent link">&para;</a></h3>
+<p>For <strong>inpainting</strong> (filling missing regions) or <strong>super-resolution</strong>:</p>
+<ul>
+<li><strong>Bicubic interpolation</strong> — smooth, 3rd-order polynomial, 16-tap. The default for image resizing.</li>
+<li><strong>Spline interpolation</strong> — piecewise polynomial with continuous derivatives. MATLAB <code>spline</code>, <code>interp2</code>.</li>
+<li><strong>Thin-plate spline</strong> — 2-D analogue of the cubic spline; minimises bending energy. Used in registration.</li>
+<li><strong>Smoothing spline</strong> — fits a spline that trades off data fidelity vs. curvature penalty. A 2-D version of CLS.</li>
+</ul>
+<hr />
+<h2 id="25-image-compression">2.5 Image compression<a class="headerlink" href="#25-image-compression" title="Permanent link">&para;</a></h2>
+<h3 id="251-data-rates-and-redundancy">2.5.1 Data rates and redundancy<a class="headerlink" href="#251-data-rates-and-redundancy" title="Permanent link">&para;</a></h3>
+<p><strong>Raw image data rate</strong> for an <span class="arithmatex">\(N \times M\)</span> image with <span class="arithmatex">\(b\)</span> bits per channel,
+<span class="arithmatex">\(c\)</span> channels, <span class="arithmatex">\(f\)</span> frames/second:</p>
+<div class="arithmatex">\[
+\text{bitrate} = N \cdot M \cdot b \cdot c \cdot f\quad\text{bits/s.}
+\]</div>
+<p><strong>Example.</strong> 1080p video (1920×1080), 24 fps, 8-bit RGB = <span class="arithmatex">\(1920 \times 1080 \times 24 \times 24 \approx 1.2\)</span> Gbps raw. Broadcast needs <span class="arithmatex">\(\approx 20\)</span> Mbps — a <strong>60:1 compression</strong>.</p>
+<p><strong>Three types of redundancy.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Redundancy</th>
+<th>Explanation</th>
+<th>Reduction method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Coding</strong></td>
+<td>Fixed-length codes inefficient for non-uniform symbols</td>
+<td>Huffman, arithmetic coding</td>
+</tr>
+<tr>
+<td><strong>Spatial</strong></td>
+<td>Neighbouring pixels correlated</td>
+<td>Prediction, transform coding</td>
+</tr>
+<tr>
+<td><strong>Psychovisual</strong></td>
+<td>Eye is insensitive to certain detail</td>
+<td>Perceptual quantization (quantization matrix)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="252-predictive-coding-dpcm">2.5.2 Predictive coding (DPCM)<a class="headerlink" href="#252-predictive-coding-dpcm" title="Permanent link">&para;</a></h3>
+<p><strong>Differential pulse-code modulation (DPCM).</strong> Predict each pixel from its
+neighbours, code only the prediction error:</p>
+<div class="arithmatex">\[
+\boxed{\;d[m,n] = f[m,n] - \hat f[m,n],\quad \hat f[m,n] = \sum_{(k,l) \in \mathcal N} a_{k,l} f[m-k, n-l].\;}
+\]</div>
+<p>The <strong>prediction error</strong> <span class="arithmatex">\(d\)</span> has a much smaller range and variance than <span class="arithmatex">\(f\)</span>, so
+it can be encoded with fewer bits. The decoder reconstructs:</p>
+<div class="arithmatex">\[
+f[m,n] = d[m,n] + \hat f[m,n].
+\]</div>
+<p><strong>Predictors.</strong></p>
+<ul>
+<li><strong>1-D (previous pixel):</strong> <span class="arithmatex">\(\hat f = f[m-1, n]\)</span>.</li>
+<li><strong>2-D (causal neighbours):</strong> <span class="arithmatex">\(\hat f = a_1 f[m-1,n] + a_2 f[m,n-1] + a_3 f[m-1,n-1]\)</span>.</li>
+<li><strong>Optimal linear predictor:</strong> solve the Yule–Walker equations for the
+  autocovariance (ECEG-6303 Ch 3 §3.8) — but for 2-D, the predictor becomes a
+  small FIR filter.</li>
+</ul>
+<p><strong>Limitations.</strong></p>
+<ul>
+<li><strong>Error propagation:</strong> the decoder reconstructs <span class="arithmatex">\(f[m,n]\)</span> from past <strong>reconstructed</strong> pixels — a single error can propagate.</li>
+<li><strong>Fixed code length</strong> for each residual — no entropy coding (a simple DPCM system).</li>
+<li><strong>Poor for textures:</strong> textures have little spatial correlation → prediction gain small.</li>
+</ul>
+<p><strong>Practical use.</strong> DPCM is used in <strong>lossless JPEG</strong> and as the <strong>DC coefficient coder</strong> in JPEG (adjacent blocks have correlated DCs).</p>
+<h3 id="worked-example-214-1-d-dpcm">Worked example 2.14 — 1-D DPCM<a class="headerlink" href="#worked-example-214-1-d-dpcm" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x = (10, 12, 14, 15, 15, 14, 12, 10)\)</span> — a smooth ramp up and down.</p>
+<p><strong>Predictor:</strong> <span class="arithmatex">\(\hat x[n] = x[n-1]\)</span>.</p>
+<p><strong>Residuals:</strong> <span class="arithmatex">\(d[0] = 10\)</span>, <span class="arithmatex">\(d[1] = 2\)</span>, <span class="arithmatex">\(d[2] = 2\)</span>, <span class="arithmatex">\(d[3] = 1\)</span>, <span class="arithmatex">\(d[4] = 0\)</span>, <span class="arithmatex">\(d[5] = -1\)</span>, <span class="arithmatex">\(d[6] = -2\)</span>, <span class="arithmatex">\(d[7] = -2\)</span>.</p>
+<p><strong>Variance reduction:</strong></p>
+<ul>
+<li>Signal variance: <span class="arithmatex">\(\approx 4.2\)</span>.</li>
+<li>Residual variance (excluding <span class="arithmatex">\(d[0]\)</span>): <span class="arithmatex">\(\approx 2.3\)</span>.</li>
+</ul>
+<p><strong>Entropy.</strong> Signal range 10–15 (6 levels): <span class="arithmatex">\(\log_2 6 \approx 2.6\)</span> bits. Residual range <span class="arithmatex">\(-2\)</span> to <span class="arithmatex">\(+2\)</span> (5 levels): <span class="arithmatex">\(\log_2 5 \approx 2.3\)</span> bits. Modest reduction for this example; in real images with larger dynamic range, the reduction is much larger (8 bits → 3–5 bits typical).</p>
+<p><strong>Better predictor</strong> (2-tap): <span class="arithmatex">\(\hat x[n] = 2x[n-1] - x[n-2]\)</span> (linear extrapolation).</p>
+<p>Residuals: <span class="arithmatex">\(d[0]=10\)</span>, <span class="arithmatex">\(d[1]=2\)</span>, <span class="arithmatex">\(d[2]=0\)</span>, <span class="arithmatex">\(d[3]=-1\)</span>, <span class="arithmatex">\(d[4]=-1\)</span>, <span class="arithmatex">\(d[5]=-1\)</span>, <span class="arithmatex">\(d[6]=-1\)</span>, <span class="arithmatex">\(d[7]=0\)</span>. Even smaller — but slightly larger than one might hope because the corners of the ramp break the linear model.</p>
+<h3 id="253-transform-coding">2.5.3 Transform coding<a class="headerlink" href="#253-transform-coding" title="Permanent link">&para;</a></h3>
+<p><strong>The idea.</strong> Apply an invertible transform <span class="arithmatex">\(T\)</span> to a block, quantize the coefficients
+(non-uniformly, more heavily for high frequency where the eye is less sensitive),
+and entropy-code. The block-based <strong>JPEG</strong> uses an 8×8 DCT.</p>
+<p><strong>JPEG pipeline</strong> (for reference; JPEG is covered fully in most textbooks):</p>
+<ol>
+<li>Split into 8×8 blocks.</li>
+<li>Convert RGB → YCbCr, subsample chroma 4:2:0.</li>
+<li>Compute 8×8 DCT of each block.</li>
+<li><strong>Quantize</strong> using the standard 8×8 quantization table, scaled by a quality factor <span class="arithmatex">\(Q \in [1, 100]\)</span>:
+   $$
+   \hat X[k,l] = \text{round}!\left(\frac{X[k,l]}{Q(k,l)}\right).
+   $$
+   The matrix <span class="arithmatex">\(Q(k,l)\)</span> is <strong>larger at high frequencies</strong> (more aggressive quantization) — perceptual.</li>
+<li><strong>Zigzag scan</strong> the coefficients (low to high frequency) → long runs of zeros at the end.</li>
+<li><strong>Entropy code</strong> (Huffman) the run-length encoded zeros + the nonzero coefficients.</li>
+</ol>
+<p><strong>Decoding:</strong> reverse each step. Because quantization is lossy, the reconstruction
+is <strong>not identical</strong> to the original — but at <span class="arithmatex">\(Q = 75\)</span>, the result is
+perceptually transparent for most images.</p>
+<p><strong>JPEG quality levels.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Quality</th>
+<th style="text-align: center;">Compression</th>
+<th>Visual quality</th>
+<th>Artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">95</td>
+<td style="text-align: center;">10:1</td>
+<td>Transparent</td>
+<td>None</td>
+</tr>
+<tr>
+<td style="text-align: center;">75</td>
+<td style="text-align: center;">20:1</td>
+<td>Good</td>
+<td>None visible</td>
+</tr>
+<tr>
+<td style="text-align: center;">50</td>
+<td style="text-align: center;">40:1</td>
+<td>Fair</td>
+<td>Slight blocking</td>
+</tr>
+<tr>
+<td style="text-align: center;">25</td>
+<td style="text-align: center;">80:1</td>
+<td>Poor</td>
+<td>Visible blocking, ringing</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">200:1</td>
+<td>Very poor</td>
+<td>Severe blocking, blur</td>
+</tr>
+</tbody>
+</table>
+<h3 id="worked-example-215-dct-block-coding">Worked example 2.15 — DCT block coding<a class="headerlink" href="#worked-example-215-dct-block-coding" title="Permanent link">&para;</a></h3>
+<p>An 8×8 block has DCT coefficients concentrated at (0,0) = 1000, (0,1) = 500,
+(1,0) = 300, (1,1) = 200, all others near zero.</p>
+<p><strong>Quantization</strong> with a Q matrix that has <span class="arithmatex">\(Q(0,0) = 16\)</span> (low frequency, gentle),
+<span class="arithmatex">\(Q(0,1) = Q(1,0) = 32\)</span>, <span class="arithmatex">\(Q(1,1) = 64\)</span>, and <span class="arithmatex">\(Q(k,l) = 128\)</span> for the rest.</p>
+<p>Quantized values: <span class="arithmatex">\(1000/16 = 63\)</span>, <span class="arithmatex">\(500/32 = 16\)</span>, <span class="arithmatex">\(300/32 = 9\)</span>, <span class="arithmatex">\(200/64 = 3\)</span>,
+all others 0 (since the original was near zero and the quantizer rounds to 0).</p>
+<p><strong>Stored: 4 nonzero coefficients</strong> + run-length encoding that covers the
+remaining 60 zeros in ~3–4 bytes. Total: ~12 bytes per block — a <strong>42:1
+compression</strong> from 8×8 8-bit = 64 bytes.</p>
+<p><strong>Reconstruction:</strong> dequantize (multiply by Q) and inverse DCT. The block is
+recovered to within the quantization error of the 4 largest coefficients —
+perceptually identical to the original for a smooth block.</p>
+<h3 id="254-vector-quantization-vq">2.5.4 Vector quantization (VQ)<a class="headerlink" href="#254-vector-quantization-vq" title="Permanent link">&para;</a></h3>
+<p><strong>Idea.</strong> Group pixels into <strong>vectors</strong> (e.g., 4×4 blocks) and encode each vector
+by the <strong>index</strong> of its nearest codeword in a <strong>codebook</strong>.</p>
+<div class="arithmatex">\[
+\boxed{\;\text{codebook} = \{\mathbf c_1, \dots, \mathbf c_K\},\quad \text{encode}(\mathbf x) = \arg\min_k \|\mathbf x - \mathbf c_k\|.\;}
+\]</div>
+<p><strong>Compression.</strong> For 4×4 = 16-pixel vectors and a codebook of <span class="arithmatex">\(K = 256\)</span> codewords:
+<span class="arithmatex">\(16 \times 8 = 128\)</span> bits per block → 8 bits per block = <strong>16:1</strong> compression.</p>
+<p><strong>Codebook design.</strong> <strong>LBG algorithm</strong> (Linde–Buzo–Gray, 1980) — iteratively
+refine centroids, like k-means. Optimality = <strong>Lloyd–Max</strong> condition in vector
+form: each codeword is the centroid of its Voronoi region.</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Optimal</strong> among all fixed-rate vector coders (for the training distribution).</li>
+<li><strong>Asymptotically</strong> approaches the rate-distortion bound.</li>
+<li><strong>The catch:</strong> the codebook must be transmitted. For <span class="arithmatex">\(K = 256\)</span> codewords and 16 pixels: <span class="arithmatex">\(256 \times 16\)</span> bytes = 4 KB overhead — negligible for large images, significant for small ones.</li>
+</ul>
+<p><strong>Not used in modern codecs</strong> for images (transform coding dominates), but used in:
+- <strong>Speech coding</strong> (as the "excitation" quantizer in CELP).
+- <strong>Deep learning</strong> (as a product quantizer in face recognition).
+- <strong>Image retrieval</strong> (as a compressed feature descriptor).</p>
+<h3 id="255-block-truncation-coding-btc">2.5.5 Block truncation coding (BTC)<a class="headerlink" href="#255-block-truncation-coding-btc" title="Permanent link">&para;</a></h3>
+<p>A fast, low-complexity block-based coder. For each 4×4 or 8×8 block:</p>
+<ol>
+<li>Compute the <strong>mean</strong> <span class="arithmatex">\(\bar x\)</span> and <strong>standard deviation</strong> <span class="arithmatex">\(\sigma_x\)</span> of the block.</li>
+<li><strong>Binarize</strong> at <span class="arithmatex">\(\bar x\)</span>: pixel is 1 if above mean, 0 if below.</li>
+<li><strong>Two reconstruction levels</strong> <span class="arithmatex">\(a, b\)</span> chosen so the block mean and variance are preserved:
+   $$
+   a = \bar x - \sigma_x \sqrt{q/m},\quad b = \bar x + \sigma_x \sqrt{m/q},
+   $$
+   where <span class="arithmatex">\(m\)</span> = number of 0s, <span class="arithmatex">\(q\)</span> = number of 1s, <span class="arithmatex">\(m + q = N\)</span>.</li>
+<li>Store <span class="arithmatex">\(\bar x\)</span>, <span class="arithmatex">\(\sigma_x\)</span>, and the <strong>mask</strong> (1 bit per pixel).</li>
+</ol>
+<p><strong>Rate.</strong> For a 4×4 block: 4×4 = 16 mask bits + 8 mean + 8 std = 32 bits. Original
+= <span class="arithmatex">\(16 \times 8 = 128\)</span> bits. Compression = <strong>4:1</strong> (with quantization of mean
+and std, better).</p>
+<p><strong>Properties.</strong></p>
+<ul>
+<li><strong>Very fast</strong> — no transform, no floating point (with quantized mean/std).</li>
+<li><strong>Decent quality</strong> on natural images — comparable to low-quality JPEG.</li>
+<li><strong>Historical:</strong> pre-JPEG era; still used in some embedded hardware.</li>
+</ul>
+<h3 id="worked-example-216-btc-on-a-44-block">Worked example 2.16 — BTC on a 4×4 block<a class="headerlink" href="#worked-example-216-btc-on-a-44-block" title="Permanent link">&para;</a></h3>
+<p>Block values (8-bit): <span class="arithmatex">\(\{100, 120, 140, 160\}\)</span> in a checkerboard pattern.</p>
+<p>Actually, do a simpler one: block with 8 pixels = 100, 8 pixels = 200.</p>
+<p><strong>Mean:</strong> <span class="arithmatex">\(\bar x = 150\)</span>. <strong>Variance:</strong> <span class="arithmatex">\(\sigma_x = 50\)</span>. <strong>Mask:</strong> 1 for the 200s, 0 for the 100s.</p>
+<p><strong>Reconstruction levels.</strong> <span class="arithmatex">\(m = q = 8\)</span>, <span class="arithmatex">\(N = 16\)</span>. So <span class="arithmatex">\(\sqrt{q/m} = 1\)</span>, <span class="arithmatex">\(\sqrt{m/q} = 1\)</span>.
+<span class="arithmatex">\(a = 150 - 50 = 100\)</span>, <span class="arithmatex">\(b = 150 + 50 = 200\)</span>. Exact! (Because the block has only two distinct values, BTC reconstructs perfectly.)</p>
+<p><strong>Bits stored:</strong> 16 mask + 8 mean + 8 std = 32 bits (vs. 16 pixels × 8 bits = 128
+bits). <strong>4:1 compression, lossless for this block.</strong></p>
+<p><strong>Real images:</strong> blocks with smooth structure have mean/std that vary slowly; BTC
+compresses well but is no match for transform coding.</p>
+<h3 id="256-wavelet-coding">2.5.6 Wavelet coding<a class="headerlink" href="#256-wavelet-coding" title="Permanent link">&para;</a></h3>
+<p>The <strong>wavelet transform</strong> (ECEG-6303 Ch 5 §5.9) decomposes an image into
+multi-resolution coefficients. Because natural images are <strong>piecewise smooth</strong>,
+most wavelet coefficients are <strong>near zero</strong> — high sparsity. Wavelet coding
+exploits this:</p>
+<ol>
+<li><strong>2-D DWT</strong> (typically 5 levels with the CDF 9/7 biorthogonal wavelet).</li>
+<li><strong>Quantize</strong> coefficients — high-frequency subbands coarser (they capture less energy in natural images).</li>
+<li><strong>Entropy-code</strong> with context modelling (neighbouring coefficients are correlated — code them together).</li>
+</ol>
+<p><strong>JPEG 2000</strong> is the standard wavelet codec. Advantages over JPEG:</p>
+<ul>
+<li><strong>No blocking artifacts</strong> — the DWT is global, not block-based.</li>
+<li><strong>Progressive transmission</strong> — better rate-distortion trade-off (truncate the bitstream at any point).</li>
+<li><strong>Lossless and lossy</strong> in one framework.</li>
+<li><strong>Better compression</strong> at high PSNR (2–4 dB better than JPEG).</li>
+<li><strong>Region of interest</strong> coding.</li>
+<li><strong>Higher computational cost</strong> — this is why JPEG dominates the consumer market despite JPEG 2000's technical superiority.</li>
+</ul>
+<p><strong>HEVC (H.265) and AV1</strong> use <strong>DCT-based</strong> transform coding, not wavelets — the
+transform tools have evolved but wavelets were not adopted due to hardware cost.</p>
+<h3 id="257-colour-image-coding">2.5.7 Colour image coding<a class="headerlink" href="#257-colour-image-coding" title="Permanent link">&para;</a></h3>
+<p>Colour adds three times the raw data, but <strong>the eye is less sensitive to chroma</strong>.
+Compression exploits this in two ways:</p>
+<ol>
+<li><strong>Colour-space transform:</strong> RGB → YCbCr (Chapter 1 §1.7).</li>
+<li><strong>Chroma subsampling:</strong> 4:4:4 → 4:2:0 → half the chroma bytes for ~0.1 dB PSNR loss.</li>
+</ol>
+<p>Combined, YCbCr + 4:2:0 halves the raw image size (before any DCT, prediction,
+or entropy coding). This is why colour compression achieves nearly 3× the ratio
+of grayscale at the same perceptual quality.</p>
+<h3 id="258-jpeg-vs-jpeg-2000-vs-heic-vs-avif">2.5.8 JPEG vs. JPEG 2000 vs. HEIC vs. AVIF<a class="headerlink" href="#258-jpeg-vs-jpeg-2000-vs-heic-vs-avif" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Codec</th>
+<th>Transform</th>
+<th>Block</th>
+<th style="text-align: center;">Lossless</th>
+<th style="text-align: center;">Progressiveness</th>
+<th>Compression at Q=30</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JPEG</td>
+<td>8×8 DCT</td>
+<td>Yes</td>
+<td style="text-align: center;">No (except JPEG-LS)</td>
+<td style="text-align: center;">Yes</td>
+<td>25:1</td>
+</tr>
+<tr>
+<td>JPEG 2000</td>
+<td>DWT (CDF 9/7)</td>
+<td>No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td>30:1</td>
+</tr>
+<tr>
+<td>WebP</td>
+<td>VP8 (DCT+intra)</td>
+<td>Yes</td>
+<td style="text-align: center;">Yes (lossless mode)</td>
+<td style="text-align: center;">Yes</td>
+<td>30:1</td>
+</tr>
+<tr>
+<td>HEIC (HEVC)</td>
+<td>DCT</td>
+<td>Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td>35:1</td>
+</tr>
+<tr>
+<td>AVIF (AV1)</td>
+<td>DCT + intra</td>
+<td>Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td>35:1</td>
+</tr>
+</tbody>
+</table>
+<p>JPEG 2000 is technically superior in most respects, but JPEG's ubiquity and
+its adequacy for most web use kept it dominant until newer codecs (WebP,
+HEIC, AVIF) recently displaced it in browsers and mobile.</p>
+<hr />
+<h2 id="26-reconstruction-from-projections">2.6 Reconstruction from projections<a class="headerlink" href="#26-reconstruction-from-projections" title="Permanent link">&para;</a></h2>
+<h3 id="261-the-radon-transform">2.6.1 The Radon transform<a class="headerlink" href="#261-the-radon-transform" title="Permanent link">&para;</a></h3>
+<p>For a 2-D function <span class="arithmatex">\(f(x,y)\)</span>, its <strong>Radon transform</strong> is the set of <strong>line integrals</strong>
+at each projection angle <span class="arithmatex">\(\theta\)</span> and offset <span class="arithmatex">\(\rho\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;R(\rho, \theta) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f(x,y)\, \delta(x\cos\theta + y\sin\theta - \rho)\, dx\, dy.\;}
+\]</div>
+<p><strong>Geometric interpretation.</strong> The line <span class="arithmatex">\(x\cos\theta + y\sin\theta = \rho\)</span> is a
+straight line at distance <span class="arithmatex">\(\rho\)</span> from the origin, oriented at angle <span class="arithmatex">\(\theta + 90°\)</span>.
+The Radon transform integrates <span class="arithmatex">\(f\)</span> along that line.</p>
+<p><strong>Physical meaning.</strong> If <span class="arithmatex">\(f\)</span> is the attenuation coefficient of a body (as in CT),
+<span class="arithmatex">\(R(\rho, \theta)\)</span> is the X-ray intensity loss along a ray at distance <span class="arithmatex">\(\rho\)</span>
+from the origin, oriented at angle <span class="arithmatex">\(\theta\)</span> — the <strong>projection</strong> of the body onto
+a line perpendicular to the ray.</p>
+<p><strong>Sinogram.</strong> The 2-D plot of <span class="arithmatex">\(R(\rho, \theta)\)</span> vs. <span class="arithmatex">\((\rho, \theta)\)</span> is called a
+<strong>sinogram</strong>. A point source produces a sinusoid in the sinogram; a line
+produces a horizontal line; an extended object produces an elliptical smear.</p>
+<p><strong>Applications.</strong></p>
+<ul>
+<li><strong>CT (computed tomography):</strong> reconstruct 3-D density from X-ray projections.</li>
+<li><strong>PET, SPECT:</strong> reconstruct tracer distribution from gamma emissions.</li>
+<li><strong>Radar, sonar:</strong> reconstruct object from scattered returns.</li>
+<li><strong>Electron microscopy:</strong> 3-D structure of macromolecules.</li>
+</ul>
+<h3 id="262-back-projection-unfiltered">2.6.2 Back-projection (unfiltered)<a class="headerlink" href="#262-back-projection-unfiltered" title="Permanent link">&para;</a></h3>
+<p>The naive inverse: smearing each projection back along its ray.</p>
+<div class="arithmatex">\[
+\boxed{\;f_{\text{bp}}(x,y) = \int_0^\pi R(x\cos\theta + y\sin\theta,\ \theta)\, d\theta.\;}
+\]</div>
+<p><strong>The problem.</strong> Back-projection is <strong>not</strong> the inverse Radon transform — it is
+the original <span class="arithmatex">\(f\)</span> <strong>convolved with <span class="arithmatex">\(1/r\)</span></strong>:</p>
+<div class="arithmatex">\[
+f_{\text{bp}}(x,y) \propto f(x,y) * \frac{1}{\sqrt{x^2 + y^2}}.
+\]</div>
+<p>So the reconstruction is <strong>blurred</strong> by a <span class="arithmatex">\(1/r\)</span> PSF — low frequencies correct,
+high frequencies attenuated. Back-projection alone is never used in practice.</p>
+<h3 id="263-filtered-back-projection-fbp">2.6.3 Filtered back-projection (FBP)<a class="headerlink" href="#263-filtered-back-projection-fbp" title="Permanent link">&para;</a></h3>
+<p>The <strong>filtered back-projection</strong> filter corrects this. It is based on the
+<strong>Fourier slice theorem</strong>: the Fourier transform of the projection <span class="arithmatex">\(R(\rho, \theta)\)</span>
+at frequency <span class="arithmatex">\(\omega\)</span> equals the 2-D Fourier transform of <span class="arithmatex">\(f\)</span> along the line
+through the origin at angle <span class="arithmatex">\(\theta\)</span>:</p>
+<div class="arithmatex">\[
+\boxed{\;\widehat{R}(\omega, \theta) = F(\omega\cos\theta, \omega\sin\theta).\;}
+\]</div>
+<p>This lets us reconstruct <span class="arithmatex">\(f\)</span> from all angles by inverse 2-D FT:</p>
+<ol>
+<li><strong>Fourier transform</strong> each projection: <span class="arithmatex">\(\widehat{R}(\omega, \theta)\)</span>.</li>
+<li><strong>Filter</strong> in the Fourier domain with the <strong>ramp filter</strong> <span class="arithmatex">\(|\omega|\)</span> (or a smoothed version, the <strong>Shepp–Logan</strong> filter <span class="arithmatex">\(|\omega| \cdot |\text{window}|\)</span>).</li>
+<li><strong>Inverse FT</strong> to get the filtered projection <span class="arithmatex">\(\tilde R(\rho, \theta)\)</span>.</li>
+<li><strong>Back-project</strong> <span class="arithmatex">\(\tilde R\)</span> over all <span class="arithmatex">\(\theta\)</span>:
+   $$
+   \hat f(x,y) = \int_0^\pi \tilde R(x\cos\theta + y\sin\theta,\ \theta)\, d\theta.
+   $$</li>
+</ol>
+<p><strong>The ramp filter</strong> <span class="arithmatex">\(|\omega|\)</span> compensates for the <span class="arithmatex">\(1/r\)</span> blur of unfiltered
+back-projection. In practice, a <strong>Hamming</strong> or <strong>Shepp–Logan</strong> window is applied
+to suppress the noise amplification at high frequencies (the ramp is
+unbounded).</p>
+<p><strong>Reconstruction quality.</strong></p>
+<ul>
+<li><strong>Exact</strong> (in the continuous, noiseless case) for full <span class="arithmatex">\(180°\)</span> coverage.</li>
+<li><strong>Excellent</strong> in practice with 500–1000 projections and a good window.</li>
+<li><strong>Standard in commercial CT</strong> — every clinical CT scanner uses FBP or a close variant (iterative methods are increasingly replacing it, but FBP is still the baseline).</li>
+</ul>
+<h3 id="worked-example-217-radon-transform-of-a-point-object">Worked example 2.17 — Radon transform of a point object<a class="headerlink" href="#worked-example-217-radon-transform-of-a-point-object" title="Permanent link">&para;</a></h3>
+<p>Point object at <span class="arithmatex">\((x_0, y_0)\)</span>: <span class="arithmatex">\(f(x,y) = \delta(x - x_0, y - y_0)\)</span>.</p>
+<div class="arithmatex">\[
+R(\rho, \theta) = \int\int \delta(x-x_0, y-y_0)\, \delta(x\cos\theta + y\sin\theta - \rho)\, dx\, dy
+= \delta(x_0\cos\theta + y_0\sin\theta - \rho).
+\]</div>
+<p>For <span class="arithmatex">\(\rho = x_0\cos\theta + y_0\sin\theta\)</span>, the projection is nonzero. The locus
+of <span class="arithmatex">\(\rho\)</span> over <span class="arithmatex">\(\theta\)</span> is a <strong>sinusoid</strong> of amplitude <span class="arithmatex">\(\sqrt{x_0^2 + y_0^2}\)</span>
+and phase <span class="arithmatex">\(\arctan(y_0/x_0)\)</span> — the "sinogram of a point" is literally a sine
+wave, which is why it is called a sinogram.</p>
+<p><strong>Filtered back-projection</strong> of this sinogram gives a sharp point (up to
+finite-angle blur). <strong>Unfiltered back-projection</strong> gives the <span class="arithmatex">\(1/r\)</span> blur.</p>
+<h3 id="264-fan-beam-geometry">2.6.4 Fan-beam geometry<a class="headerlink" href="#264-fan-beam-geometry" title="Permanent link">&para;</a></h3>
+<p><strong>Parallel-beam</strong> is the idealised geometry: all rays at angle <span class="arithmatex">\(\theta\)</span> are
+parallel. <strong>Fan-beam</strong> (more common in CT scanners) uses a <strong>point source</strong> and
+a detector arc. The rays diverge from the source — each angle <span class="arithmatex">\(\beta\)</span> of the
+source and each detector element <span class="arithmatex">\(\gamma\)</span> define a ray.</p>
+<p><strong>Fan-beam → parallel-beam.</strong> A fan-beam projection can be re-sorted to
+parallel-beam by appropriate coordinate transformation (fan-to-parallel rebinning),
+then the parallel FBP applies. Alternatively, <strong>fan-beam FBP</strong> has its own
+reconstruction formula with a modified filter.</p>
+<p><strong>Cone-beam.</strong> The 3-D extension (each source position produces a cone of rays)
+is the geometry of <strong>CBCT</strong> (cone-beam CT) and modern helical scanners.
+Reconstruction uses <strong>FDK</strong> (Feldkamp–Davis–Kress) — the 3-D FBP approximation.</p>
+<h3 id="265-algebraic-reconstruction-techniques-art">2.6.5 Algebraic reconstruction techniques (ART)<a class="headerlink" href="#265-algebraic-reconstruction-techniques-art" title="Permanent link">&para;</a></h3>
+<p>An alternative to FBP when the data is sparse (few angles) or noisy. <strong>ART
+formulates the reconstruction as a linear system</strong> and solves it iteratively.</p>
+<p><strong>Discretize.</strong> The image is <span class="arithmatex">\(N \times N\)</span> pixels, unknown. Each projection ray
+gives one equation:</p>
+<div class="arithmatex">\[
+\boxed{\;\sum_{i,j} a_{ki,j}\, f_{i,j} = p_k,\quad a_{ki,j} = \text{length of ray } k \text{ through pixel } (i,j).\;}
+\]</div>
+<p>If there are <span class="arithmatex">\(M\)</span> rays, this is a linear system <span class="arithmatex">\(A \mathbf f = \mathbf p\)</span>
+with <span class="arithmatex">\(M\)</span> equations and <span class="arithmatex">\(N^2\)</span> unknowns.</p>
+<p><strong>Iterative solution.</strong></p>
+<ul>
+<li><strong>Kaczmarz (ART):</strong> cycle through the equations, projecting the current estimate onto each hyperplane:
+  $$
+  \mathbf f^{(m+1)} = \mathbf f^{(m)} + \lambda \frac{p_k - \mathbf a_k^\top \mathbf f^{(m)}}{|\mathbf a_k|^2} \mathbf a_k.
+  $$</li>
+<li><strong>SART (simultaneous ART):</strong> update using a whole projection at once — faster convergence, smoother.</li>
+<li><strong>SIRT (simultaneous iterative reconstruction):</strong> weighted average of all projections.</li>
+</ul>
+<p><strong>Pros.</strong> Works with few angles; handles noise via regularization.</p>
+<p><strong>Cons.</strong> Slow (many iterations); needs careful preconditioning.</p>
+<p><strong>Modern use.</strong> Iterative reconstruction (IR) is standard on premium CT
+scanners — it reduces X-ray dose by 30–50% compared to FBP while maintaining
+image quality. <strong>Compressed sensing</strong> reconstruction (which exploits image
+sparsity in a transform domain) goes further, using as few as 20–30
+projections — used in some research and emerging clinical systems.</p>
+<hr />
+<h2 id="27-chapter-summary">2.7 Chapter summary<a class="headerlink" href="#27-chapter-summary" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Transforms</strong> are the foundation — orthogonal/unitary transforms preserve energy and invert cheaply.</li>
+<li><strong>DCT</strong> is the practical transform of choice for compression: real, fast, excellent energy compaction, near-KLT-optimal for natural images.</li>
+<li><strong>KLT</strong> is theoretically optimal but data-dependent (not usable in practice). <strong>SVD</strong> is similarly optimal but data-dependent (used for denoising and low-rank problems).</li>
+<li><strong>Walsh–Hadamard, Haar, Slant</strong> are historical — mainly of interest for their simple structure (Haar feeds into wavelets).</li>
+<li><strong>Enhancement</strong> is subjective — point operations (contrast stretch, gamma), histograms (equalization, specification), spatial filtering (blur, sharpen), median filtering (impulse noise), unsharp masking (edges).</li>
+<li><strong>Restoration</strong> is objective — inverse (fails with noise), <strong>Wiener</strong> (optimal MSE with known PSDs), <strong>CLS</strong> (robust with smoothness prior).</li>
+<li><strong>DPCM</strong> is simple predictive coding; <strong>DCT coding</strong> (JPEG) is the practical standard; <strong>wavelet coding</strong> (JPEG 2000) is superior technically but less widespread; <strong>BTC</strong> is fast but low quality.</li>
+<li><strong>Radon transform</strong> gives projections; <strong>back-projection</strong> gives blurred reconstruction; <strong>filtered back-projection</strong> (with the ramp filter) gives sharp reconstruction; <strong>ART</strong> handles few-angle / noisy cases.</li>
+</ol>
+<hr />
+<h2 id="28-quiz">2.8 Quiz<a class="headerlink" href="#28-quiz" title="Permanent link">&para;</a></h2>
+<h3 id="a-multiple-choice">A. Multiple choice<a class="headerlink" href="#a-multiple-choice" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>The <strong>DCT</strong> is preferred over the <strong>DFT</strong> for image compression because:
+   (a) it is faster (b) its coefficients are real and it has better energy compaction (c) it is more accurate (d) it requires no quantization</p>
+</li>
+<li>
+<p>The <strong>KL transform</strong> is theoretically optimal but not used in practice because:
+   (a) it is too slow (b) it is data-dependent (c) it produces complex coefficients (d) it is not orthogonal</p>
+</li>
+<li>
+<p>The <strong>SVD</strong> of an image is used primarily for:
+   (a) compression standards (b) denoising and low-rank approximation (c) JPEG encoding (d) histogram equalization</p>
+</li>
+<li>
+<p><strong>Histogram equalization</strong> transforms the image so its histogram is:
+   (a) Gaussian (b) approximately uniform (c) exponential (d) identical to the original</p>
+</li>
+<li>
+<p><strong>Median filtering</strong> is preferred over mean filtering for:
+   (a) Gaussian noise (b) impulse (salt-and-pepper) noise (c) blur (d) sharpening</p>
+</li>
+<li>
+<p><strong>Unsharp masking</strong> enhances edges by:
+   (a) averaging (b) subtracting a lowpass version from the image and adding it back (c) histogram equalization (d) thresholding</p>
+</li>
+<li>
+<p><strong>Inverse filtering</strong> fails in practice because:
+   (a) it is too slow (b) it amplifies noise at high frequencies (c) it needs a prior (d) it is not linear</p>
+</li>
+<li>
+<p>The <strong>Wiener filter</strong> minimizes:
+   (a) peak error (b) mean-square error given signal and noise PSDs (c) mutual information (d) total variation</p>
+</li>
+<li>
+<p><strong>JPEG</strong> compression uses which transform?
+   (a) DWT (b) 8×8 DCT (c) KLT (d) SVD</p>
+</li>
+<li>
+<p><strong>Block truncation coding</strong> represents each block by:
+    (a) DCT coefficients (b) mean, standard deviation, and 1-bit mask (c) wavelet coefficients (d) KLT basis</p>
+</li>
+<li>
+<p>The <strong>Radon transform</strong> of a point object produces:
+    (a) a point (b) a sinusoid in the sinogram (c) a disk (d) zero</p>
+</li>
+<li>
+<p><strong>Filtered back-projection</strong> uses which filter?
+    (a) Gaussian (b) ramp <span class="arithmatex">\(|\omega|\)</span> (c) box (d) none</p>
+</li>
+</ol>
+<h3 id="b-fill-in-the-blank">B. Fill in the blank<a class="headerlink" href="#b-fill-in-the-blank" title="Permanent link">&para;</a></h3>
+<ol>
+<li>The DCT of a constant <span class="arithmatex">\(8\times 8\)</span> block has only one nonzero coefficient at (0,0) — the ____ coefficient.</li>
+<li>The KLT basis is given by the ____ of the covariance matrix.</li>
+<li>SVD of an image is <span class="arithmatex">\(A = U\Sigma V^\top\)</span> with ____ on the diagonal.</li>
+<li>Histogram equalization maps intensities by their ____ function.</li>
+<li>The Laplacian kernel is <span class="arithmatex">\(\begin{bmatrix}0&amp;1&amp;0\\1&amp;\)</span>____<span class="arithmatex">\(&amp;1\\0&amp;1&amp;0\end{bmatrix}\)</span>.</li>
+<li><strong>Wiener filter:</strong> <span class="arithmatex">\(W = H^*/(|H|^2 + S_\nu/\)</span>____).</li>
+<li><strong>Inverse filter</strong> amplifies noise as <span class="arithmatex">\(N/\)</span>____ at each frequency.</li>
+<li><strong>DPCM</strong> codes the prediction ____.</li>
+<li><strong>BTC</strong> stores ____, ____, and a mask per block.</li>
+<li><strong>Filtered back-projection</strong> filter is <span class="arithmatex">\(|\omega|\)</span>, called the ____ filter.</li>
+</ol>
+<h3 id="c-define-explain">C. Define / explain<a class="headerlink" href="#c-define-explain" title="Permanent link">&para;</a></h3>
+<ol>
+<li>State the <strong>DFT</strong>, <strong>DCT</strong>, and <strong>KLT</strong> in one sentence each. Compare their energy compaction for a natural image (which is best, which is worst).</li>
+<li>Derive the <strong>2-D DCT</strong> from the 1-D DCT. Why is the DCT asymptotically optimal for AR(1) processes with <span class="arithmatex">\(\rho \to 1\)</span>?</li>
+<li>Describe the <strong>8×8 DCT basis functions</strong>. What does the low-frequency corner represent? The high-frequency corner?</li>
+<li>Write the <strong>JPEG compression pipeline</strong>. What are the three types of redundancy JPEG exploits?</li>
+<li>Derive the <strong>histogram equalization mapping</strong> <span class="arithmatex">\(s = (L-1)C(r)\)</span>. Show that it is monotone and produces a uniform histogram in the continuous limit.</li>
+<li>Explain the difference between <strong>contrast stretching</strong>, <strong>histogram equalization</strong>, and <strong>histogram specification</strong>.</li>
+<li>Compare <strong>median</strong>, <strong>mean</strong>, <strong>bilateral</strong>, and <strong>non-local means</strong> filters. What kind of noise / structure is each suited for?</li>
+<li>Derive the <strong>inverse filter</strong> formula. Explain with a numerical example why it fails on real images with noise.</li>
+<li>Derive the <strong>Wiener filter</strong> formula from the minimum-MSE criterion. How does it interpolate between inverse filtering and no filtering?</li>
+<li>Derive <strong>BTC</strong>. What is the compression ratio for a 4×4 block? What is the reconstruction quality trade-off?</li>
+<li>State the <strong>Radon transform</strong> and the <strong>Fourier slice theorem</strong>. Use the slice theorem to derive the <strong>filtered back-projection</strong> algorithm.</li>
+</ol>
+<hr />
+<h2 id="29-answer-key">2.9 Answer key<a class="headerlink" href="#29-answer-key" title="Permanent link">&para;</a></h2>
+<details class="success">
+<summary>A. Multiple choice</summary>
+<ol>
+<li><strong>(b)</strong> — real coefficients + better energy compaction.</li>
+<li><strong>(b)</strong> — data-dependent.</li>
+<li><strong>(b)</strong> — denoising / low-rank.</li>
+<li><strong>(b)</strong> — approximately uniform.</li>
+<li><strong>(b)</strong> — impulse (salt-and-pepper).</li>
+<li><strong>(b)</strong> — subtract lowpass, add back.</li>
+<li><strong>(b)</strong> — amplifies noise at high frequencies.</li>
+<li><strong>(b)</strong> — MMSE given PSDs.</li>
+<li><strong>(b)</strong> — 8×8 DCT.</li>
+<li><strong>(b)</strong> — mean, std, mask.</li>
+<li><strong>(b)</strong> — sinusoid in the sinogram.</li>
+<li><strong>(b)</strong> — ramp <span class="arithmatex">\(|\omega|\)</span>.</li>
+</ol>
+</details>
+<details class="success">
+<summary>B. Fill in the blank</summary>
+<ol>
+<li>DC (zero-frequency)</li>
+<li>eigenvectors</li>
+<li>singular values</li>
+<li>cumulative distribution (CDF)</li>
+<li><span class="arithmatex">\(-4\)</span></li>
+<li><span class="arithmatex">\(S_f\)</span> (signal PSD)</li>
+<li><span class="arithmatex">\(H\)</span> (blur transfer function)</li>
+<li>error (residual)</li>
+<li>mean, standard deviation</li>
+<li>ramp</li>
+</ol>
+</details>
+<details class="success">
+<summary>C. Define / explain — model answers</summary>
+<ol>
+<li><strong>DFT:</strong> <span class="arithmatex">\(X[k] = \sum x[n] e^{-j2\pi kn/N}\)</span> — Fourier basis (complex exponentials). <strong>DCT:</strong> <span class="arithmatex">\(X[k] = c_k \sum x[n] \cos((2n+1)k\pi/(2N))\)</span> — real cosines with even symmetry. <strong>KLT:</strong> <span class="arithmatex">\(y = U^\top(x - \mu)\)</span> where <span class="arithmatex">\(U\)</span> = eigenvectors of <span class="arithmatex">\(x\)</span>'s covariance. <strong>Energy compaction:</strong> KLT optimal &gt; DCT (very close, 92–95% for natural-image correlation) &gt;&gt; DFT (80–85%, boundary leakage). For practical codecs, DCT wins because KLT requires transmitting the basis.</li>
+<li><strong>1-D to 2-D DCT:</strong> apply 1-D DCT along rows, then along columns. Since the DCT basis is separable, the result is a tensor product of 1-D cosine bases. <strong>Asymptotic optimality:</strong> for an AR(1) process with correlation <span class="arithmatex">\(r[k] = \rho^{|k|}\)</span>, as <span class="arithmatex">\(\rho \to 1\)</span> the KL eigenvectors converge to the DCT basis. Practical natural images have <span class="arithmatex">\(\rho \approx 0.9\)</span>–0.95, so DCT is nearly optimal, explaining its dominance in JPEG, MPEG, H.264, and HEVC.</li>
+<li><strong>8×8 DCT basis.</strong> Each of the 64 basis functions is a 2-D separable cosine with frequency <span class="arithmatex">\((k, l)\)</span> in the two directions. The top-left (0,0) is the DC term — a uniform basis (constant over the block). Top-right (0,7) is high-frequency vertically, low-frequency horizontally. Bottom-right (7,7) is the highest-frequency 2-D checkerboard — flips sign on every pixel. Low frequencies dominate typical natural images; high frequencies capture edges and textures. <strong>Compression intuition:</strong> natural images have most energy in low frequencies (smooth), so most DCT energy sits in the top-left corner — the rest is small and can be coarsely quantized.</li>
+<li><strong>JPEG pipeline:</strong> (i) split into 8×8 blocks; (ii) RGB → YCbCr, chroma 4:2:0; (iii) 8×8 DCT per block; (iv) quantize using a table scaled by a quality factor; (v) zigzag scan; (vi) Huffman (or arithmetic) entropy coding of the runs. <strong>Three redundancies:</strong> (i) <strong>coding</strong> — Huffman exploits uneven symbol probabilities; (ii) <strong>interpixel (spatial)</strong> — DCT decorrelates neighbouring pixels; (iii) <strong>psychovisual</strong> — the quantization table leverages the eye's lower sensitivity at high frequencies, allocating bits where they are perceptually most needed.</li>
+<li><strong>Histogram equalization derivation.</strong> In the continuous limit, intensity <span class="arithmatex">\(r\)</span> has PDF <span class="arithmatex">\(p_r(r)\)</span> and CDF <span class="arithmatex">\(C(r) = \int_0^r p_r(s) ds\)</span>. Define the output <span class="arithmatex">\(s = (L-1) C(r)\)</span>. Then <span class="arithmatex">\(s\)</span> has PDF <span class="arithmatex">\(p_s(s) = p_r(r)/((L-1) p_r(r)) = 1/(L-1)\)</span> for <span class="arithmatex">\(s \in [0, L-1]\)</span> — <strong>uniform</strong>. Monotone because <span class="arithmatex">\(C(r)\)</span> is monotone (integral of a non-negative density). Discrete case uses the empirical CDF.</li>
+<li><strong>Contrast stretching:</strong> linear scaling that maps the observed minimum and maximum to 0 and <span class="arithmatex">\(L-1\)</span>. Simple but ignores the histogram shape. <strong>Histogram equalization:</strong> nonlinear mapping based on the cumulative distribution — maximises entropy, spreads the histogram as uniformly as possible. <strong>Histogram specification:</strong> nonlinear mapping to a <strong>specific target PDF</strong> — more flexible than equalization (target need not be uniform).</li>
+<li><strong>Mean filter:</strong> linear, blurs uniformly. Best for Gaussian noise, destroys edges. <strong>Median:</strong> nonlinear, excellent for salt-and-pepper (impulse) noise, preserves edges but destroys fine textures and thin lines. <strong>Bilateral:</strong> weighted average where the weight depends on both spatial distance and intensity similarity — smooths noise while preserving edges. Best for Gaussian noise in textured images. <strong>Non-local means:</strong> averages patches that are similar anywhere in the image. Excellent for Gaussian noise in natural images. Slower.</li>
+<li><strong>Inverse filter:</strong> in Fourier domain, <span class="arithmatex">\(\hat F = G/H = F + N/H\)</span>. <strong>Failure:</strong> wherever <span class="arithmatex">\(H(f) \to 0\)</span> (high frequency for most blur models), <span class="arithmatex">\(1/H \to \infty\)</span>, so the noise term <span class="arithmatex">\(N/H\)</span> amplifies without bound. Even a tiny noise level (e.g., 0.1% of the image RMS) becomes amplified to 10–100% of the image RMS at those frequencies. The output is dominated by noise. <strong>Example (Worked Example 2.11):</strong> Gaussian blur <span class="arithmatex">\(H(f) = e^{-(f/f_0)^2}\)</span> with noise std <span class="arithmatex">\(10^{-3}\)</span>: at <span class="arithmatex">\(f = 3f_0\)</span>, <span class="arithmatex">\(H = 10^{-4}\)</span>, so noise is amplified by <span class="arithmatex">\(10^4\)</span> — from <span class="arithmatex">\(10^{-3}\)</span> to <span class="arithmatex">\(10\)</span>, i.e., 10× the signal. Unusable.</li>
+<li><strong>Wiener derivation.</strong> Minimize <span class="arithmatex">\(\mathbb E[\|F - \hat F\|^2]\)</span> over linear filters <span class="arithmatex">\(\hat F = W \cdot G\)</span>. Substitute <span class="arithmatex">\(G = HF + N\)</span> and the signal/noise independence. The optimal <span class="arithmatex">\(W\)</span> is <span class="arithmatex">\(\mathbb E[F G^*]/\mathbb E[|G|^2] = H^* S_f/(|H|^2 S_f + S_\nu)\)</span>. <strong>Interpolation:</strong> where <span class="arithmatex">\(S_f \gg S_\nu\)</span> (high SNR), <span class="arithmatex">\(W \approx 1/H\)</span> — inverse filtering. Where <span class="arithmatex">\(S_f \ll S_\nu\)</span> (low SNR), <span class="arithmatex">\(W \approx 0\)</span> — no restoration, no noise amplification. In between, the filter smoothly transitions based on the local SNR.</li>
+<li><strong>BTC.</strong> For each 4×4 block: compute mean <span class="arithmatex">\(\bar x\)</span> and std <span class="arithmatex">\(\sigma_x\)</span>; binarize at <span class="arithmatex">\(\bar x\)</span> (1 if above, 0 if below); set reconstruction levels <span class="arithmatex">\(a = \bar x - \sigma_x\sqrt{q/m}\)</span>, <span class="arithmatex">\(b = \bar x + \sigma_x\sqrt{m/q}\)</span>; store mask (16 bits) + quantized <span class="arithmatex">\(\bar x\)</span> (8 bits) + quantized <span class="arithmatex">\(\sigma_x\)</span> (8 bits) = <strong>32 bits per block</strong>. <strong>Compression:</strong> original 4×4 8-bit = 128 bits; BTC = 32 bits; <strong>4:1</strong>. <strong>Quality trade-off:</strong> the two-level approximation loses mid-range detail — textures and smooth gradients are degraded, but edges are preserved. Reconstruction is blurry in smooth areas, crisp on edges. Acceptable for low-rate applications, poor at high rate.</li>
+<li><strong>Radon transform:</strong> <span class="arithmatex">\(R(\rho, \theta) = \int\int f(x,y) \delta(x\cos\theta + y\sin\theta - \rho) dx dy\)</span> — line integrals at angle <span class="arithmatex">\(\theta\)</span>. <strong>Fourier slice theorem:</strong> <span class="arithmatex">\(\widehat R(\omega, \theta) = F(\omega\cos\theta, \omega\sin\theta)\)</span> — the 1-D FT of the projection equals the 2-D FT of <span class="arithmatex">\(f\)</span> along the slice through the origin at angle <span class="arithmatex">\(\theta\)</span>. <strong>FBP derivation:</strong> the inverse 2-D FT can be written as a polar integral: <span class="arithmatex">\(f(x,y) = \int_0^\pi \left[\int |\omega| \widehat R(\omega, \theta) e^{j2\pi\omega(x\cos\theta + y\sin\theta)} d\omega\right] d\theta\)</span>. The inner bracket is the <strong>filtered projection</strong> <span class="arithmatex">\(\tilde R(\rho, \theta)\)</span> — the projection filtered by the ramp <span class="arithmatex">\(|\omega|\)</span>. The outer integral is the <strong>back-projection</strong> — smearing the filtered projection back along its ray. So FBP = filter with ramp + back-project. The ramp compensates for the <span class="arithmatex">\(1/r\)</span> blur of plain back-projection.</li>
+</ol>
+</details>
+<hr />
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Jain, <em>Fundamentals of Digital Image Processing</em>, PHI, 1995 — Chapters 5–7 cover enhancement, restoration, and compression.</li>
+<li>Gonzalez &amp; Woods, <em>Digital Image Processing</em>, 4th ed., Pearson, 2018 — Chapters 3–6 and 10 for the full classical treatment.</li>
+<li>Pratt, <em>Digital Image Processing</em>, 4th ed., Wiley, 2007 — the encyclopedic reference.</li>
+<li>Rao &amp; Yip, <em>The Transform and Data Compression Handbook</em>, CRC Press, 2001 — DCT, KLT, and other transforms in depth.</li>
+<li>Ahmed, Natarajan &amp; Rao, "Discrete Cosine Transform", <em>IEEE Trans. Computers</em>, 1974 — the original DCT paper.</li>
+<li>Oppenheim &amp; Schafer, <em>Discrete-Time Signal Processing</em>, PHI — for the transform theory.</li>
+<li>Lim, <em>Two-Dimensional Signal and Image Processing</em>, Prentice-Hall, 1990 — comprehensive 2-D transform and filter theory.</li>
+<li>Jain, "Image data compression: A review", <em>Proc. IEEE</em>, 1981 — the classical survey.</li>
+<li>Clarke, <em>Transform Coding of Images</em>, Academic Press, 1985 — detailed DCT analysis.</li>
+<li>Wallace, "The JPEG Still Picture Compression Standard", <em>Commun. ACM</em>, 1991 — the definitive JPEG reference.</li>
+<li>Taubman &amp; Marcellin, <em>JPEG 2000: Image Compression Fundamentals, Standards and Practice</em>, Springer, 2002 — the definitive JPEG 2000 book.</li>
+<li><strong>Tour of Filtered Back-Projection:</strong> Kak &amp; Slaney, <em>Principles of Computerized Tomographic Imaging</em>, IEEE Press, 1988 (available free online).</li>
+<li>Natterer, <em>The Mathematics of Computerized Tomography</em>, Wiley, 2001 — rigorous FBP theory.</li>
+<li>Buades, Coll &amp; Morel, "A Non-Local Algorithm for Image Denoising", <em>CVPR</em> 2005 — the non-local means paper.</li>
+<li>Dabov et al., "Image Denoising by Sparse 3D Transform-Domain Collaborative Filtering", <em>IEEE TIP</em>, 2007 — the BM3D paper.</li>
+<li>SciPy, scikit-image, OpenCV, PyWavelets documentation.</li>
+</ul>
+<hr />
+<h2 id="suggested-tutorial-and-lab-problems-for-this-chapter">Suggested tutorial and lab problems for this chapter<a class="headerlink" href="#suggested-tutorial-and-lab-problems-for-this-chapter" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>DCT energy compaction.</strong> Apply the 2-D DCT to a natural image (or Lena). Sort the coefficients by magnitude. What fraction of the total energy is in the top 1%, 5%, 10% of coefficients? Repeat for the DFT — quantify the difference.</p>
+</li>
+<li>
+<p><strong>JPEG simulation.</strong> Implement the JPEG pipeline (DCT, quantization, entropy coding) for a single grayscale image. Compare compression ratios and PSNR at quality levels 10, 50, 90. Visualise the blocking artifacts at low quality.</p>
+</li>
+<li>
+<p><strong>KL vs. DCT.</strong> Compute the KLT of a small correlated image block, truncate to <span class="arithmatex">\(M\)</span> components, and reconstruct. Do the same with the DCT. At what <span class="arithmatex">\(M\)</span> does each reach 30 dB PSNR?</p>
+</li>
+<li>
+<p><strong>Histogram equalization.</strong> Implement histogram equalization and histogram specification from scratch. Apply to a dark image and to an overexposed image. Compare with <code>cv2.equalizeHist</code>.</p>
+</li>
+<li>
+<p><strong>Median vs. bilateral denoising.</strong> Add salt-and-pepper and Gaussian noise to a natural image. Compare median, bilateral, and non-local means for both noise types. Which is best for which?</p>
+</li>
+<li>
+<p><strong>Wiener filter with unknown noise.</strong> Blur a clean image with a Gaussian PSF (σ = 2). Add white Gaussian noise. Apply inverse filtering, Wiener filtering, and CLS. Compare PSNR. Tune the regularisation parameter.</p>
+</li>
+<li>
+<p><strong>Predictive coding.</strong> Implement DPCM with 1-D, 2-D, and 3-tap predictors on a grayscale image. Compute the entropy of the residuals for each. Plot the rate-distortion curve.</p>
+</li>
+<li>
+<p><strong>BTC implementation.</strong> Implement BTC with block sizes 4×4 and 8×8, with quantized mean/std to 4/6/8 bits. Compare compression ratio and PSNR to JPEG at the same rate.</p>
+</li>
+<li>
+<p><strong>Wavelet denoising.</strong> Take a noisy image, apply a 5-level DWT (db4), hard- or soft-threshold the detail coefficients at <span class="arithmatex">\(3\sigma\)</span>, and reconstruct. Compare PSNR to the Wiener filter.</p>
+</li>
+<li>
+<p><strong>Radon transform.</strong> Implement the Radon transform of a small binary shape (e.g., a disc, a rectangle). Visualise the sinogram. Reconstruct via unfiltered back-projection and filtered back-projection. Compare the two reconstructions — the blur of unfiltered BP should be visible.</p>
+</li>
+<li>
+<p><strong>FBP on a Shepp–Logan phantom.</strong> Reconstruct the Shepp–Logan phantom (standard test image for CT) from projections at 90°, 180°, and 360°. Compare quality at each. Demonstrate the failure of FBP with too few angles.</p>
+</li>
+<li>
+<p><strong>Art with noisy projections.</strong> Add 1% Gaussian noise to the projections of a Shepp–Logan phantom. Compare FBP reconstruction vs. iterative reconstruction (ART or SIRT, 50 iterations). Report PSNR and visual quality.</p>
+</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.tracking", "content.code.copy", "search.suggest", "search.highlight", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7c377c4.min.js"></script>
+      
+        <script src="../../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
